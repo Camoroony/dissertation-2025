@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Response
-from routers.users import router as users_router
-from routers.workouts import router as workouts_router
+from backend.routers.users_router import router as users_router
+from backend.routers.workouts_router import router as workouts_router
 
 app = FastAPI()
 
