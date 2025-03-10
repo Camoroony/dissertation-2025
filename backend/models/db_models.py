@@ -15,7 +15,7 @@ class UserSQL(UserBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     hashed_password: str
 
-    workout_plans: List["WorkoutPlan"] = Relationship(back_populates="user")
+    workout_plans: List["WorkoutPlan"] = Relationship(back_populates="user", sa_relationship_kwargs={"cascade": "delete"})
 
 class WorkoutPlan(SQLModel, table=True):
 
@@ -28,7 +28,7 @@ class WorkoutPlan(SQLModel, table=True):
     equipment_requirements: str
 
     user: UserSQL = Relationship(back_populates="workout_plans")
-    workout_sessions: List["WorkoutSession"] = Relationship(back_populates="workout_plan")
+    workout_sessions: List["WorkoutSession"] = Relationship(back_populates="workout_plan", sa_relationship_kwargs={"cascade": "delete"})
     
 
 class WorkoutSession(SQLModel, table=True):
@@ -36,25 +36,25 @@ class WorkoutSession(SQLModel, table=True):
     __tablename__ = "workoutsession"
 
     id: Optional[int] = Field(default=None, primary_key=True)
-    workout_id: int = Field(foreign_key="workoutplan.id")
+    workoutplan_id: int = Field(foreign_key="workoutplan.id")
     session_name: str
     length_of_session: float
     day_of_week: str
     equipment_requirements: str
 
     workout_plan: WorkoutPlan = Relationship(back_populates="workout_sessions")
-    exercises: List["Exercise"] = Relationship(back_populates="workout_session")
+    exercises: List["Exercise"] = Relationship(back_populates="workout_session", sa_relationship_kwargs={"cascade": "delete"})
 
 class Exercise(SQLModel, table=True):
 
     __tablename__ = "exercise"
 
     id: Optional[int] = Field(default=None, primary_key=True)
-    session_id: int = Field(foreign_key="workoutsession.id")
+    workoutsession_id: int = Field(foreign_key="workoutsession.id")
     exercise_name: str
     sets: int
     reps: int
     reps_in_reserve: Optional[int] = Field(default=0)
 
-    workout_session: WorkoutSession = Relationship(back_populates="exercises")
+    workout_session: WorkoutSession = Relationship(back_populates="exercises", sa_relationship_kwargs={"cascade": "delete"})
 
