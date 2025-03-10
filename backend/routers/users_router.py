@@ -12,7 +12,7 @@ router = APIRouter(
 def index() :
     return Response ("Hello from the users router!")
 
-@router.get("create-user")
+@router.post("create-user")
 def create_user(user_data: UserInput, db: Session = Depends(get_db)) :
     existing_user = db.exec(select(UserSQL).where(UserInput.username == user_data.username)).first()
     if existing_user:
@@ -22,7 +22,7 @@ def create_user(user_data: UserInput, db: Session = Depends(get_db)) :
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
-    
+
     return new_user
 
 @router.get("get-user")
