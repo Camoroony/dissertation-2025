@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Response, Depends, HTTPException
 from sqlmodel import Session, select
-from backend.models.user_model import UserInput, UserSQL, UserBase
-from backend.database.database import get_db
-from backend.security.hashing import hash_password
+from models.db_models import UserInput, UserSQL
+from database.database import get_db
+from security.hashing import hash_password
 
 router = APIRouter(
     prefix="/users"
@@ -25,15 +25,15 @@ def create_user(user_data: UserInput, db: Session = Depends(get_db)) :
 
     return new_user
 
-@router.get("get-user")
+@router.get("/get-user")
 def index() :
     return Response ("Getting user")
 
-@router.get("update-user")
+@router.get("/update-user")
 def index() :
     return Response ("Updating user")
 
-@router.get("delete-user")
+@router.get("/delete-user")
 def index() :
     return Response ("Deleting user")
 

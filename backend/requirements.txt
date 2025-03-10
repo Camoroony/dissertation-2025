@@ -1,4 +1,4 @@
 fastapi[all]
 sqlmodel
-mysql-connector-python
 bcrypt
+pymysql
