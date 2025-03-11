@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  hypertrophy_edu_backend:
+    build: ./backend 
+    container_name: hypertrophy-edu_backendcontainer
+    restart: always
+    environment:
+      DATABASE_URL: mysql+pymysql://root:password@db/hypertrophy_edu_db 
+    depends_on:
+      - db  
+    ports:
+      - "8000:8000" 
+
+  db:
+    image: mysql:8.0
+    container_name: hypertrophy-edu_dbcontainer
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: hypertrophy_edu_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
