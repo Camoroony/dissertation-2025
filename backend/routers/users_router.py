@@ -35,12 +35,16 @@ def get_user(user_id: int, db: Session = Depends(get_db)) :
     return user
 
 @router.put("/update-user", response_model=UserSQL)
-def update_user(user_id: int, updated_user: UserSQL, db: Session = Depends(get_db)) :
+def update_user(user_id: int, updated_user: UserInput, db: Session = Depends(get_db)) :
     user = db.get(UserSQL, user_id)
     if not user:
         raise HTTPException(status_code=404, detail=f"No user with id {user_id} exists")
     
     for attr, value in updated_user.model_dump().items():
+        if attr == "plain_password":
+           value = hash_password(value)
+           attr = "hashed_password"
+
         setattr(user, attr, value)
 
     db.commit()
