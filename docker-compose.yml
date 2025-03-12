@@ -12,6 +12,19 @@ services:
     ports:
       - "8000:8000" 
 
+# services:
+#   hypertrophy_edu_backend:
+#     image: ghcr.io/camoroony/hypertrophy-edu-backend:latest  # Using GHCR image
+#     container_name: hypertrophy-edu_backendcontainer
+#     restart: always
+#     environment:
+#       DATABASE_URL: mysql+pymysql://root:password@db/hypertrophy_edu_db 
+#     depends_on:
+#       - db  
+#     ports:
+#       - "8000:8000" 
+
+
   db:
     image: mysql:8.0
     container_name: hypertrophy-edu_dbcontainer
