@@ -1,5 +1,5 @@
 from sqlmodel import SQLModel, Field
-from pydantic import BaseModel, field_validator
+from pydantic import BaseModel, model_validator
 
 # User Input Models
 
@@ -9,22 +9,21 @@ class UserBase(SQLModel):
 class UserInput(UserBase):
     plain_password: str
 
+# Workout Plan Input Type Validators
 
-class TrainingExperience(str):
-    ALLOWED_LEVELS = {"Beginner (0 - 2 years of experience)", "Intermediate (2 - 5 years of experience)", "Advanced (5+ years of exeprience)"}
+ALLOWED_LEVELS = {"Beginner (0 - 2 years of experience)", "Intermediate (2 - 5 years of experience)", "Advanced (5+ years of exeprience)"}
 
-    @classmethod
-    def validate(cls, value: str):
-        if value not in cls.ALLOWED_LEVELS:
-            raise ValueError(f"Invalid experience level: {value}. Choose from {cls.ALLOWED_LEVELS}")
-        return value 
+# Workout Plan Input Model
 
 class WorkoutGenInput(BaseModel):
-    experience: TrainingExperience 
+    experience_level: str
+    training_availability: int
+    session_length: int
+    training_focus: str 
+    available_equipment: str 
+    additional_info : str
 
 
-    @field_validator("experience", pre=True, always=True)
-    def validate_experience(cls, value):
-        return TrainingExperience.validate(value)
+
         
 
