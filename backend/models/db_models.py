@@ -1,12 +1,10 @@
 from sqlmodel import SQLModel, Field, Relationship
 from sqlalchemy import ForeignKey
 from typing import List, Optional
+from pydantic import BaseModel, field_validator
+from models.input_models import UserBase
 
-class UserBase(SQLModel):
-    username: str = Field(index=True, unique=True)
-
-class UserInput(UserBase):
-    plain_password: str
+# User SQL Models 
 
 class UserSQL(UserBase, table=True):
 
@@ -16,6 +14,8 @@ class UserSQL(UserBase, table=True):
     hashed_password: str
 
     workout_plans: List["WorkoutPlan"] = Relationship(back_populates="user", sa_relationship_kwargs={"cascade": "delete"})
+
+# Workout SQL Models 
 
 class WorkoutPlan(SQLModel, table=True):
 
@@ -57,4 +57,3 @@ class Exercise(SQLModel, table=True):
     reps_in_reserve: Optional[int] = Field(default=0)
 
     workout_session: WorkoutSession = Relationship(back_populates="exercises", sa_relationship_kwargs={"cascade": "delete"})
-
