@@ -6,3 +6,4 @@ cryptography
 langchain-openai
 langchain
 python-dotenv
+pymongo

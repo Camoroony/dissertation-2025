@@ -2,7 +2,7 @@ from fastapi import APIRouter, Response, Depends, HTTPException
 from sqlmodel import Session, select
 from models.db_models import UserSQL
 from models.input_models import UserInput
-from database.database import get_db_session
+from backend.database.sqldatabase import get_db_session
 from security.hashing import hash_password
 
 router = APIRouter(
