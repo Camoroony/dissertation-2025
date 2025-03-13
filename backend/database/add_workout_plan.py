@@ -2,7 +2,7 @@ import json
 from models.db_models import WorkoutPlan, WorkoutSession, Exercise
 from sqlmodel import Session
 
-def workout_gen_deserialise(workoutplan_data: str, user_id: int, db: Session):
+def add_workout_plan(workoutplan_data: str, user_id: int, db: Session):
 
     data = json.loads(workoutplan_data)
 
