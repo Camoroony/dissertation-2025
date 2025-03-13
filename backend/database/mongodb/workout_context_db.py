@@ -19,7 +19,7 @@ def add_workout_context(workout_plan_id: int, context: str):
         raise ValueError("Failed to insert document.")
     
 
-def get_workout_context(workout_plan_id: int):
+def get_workout_context(workout_plan_id: int) -> str:
 
     document = workout_context_collection.find_one({"workout_plan_id": workout_plan_id})
 

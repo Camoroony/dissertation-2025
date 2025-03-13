@@ -10,9 +10,9 @@ load_dotenv()
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
-def generate_workout_plan(workout_input: WorkoutGenInput):
+model = ChatOpenAI(model="gpt-3.5-turbo", api_key=OPENAI_API_KEY)
 
-    model = ChatOpenAI(model="gpt-3.5-turbo", api_key=OPENAI_API_KEY)
+def generate_workout_plan(workout_input: WorkoutGenInput):
 
     # Create a prompt template
     prompt_template = ChatPromptTemplate.from_messages([
@@ -29,7 +29,7 @@ def generate_workout_plan(workout_input: WorkoutGenInput):
                   "- Additional Info: {additional_info}")
     ])
 
-    # Convert available equipment to a comma-separated string
+   
     formatted_input = {
         "experience_level": workout_input.experience_level,
         "training_availability": workout_input.training_availability,
@@ -41,10 +41,10 @@ def generate_workout_plan(workout_input: WorkoutGenInput):
 
     final_prompt = prompt_template.format(**formatted_input)
 
-    # Create the chain
+    
     chain = prompt_template | model | StrOutputParser()
 
-    # Invoke the chain with the formatted input
+    
     response = chain.invoke(formatted_input)
 
     return {
