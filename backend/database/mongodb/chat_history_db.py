@@ -1,4 +1,4 @@
-from database.mongodb.mongodb import get_mongodb_client
+from backend.database.mongodb.init_mongodb_db import get_mongodb_client
 
 db = get_mongodb_client()
 

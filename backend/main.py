@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Response
 from routers.users_router import router as users_router
 from routers.workouts_router import router as workouts_router
-from database.sql.sqldatabase import create_db
+from backend.database.sql.init_sql_db import create_db
 
 app = FastAPI()
 
