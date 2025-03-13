@@ -24,7 +24,7 @@ class WorkoutPlan(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     user_id: int = Field(foreign_key="user.id")
     no_of_sessions: int
-    average_session_length: float
+    average_session_length: int
     equipment_requirements: str
 
     user: UserSQL = Relationship(back_populates="workout_plans")
@@ -38,7 +38,7 @@ class WorkoutSession(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     workoutplan_id: int = Field(foreign_key="workoutplan.id")
     session_name: str
-    length_of_session: float
+    length_of_session: int
     day_of_week: str
     equipment_requirements: str
 
