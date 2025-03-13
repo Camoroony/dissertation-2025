@@ -39,11 +39,16 @@ def generate_workout_plan(workout_input: WorkoutGenInput):
         "additional_info": workout_input.additional_info if workout_input.additional_info else "None"
     }
 
+    final_prompt = prompt_template.format(**formatted_input)
+
     # Create the chain
     chain = prompt_template | model | StrOutputParser()
 
     # Invoke the chain with the formatted input
     response = chain.invoke(formatted_input)
 
-    return response
+    return {
+        "context": final_prompt,
+        "response": response
+    }
 
