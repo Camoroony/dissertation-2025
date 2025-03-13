@@ -33,9 +33,9 @@ def add_workout_plan(workoutplan_data: str, user_id: int, db: Session):
 
         exercises = []
 
-        for exercise in data["exercises"]:
+        for exercise in workoutsession["exercises"]:
             exercise_obj = Exercise(
-                workoutsession_id = workout_plan_obj.id,
+                workoutsession_id = workout_session_obj.id,
                 exercise_name = exercise["exercise_name"],
                 sets = exercise["sets"],
                 reps = exercise["reps"],

@@ -16,7 +16,7 @@ WORKOUT_PLAN_SCHEMA = """{{
           "exercise_name": str,  # Name of the exercise
           "sets": int,  # Number of sets
           "reps": int,  # Number of reps per set
-          "reps_in_reserve": int  # (Optional) Reps in reserve
+          "reps_in_reserve": int  # Reps in reserve
         }}
       ]
     }}
