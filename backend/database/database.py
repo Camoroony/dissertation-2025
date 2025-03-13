@@ -11,6 +11,6 @@ def create_db():
     SQLModel.metadata.create_all(engine)
     print("Database tables created successfully.")
 
-def get_db():
+def get_db_session():
     with Session(engine) as session:
         yield session

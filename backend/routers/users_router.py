@@ -2,7 +2,7 @@ from fastapi import APIRouter, Response, Depends, HTTPException
 from sqlmodel import Session, select
 from models.db_models import UserSQL
 from models.input_models import UserInput
-from database.database import get_db
+from database.database import get_db_session
 from security.hashing import hash_password
 
 router = APIRouter(
@@ -14,7 +14,7 @@ def index() :
     return Response ("Hello from the users router!")
 
 @router.post("/create-user", response_model=UserSQL)
-def create_user(user_data: UserInput, db: Session = Depends(get_db)) :
+def create_user(user_data: UserInput, db: Session = Depends(get_db_session)) :
     existing_user = db.exec(select(UserSQL).where(UserSQL.username == user_data.username)).first()
     if existing_user:
         raise HTTPException(status_code=400, detail="Username already exists")
@@ -28,7 +28,7 @@ def create_user(user_data: UserInput, db: Session = Depends(get_db)) :
     return new_user
 
 @router.get("/get-user", response_model=UserSQL)
-def get_user(user_id: int, db: Session = Depends(get_db)) :
+def get_user(user_id: int, db: Session = Depends(get_db_session)) :
     user = db.get(UserSQL, user_id)
     if not user:
         raise HTTPException(status_code=404, detail=f"No user with id {user_id} exists")
@@ -36,7 +36,7 @@ def get_user(user_id: int, db: Session = Depends(get_db)) :
     return user
 
 @router.put("/update-user", response_model=UserSQL)
-def update_user(user_id: int, updated_user: UserInput, db: Session = Depends(get_db)) :
+def update_user(user_id: int, updated_user: UserInput, db: Session = Depends(get_db_session)) :
     user = db.get(UserSQL, user_id)
     if not user:
         raise HTTPException(status_code=404, detail=f"No user with id {user_id} exists")
@@ -54,7 +54,7 @@ def update_user(user_id: int, updated_user: UserInput, db: Session = Depends(get
     return user
 
 @router.delete("/delete-user", response_model= str)
-def delete_user(user_id: int, db: Session = Depends(get_db)) :
+def delete_user(user_id: int, db: Session = Depends(get_db_session)) :
     user = db.get(UserSQL, user_id)
     if not user:
         raise HTTPException(status_code=404, detail=f"No user with id {user_id} exists")
