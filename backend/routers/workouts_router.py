@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Response, Depends, HTTPException
 from sqlmodel import Session
-from database.sql.sqldatabase import get_db_session
-from database.add_workout_plan import add_workout_plan
-from database.workout_contexts import add_workout_context
+from database.sql.init_sql_db import get_db_session
+from database.sql.workout_plan_db import add_workout_plan
+from database.mongodb.workout_context_db import add_workout_context
 from models.input_models import WorkoutGenInput
 from ai.gen_workout_plan import generate_workout_plan
 from ai.gen_workout_info import generate_exercise_overview
