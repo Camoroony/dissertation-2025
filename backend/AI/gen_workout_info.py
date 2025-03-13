@@ -18,6 +18,6 @@ def get_workoutsession_overview():
 
 
 
-def get_exercise_overview():
+def generate_exercise_overview():
 
     return "Getting exercise overview!"

@@ -1,9 +1,10 @@
 from fastapi import APIRouter, Response, Depends, HTTPException
-from sqlmodel import Session, select
-from backend.database.sqldatabase import get_db_session
-from backend.database.methods.add_workout_plan import add_workout_plan
+from sqlmodel import Session
+from database.sql.sqldatabase import get_db_session
+from database.add_workout_plan import add_workout_plan
 from models.input_models import WorkoutGenInput
 from ai.gen_workout_plan import generate_workout_plan
+from ai.gen_workout_info import generate_exercise_overview
 
 router = APIRouter(
     prefix="/workouts"
@@ -24,8 +25,8 @@ def create_workout(workout_input: WorkoutGenInput, user_id: int, db: Session = D
 
 
 @router.get("/get-exercise-info")
-def get_exercise_info(exercise_id: int, db: Session = Depends(get_db_session)) :
+def get_exercise_info(exercise_id: int, workout_plan_id: int, db: Session = Depends(get_db_session)) :
 
-    ai_response_data = 
+    # ai_response_data = generate_exercise_overview()
 
     return Response()
