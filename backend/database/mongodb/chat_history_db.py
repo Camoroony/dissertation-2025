@@ -8,7 +8,7 @@ db = get_mongodb_client()
 chat_history_collection = db["chat_histories"]
 
 
-def create_chat_history(user_id: int):
+def create_chat_history(user_id: int, workout_plan_id=None):
 
     chat_history_document = {
         "user_id": user_id,
@@ -16,14 +16,17 @@ def create_chat_history(user_id: int):
         "chats": []
     }
 
+    if workout_plan_id is not None:
+        chat_history_document["workout_plan_id"] = workout_plan_id
+
     result = chat_history_collection.insert_one(chat_history_document)
 
     return result.inserted_id
 
 
-def add_chat_history(user_id: int, user_message: str, ai_message: str, chat_history_id=None):
+def add_chat_history(user_id: int, user_message: str, ai_message: str, workout_plan_id=None, chat_history_id=None):
     if chat_history_id is None:
-        chat_history_id = create_chat_history(user_id)
+        chat_history_id = create_chat_history(user_id, workout_plan_id)
     
     chat_message = {
         "chat_message_id": str(ObjectId()),
