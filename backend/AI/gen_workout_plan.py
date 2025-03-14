@@ -17,7 +17,7 @@ def generate_workout_plan(workout_input: WorkoutGenInput):
     # Create a prompt template
     prompt_template = ChatPromptTemplate.from_messages([
 
-        ("system", f"You are a workout generator who generates workout plans following this schema:\n{WORKOUT_PLAN_SCHEMA}\n"),
+        ("system", "You are a workout generator who generates workout plans following this schema:\n" + "{WORKOUT_PLAN_SCHEMA}\n"),
 
 
         ("human", "Generate me a hypertrophy workout plan for an individual with the following details:\n"
@@ -31,6 +31,7 @@ def generate_workout_plan(workout_input: WorkoutGenInput):
 
    
     formatted_input = {
+        "WORKOUT_PLAN_SCHEMA": WORKOUT_PLAN_SCHEMA,
         "experience_level": workout_input.experience_level,
         "training_availability": workout_input.training_availability,
         "session_length": workout_input.session_length,
