@@ -2,7 +2,7 @@ from langchain_openai import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
 from langchain.schema.output_parser import StrOutputParser
 from dotenv import load_dotenv
-import os 
+import os
 
 
 load_dotenv()

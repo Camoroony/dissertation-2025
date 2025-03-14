@@ -2,9 +2,10 @@ from fastapi import APIRouter, Response, Depends, HTTPException
 from sqlmodel import Session
 from database.sql.init_sql_db import get_db_session
 from database.sql.workout_plan_db import add_workout_plan
-from pymongo import database
 from database.mongodb.workout_context_db import add_workout_context, get_workout_context
+from database.mongodb.chat_history_db import create_chat_history, get_chat_history
 from models.input_models import WorkoutGenInput
+from ai.gen_chat import generate_chat, generate_workout_chat
 from ai.gen_workout_plan import generate_workout_plan
 from ai.gen_workout_info import generate_exercise_overview, generate_workoutsession_overview
 
@@ -32,7 +33,7 @@ def create_workout(workout_input: WorkoutGenInput, user_id: int, db: Session = D
     )
 
 @router.get("/get-workoutsession-info")
-def get_workoutsession_info(workout_plan_id: int , workoutsession_id: int) :
+def get_workoutsession_info(workout_plan_id: int, workoutsession_id: int) :
 
     context = get_workout_context(workout_plan_id)
 
@@ -41,10 +42,28 @@ def get_workoutsession_info(workout_plan_id: int , workoutsession_id: int) :
     return Response(ai_response_data, status_code=200)
 
 @router.get("/get-exercise-info")
-def get_exercise_info(workout_plan_id: int , exercise_id: int) :
+def get_exercise_info(workout_plan_id: int, exercise_id: int) :
 
     context = get_workout_context(workout_plan_id)
 
     ai_response_data = generate_exercise_overview(context, exercise_id)
+
+    return Response(ai_response_data, status_code=200)
+
+@router.get("/general-chat")
+def general_chat(user_prompt: str, chat_id=None) :
+
+    chat_history = get_chat_history(chat_id)
+
+    ai_response_data = generate_chat(user_prompt, chat_history)
+
+    return Response(ai_response_data, status_code=200)
+
+@router.get("/workout-chat")
+def workout_chat(user_prompt: str, chat_id=None) :
+
+    chat_history = add_chat_history(chat_id, user_prompt) if chat_id is not None else add_chat_history(user_prompt)
+
+    ai_response_data = generate_workout_chat(user_prompt, chat_history)
 
     return Response(ai_response_data, status_code=200)
