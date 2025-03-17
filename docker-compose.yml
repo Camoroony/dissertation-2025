@@ -7,7 +7,7 @@ services:
     container_name: hypertrophy-edu_backendcontainer
     restart: always
     environment:
-      DATABASE_URL: mysql+pymysql://root:password@db/hypertrophy_edu_db 
+      DATABASE_URL: mysql+pymysql://root:password@sql/hypertrophy_edu_db 
       MONGODB_URL: mongodb://mongo:27017/hypertrophy_edu_mongodb
     depends_on:
       - sql  
