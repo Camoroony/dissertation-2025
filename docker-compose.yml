@@ -1,6 +1,7 @@
 version: '3.8'
 
 services:
+
   hypertrophy_edu_backend:
     build: ./backend 
     container_name: hypertrophy-edu_backendcontainer
@@ -9,7 +10,7 @@ services:
       DATABASE_URL: mysql+pymysql://root:password@db/hypertrophy_edu_db 
       MONGODB_URL: mongodb://mongo:27017/hypertrophy_edu_mongodb
     depends_on:
-      - db  
+      - sql  
       - mongo
     ports:
       - "8000:8000" 
@@ -27,7 +28,7 @@ services:
 #       - "8000:8000" 
 
 
-  db:
+  sql:
     image: mysql:8.0
     container_name: hypertrophy-edu_dbcontainer
     restart: always
@@ -53,3 +54,4 @@ services:
 
 volumes:
   db_data:
+  mongo_data:
