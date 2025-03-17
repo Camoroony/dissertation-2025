@@ -16,11 +16,9 @@ def index() :
 @router.post("/chat")
 def workout_chat(user_id: int, user_prompt: str, chat_history_id=None, workout_plan_id=None, db: Session = Depends(get_db_session)) :
 
-    if chat_history_id is not None:
-       chat_history = get_chat_history(chat_history_id)
+    chat_history = get_chat_history(chat_history_id) if chat_history_id is not None else None
 
-    if workout_plan_id is not None:
-        workout_plan = get_workout_plan(workout_plan_id, db)
+    workout_plan = get_workout_plan(workout_plan_id, db) if workout_plan_id is not None else None
 
     ai_response_data = generate_chat(user_prompt, chat_history, workout_plan)
 
