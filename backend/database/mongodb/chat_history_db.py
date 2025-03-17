@@ -24,7 +24,7 @@ def create_chat_history(user_id: int, workout_plan_id=None):
     return result.inserted_id
 
 
-def add_chat_history(user_id: int, user_message: str, ai_message: str, workout_plan_id=None, chat_history_id=None):
+def add_chat_history(user_id: int, user_message: str, ai_message: str, chat_history_id=None, workout_plan_id=None):
     if chat_history_id is None:
         chat_history_id = create_chat_history(user_id, workout_plan_id)
     

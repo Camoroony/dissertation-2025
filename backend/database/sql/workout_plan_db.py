@@ -1,10 +1,12 @@
 import json
 from models.db_models import WorkoutPlan, WorkoutSession, Exercise
-from sqlmodel import Session
+from sqlmodel import Session, select
+from sqlalchemy.orm import selectinload
+from models.utilities.workout_plan_utils import serialise_workout_plan
 
-def add_workout_plan(workoutplan_data: str, user_id: int, db: Session):
+def add_workout_plan(workout_plan_data: str, user_id: int, db: Session):
 
-    data = json.loads(workoutplan_data)
+    data = json.loads(workout_plan_data)
 
     workout_plan_obj = WorkoutPlan(
         user_id = user_id,
@@ -50,3 +52,19 @@ def add_workout_plan(workoutplan_data: str, user_id: int, db: Session):
     db.commit()
 
     return workout_plan_obj
+
+def get_workout_plan(workout_plan_id: int, db: Session):
+
+    statement = (
+        select(WorkoutPlan)
+        .where(WorkoutPlan.id == workout_plan_id)
+        .options(
+            selectinload(WorkoutPlan.workout_sessions).selectinload(WorkoutSession.exercises)
+        )
+    )
+
+    workout_plan = db.exec(statement).first()
+
+    workout_plan_dict = serialise_workout_plan(workout_plan)
+
+    return workout_plan_dict
