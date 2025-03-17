@@ -7,8 +7,10 @@ services:
     restart: always
     environment:
       DATABASE_URL: mysql+pymysql://root:password@db/hypertrophy_edu_db 
+      MONGODB_URL: mongodb://mongo:27017/hypertrophy_edu_mongodb
     depends_on:
       - db  
+      - mongo
     ports:
       - "8000:8000" 
 
@@ -36,6 +38,18 @@ services:
       - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
+
+  mongo:
+    image: mongo
+    container_name: hypertrophy-edu_mongocontainer
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: hypertrophy_edu_mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
 
 volumes:
   db_data:
