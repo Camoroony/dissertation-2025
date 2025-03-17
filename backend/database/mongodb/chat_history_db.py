@@ -42,7 +42,7 @@ def add_chat_history(user_id: int, user_message: str, ai_message: str, workout_p
         
     return f"Chat message (Id: {result}) added to chat history (Id: {chat_history_id}) "
 
-def get_chat_history(chat_history_id: int):
+def get_chat_history(chat_history_id: str):
 
     chat_history = chat_history_collection.find_one(
         {"_id": ObjectId(chat_history_id)},
@@ -70,7 +70,7 @@ def get_chat_histories_by_userid(user_id: int):
     for chat_history in chat_histories:
      if "workout_plan_id" in chat_history:
         workout_chats.append(chat_history)
-    else:
+     else:
         generic_chats.append(chat_history) 
 
     chats = {
