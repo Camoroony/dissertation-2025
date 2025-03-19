@@ -27,3 +27,14 @@ def get_workout_context(workout_plan_id: int) -> str:
         return document["context"]
     else:
         raise ValueError("Document is empty or not found.")
+    
+def delete_workout_context(workout_plan_id: int) -> bool:
+
+    state = False
+
+    result = workout_context_collection.delete_one({"workout_plan_id": workout_plan_id})
+
+    if result.deleted_count > 0:
+        state = True
+    
+    return state

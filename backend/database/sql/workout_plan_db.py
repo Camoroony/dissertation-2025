@@ -68,3 +68,16 @@ def get_workout_plan(workout_plan_id: int, db: Session):
     workout_plan_dict = serialise_workout_plan(workout_plan)
 
     return workout_plan_dict
+
+def delete_workout_plan(workout_plan_id: int, db: Session):
+
+    state = False
+
+    workout_plan = db.exec(select(WorkoutPlan).where(WorkoutPlan.id == workout_plan_id)).first()
+
+    if workout_plan:
+        db.delete(workout_plan)
+        db.commit()
+        state = True
+
+    return state
