@@ -1,4 +1,5 @@
 from database.mongodb.init_mongodb_db import get_mongodb_client
+from bson import ObjectId
 
 db = get_mongodb_client()
 
@@ -30,11 +31,13 @@ def get_workout_context(workout_plan_id: int) -> str:
     
 def delete_workout_context(workout_plan_id: int) -> bool:
 
-    state = False
+    response = False
 
-    result = workout_context_collection.delete_one({"workout_plan_id": workout_plan_id})
+    workout_context = workout_context_collection.find_one({"workout_plan_id": workout_plan_id})
+
+    result = workout_context_collection.delete_one({"_id": workout_context["_id"]})
 
     if result.deleted_count > 0:
-        state = True
+        response = str(workout_context["_id"])
     
-    return state
+    return response

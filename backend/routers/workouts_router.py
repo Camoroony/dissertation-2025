@@ -27,13 +27,13 @@ def create_workout(workout_input: WorkoutGenInput, user_id: int, db: Session = D
 
     return Response(
         f"Created workout plan {add_result_sql} for user: {add_result_sql.user_id}\n"
-        f"Workout context {add_result_mongodb["status"]}, Id: {add_result_mongodb["inserted_id"]}",
+        f"Workout context added, Id: {add_result_mongodb["inserted_id"]}",
         status_code=200
     )
 
 
 @router.delete("/delete-workout-plan")
-def create_workout(workout_plan_id: int, db: Session = Depends(get_db_session)) :
+def delete_workout(workout_plan_id: int, db: Session = Depends(get_db_session)) :
 
     delete_result_sql = delete_workout_plan(workout_plan_id, db)
 
@@ -46,7 +46,8 @@ def create_workout(workout_plan_id: int, db: Session = Depends(get_db_session)) 
         raise HTTPException(status_code=400, detail=f"Error with deleting workout context for workout Id: {workout_plan_id}")
 
     return Response(
-        f"Deleted workout plan Id: {workout_plan_id}",
+        f"Deleted workout plan (Id: {workout_plan_id})\n"
+        f"Deleted workout context (Id: {delete_result_mongodb})",
         status_code=200
     )
 
