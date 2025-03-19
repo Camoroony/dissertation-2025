@@ -79,3 +79,14 @@ def get_chat_histories_by_userid(user_id: int):
     }
 
     return chats
+
+def delete_chat_history(chat_history_id: int):
+
+    state = False
+
+    result = chat_history_collection.delete_one({"_id": ObjectId(chat_history_id)})
+
+    if result.deleted_count > 0:
+        state = True
+    
+    return state

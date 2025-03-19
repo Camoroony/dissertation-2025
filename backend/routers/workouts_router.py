@@ -32,7 +32,7 @@ def create_workout(workout_input: WorkoutGenInput, user_id: int, db: Session = D
     )
 
 
-@router.post("/delete-workout-plan")
+@router.delete("/delete-workout-plan")
 def create_workout(workout_plan_id: int, db: Session = Depends(get_db_session)) :
 
     delete_result_sql = delete_workout_plan(workout_plan_id, db)
