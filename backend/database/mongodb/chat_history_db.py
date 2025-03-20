@@ -5,7 +5,7 @@ import datetime
 
 db = get_mongodb_client()
 
-chat_history_collection = db["chat_histories"]
+chat_history_collection = db['chat_histories']
 
 
 def create_chat_history(user_id: int, workout_plan_id=None):
@@ -17,7 +17,7 @@ def create_chat_history(user_id: int, workout_plan_id=None):
     }
 
     if workout_plan_id is not None:
-        chat_history_document["workout_plan_id"] = workout_plan_id
+        chat_history_document['workout_plan_id'] = workout_plan_id
 
     result = chat_history_collection.insert_one(chat_history_document)
 
@@ -55,8 +55,8 @@ def get_chat_history(chat_history_id: str):
     messages = []
 
     for chat in chat_history["chats"]:
-        messages.append(f"User: {chat["user_message"]}")
-        messages.append(f"Response: {chat["ai_message"]}")
+        messages.append(f"User: {chat['user_message']}")
+        messages.append(f"Response: {chat['ai_message']}")
 
     return messages
 

@@ -27,7 +27,7 @@ def create_workout(workout_input: WorkoutGenInput, user_id: int, db: Session = D
 
     return Response(
         f"Created workout plan {add_result_sql} for user: {add_result_sql.user_id}\n"
-        f"Workout context added, Id: {add_result_mongodb["inserted_id"]}",
+        f"Workout context added, Id: {add_result_mongodb['inserted_id']}",
         status_code=200
     )
 

@@ -3,7 +3,7 @@ from bson import ObjectId
 
 db = get_mongodb_client()
 
-workout_context_collection = db["workout_contexts"]
+workout_context_collection = db['workout_contexts']
 
 def add_workout_context(workout_plan_id: int, context: str):
 
@@ -25,7 +25,7 @@ def get_workout_context(workout_plan_id: int) -> str:
     document = workout_context_collection.find_one({"workout_plan_id": workout_plan_id})
 
     if document:
-        return document["context"]
+        return document['context']
     else:
         raise ValueError("Document is empty or not found.")
     
@@ -35,9 +35,9 @@ def delete_workout_context(workout_plan_id: int) -> bool:
 
     workout_context = workout_context_collection.find_one({"workout_plan_id": workout_plan_id})
 
-    result = workout_context_collection.delete_one({"_id": workout_context["_id"]})
+    result = workout_context_collection.delete_one({"_id": workout_context['_id']})
 
     if result.deleted_count > 0:
-        response = str(workout_context["_id"])
+        response = str(workout_context['_id'])
     
     return response
