@@ -4,8 +4,8 @@ from models.input_models import WorkoutGenInput
 from database.sql.init_sql_db import get_db_session
 from database.sql.workout_plan_db import add_workout_plan, delete_workout_plan
 from database.mongodb.workout_context_db import add_workout_context, get_workout_context, delete_workout_context
-from ai.gen_workout_plan import generate_workout_plan
-from ai.gen_workout_info import generate_exercise_overview, generate_workoutsession_overview
+from ai_services.gen_workout_plan import generate_workout_plan
+from ai_services.gen_workout_info import generate_exercise_overview, generate_workoutsession_overview
 
 router = APIRouter(
     prefix="/workouts"
