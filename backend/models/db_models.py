@@ -1,12 +1,10 @@
 from sqlmodel import SQLModel, Field, Relationship
 from sqlalchemy import ForeignKey
 from typing import List, Optional
+from pydantic import BaseModel, field_validator
+from models.input_models import UserBase
 
-class UserBase(SQLModel):
-    username: str = Field(index=True, unique=True)
-
-class UserInput(UserBase):
-    plain_password: str
+# User SQL Models 
 
 class UserSQL(UserBase, table=True):
 
@@ -17,6 +15,8 @@ class UserSQL(UserBase, table=True):
 
     workout_plans: List["WorkoutPlan"] = Relationship(back_populates="user", sa_relationship_kwargs={"cascade": "delete"})
 
+# Workout SQL Models 
+
 class WorkoutPlan(SQLModel, table=True):
 
     __tablename__ = "workoutplan"
@@ -24,7 +24,7 @@ class WorkoutPlan(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     user_id: int = Field(foreign_key="user.id")
     no_of_sessions: int
-    average_session_length: float
+    average_session_length: int
     equipment_requirements: str
 
     user: UserSQL = Relationship(back_populates="workout_plans")
@@ -38,7 +38,7 @@ class WorkoutSession(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     workoutplan_id: int = Field(foreign_key="workoutplan.id")
     session_name: str
-    length_of_session: float
+    length_of_session: int
     day_of_week: str
     equipment_requirements: str
 
@@ -57,4 +57,3 @@ class Exercise(SQLModel, table=True):
     reps_in_reserve: Optional[int] = Field(default=0)
 
     workout_session: WorkoutSession = Relationship(back_populates="exercises", sa_relationship_kwargs={"cascade": "delete"})
-
