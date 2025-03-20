@@ -3,7 +3,7 @@ from sqlmodel import Session
 from database.sql.init_sql_db import get_db_session
 from database.mongodb.chat_history_db import get_chat_history, add_chat_history, delete_chat_history
 from database.sql.workout_plan_db import get_workout_plan
-from ai.gen_chat import generate_chat
+from ai_services.gen_chat import generate_chat
 
 router = APIRouter(
     prefix="/chatbot"
