@@ -1,8 +1,10 @@
 from fastapi import APIRouter, Response, Depends, HTTPException
 from sqlmodel import Session
 from models.input_models import WorkoutGenInput
+from models.utilities.sql_seralising import serialise_exercise
 from database.sql.init_sql_db import get_db_session
 from database.sql.workout_plan_db import add_workout_plan, delete_workout_plan
+from database.sql.exercise_db import get_exercise
 from database.mongodb.workout_context_db import add_workout_context, get_workout_context, delete_workout_context
 from ai_services.gen_workout_plan import generate_workout_plan
 from ai_services.gen_workout_info import generate_exercise_overview, generate_workoutsession_overview
@@ -63,10 +65,17 @@ def get_workoutsession_info(workout_plan_id: int, workoutsession_id: int) :
 
 
 @router.get("/get-exercise-info")
-def get_exercise_info(workout_plan_id: int, exercise_id: int) :
+def get_exercise_info(workout_plan_id: int, exercise_id: int, db: Session = Depends(get_db_session) ) :
 
     context = get_workout_context(workout_plan_id)
 
-    ai_response_data = generate_exercise_overview(context, exercise_id)
+    exercise = get_exercise(exercise_id, db)
+
+    if not exercise:
+        raise HTTPException(f"No exercise foud with the Id: {exercise_id}")
+
+    exercise_dict = serialise_exercise(exercise)
+
+    ai_response_data = generate_exercise_overview(context, exercise_dict)
 
     return Response(ai_response_data, status_code=200)

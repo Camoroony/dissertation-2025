@@ -1,10 +1,10 @@
-from models.db_models import WorkoutPlan
+from models.db_models import WorkoutPlan, WorkoutSession, Exercise
 from typing import Dict, Any
 
 def serialise_workout_plan(workout_plan: WorkoutPlan) -> Dict[str, Any]:
 
         if not workout_plan:
-            return {"error": "Workout plan not found"}
+            return {"error": "Workout plan not found for serialisation"}
 
         return {
             "id": workout_plan.id,
@@ -34,3 +34,17 @@ def serialise_workout_plan(workout_plan: WorkoutPlan) -> Dict[str, Any]:
             ]
         }
 
+
+def serialise_exercise(exercise: Exercise) -> Dict[str, Any]:
+      
+       if not exercise:
+            return {"error": "Exercise not found for serialisation"}
+       
+       return {
+              "id": exercise.id,
+              "exercise_name": exercise.exercise_name,
+              "sets": exercise.sets,
+              "reps": exercise.reps,
+              "reps_in_reserve": exercise.reps_in_reserve
+       }
+      

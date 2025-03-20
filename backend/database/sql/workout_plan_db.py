@@ -2,7 +2,6 @@ import json
 from models.db_models import WorkoutPlan, WorkoutSession, Exercise
 from sqlmodel import Session, select
 from sqlalchemy.orm import selectinload
-from models.utilities.workout_plan_utils import serialise_workout_plan
 
 def add_workout_plan(workout_plan_data: str, user_id: int, db: Session):
 
@@ -65,9 +64,7 @@ def get_workout_plan(workout_plan_id: int, db: Session):
 
     workout_plan = db.exec(statement).first()
 
-    workout_plan_dict = serialise_workout_plan(workout_plan)
-
-    return workout_plan_dict
+    return workout_plan
 
 def delete_workout_plan(workout_plan_id: int, db: Session):
 
