@@ -3,7 +3,10 @@ sqlmodel
 bcrypt
 pymysql
 cryptography
-langchain-openai
 langchain
+langchain-openai
+langchain-community
+unstructured
 python-dotenv
 pymongo
+chromadb
