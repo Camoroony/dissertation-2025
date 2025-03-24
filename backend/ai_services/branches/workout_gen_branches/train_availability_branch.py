@@ -3,7 +3,8 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_openai.embeddings import OpenAIEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain_openai import ChatOpenAI
-from langchain_core.messages import SystemMessage, HumanMessage
+from langchain.schema.output_parser import StrOutputParser
+from langchain.prompts import ChatPromptTemplate
 from dotenv import load_dotenv
 import os
 import glob
@@ -19,7 +20,7 @@ txt_files = glob.glob(os.path.join(text_files_directory, "*.txt"))
 embeddings = OpenAIEmbeddings(api_key=OPENAI_API_KEY, model="text-embedding-3-small")
 model = ChatOpenAI(model="gpt-4o-mini")
 
-def get_availability_recommendation(training_availability: int):
+def get_availability_guidance(training_availability: int):
 
     if not os.path.exists(persistent_directory):
      print("Chroma_db does not exist, initialising vector store...")
@@ -48,37 +49,38 @@ def get_availability_recommendation(training_availability: int):
 
     vector_query = f"{training_availability} day workout split"
 
-    ai_query = f"The individual can only train {training_availability} days per week, what is the best workout split for them?"
-
     relevant_docs = retriever.invoke(vector_query)
 
-    print("\n--- Relevant Documents ---")
-    for i, doc in enumerate(relevant_docs, 1):
-     print(f"Document {i}:\n{doc.page_content}\n")
+    # print("\n--- Relevant Documents ---")
+    # for i, doc in enumerate(relevant_docs, 1):
+    #  print(f"Document {i}:\n{doc.page_content}\n")
+
+    ai_query = f"The individual wants to train {training_availability} days per week, suggest them the best workout split for {training_availability} sessions a week"
 
     context = (
     "\n\n You will be provided with some relevant documents to use when answering the question"
     + "\n\n Some documents contain references to other sources by numbers e.g. [1], [2] etc. These numbers correspond with references that are marked with the same numbers at the end of documents e.g. [2] Example university (year), Paper title etc.."
     + "\n Your job is to provide an answer based on the following documents."
     + "\n\n ONLY USE THE DOCUMENTS PROVIDED TO YOU TO FORMULATE YOUR ANSWER"
-    # + "\n\n When generating your answer, include inline number citations to the references from the relevant documents you used to come up with your answer (e.g. [1], [2] etc.)"
-    # + "\n\n Provide the references used in your response at the end with the same number they have in the inline citations you generated."
-    # + "\n\n Number these references to match the inline references you gave in the response. e.g.:"
-    # + "\n Response: This is text response content gathered from a reference [1]"
-    # + "\n References: [1] Reference author (reference year) paper title etc."
+    + "\n\n DO NOT GIVE SAMPLE EXAMPLES OF A WORKOUT PLAN, YOU ARE ONLY TO RECOMMEND THE SPLIT TO FOLLOW AND EXPLAIN WHY"
     + "\n\n These are the relevant documents you must use to forumulate your answer:"
     + "\n\n Relevant Documents: \n"
     + "\n\n".join([doc.page_content for doc in relevant_docs])
     )
 
-    messages = [
-    SystemMessage(content="You are an assistant who provides concise advice on what workout split an individual should choose based on their characteristics.\n"),
-    SystemMessage(content=context),
-    HumanMessage(content=f"\n\n This is your question to answer based on the documents: {ai_query}")
-    ]
+    prompt = ChatPromptTemplate.from_messages([
+    ("system", "You are an assistant who provides concise advice on what workout split an individual should choose based on their characteristics."),
+    ("system", "{context}"),  
+    ("human", "This is your question to answer based on the documents: {ai_query}")  
+    ])
 
-    llm_response = model.invoke(messages)
 
-    print("\n--- Generated Response: ---")
-    print("Content:")
-    print(llm_response.content)
+    chain = prompt | model | StrOutputParser()
+
+    response = chain.invoke({"context": context, "ai_query": ai_query})  
+
+    # print("\n--- Generated Response: ---")
+    # print("Content:")
+    # print(response.content)
+
+    return response
