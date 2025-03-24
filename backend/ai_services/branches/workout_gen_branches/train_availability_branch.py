@@ -6,36 +6,50 @@ from langchain_openai import ChatOpenAI
 from langchain_core.messages import SystemMessage, HumanMessage
 from dotenv import load_dotenv
 import os
+import glob
 
 load_dotenv()
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
-persistent_directory = os.path.join(current_dir, "chroma_db")
+persistent_directory = os.path.join(current_dir, "..", "..", "..", "database", "chroma_dbs", "workout_split_db")
+
+text_files_directory = os.path.join(current_dir, "..", "..", "..", "database", "chroma_data")
+
+txt_files = glob.glob(os.path.join(text_files_directory, "*.txt"))
 
 embeddings = OpenAIEmbeddings(api_key=OPENAI_API_KEY, model="text-embedding-3-small")
 
 if not os.path.exists(persistent_directory):
     print("Chroma_db does not exist, initialising vector store...")
 
-    loader = TextLoader("gymshark.txt", encoding="utf-8")
-    document = loader.load()
+    all_docs = []
 
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1500, chunk_overlap=100)
-    docs = text_splitter.split_documents(document)
+    for txt_file in txt_files:
+        print(f"Loading document: {txt_file}")
+        
+        loader = TextLoader(txt_file, encoding="utf-8")
+        document = loader.load()
 
-    vectorstore = Chroma.from_documents(docs, embeddings, persist_directory="./chroma_db")
+        # Split the document into chunks
+        text_splitter = RecursiveCharacterTextSplitter(chunk_size=1500, chunk_overlap=100)
+        docs = text_splitter.split_documents(document)
+
+        # Add the split documents to the all_docs list
+        all_docs.extend(docs)
+
+    vectorstore = Chroma.from_documents(all_docs, embeddings, persist_directory=persistent_directory)
 else:
     print("Chroma_db already exists, no need to initialise.")
     vectorstore = Chroma(persist_directory=persistent_directory, embedding_function=embeddings)
 
 retriever = vectorstore.as_retriever(search_type= "similarity_score_threshold",
-                                     search_kwargs={"k": 1, "score_threshold": 0.2})
+                                     search_kwargs={"k": 3, "score_threshold": 0.2})
 
-vector_query = "Body part split disadavantages"
+vector_query = "What is the best 6 day workout split"
 
-ai_query = "What are the disadvanatages of a body part split?"
+ai_query = "What is the best 6 day workout split?"
 
 relevant_docs = retriever.invoke(vector_query)
 
