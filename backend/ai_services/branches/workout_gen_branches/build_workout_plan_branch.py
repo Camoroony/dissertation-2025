@@ -28,8 +28,8 @@ def build_workout_plan(workout_input: WorkoutGenInput, plan_guidance: str):
                   "- Available Equipment: {available_equipment}\n"
                   "- Additional Info: {additional_info}"),
 
-        ("human", "Use the following information on the individual to guide your decision-making for the workout plan:\n\n"
-                  "- Experience Level: {guidance}\n")     
+        ("system", "Use the following information on the individual to guide your decision-making for the workout plan:\n\n"
+                  "{guidance}")     
     ])
 
    
