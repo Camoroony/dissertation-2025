@@ -16,7 +16,6 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 persistent_directory = os.path.join(current_dir, "..", "..", "..", "database", "chroma_dbs", "workout_split_db")
 text_files_directory = os.path.join(current_dir, "..", "..", "..", "database", "chroma_data")
 txt_files = glob.glob(os.path.join(text_files_directory, "*.txt"))
-
 embeddings = OpenAIEmbeddings(api_key=OPENAI_API_KEY, model="text-embedding-3-small")
 model = ChatOpenAI(model="gpt-4o-mini")
 
