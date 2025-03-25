@@ -10,8 +10,9 @@ load_dotenv()
 
 embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
 
-def build_chroma_vectorstore(db_name: str, db_data: str):
+def get_chroma_vectorstore(db_name: str, db_data: str):
  
+ current_dir = os.path.dirname(os.path.abspath(__file__))
  persistent_directory = os.path.join(current_dir, "chroma_dbs", db_name)
 
  if not os.path.exists(persistent_directory):
