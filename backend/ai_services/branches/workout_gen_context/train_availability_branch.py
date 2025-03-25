@@ -13,7 +13,7 @@ model = ChatOpenAI(model="gpt-4o-mini")
 
 def get_availability_context(training_availability: int):
 
-    vectorstore = build_chroma_vectorstore("workout_split_db")
+    vectorstore = build_chroma_vectorstore(db_name="training_availability_db", db_data="training_availability_studies")
 
     retriever = vectorstore.as_retriever(search_type= "similarity_score_threshold",
                                      search_kwargs={"k": 6, "score_threshold": 0.4})

@@ -10,7 +10,7 @@ load_dotenv()
 
 embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
 
-def build_chroma_vectorstore(db_name: str):
+def build_chroma_vectorstore(db_name: str, db_data: str):
  
  persistent_directory = os.path.join(current_dir, "chroma_dbs", db_name)
 
@@ -18,7 +18,7 @@ def build_chroma_vectorstore(db_name: str):
      print("Chroma_db does not exist, initialising vector store...")
 
      current_dir = os.path.dirname(os.path.abspath(__file__))
-     text_files_directory = os.path.join(current_dir, "chroma_data")
+     text_files_directory = os.path.join(current_dir, "chroma_data", db_data)
      txt_files = glob.glob(os.path.join(text_files_directory, "*.txt"))
 
      all_docs = []

@@ -10,7 +10,7 @@ load_dotenv()
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
-model = ChatOpenAI(model="gpt-3.5-turbo", api_key=OPENAI_API_KEY)
+model = ChatOpenAI(model="gpt-4o-mini", api_key=OPENAI_API_KEY)
 
 def build_workout_plan(workout_input: WorkoutGenInput, plan_guidance: str):
 
