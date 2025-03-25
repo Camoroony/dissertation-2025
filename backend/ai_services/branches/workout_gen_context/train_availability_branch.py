@@ -1,48 +1,19 @@
-from langchain_community.document_loaders import TextLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_openai.embeddings import OpenAIEmbeddings
-from langchain_community.vectorstores import Chroma
+import os
+from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from langchain.schema.output_parser import StrOutputParser
 from langchain.prompts import ChatPromptTemplate
-from dotenv import load_dotenv
-import os
-import glob
+from database.chroma.init_chroma_db import build_chroma_vectorstore
 
 load_dotenv()
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
-current_dir = os.path.dirname(os.path.abspath(__file__))
-persistent_directory = os.path.join(current_dir, "..", "..", "..", "database", "chroma_dbs", "workout_split_db")
-text_files_directory = os.path.join(current_dir, "..", "..", "..", "database", "chroma_data")
-txt_files = glob.glob(os.path.join(text_files_directory, "*.txt"))
-embeddings = OpenAIEmbeddings(api_key=OPENAI_API_KEY, model="text-embedding-3-small")
 model = ChatOpenAI(model="gpt-4o-mini")
 
-def get_availability_guidance(training_availability: int):
+def get_availability_context(training_availability: int):
 
-    if not os.path.exists(persistent_directory):
-     print("Chroma_db does not exist, initialising vector store...")
-
-     all_docs = []
-
-     for txt_file in txt_files:
-        print(f"Loading document: {txt_file}")
-        
-        loader = TextLoader(txt_file, encoding="utf-8")
-        document = loader.load()
-
-        # Split the document into chunks
-        text_splitter = RecursiveCharacterTextSplitter(chunk_size=1500, chunk_overlap=100)
-        docs = text_splitter.split_documents(document)
-
-        # Add the split documents to the all_docs list
-        all_docs.extend(docs)
-        vectorstore = Chroma.from_documents(all_docs, embeddings, persist_directory=persistent_directory)
-    else:
-        print("Chroma_db already exists, no need to initialise.")
-        vectorstore = Chroma(persist_directory=persistent_directory, embedding_function=embeddings)
+    vectorstore = build_chroma_vectorstore("workout_split_db")
 
     retriever = vectorstore.as_retriever(search_type= "similarity_score_threshold",
                                      search_kwargs={"k": 6, "score_threshold": 0.4})

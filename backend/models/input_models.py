@@ -17,6 +17,7 @@ AVAILABILITY_DAYS = range(1, 6)
 SESSION_LENGTH = range(10, 90)
 TRAINING_FOCUS = {"Full-Body", "Upper-Body", "Lower-Body", "Arms", "Shoulders", "Chest", "Back"}
 AVAILABLE_EQUIPMENT = {
+    "Full access to gym",
     "Dumbbells", "Barbell",
     "Squat Rack", "Power Rack", "Smith Machine", "Leg Press Machine", 
     "Cable Machine", "Chest Press Machine", "Lat Pulldown Machine", 
