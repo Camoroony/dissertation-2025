@@ -4,6 +4,7 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import TextLoader
 from langchain_community.vectorstores import Chroma
 from langchain_openai.embeddings import OpenAIEmbeddings
+from langchain.docstore.document import Document
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -26,15 +27,17 @@ def get_chroma_vectorstore(db_name: str, db_data: str):
 
      for txt_file in txt_files:
         print(f"Loading document: {txt_file}")
-        
-        loader = TextLoader(txt_file, encoding="utf-8")
+
+        loader = TextLoader(txt_file, "utf-8")
+
         document = loader.load()
 
-        # Split the document into chunks
-        text_splitter = RecursiveCharacterTextSplitter(chunk_size=1500, chunk_overlap=100)
-        docs = text_splitter.split_documents(document)
+        docs = custom_splitter(document[0])
 
-        # Add the split documents to the all_docs list
+        for i, chunk in enumerate(docs):  
+         print(f"\nChunk {i+1}:\n{chunk}\n{'='*40}")  
+
+
         all_docs.extend(docs)
         vectorstore = Chroma.from_documents(all_docs, embeddings, persist_directory=persistent_directory)
  else:
@@ -42,3 +45,16 @@ def get_chroma_vectorstore(db_name: str, db_data: str):
         vectorstore = Chroma(persist_directory=persistent_directory, embedding_function=embeddings)
 
  return vectorstore 
+
+def custom_splitter(document: Document, separator="---") -> list[Document]:
+    
+    chunks = document.page_content.split(separator)
+
+    chunks = [chunk.strip() for chunk in chunks if chunk.strip()]
+
+    documents = []
+    for chunk in chunks:
+        doc = Document(page_content=chunk)
+        documents.append(doc)
+    
+    return documents
