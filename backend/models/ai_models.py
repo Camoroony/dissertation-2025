@@ -23,4 +23,4 @@ WORKOUT_PLAN_SCHEMA = """{
   ]
 }"""
 
-MUSCLE_GROUPS = ["Chest", "Back", "Bicep", "Tricep", "Core\Abs", "Legs"]
+MUSCLE_GROUPS = ["Chest", "Shoulders", "Back", "Biceps", "Triceps", "Core\\Abs", "Leg (Quads/Hamstrings/Calfs)"]

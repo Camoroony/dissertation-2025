@@ -7,40 +7,34 @@ from database.chroma.init_chroma_db import get_chroma_vectorstore
 
 load_dotenv()
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-
 model = ChatOpenAI(model="gpt-4o-mini")
 
 def get_availability_context(training_availability: int):
 
-    vectorstore = get_chroma_vectorstore(db_name="training_availability_db", db_data="training_availability_studies")
+    vectorstore = get_chroma_vectorstore(db_name="workout_splits_db", db_data="workout_split_studies")
 
-    retriever = vectorstore.as_retriever(search_type= "similarity_score_threshold",
-                                     search_kwargs={"k": 6, "score_threshold": 0.4})
+    vs_query = f"What {training_availability} day workout splits are there?"
 
-    vector_query = f"{training_availability} day workout split"
+    vs_results = vectorstore.similarity_search_with_relevance_scores(query=vs_query, k=7)
 
-    relevant_docs = retriever.invoke(vector_query)
+    context_text = "\n\n---\n\n".join([doc.page_content for doc, _score, in vs_results])
 
-    # print("\n--- Relevant Documents ---")
-    # for i, doc in enumerate(relevant_docs, 1):
-    #  print(f"Document {i}:\n{doc.page_content}\n")
+    print(context_text)
 
     ai_query = f"The individual wants to train {training_availability} days per week, suggest them the best workout split for {training_availability} sessions a week"
 
     context = (
     "\n\n You will be provided with some relevant documents to use when answering the question"
-    + "\n\n Some documents contain references to other sources by numbers e.g. [1], [2] etc. These numbers correspond with references that are marked with the same numbers at the end of documents e.g. [2] Example university (year), Paper title etc.."
     + "\n Your job is to provide an answer based on the following documents."
     + "\n\n ONLY USE THE DOCUMENTS PROVIDED TO YOU TO FORMULATE YOUR ANSWER"
     + "\n\n DO NOT GIVE SAMPLE EXAMPLES OF A WORKOUT PLAN, YOU ARE ONLY TO RECOMMEND THE SPLIT TO FOLLOW AND EXPLAIN WHY"
     + "\n\n These are the relevant documents you must use to forumulate your answer:"
-    + "\n\n Relevant Documents: \n"
-    + "\n\n".join([doc.page_content for doc in relevant_docs])
+    + "\n\n Relevant Documents: \n\n"
+    + f"\n\n {context_text}"
     )
 
     prompt = ChatPromptTemplate.from_messages([
-    ("system", "You are an assistant who provides concise advice on what workout split an individual should choose based on their characteristics."),
+    ("system", "You are an assistant who provides a description on an individuals workout split desires as well as advice on what workout split the individual should choose based on their characteristics."),
     ("system", "{context}"),  
     ("human", "This is your question to answer based on the documents: {ai_query}")  
     ])
@@ -50,8 +44,8 @@ def get_availability_context(training_availability: int):
 
     response = chain.invoke({"context": context, "ai_query": ai_query})  
 
-    # print("\n--- Generated Response: ---")
-    # print("Content:")
-    # print(response.content)
+    print("\n--- Generated Response: ---")
+    print("Content:")
+    print(response)
 
     return response
