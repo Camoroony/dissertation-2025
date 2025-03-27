@@ -23,27 +23,37 @@ def get_chroma_vectorstore(db_name: str, db_data: str):
      text_files_directory = os.path.join(current_dir, "chroma_data", db_data)
      txt_files = glob.glob(os.path.join(text_files_directory, "*.txt"))
 
-     all_docs = []
+     text_splitter = RecursiveCharacterTextSplitter(
+        chunk_size=1300,
+        chunk_overlap=500,
+        length_function=len,
+        add_start_index=True
+        )
+
+     chunks = []
 
      for txt_file in txt_files:
         print(f"Loading document: {txt_file}")
 
         loader = TextLoader(txt_file, "utf-8")
-
         document = loader.load()
+        docs = text_splitter.split_documents(document)
 
-        docs = custom_splitter(document[0])
+        # Uncomment if you want to debug the chunks
+        # for i, chunk in enumerate(docs):  
+        #     print(f"\nChunk {i+1}:\n{chunk}\n{'='*40}")  
 
-        for i, chunk in enumerate(docs):  
-         print(f"\nChunk {i+1}:\n{chunk}\n{'='*40}")  
+        chunks.extend(docs)
+        print(f"Document: {txt_file} loaded into chunks")
 
 
-        all_docs.extend(docs)
-        vectorstore = Chroma.from_documents(all_docs, embeddings, persist_directory=persistent_directory)
+     vectorstore = Chroma.from_documents(chunks, embeddings, persist_directory=persistent_directory)
+
  else:
         print("Chroma_db already exists, no need to initialise.")
         vectorstore = Chroma(persist_directory=persistent_directory, embedding_function=embeddings)
 
+ 
  return vectorstore 
 
 def custom_splitter(document: Document, separator="---") -> list[Document]:
