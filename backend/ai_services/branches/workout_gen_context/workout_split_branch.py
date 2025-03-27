@@ -9,7 +9,7 @@ load_dotenv()
 
 model = ChatOpenAI(model="gpt-4o-mini")
 
-def get_availability_context(training_availability: int):
+def get_workout_split_ai(training_availability: int):
 
     vectorstore = get_chroma_vectorstore(db_name="workout_splits_db", db_data="workout_split_studies")
 
@@ -24,7 +24,7 @@ def get_availability_context(training_availability: int):
     ai_query = (
     f"The individual wants to train {training_availability} days per week\n"
     + "Provide a brief 1 to 2 line summary of the individual and their desires, "
-    + f"then suggest them the best workout split for {training_availability} sessions a week"
+    + f"then suggest the individual the best workout split for {training_availability} sessions a week"
     )
 
     context = (
