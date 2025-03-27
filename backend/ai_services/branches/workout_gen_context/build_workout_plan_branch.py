@@ -14,7 +14,6 @@ model = ChatOpenAI(model="gpt-4o-mini", api_key=OPENAI_API_KEY)
 
 def build_workout_plan(workout_input: WorkoutGenInput, plan_guidance: str):
 
-    # Create a prompt template
     prompt_template = ChatPromptTemplate.from_messages([
 
         ("system", "You are a workout generator who generates workout plans following this schema:\n" + "{WORKOUT_PLAN_SCHEMA}\n"),

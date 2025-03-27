@@ -8,9 +8,38 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
+
 model = ChatOpenAI(model="gpt-4o-mini")
 
-prompt_context = (
+
+
+def get_workout_exercises_ai(available_equipment: str):
+  
+  content = get_available_equipment_context(available_equipment)
+
+  ai_showcase_content = (
+    f"Equipment the indvidual has access to: {available_equipment}\n\n"
+    + f"The content for you to display: {content}"
+    )
+  
+  prompt = ChatPromptTemplate.from_messages([   
+      ("system", "You are an formatting assistant who provides a 1 to 2 line summary on an individual and the types of exercise equipment they have access to."),
+      ("system", "Once you have provided the summary, you display formatted exercise recommendations."),
+      ("system", "DO NOT ALTER ANY CONTENT YOU HAVE BEEN GIVEN TO USE, ONLY DISPLAY IT."),
+      ("human", f"This is the following content for you to use: {ai_showcase_content}")])
+  
+  chain = prompt | model | StrOutputParser()
+
+  response = chain.invoke({"ai_showcase_content": ai_showcase_content})  
+
+  print(response)
+
+  return response
+
+
+def get_available_equipment_context(available_equipment: str):
+
+    prompt_context = (
     "\n\n You will be provided with some relevant documents to use when answering the question"
     + "\n Your job is to provide an answer based on the following documents."
     + "\n\n (ONLY USE THE DOCUMENTS PROVIDED TO YOU TO FORMULATE YOUR ANSWER)"
@@ -18,13 +47,13 @@ prompt_context = (
     + "\n\n {context_text}"
     )
 
-ai_query = (
+    ai_query = (
     "\n\n This is your question to answer based on the documents:"
-    + "\n\n What {available_equipment} {muscle} exercises do you recommend? Provide at least three, but an upmost of five if you have them to share. \n\n" 
-    + "\n\n Please provide them all in a list format alongside the correpsonding muscle they train and provide a one line explanation for why you have chosen that exercise."
+    + "\n\n What {available_equipment} {muscle} exercises do you recommend?\n"
+    + "You must provide at least three, but an upmost of five if you have them to share. \n\n" 
+    + "Provide all the exercises you recommend in a list format alongside the corresponding muscle they train and provide a one line explanation "
+    + "for why you have chosen that exercise."
     )
-
-def get_available_equipment_context(available_equipment: str):
 
     vectorstore = get_chroma_vectorstore(db_name="workout_exercises_db", db_data="workout_exercise_studies")
 
@@ -32,6 +61,9 @@ def get_available_equipment_context(available_equipment: str):
 
     ai_response = []
 
+    if available_equipment == "Full gym access":
+      available_equipment = ""
+      
     for muscle in MUSCLE_GROUPS:
      vs_query = f"What are the best {available_equipment} {muscle} exercises?"
      vs_results = vectorstore.similarity_search_with_relevance_scores(query=vs_query, k=5)

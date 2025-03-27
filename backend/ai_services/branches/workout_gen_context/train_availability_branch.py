@@ -21,7 +21,11 @@ def get_availability_context(training_availability: int):
 
     print(context_text)
 
-    ai_query = f"The individual wants to train {training_availability} days per week, suggest them the best workout split for {training_availability} sessions a week"
+    ai_query = (
+    f"The individual wants to train {training_availability} days per week\n"
+    + "Provide a brief 1 to 2 line summary of the individual and their desires, "
+    + f"then suggest them the best workout split for {training_availability} sessions a week"
+    )
 
     context = (
     "\n\n You will be provided with some relevant documents to use when answering the question"
