@@ -30,7 +30,7 @@ def get_available_equipment_context(available_equipment: str):
 
     vectorstore_response = []
 
-    total_response = []
+    ai_response = []
 
     for muscle in MUSCLE_GROUPS:
      vs_query = f"What are the best {available_equipment} {muscle} exercises?"
@@ -38,7 +38,7 @@ def get_available_equipment_context(available_equipment: str):
 
      context_text = "\n\n---\n\n".join([doc.page_content for doc, _score, in vs_results])
 
-     print(context_text)
+    #  print(context_text)
 
      vectorstore_response.append(context_text)
 
@@ -48,15 +48,15 @@ def get_available_equipment_context(available_equipment: str):
      prompt = ChatPromptTemplate.from_messages([   
       ("system", "You are an assistant who provides a description on an individuals exercise equipment availability as well as advice on what exercises the individual could choose and why."),
       ("system", formatted_prompt_context),  
-      ("human", ai_query)])
+      ("human", formatted_ai_query)])
 
      chain = prompt | model | StrOutputParser()
 
-     response = chain.invoke()  
-     total_response.append(response)
+     chain_response = chain.invoke({"formatted_prompt_context": formatted_prompt_context, "formatted_ai_query": formatted_ai_query})  
+     ai_response.append(chain_response)
 
     print("\n\n--- Generated Response: ---\n\n")
-    print("Content:\n\n")
-    print(total_response)
+    for response in ai_response:
+     print(response + "\n\n")
 
-    return total_response
+    return ai_response
