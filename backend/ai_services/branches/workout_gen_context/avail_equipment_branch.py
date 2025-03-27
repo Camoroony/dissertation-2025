@@ -1,5 +1,6 @@
 from langchain_openai import ChatOpenAI
-from langchain.indexes.vectorstore import VectorStoreIndexWrapper
+from langchain_community.vectorstores import Chroma
+from langchain.schema.runnable import RunnableParallel
 from langchain.schema.output_parser import StrOutputParser
 from langchain.prompts import ChatPromptTemplate
 from models.ai_models import MUSCLE_GROUPS
@@ -12,10 +13,11 @@ load_dotenv()
 model = ChatOpenAI(model="gpt-4o-mini")
 
 
-
 def get_workout_exercises_ai(available_equipment: str):
   
-  content = get_available_equipment_context(available_equipment)
+  content_response = get_available_equipment_context(available_equipment)
+
+  content = "\n\n".join(f"**{muscle} Exercises:**\n{exercises}" for muscle, exercises in content_response.items())
 
   ai_showcase_content = (
     f"Equipment the indvidual has access to: {available_equipment}\n\n"
@@ -39,6 +41,32 @@ def get_workout_exercises_ai(available_equipment: str):
 
 def get_available_equipment_context(available_equipment: str):
 
+    vectorstore = get_chroma_vectorstore(db_name="workout_exercises_db", db_data="workout_exercise_studies")
+
+    ai_response = []
+
+    if available_equipment == "Full gym access":
+      available_equipment = ""
+
+    chains = {muscle: process_muscle(muscle, available_equipment, vectorstore) for muscle in MUSCLE_GROUPS}
+
+    parallel_chain = RunnableParallel(**chains)
+
+    ai_response = parallel_chain.invoke({})
+
+    print("\n\n--- Generated Response: ---\n\n")
+    for k, v in ai_response.items():
+     print(f"Recommended {k} exercises:" + "\n\n")
+     print(f"{v}" + "\n\n")
+
+
+
+
+    return ai_response
+
+
+def process_muscle(muscle: str, available_equipment: str, vectorstore: Chroma):
+     
     prompt_context = (
     "\n\n You will be provided with some relevant documents to use when answering the question"
     + "\n Your job is to provide an answer based on the following documents."
@@ -55,40 +83,21 @@ def get_available_equipment_context(available_equipment: str):
     + "for why you have chosen that exercise."
     )
 
-    vectorstore = get_chroma_vectorstore(db_name="workout_exercises_db", db_data="workout_exercise_studies")
+    vs_query = f"What are the best {available_equipment} {muscle} exercises?"
+    vs_results = vectorstore.similarity_search_with_relevance_scores(query=vs_query, k=5)
 
-    vectorstore_response = []
-
-    ai_response = []
-
-    if available_equipment == "Full gym access":
-      available_equipment = ""
-      
-    for muscle in MUSCLE_GROUPS:
-     vs_query = f"What are the best {available_equipment} {muscle} exercises?"
-     vs_results = vectorstore.similarity_search_with_relevance_scores(query=vs_query, k=5)
-
-     context_text = "\n\n---\n\n".join([doc.page_content for doc, _score, in vs_results])
+    context_text = "\n\n---\n\n".join([doc.page_content for doc, _score, in vs_results])
 
     #  print(context_text)
 
-     vectorstore_response.append(context_text)
+    formatted_prompt_context = prompt_context.format(context_text=context_text)
+    formatted_ai_query = ai_query.format(available_equipment=available_equipment, muscle=muscle)
 
-     formatted_prompt_context = prompt_context.format(context_text=context_text)
-     formatted_ai_query = ai_query.format(available_equipment=available_equipment, muscle=muscle)
-
-     prompt = ChatPromptTemplate.from_messages([   
+    prompt = ChatPromptTemplate.from_messages([   
       ("system", "You are an assistant who provides a description on an individuals exercise equipment availability as well as advice on what exercises the individual could choose and why."),
       ("system", formatted_prompt_context),  
       ("human", formatted_ai_query)])
 
-     chain = prompt | model | StrOutputParser()
+    chain = prompt | model | StrOutputParser()
 
-     chain_response = chain.invoke({"formatted_prompt_context": formatted_prompt_context, "formatted_ai_query": formatted_ai_query})  
-     ai_response.append(chain_response)
-
-    print("\n\n--- Generated Response: ---\n\n")
-    for response in ai_response:
-     print(response + "\n\n")
-
-    return ai_response
+    return chain
