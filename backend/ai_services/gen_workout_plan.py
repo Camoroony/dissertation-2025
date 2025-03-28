@@ -18,6 +18,10 @@ def generate_workout_plan(workout_input: WorkoutGenInput):
     #     lambda _: get_training_focus_context(workout_input.training_focus)
     # )
 
+    # training_experience_lambda = RunnableLambda(
+    #     lambda _: get_training_focus_context(workout_input.training_experience)
+    # )
+
     context_chain = RunnableParallel(
         training_availability_context = workout_split_lambda,
         training_equipment_context = workout_exercises_lambda
