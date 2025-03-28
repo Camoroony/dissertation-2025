@@ -1,11 +1,10 @@
 import json
+from typing import Dict, Any
 from models.db_models import WorkoutPlan, WorkoutSession, Exercise
 from sqlmodel import Session, select
 from sqlalchemy.orm import selectinload
 
-def add_workout_plan(workout_plan_data: str, user_id: int, db: Session):
-
-    data = json.loads(workout_plan_data)
+def add_workout_plan(data: Dict[str, Any], user_id: int, db: Session):
 
     workout_plan_obj = WorkoutPlan(
         user_id = user_id,
