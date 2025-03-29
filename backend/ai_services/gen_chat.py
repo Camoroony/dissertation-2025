@@ -40,9 +40,10 @@ def generate_workout_chat(prompt: str, chat_history, workout_plan):
 
     prompt_template = ChatPromptTemplate.from_messages([
 
-        ("system", "You are a chatbot who is being asked questions about the following workout plan: {workout_plan}\n"
-         "You also have the following chat history with the user: {chat_history}"),
-        ("human", "{prompt}")
+        ("system", "You are a chatbot who can answer questions about the following workout plan: {workout_plan}\n\n"
+        "YOU ARE ONLY ALLOWED TO ANSWER QUESTIONS ABOUT THE WORKOUT PLAN.\n\n"
+        "You have the following chat history with the user: {chat_history}. \n\n"),
+        ("human", "This is the question for you to answer: {prompt}")
 
     ])
 
