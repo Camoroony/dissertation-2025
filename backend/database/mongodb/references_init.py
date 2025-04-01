@@ -11,7 +11,7 @@ references = [
     "author": "Alex Kirkup-Lee",
     "publication_date": "2024-05-20",
     "url": "https://uk.gymshark.com/blog/article/the-best-workout-splits-for-every-goal",
-    "vector_db": "training_availability_db",
+    "vector_db": "workout_splits_db",
     "references": [
         {
             "author": "Schoenfeld, B.J., Grgic, J. and Krieger, J.",
@@ -55,7 +55,7 @@ references = [
     "author": "Jeremy Ethier",
     "publication_date": "2024-11-24",
     "url": "https://builtwithscience.com/fitness-tips/best-workout-split-2025/",
-    "vector_db": "training_availability_db",
+    "vector_db": "workout_splits_db",
     "references": [
         {
             "author": "Pelland, J., Remmert, J., Robinson, Z., Hinson, S., Zourdos, M.",
@@ -86,7 +86,7 @@ references = [
     "author": "Alex Kirkup-Lee",
     "publication_date": "2025-03-21",
     "url": "https://uk.gymshark.com/blog/article/the-best-dumbbell-exercises",
-    "vector_db": "available_equipment_db",
+    "vector_db": "workout_exercises_db",
     "references": [
         {
             "author": "Smoak, Y.",
@@ -130,7 +130,7 @@ references = [
     "author": "Michael Matthews",
     "publication_date": "2024-09-13",
     "url": "https://legionathletics.com/chest-workouts/",
-    "vector_db": "available_equipment_db",
+    "vector_db": "workout_exercises_db",
     "references": [
         {
             "author": "Wolf, Milo, et al.",
@@ -179,7 +179,7 @@ references = [
     "author": "Michael Matthews",
     "publication_date": "2024-06-28",
     "url": "https://legionathletics.com/back-workouts/",
-    "vector_db": "available_equipment_db",
+    "vector_db": "workout_exercises_db",
     "references": [
         {
             "author": "Nigro, Federico, and Sandro Bartolomei",
@@ -228,7 +228,7 @@ references = [
     "author": "Michael Matthews",
     "publication_date": "2024-05-17",
     "url": "https://legionathletics.com/shoulder-workouts/",
-    "vector_db": "available_equipment_db",
+    "vector_db": "workout_exercises_db",
     "references": [
         {
             "author": "Saeterbakken, Atle H., and Marius S. Fimland",
@@ -262,7 +262,7 @@ references = [
     "author": "Michael Matthews",
     "publication_date": "2024-03-19",
     "url": "https://legionathletics.com/leg-workouts/",
-    "vector_db": "available_equipment_db",
+    "vector_db": "workout_exercises_db",
     "references": [
         {
             "author": "Yavuz, Hasan Ulas, et al.",
@@ -311,7 +311,7 @@ references = [
     "author": "Michael Matthews",
     "publication_date": "2024-05-14",
     "url": "https://legionathletics.com/how-to-get-six-pack-abs/",
-    "vector_db": "available_equipment_db",
+    "vector_db": "workout_exercises_db",
     "references": [
         {
             "author": "Vispute, Sachin S, et al.",
@@ -347,6 +347,74 @@ references = [
             "author": "Youdas, James W, et al.",
             "year": 2008,
             "title": "An Electromyographic Analysis of the Ab-Slide Exercise, Abdominal Crunch, Supine Double Leg Thrust, and Side Bridge in Healthy Young Adults: Implications for Rehabilitation Professionals."
+        }
+    ]
+},
+{
+"title": "Hypertrophy Training: How Many Sets Should You Do To Maximize Muscle Growth?",
+"author": "John Fawkes",
+"publication_date": "2024-01-01",
+"url": "https://www.spartan.com/blogs/unbreakable-training/hypertrophy-training",
+"vector_db": "workout_sets_db",
+"references": [
+{
+"author": "Ralston, Grant W., Lon Kilgore, Frank B. Wyatt & Julien S. Baker",
+"year": 2017,
+"title": "The Effect of Weekly Set Volume on Strength Gain: A Meta-Analysis."
+},
+{
+"author": "Amirthalingam, Theban, et al.",
+"year": 2017,
+"title": "Effects of a Modified German Volume Training Program on Muscular Hypertrophy and Strength."
+},
+{
+"author": "Jones, Andrew M.",
+"year": 2025,
+"title": "Medicine in Science and Sports Exercise April 2025 - Volume 57 - Issue 4."
+},
+{
+"author": "Slater, Gary John, et al.",
+"year": 2019,
+"title": "Is an Energy Surplus Required to Maximize Skeletal Muscle Hypertrophy Associated With Resistance Training."
+},
+{
+"author": "Vingren, Jakob L., et al.",
+"year": 2010,
+"title": "Testosterone Physiology in Resistance Exercise and Training: The Upstream Regulatory Elements."
+},
+{
+"author": "Brodsky, I. G., et al.",
+"year": 1996,
+"title": "Effects of Testosterone Replacement on Muscle Mass and Muscle Protein Synthesis in Hypogonadal Men--A Clinical Research Center Study."
+},
+{
+"author": "Urhausen, A., et al.",
+"year": 1995,
+"title": "Blood Hormones as Markers of Training Stress and Overtraining."
+},
+{
+"author": "Stults-Kolehmainen, Matthew A., et al.",
+"year": 2014,
+"title": "Chronic Psychological Stress Impairs Recovery of Muscular Function and Somatic Sensations Over a 96-Hour Period."
+}
+]
+},
+{
+    "title": "How Many Sets Do You Need?",
+    "author": "Jeff Nippard",
+    "publication_date": "2025-01-01",
+    "url": "https://jeffnippard.com/blogs/training/how-many-sets-do-you-need",
+    "vector_db": "workout_sets_db",
+    "references": [
+        {
+            "author": "Schoenfeld, Brad J., Dan Ogborn, and James W. Krieger",
+            "year": 2017,
+            "title": "Dose-response relationship between weekly resistance training volume and increases in muscle mass: A systematic review and meta-analysis."
+        },
+        {
+            "author": "Enes, Alysson, Eduardo O. DE Souza, and Tácito P. Souza-Junior",
+            "year": 2022,
+            "title": "Effects of Different Weekly Set Progressions on Muscular Adaptations in Trained Males: Is There a Dose-Response Effect?"
         }
     ]
 }
