@@ -23,8 +23,8 @@ def build_workout_plan(workout_input: WorkoutGenInput, context):
                    + "Use these recommendations to generate the workout plan with the individuals characteristics in mind."),     
 
         ("human", "Generate me a **hypertrophy workout plan** for an individual with the following context:\n"
-                  + "- **Experience Level**: {experience_level}\n\n"
                   + "- **Training Availability**: {training_availability} days per week\n\n"
+                  + "- **Experience Level**: {experience_level}\n\n"
                   + "- **Session Length**: {session_length} minutes per session\n\n"
                   + "- **Training Focus**: {training_focus}\n\n"
                   + "- **Available Equipment**: {available_equipment}\n\n"
@@ -33,8 +33,8 @@ def build_workout_plan(workout_input: WorkoutGenInput, context):
 
    
     formatted_input = {
-        "experience_level": workout_input.experience_level,
         "training_availability": context["training_availability_context"],
+        "experience_level": context["training_experience_context"],
         "session_length": workout_input.session_length,
         "training_focus": workout_input.training_focus,
         "available_equipment": context["training_equipment_context"],
