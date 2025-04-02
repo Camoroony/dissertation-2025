@@ -25,7 +25,7 @@ def get_workout_sets_ai(training_experience: str, training_focus: str):
 
     result = full_chain.invoke({})
 
-    return 
+    return result
     
 
 
