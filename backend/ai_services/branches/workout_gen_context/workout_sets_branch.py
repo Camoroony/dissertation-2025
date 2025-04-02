@@ -23,9 +23,12 @@ def get_workout_sets_ai(training_experience: str, training_focus: str):
 
     full_chain = workout_experience_lambda | workout_focus_lambda
 
-    result = full_chain.invoke({})
+    sets_per_week = full_chain.invoke({})
 
-    return result
+    final_response = (f"The individual is a {training_experience} weightlifter and is looking to prioritise {training_focus} in their workout plan.\n"
+    + f"The following amount of sets per muscle group is recommended for the workout plan to meet this desire: {sets_per_week}")
+
+    return final_response
     
 
 
