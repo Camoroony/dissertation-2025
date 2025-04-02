@@ -12,7 +12,9 @@ class UserInput(UserBase):
 
 # Workout Plan Input Type Validators
 
-EXPERIENCE_LEVELS = {"Beginner (0 - 2 years of experience)", "Intermediate (2 - 5 years of experience)", "Advanced (5+ years of experience)"}
+EXPERIENCE_LEVELS = {"Beginner (less than 12 months of consistent, proper training experience)",
+                      "Intermediate (1 to 4 years of consistent, proper training experience)",
+                        "Advanced (more than 4 years of consistent, proper training experience)"}
 AVAILABILITY_DAYS = range(1, 6)
 SESSION_LENGTH = range(10, 90)
 TRAINING_FOCUS = {"Full-Body", "Upper-Body", "Lower-Body", "Arms", "Shoulders", "Chest", "Back"}

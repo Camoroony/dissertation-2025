@@ -1,6 +1,3 @@
-from pydantic import BaseModel
-from typing import List, Optional
-
 
 # Workout plan AI prompt schema
 
@@ -54,6 +51,29 @@ WORKOUT_PLAN_FUNCTION_SCHEMA = {
     }
 }
 
+# Sets per muscle group AI prompt schema
+
+MUSCLE_GROUP_SETS_SCHEMA = {
+    "name": "generate_muscle_group_sets",
+    "description": "Generate a structured dictionary mapping muscle groups to the number of sets to perform.",
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "muscle_groups": {
+                "type": "object",
+                "description": "A dictionary where keys are muscle group names and values are the number of sets.",
+                "additionalProperties": {
+                    "type": "integer",
+                    "description": "Number of sets for the muscle group."
+                }
+            }
+        },
+        "required": ["muscle_groups"]
+    }
+}
+
 # AI prompt defintions
 
-MUSCLE_GROUPS = ["Chest", "Shoulders", "Back", "Biceps", "Triceps", "Core\\Abs", "Leg (Quads/Hamstrings/Calfs)"]
+MUSCLE_GROUPS = ["Chest", "Shoulders", "Back", "Biceps", "Triceps", "Core\\Abs", "Legs (Quads/Hamstrings/Calfs)"]
+
+INDIVIDUAL_MUSCLES = ("Chest", "Shoulders", "Back", "Biceps", "Triceps", "Core\\Abs", "Quads", "Hamstrings", "Glutes", "Calfs")
