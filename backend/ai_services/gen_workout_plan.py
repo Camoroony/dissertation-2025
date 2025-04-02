@@ -19,9 +19,6 @@ def generate_workout_plan(workout_input: WorkoutGenInput):
         lambda _: get_workout_sets_ai(workout_input.experience_level, workout_input.training_focus)
     )
 
-    # training_focus_lambda = RunnableLambda(
-    #     lambda _: get_training_focus_context(workout_input.training_focus)
-    # )
 
     context_chain = RunnableParallel(
         training_availability_context = workout_split_lambda,
