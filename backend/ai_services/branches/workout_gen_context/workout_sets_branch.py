@@ -79,44 +79,48 @@ def get_workout_experience_ai(training_experience: str):
 
 def get_workout_focus_ai(muscle_groups: dict, training_focus: str):
 
-    vectorstore = get_chroma_vectorstore(db_name="workout_sets_db", db_data="workout_sets_studies")
+    if training_focus == "Full-Body":
+        response = muscle_groups
+    else:   
 
-    vs_query = f"How to develop muscles that are not responding as well as others?"
+     vectorstore = get_chroma_vectorstore(db_name="workout_sets_db", db_data="workout_sets_studies")
 
-    vs_results = vectorstore.similarity_search_with_relevance_scores(query=vs_query, k=2)
+     vs_query = f"How to develop muscles that are not responding as well as others?"
 
-    context_text = "\n\n---\n\n".join([doc.page_content for doc, _score, in vs_results])
+     vs_results = vectorstore.similarity_search_with_relevance_scores(query=vs_query, k=2)
 
-    print(context_text)
+     context_text = "\n\n---\n\n".join([doc.page_content for doc, _score, in vs_results])
 
-    ai_query = (
-    f"The individual is looking to put more focus on growing their {training_focus} in their workout plan."
-    + f"\nUsing the provided documents for your reasoning, reorganise the current sets for the workout plan to put more emphasis on the muscle the individual desires to prioritise."
-    + "\nDO NOT ADD OR DELETE ANY SETS FROM THE TOTAL SET COUNT OF THE PLAN, YOU ARE ONLY REORGANISING THE SETS BASED ON THE DESIRED FOCUS FROM THE INDIVIDUAL."
-    + f"\nThis is the current plan for you to alter based on the users focus desire:\n {muscle_groups}"
-    )
+     print(context_text)
 
-    context = (
-    "\n\n You will be provided with some relevant documents to use when answering the question"
-    + "\n Your job is to provide an answer based on the following documents."
-    + "\n\n ONLY USE THE DOCUMENTS PROVIDED TO YOU TO FORMULATE YOUR ANSWER"
-    + "\n\n DO NOT PROVIDE OR RECOMMEND WORKOUT SPLITS OR PLANS, YOU ARE ONLY TO REORGANISE THE SETS OF A WORKOUT PLAN TO BETTER PRIORITISE THE DESIRED MUSCLE THE INDIVIDUAL WISHES TO FOCUS ON MORE."
-    + "\n\n These are the relevant documents you must use to formulate your answer:"
-    + "\n\n Relevant Documents: \n\n"
-    + f"{context_text}\n\n"
-    )
+     ai_query = (
+     f"The individual is looking to put more focus on growing their {training_focus} in their workout plan."
+     + f"\nUsing the provided documents for your reasoning, reorganise the current sets for the workout plan to put more emphasis on the muscle the individual desires to prioritise."
+     + "\nDO NOT ADD OR DELETE ANY SETS FROM THE TOTAL SET COUNT OF THE PLAN, YOU ARE ONLY REORGANISING THE SETS BASED ON THE DESIRED FOCUS FROM THE INDIVIDUAL."
+     + f"\nThis is the current plan for you to alter based on the users focus desire:\n {muscle_groups}"
+     )
 
-    prompt = ChatPromptTemplate.from_messages([
-    ("system", "You are an assistant for a workout generator who reorganises the sets of a workout plan to have more emphasis on the muscle an individual wants"
-    " to prioritise more.\n\n"),
-    ("system", "{context}\n\n"),  
-    ("human", "This is your question to answer based on the documents:\n {ai_query}")  
-    ])
+     context = (
+     "\n\n You will be provided with some relevant documents to use when answering the question"
+     + "\n Your job is to provide an answer based on the following documents."
+     + "\n\n ONLY USE THE DOCUMENTS PROVIDED TO YOU TO FORMULATE YOUR ANSWER"
+     + "\n\n DO NOT PROVIDE OR RECOMMEND WORKOUT SPLITS OR PLANS, YOU ARE ONLY TO REORGANISE THE SETS OF A WORKOUT PLAN TO BETTER PRIORITISE THE DESIRED MUSCLE THE INDIVIDUAL WISHES TO FOCUS ON MORE."
+     + "\n\n These are the relevant documents you must use to formulate your answer:"
+     + "\n\n Relevant Documents: \n\n"
+     + f"{context_text}\n\n"
+     )
+
+     prompt = ChatPromptTemplate.from_messages([
+     ("system", "You are an assistant for a workout generator who reorganises the sets of a workout plan to have more emphasis on the muscle an individual wants"
+     " to prioritise more.\n\n"),
+     ("system", "{context}\n\n"),  
+     ("human", "This is your question to answer based on the documents:\n {ai_query}")  
+     ])
 
 
-    chain = prompt | sets_model
+     chain = prompt | sets_model
 
-    response = chain.invoke({"context": context, "ai_query": ai_query})  
+     response = chain.invoke({"context": context, "ai_query": ai_query})  
 
     print("\n--- Generated Response: ---")
     print("Content:")
