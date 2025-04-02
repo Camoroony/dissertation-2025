@@ -23,22 +23,16 @@ def build_workout_plan(workout_input: WorkoutGenInput, context):
                    + "Use these recommendations to generate the workout plan with the individuals characteristics in mind."),     
 
         ("human", "Generate me a **hypertrophy workout plan** for an individual with the following context:\n"
-                  + "- **Training Availability**: {training_availability} days per week\n\n"
-                  + "- **Experience Level**: {experience_level}\n\n"
-                  + "- **Session Length**: {session_length} minutes per session\n\n"
-                  + "- **Training Focus**: {training_focus}\n\n"
-                  + "- **Available Equipment**: {available_equipment}\n\n"
-                  + "- **Additional Info**: {additional_info}"),
+                  + "- **Workout split**: {workout_split}\n\n"
+                  + "- **Sets per muscle group**: {workout_sets}\n\n"
+                  + "- **Recommended Exercises**: {workout_exercises}\n\n")
     ])
 
    
     formatted_input = {
-        "training_availability": context["training_availability_context"],
-        "experience_level": context["training_experience_context"],
-        "session_length": workout_input.session_length,
-        "training_focus": workout_input.training_focus,
-        "available_equipment": context["training_equipment_context"],
-        "additional_info": workout_input.additional_info if workout_input.additional_info else "None",
+        "workout_split": context["training_availability_context"],
+        "workout_sets": context["training_experience_context"],
+        "workout_exercises": context["training_equipment_context"]
     }
 
     final_prompt = prompt_template.format(**formatted_input)
