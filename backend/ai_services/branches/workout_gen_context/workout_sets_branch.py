@@ -29,7 +29,6 @@ def get_workout_sets_ai(training_experience: str, training_focus: str):
     
 
 
-
 def get_workout_experience_ai(training_experience: str):
 
     vectorstore = get_chroma_vectorstore(db_name="workout_sets_db", db_data="workout_sets_studies")
