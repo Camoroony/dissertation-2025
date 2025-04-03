@@ -1,4 +1,3 @@
-import json
 from typing import Dict, Any
 from models.db_models import WorkoutPlan, WorkoutSession, Exercise
 from sqlmodel import Session, select
@@ -63,6 +62,9 @@ def get_workout_plan(workout_plan_id: int, db: Session):
 
     workout_plan = db.exec(statement).first()
 
+    if workout_plan is None:
+        raise ValueError(f"Workout plan with ID {workout_plan_id} not found.")
+
     return workout_plan
 
 def delete_workout_plan(workout_plan_id: int, db: Session):
@@ -71,9 +73,11 @@ def delete_workout_plan(workout_plan_id: int, db: Session):
 
     workout_plan = db.exec(select(WorkoutPlan).where(WorkoutPlan.id == workout_plan_id)).first()
 
-    if workout_plan:
-        db.delete(workout_plan)
-        db.commit()
-        state = True
+    if workout_plan is None:
+        raise ValueError(f"Workout plan with ID {workout_plan_id} not found.")
+    else: 
+       db.delete(workout_plan)
+       db.commit()
+       state = True
 
     return state

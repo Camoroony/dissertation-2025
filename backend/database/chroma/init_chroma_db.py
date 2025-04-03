@@ -35,8 +35,8 @@ def get_chroma_vectorstore(db_name: str, db_data: str):
 
      for txt_file in txt_files:
         print(f"Loading document: {txt_file}")
-
-        doc_url = get_reference_url(txt_file)
+        
+        doc_url = get_reference_url(os.path.basename(txt_file))
 
         loader = TextLoader(txt_file, "utf-8")
         document = loader.load()
@@ -45,7 +45,7 @@ def get_chroma_vectorstore(db_name: str, db_data: str):
         # Debug the chunks
         for i, chunk in enumerate(docs): 
             chunk.metadata["url"] = doc_url
-            print(f"\nChunk {i+1}:\n\n{chunk}\n\n{chunk.metadata}\n\n{'='*40}")  
+            # print(f"\nChunk {i+1}:\n\n{chunk}\n\n{chunk.metadata["url"]}\n\n{'='*40}")  
 
         chunks.extend(docs)
         print(f"Document: {txt_file} loaded into chunks")

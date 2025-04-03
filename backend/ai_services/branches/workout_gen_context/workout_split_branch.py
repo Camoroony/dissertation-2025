@@ -17,7 +17,12 @@ def get_workout_split_ai(training_availability: int):
 
     vs_results = vectorstore.similarity_search_with_relevance_scores(query=vs_query, k=7)
 
-    context_text = "\n\n---\n\n".join([doc.page_content for doc, _score, in vs_results])
+    context_text = ""
+
+    for doc, _score in vs_results:
+      context_text += f"{doc.page_content}\n\nSource: {doc.metadata["url"]}\n\n{'='*40}\n\n"
+
+    context_text = context_text.rstrip("\n\n---\n\n")
 
     print(context_text)
 
