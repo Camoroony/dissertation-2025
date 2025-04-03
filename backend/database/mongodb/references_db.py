@@ -461,8 +461,30 @@ references = [
             "title": "Effects of Different Weekly Set Progressions on Muscular Adaptations in Trained Males: Is There a Dose-Response Effect?"
         }
     ]
+},
+{
+    "title": "The Top 8 Chest Exercises for Strength and Shape",
+    "author": "Travis Edwards",
+    "publication_date": "2023-03-29",
+    "url": "https://www.healthline.com/health/fitness-exercise/best-chest-exercises",
+    "vector_db": "workout_exercises_db",
+    "textfile_name": "best_chest_exercises_Heathline.txt",
+    "references": []
+},
+{
+    "title": "The Best Bodyweight Workouts and Exercises You Can Do",
+    "author": "Michael Matthews",
+    "publication_date": "2019-05-08",
+    "url": "https://legionathletics.com/the-ultimate-bodyweight-workout-routine/",
+    "vector_db": "workout_exercises_db",
+    "textfile_name": "best_bodyweight_exercises_Legion.txt",
+    "reviewers": [
+        {
+            "Reviewer": "Brian Grant",
+            "Qualifications": "Doctor of Physical Therapy (DPT), Orthopedic Residency Graduate in Physical Therapy, Bachelors Degree in Exercise Science , Certified Strength and Conditioning Specialist from the NSCA"
+        }
+    ]
 }
-
 ]
 
 def references_init():
