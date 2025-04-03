@@ -12,6 +12,7 @@ references = [
     "publication_date": "2024-05-20",
     "url": "https://uk.gymshark.com/blog/article/the-best-workout-splits-for-every-goal",
     "vector_db": "workout_splits_db",
+    "textfile_name": "best_workout_splits_GS.txt",
     "references": [
         {
             "author": "Schoenfeld, B.J., Grgic, J. and Krieger, J.",
@@ -56,6 +57,7 @@ references = [
     "publication_date": "2024-11-24",
     "url": "https://builtwithscience.com/fitness-tips/best-workout-split-2025/",
     "vector_db": "workout_splits_db",
+    "textfile_name": "best_workout_splits_BWS.txt",
     "references": [
         {
             "author": "Pelland, J., Remmert, J., Robinson, Z., Hinson, S., Zourdos, M.",
@@ -87,6 +89,7 @@ references = [
     "publication_date": "2025-03-21",
     "url": "https://uk.gymshark.com/blog/article/the-best-dumbbell-exercises",
     "vector_db": "workout_exercises_db",
+    "textfile_name": "best_dumbbell_exercises_GS.txt",
     "references": [
         {
             "author": "Smoak, Y.",
@@ -131,6 +134,7 @@ references = [
     "publication_date": "2024-09-13",
     "url": "https://legionathletics.com/chest-workouts/",
     "vector_db": "workout_exercises_db",
+    "textfile_name": "best_chest_exercises_Legion.txt",
     "references": [
         {
             "author": "Wolf, Milo, et al.",
@@ -180,6 +184,7 @@ references = [
     "publication_date": "2024-06-28",
     "url": "https://legionathletics.com/back-workouts/",
     "vector_db": "workout_exercises_db",
+    "textfile_name": "best_back_exercises_Legion.txt",
     "references": [
         {
             "author": "Nigro, Federico, and Sandro Bartolomei",
@@ -229,6 +234,7 @@ references = [
     "publication_date": "2024-05-17",
     "url": "https://legionathletics.com/shoulder-workouts/",
     "vector_db": "workout_exercises_db",
+    "textfile_name": "best_shoulder_exercises_Legion.txt",
     "references": [
         {
             "author": "Saeterbakken, Atle H., and Marius S. Fimland",
@@ -263,6 +269,7 @@ references = [
     "publication_date": "2024-03-19",
     "url": "https://legionathletics.com/leg-workouts/",
     "vector_db": "workout_exercises_db",
+    "textfile_name": "best_leg_exercises_Legion.txt",
     "references": [
         {
             "author": "Yavuz, Hasan Ulas, et al.",
@@ -312,6 +319,7 @@ references = [
     "publication_date": "2024-05-14",
     "url": "https://legionathletics.com/how-to-get-six-pack-abs/",
     "vector_db": "workout_exercises_db",
+    "textfile_name": "best_core_exercises_Legion.txt",
     "references": [
         {
             "author": "Vispute, Sachin S, et al.",
@@ -405,6 +413,7 @@ references = [
     "publication_date": "2025-01-01",
     "url": "https://jeffnippard.com/blogs/training/how-many-sets-do-you-need",
     "vector_db": "workout_sets_db",
+    "textfile_name": "how_many_sets_do_you_need_JN.txt",
     "references": [
         {
             "author": "Schoenfeld, Brad J., Dan Ogborn, and James W. Krieger",
@@ -432,4 +441,16 @@ def references_init():
     
   return state
 
+
+def get_reference_url(txt_name: str):
+  
+  document = references_collection.find_one({"textfile_name": txt_name})
+
+  if document:
+    if document["url"] is None:
+      url = "No Url Found for source."
+    else:
+      url = document["url"]
+  
+  return url
 
