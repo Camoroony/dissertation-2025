@@ -18,9 +18,11 @@ def get_workout_split_ai(training_availability: int):
     vs_results = vectorstore.similarity_search_with_relevance_scores(query=vs_query, k=7)
 
     context_text = ""
+    sources = set()
 
     for doc, _score in vs_results:
       context_text += f"{doc.page_content}\n\nSource: {doc.metadata["url"]}\n\n{'='*40}\n\n"
+      sources.add(doc.metadata["url"])
 
     context_text = context_text.rstrip("\n\n---\n\n")
 
@@ -51,10 +53,12 @@ def get_workout_split_ai(training_availability: int):
 
     chain = prompt | model | StrOutputParser()
 
-    response = chain.invoke({"context": context, "ai_query": ai_query})  
+    ai_response = chain.invoke({"context": context, "ai_query": ai_query})  
 
     print("\n--- Generated Response: ---")
-    print("Content:")
-    print(response)
+    print("\n\nContent:")
+    print("\n" + ai_response)
+    print("\n\nSources used:\n")
+    print(sources)
 
-    return response
+    return ai_response
