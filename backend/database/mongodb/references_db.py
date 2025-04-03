@@ -483,7 +483,8 @@ references = [
             "Reviewer": "Brian Grant",
             "Qualifications": "Doctor of Physical Therapy (DPT), Orthopedic Residency Graduate in Physical Therapy, Bachelors Degree in Exercise Science , Certified Strength and Conditioning Specialist from the NSCA"
         }
-    ]
+    ],
+    "references": []
 }
 ]
 
