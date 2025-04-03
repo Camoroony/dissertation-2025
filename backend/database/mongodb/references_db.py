@@ -466,15 +466,17 @@ references = [
 ]
 
 def references_init():
-  
-  state = False
 
-  result = references_collection.insert_many(references)
+    if references_collection.count_documents({}) == 0:
+        print("Inserting application references into MongoDB instance...")
+        result = references_collection.insert_many(references)
 
-  if len(result.inserted_ids) == len(references):
-   state = True
-    
-  return state
+        if len(result.inserted_ids) == len(references):
+           print(f"Added application references to MongoDB instance.\n Ids inserted: {result.inserted_ids}")
+
+    else: 
+       print("Application references already exist to MongoDB instance.")
+            
 
 
 def get_reference_url(txt_name: str):
