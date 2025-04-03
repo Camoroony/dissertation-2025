@@ -61,4 +61,7 @@ def get_workout_split_ai(training_availability: int):
     print("\n\nSources used:\n")
     print(sources)
 
-    return ai_response
+    return {
+       "ai_response": ai_response,
+       "sources_used": sources
+    }
