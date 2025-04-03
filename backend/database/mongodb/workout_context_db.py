@@ -1,15 +1,15 @@
 from database.mongodb.init_mongodb_db import get_mongodb_client
-from bson import ObjectId
 
 db = get_mongodb_client()
 
 workout_context_collection = db['workout_contexts']
 
-def add_workout_context(workout_plan_id: int, context: str):
+def add_workout_context(workout_plan_id: int, context: str, sources_used: list):
 
     document = {
         "workout_plan_id": workout_plan_id, 
-        "context": context
+        "context": context,
+        "sources_used": sources_used
     }
 
     result = workout_context_collection.insert_one(document)
@@ -29,6 +29,17 @@ def get_workout_context(workout_plan_id: int) -> str:
     else:
         raise ValueError("Document is empty or not found.")
     
+
+def get_workout_sources_used(workout_plan_id: int) -> str:
+
+    document = workout_context_collection.find_one({"workout_plan_id": workout_plan_id})
+
+    if document:
+        return document['sources_used']
+    else:
+        raise ValueError("Document is empty or not found.")
+    
+
 def delete_workout_context(workout_plan_id: int) -> bool:
 
     response = False

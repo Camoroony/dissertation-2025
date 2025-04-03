@@ -30,13 +30,14 @@ def build_workout_plan(workout_input: WorkoutGenInput, context):
 
    
     formatted_input = {
-        "workout_split": context["training_availability_context"],
-        "workout_sets": context["training_experience_context"],
-        "workout_exercises": context["training_equipment_context"]
+        "workout_split": context["training_availability_context"]["ai_response"],
+        "workout_sets": context["training_experience_context"]["ai_response"],
+        "workout_exercises": context["training_equipment_context"]["ai_response"]
     }
 
     final_prompt = prompt_template.format(**formatted_input)
 
+    sources = context["training_availability_context"]["sources"] | context["training_experience_context"]["sources"] | context["training_equipment_context"]["sources"]
     
     chain = prompt_template | model
 
@@ -45,6 +46,7 @@ def build_workout_plan(workout_input: WorkoutGenInput, context):
 
     return {
         "context": final_prompt,
+        "sources_used": sources,
         "response": response
     }
 

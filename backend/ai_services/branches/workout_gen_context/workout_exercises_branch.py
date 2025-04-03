@@ -4,6 +4,7 @@ from langchain.schema.runnable import RunnableParallel
 from langchain.schema.output_parser import StrOutputParser
 from langchain.prompts import ChatPromptTemplate
 from models.ai_models import MUSCLE_GROUPS
+from models.utilities.context_formatting import format_context
 from database.chroma.init_chroma_db import get_chroma_vectorstore
 from dotenv import load_dotenv
 import os
@@ -15,9 +16,11 @@ model = ChatOpenAI(model="gpt-4o-mini")
 
 def get_workout_exercises_ai(available_equipment: str):
   
-  content_response = get_available_equipment_context(available_equipment)
+  equipment_context_response = get_available_equipment_context(available_equipment)
 
-  content = "\n\n".join(f"**{muscle} Exercises:**\n{exercises}" for muscle, exercises in content_response.items())
+  sources = equipment_context_response["sources"]
+
+  content = "\n\n".join(f"**{muscle} Exercises:**\n{exercises}" for muscle, exercises in equipment_context_response["ai_response"].items())
 
   ai_showcase_content = (
     f"Equipment the indvidual has access to: {available_equipment}\n\n"
@@ -32,11 +35,14 @@ def get_workout_exercises_ai(available_equipment: str):
   
   chain = prompt | model | StrOutputParser()
 
-  response = chain.invoke({"ai_showcase_content": ai_showcase_content})  
+  ai_response = chain.invoke({"ai_showcase_content": ai_showcase_content})  
 
-  print(response)
+  print(ai_response)
 
-  return response
+  return {
+     "ai_response": ai_response,
+     "sources": sources
+  }
 
 
 def get_available_equipment_context(available_equipment: str):
@@ -48,7 +54,17 @@ def get_available_equipment_context(available_equipment: str):
     if available_equipment == "Full gym access":
       available_equipment = ""
 
-    chains = {muscle: process_muscle(muscle, available_equipment, vectorstore) for muscle in MUSCLE_GROUPS}
+    # chains = {muscle: process_muscle(muscle, available_equipment, vectorstore)["chain"] for muscle in MUSCLE_GROUPS}
+    # sources = {muscle+"_sources": process_muscle(muscle, available_equipment, vectorstore)["sources"] for muscle in MUSCLE_GROUPS}
+
+    chains = {}
+    sources = set()
+
+    for muscle in MUSCLE_GROUPS:
+       muscle_method = process_muscle(muscle, available_equipment, vectorstore)
+
+       chains[muscle] = muscle_method["chain"]
+       sources.update(muscle_method["sources"])
 
     parallel_chain = RunnableParallel(**chains)
 
@@ -59,10 +75,10 @@ def get_available_equipment_context(available_equipment: str):
      print(f"Recommended {k} exercises:" + "\n\n")
      print(f"{v}" + "\n\n")
 
-
-
-
-    return ai_response
+    return {
+       "ai_response": ai_response,
+       "sources": sources
+    }
 
 
 def process_muscle(muscle: str, available_equipment: str, vectorstore: Chroma):
@@ -86,9 +102,12 @@ def process_muscle(muscle: str, available_equipment: str, vectorstore: Chroma):
     vs_query = f"What are the best {available_equipment} {muscle} exercises?"
     vs_results = vectorstore.similarity_search_with_relevance_scores(query=vs_query, k=5)
 
-    context_text = "\n\n---\n\n".join([doc.page_content for doc, _score, in vs_results])
+    context = format_context(vs_results)
 
-    #  print(context_text)
+    context_text = context["documents"]
+    sources = context["sources"]
+
+    print(context_text)
 
     formatted_prompt_context = prompt_context.format(context_text=context_text)
     formatted_ai_query = ai_query.format(available_equipment=available_equipment, muscle=muscle)
@@ -100,4 +119,7 @@ def process_muscle(muscle: str, available_equipment: str, vectorstore: Chroma):
 
     chain = prompt | model | StrOutputParser()
 
-    return chain
+    return {
+       "chain": chain,
+       "sources": sources
+    }

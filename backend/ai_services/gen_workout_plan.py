@@ -8,22 +8,22 @@ from ai_services.branches.workout_gen_context.build_workout_plan_branch import b
 
 def generate_workout_plan(workout_input: WorkoutGenInput):
 
-    workout_split_lambda = RunnableLambda(
+    workout_split_runnable = RunnableLambda(
         lambda _: get_workout_split_ai(workout_input.training_availability))
     
-    workout_exercises_lambda = RunnableLambda(
+    workout_exercises_runnable = RunnableLambda(
         lambda _: get_workout_exercises_ai(workout_input.available_equipment)
     )
 
-    workout_sets_lambda = RunnableLambda(
+    workout_sets_runnable = RunnableLambda(
         lambda _: get_workout_sets_ai(workout_input.experience_level, workout_input.training_focus)
     )
 
 
     context_chain = RunnableParallel(
-        training_availability_context = workout_split_lambda,
-        training_equipment_context = workout_exercises_lambda,
-        training_experience_context = workout_sets_lambda
+        training_availability_context = workout_split_runnable,
+        training_equipment_context = workout_exercises_runnable,
+        training_experience_context = workout_sets_runnable
     )
 
     final_generation = RunnableLambda(lambda x: build_workout_plan(workout_input, x))

@@ -25,11 +25,12 @@ def create_workout(workout_input: WorkoutGenInput, user_id: int, db: Session = D
 
     add_result_sql = add_workout_plan(ai_response_data["response"], user_id, db)
 
-    add_result_mongodb = add_workout_context(add_result_sql.id, ai_response_data["context"])
+    add_result_mongodb = add_workout_context(add_result_sql.id, ai_response_data["context"], list(ai_response_data["sources_used"]))
 
     return Response(
         f"Created workout plan Id: {add_result_sql.id} for user: {add_result_sql.user_id}\n"
-        f"Workout context added, Id: {add_result_mongodb['inserted_id']}",
+        f"Workout context added, Id: {add_result_mongodb['inserted_id']}\n"
+        f"Sources analysed during plan creation: {ai_response_data['sources_used']}",
         status_code=200
     )
 

@@ -1,9 +1,9 @@
 from dotenv import load_dotenv
 from langchain.schema.runnable import RunnableLambda
 from langchain_openai import ChatOpenAI
-from langchain.schema.output_parser import StrOutputParser
 from langchain.prompts import ChatPromptTemplate
 from models.ai_models import MUSCLE_GROUP_SETS_SCHEMA, INDIVIDUAL_MUSCLES
+from models.utilities.context_formatting import format_context
 from database.chroma.init_chroma_db import get_chroma_vectorstore
 
 load_dotenv()
@@ -15,24 +15,27 @@ sets_model = model.with_structured_output(schema=MUSCLE_GROUP_SETS_SCHEMA)
 
 def get_workout_sets_ai(training_experience: str, training_focus: str):
 
-    workout_experience_lambda = RunnableLambda(
-        lambda _: get_workout_experience_ai(training_experience))
+    workout_experience_chain = RunnableLambda(
+        lambda _: get_workout_experience_sets(training_experience))
     
-    workout_focus_lambda = RunnableLambda(
-        lambda x: get_workout_focus_ai(x, training_focus))
+    workout_focus_chain = RunnableLambda(
+        lambda x: get_workout_focus_sets(x, training_focus))
 
-    full_chain = workout_experience_lambda | workout_focus_lambda
+    full_chain = workout_experience_chain | workout_focus_chain
 
-    sets_per_week = full_chain.invoke({})
+    chain_response = full_chain.invoke({})
 
     final_response = (f"The individual is a {training_experience} weightlifter and is looking to prioritise {training_focus} in their workout plan.\n"
-    + f"YOU MUST DESIGN THE WORKOUT PLAN TO CONTAIN THE FOLLOWING AMOUNT OF SETS PER MUSCLE GROUP: {sets_per_week}")
+    + f"YOU MUST DESIGN THE WORKOUT PLAN TO CONTAIN THE FOLLOWING AMOUNT OF SETS PER MUSCLE GROUP: {chain_response["ai_response"]}")
 
-    return final_response
+    return {
+       "ai_response": final_response,
+       "sources": chain_response["sources"]
+    }
     
 
 
-def get_workout_experience_ai(training_experience: str):
+def get_workout_experience_sets(training_experience: str):
 
     vectorstore = get_chroma_vectorstore(db_name="workout_sets_db", db_data="workout_sets_studies")
 
@@ -40,7 +43,10 @@ def get_workout_experience_ai(training_experience: str):
 
     vs_results = vectorstore.similarity_search_with_relevance_scores(query=vs_query, k=5)
 
-    context_text = "\n\n---\n\n".join([doc.page_content for doc, _score, in vs_results])
+    context = format_context(vs_results)
+
+    context_text = context["documents"]
+    sources = context["sources"]
 
     print(context_text)
 
@@ -50,7 +56,7 @@ def get_workout_experience_ai(training_experience: str):
     + f"\nThese are the following muscle groups: {INDIVIDUAL_MUSCLES}"
     )
 
-    context = (
+    ai_context = (
     "\n\n You will be provided with some relevant documents to use when answering the question"
     + "\n Your job is to provide an answer based on the following documents."
     + "\n\n ONLY USE THE DOCUMENTS PROVIDED TO YOU TO FORMULATE YOUR ANSWER"
@@ -62,27 +68,30 @@ def get_workout_experience_ai(training_experience: str):
 
     prompt = ChatPromptTemplate.from_messages([
     ("system", "You are an assistant for a workout generator who provides an output of the amount of sets per week an individual should do for each mucle depending on their personal characteristics.\n\n"),
-    ("system", "{context}"),  
+    ("system", "{ai_context}"),  
     ("human", "This is your question to answer based on the documents: {ai_query}")  
     ])
 
 
     chain = prompt | sets_model
 
-    response = chain.invoke({"context": context, "ai_query": ai_query})  
+    ai_response = chain.invoke({"ai_context": ai_context, "ai_query": ai_query})  
 
     print("\n--- Generated Response: ---")
     print("Content:")
-    print(response)
+    print(ai_response)
 
-    return response
+    return {
+       "ai_response": ai_response,
+       "sources": sources
+    }
 
 
 
-def get_workout_focus_ai(muscle_groups: dict, training_focus: str):
+def get_workout_focus_sets(experience_response: dict, training_focus: str):
 
     if training_focus == "Full-Body":
-        response = muscle_groups
+        return experience_response
     else:   
 
      vectorstore = get_chroma_vectorstore(db_name="workout_sets_db", db_data="workout_sets_studies")
@@ -91,41 +100,47 @@ def get_workout_focus_ai(muscle_groups: dict, training_focus: str):
 
      vs_results = vectorstore.similarity_search_with_relevance_scores(query=vs_query, k=2)
 
-     context_text = "\n\n---\n\n".join([doc.page_content for doc, _score, in vs_results])
+    context = format_context(vs_results)
 
-     print(context_text)
+    context_text = context["documents"]
+    sources = context["sources"] | experience_response["sources"]
 
-     ai_query = (
-     f"The individual is looking to put more focus on growing their {training_focus} in their workout plan."
-     + f"\nUsing the provided documents for your reasoning, reorganise the current sets for the workout plan to put more emphasis on the muscle the individual desires to prioritise."
-     + "\nDO NOT ADD OR DELETE ANY SETS FROM THE TOTAL SET COUNT OF THE PLAN, YOU ARE ONLY REORGANISING THE SETS BASED ON THE DESIRED FOCUS FROM THE INDIVIDUAL."
-     + f"\nThis is the current plan for you to alter based on the users focus desire:\n {muscle_groups}"
-     )
+    print(context_text)
 
-     context = (
-     "\n\n You will be provided with some relevant documents to use when answering the question"
-     + "\n Your job is to provide an answer based on the following documents."
-     + "\n\n ONLY USE THE DOCUMENTS PROVIDED TO YOU TO FORMULATE YOUR ANSWER"
-     + "\n\n DO NOT PROVIDE OR RECOMMEND WORKOUT SPLITS OR PLANS, YOU ARE ONLY TO REORGANISE THE SETS OF A WORKOUT PLAN TO BETTER PRIORITISE THE DESIRED MUSCLE THE INDIVIDUAL WISHES TO FOCUS ON MORE."
-     + "\n\n These are the relevant documents you must use to formulate your answer:"
-     + "\n\n Relevant Documents: \n\n"
-     + f"{context_text}\n\n"
-     )
+    ai_query = (
+    f"The individual is looking to put more focus on growing their {training_focus} in their workout plan."
+    + f"\nUsing the provided documents for your reasoning, reorganise the current sets for the workout plan to put more emphasis on the muscle the individual desires to prioritise."
+    + "\nDO NOT ADD OR DELETE ANY SETS FROM THE TOTAL SET COUNT OF THE PLAN, YOU ARE ONLY REORGANISING THE SETS BASED ON THE DESIRED FOCUS FROM THE INDIVIDUAL."
+    + f"\nThis is the current plan for you to alter based on the users focus desire:\n {experience_response["ai_response"]}"
+    )
 
-     prompt = ChatPromptTemplate.from_messages([
-     ("system", "You are an assistant for a workout generator who reorganises the sets of a workout plan to have more emphasis on the muscle an individual wants"
-     " to prioritise more.\n\n"),
-     ("system", "{context}\n\n"),  
-     ("human", "This is your question to answer based on the documents:\n {ai_query}")  
-     ])
+    ai_context = (
+    "\n\n You will be provided with some relevant documents to use when answering the question"
+    + "\n Your job is to provide an answer based on the following documents."
+    + "\n\n ONLY USE THE DOCUMENTS PROVIDED TO YOU TO FORMULATE YOUR ANSWER"
+    + "\n\n DO NOT PROVIDE OR RECOMMEND WORKOUT SPLITS OR PLANS, YOU ARE ONLY TO REORGANISE THE SETS OF A WORKOUT PLAN TO BETTER PRIORITISE THE DESIRED MUSCLE THE INDIVIDUAL WISHES TO FOCUS ON MORE."
+    + "\n\n These are the relevant documents you must use to formulate your answer:"
+    + "\n\n Relevant Documents: \n\n"
+    + f"{context_text}\n\n"
+    )
+
+    prompt = ChatPromptTemplate.from_messages([
+    ("system", "You are an assistant for a workout generator who reorganises the sets of a workout plan to have more emphasis on the muscle an individual wants"
+    " to prioritise more.\n\n"),
+    ("system", "{ai_context}\n\n"),  
+    ("human", "This is your question to answer based on the documents:\n {ai_query}")  
+    ])
 
 
-     chain = prompt | sets_model
+    chain = prompt | sets_model
 
-     response = chain.invoke({"context": context, "ai_query": ai_query})  
+    ai_response = chain.invoke({"ai_context": ai_context, "ai_query": ai_query})  
 
     print("\n--- Generated Response: ---")
     print("Content:")
-    print(response)
+    print(ai_response)
 
-    return response
+    return {
+       "ai_response": ai_response,
+       "sources": sources
+    }
