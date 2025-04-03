@@ -448,7 +448,7 @@ def get_reference_url(txt_name: str):
 
   if document:
     if document["url"] is None:
-      url = "No Url Found for source."
+      url = "No url found for source."
     else:
       url = document["url"]
   
