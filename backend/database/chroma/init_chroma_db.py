@@ -5,6 +5,7 @@ from langchain_community.document_loaders import TextLoader
 from langchain_community.vectorstores import Chroma
 from langchain_openai.embeddings import OpenAIEmbeddings
 from langchain.docstore.document import Document
+from database.mongodb.references_db import get_reference_url
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -35,13 +36,16 @@ def get_chroma_vectorstore(db_name: str, db_data: str):
      for txt_file in txt_files:
         print(f"Loading document: {txt_file}")
 
+        doc_url = get_reference_url(txt_file)
+
         loader = TextLoader(txt_file, "utf-8")
         document = loader.load()
         docs = text_splitter.split_documents(document)
 
-        # Uncomment if you want to debug the chunks
-        # for i, chunk in enumerate(docs):  
-        #     print(f"\nChunk {i+1}:\n{chunk}\n{'='*40}")  
+        # Debug the chunks
+        for i, chunk in enumerate(docs): 
+            chunk.metadata["url"] = doc_url
+            print(f"\nChunk {i+1}:\n\n{chunk}\n\n{chunk.metadata}\n\n{'='*40}")  
 
         chunks.extend(docs)
         print(f"Document: {txt_file} loaded into chunks")
