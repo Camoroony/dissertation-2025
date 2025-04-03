@@ -446,7 +446,7 @@ references = [
     "title": "How Many Sets Do You Need?",
     "author": "Jeff Nippard",
     "publication_date": "2025-01-01",
-    "url": "https://jeffnippard.com/blogs/training/how-many-sets-do-you-need",
+    "url": "https://jeffnippard.com/blogs/news/how-many-sets-do-you-need",
     "vector_db": "workout_sets_db",
     "textfile_name": "how_many_sets_do_you_need_JN.txt",
     "references": [
