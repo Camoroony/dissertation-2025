@@ -264,6 +264,41 @@ references = [
     ]
 },
 {
+    "title": "The Best Arm Workouts for Building Mass",
+    "author": "Michael Matthews",
+    "publication_date": "2024-04-30",
+    "url": "https://legionathletics.com/best-arm-exercises/",
+    "vector_db": "workout_exercises_db",
+    "textfile_name": "best_arm_exercises_Legion.txt",
+    "references": [
+        {
+            "author": "Kholinne, Erica, et al.",
+            "year": 2018,
+            "title": "The Different Role of Each Head of the Triceps Brachii Muscle in Elbow Extension."
+        },
+        {
+            "author": "Gentil, Paulo, et al.",
+            "year": 2015,
+            "title": "Single vs. Multi-Joint Resistance Exercises: Effects on Muscle Strength and Hypertrophy."
+        },
+        {
+            "author": "Youdas, James W, et al.",
+            "year": 2010,
+            "title": "Surface Electromyographic Activation Patterns and Elbow Joint Motion during a Pull-Up, Chin-Up, or Perfect-PullupTM Rotational Exercise."
+        },
+        {
+            "author": "de França, Henrique Silvestre, et al.",
+            "year": 2015,
+            "title": "The Effects of Adding Single-Joint Exercises to a Multi-Joint Exercise Resistance Training Program on Upper Body Muscle Strength and Size in Trained Men."
+        },
+        {
+            "author": "Oliveira, Liliam F., et al.",
+            "year": 2009,
+            "title": "Effect of the Shoulder Position on the Biceps Brachii Emg in Different Dumbbell Curls."
+        }
+    ]
+},
+{
     "title": "Leg Day Workout Routine for Hypertrophy & Building Mass",
     "author": "Michael Matthews",
     "publication_date": "2024-03-19",
