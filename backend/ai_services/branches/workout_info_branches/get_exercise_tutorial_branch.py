@@ -46,7 +46,7 @@ def get_exercise_tutorial_ai(exercise: str):
     print("\n--- Generated Response: ---")
     print("\n\nContent:")
     print("\n" + ai_response)
-    print("\n\nSources used:\n")
+    print("\nSources used:\n")
     print(sources)
 
     return {
