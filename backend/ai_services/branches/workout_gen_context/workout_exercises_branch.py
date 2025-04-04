@@ -61,10 +61,10 @@ def get_available_equipment_context(available_equipment: str):
     sources = set()
 
     for muscle in MUSCLE_GROUPS:
-       muscle_method = process_muscle(muscle, available_equipment, vectorstore)
+      muscle_method = process_muscle(muscle, available_equipment, vectorstore)
 
-       chains[muscle] = muscle_method["chain"]
-       sources.update(muscle_method["sources"])
+      chains[muscle] = muscle_method["chain"]
+      sources.update(muscle_method["sources"])
 
     parallel_chain = RunnableParallel(**chains)
 
