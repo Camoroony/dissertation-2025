@@ -13,7 +13,7 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 model = ChatOpenAI(model="gpt-4o-mini", api_key=OPENAI_API_KEY).with_structured_output(schema=WORKOUT_PLAN_FUNCTION_SCHEMA)
 
-def build_workout_plan(workout_input: WorkoutGenInput, context):
+def build_workout_plan_ai(workout_input: WorkoutGenInput, context):
 
     prompt_template = ChatPromptTemplate.from_messages([
 
