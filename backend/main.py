@@ -12,7 +12,6 @@ app.include_router(workouts_router)
 app.include_router(chatbot_router)
 
 create_db()
-
 references_init()
 
 @app.get("/")
