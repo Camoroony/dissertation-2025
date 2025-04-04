@@ -1,9 +1,9 @@
 from langchain.schema.runnable import RunnableParallel, RunnableLambda
 from models.input_models import WorkoutGenInput
-from ai_services.branches.workout_gen_context.workout_split_branch import get_workout_split_ai
-from ai_services.branches.workout_gen_context.workout_exercises_branch import get_workout_exercises_ai
-from ai_services.branches.workout_gen_context.workout_sets_branch import get_workout_sets_ai
-from ai_services.branches.workout_gen_context.build_workout_plan_branch import build_workout_plan
+from ai_services.branches.workout_gen_branches.workout_split_branch import get_workout_split_ai
+from ai_services.branches.workout_gen_branches.workout_exercises_branch import get_workout_exercises_ai
+from ai_services.branches.workout_gen_branches.workout_sets_branch import get_workout_sets_ai
+from ai_services.branches.workout_gen_branches.build_workout_plan_branch import build_workout_plan
 
 
 def generate_workout_plan(workout_input: WorkoutGenInput):
