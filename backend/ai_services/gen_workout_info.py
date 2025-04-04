@@ -23,7 +23,7 @@ def generate_workoutsession_overview(context: str, workoutsession_id: int):
          ),
 
 
-        ("human", "Give me an explanation of the exercise with the Id: {workoutsession_id}.\n"
+        ("human", "Give me an explanation of the session with the Id: {workoutsession_id}.\n"
          "Link the best youtube video on how to do the exercise at the end of the explanation.\n"
          "Explain the exercise and how to do it using references from academic papers, and provide the references in your explanation and at the end.\n")
     ])
