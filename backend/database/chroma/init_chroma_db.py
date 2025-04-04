@@ -21,8 +21,13 @@ def get_chroma_vectorstore(db_name: str, db_data: str):
      print("Chroma_db does not exist, initialising vector store...")
 
      current_dir = os.path.dirname(os.path.abspath(__file__))
-     text_files_directory = os.path.join(current_dir, "chroma_data", db_data)
-     txt_files = glob.glob(os.path.join(text_files_directory, "*.txt"))
+
+     if db_data == "*":
+      text_files_directory = os.path.join(current_dir, "chroma_data")
+      txt_files = glob.glob(os.path.join(text_files_directory, "**", "*.txt"), recursive=True)
+     else: 
+      text_files_directory = os.path.join(current_dir, "chroma_data", db_data)
+      txt_files = glob.glob(os.path.join(text_files_directory, "*.txt"))
 
      text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=1300,
