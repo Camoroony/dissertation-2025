@@ -30,7 +30,7 @@ def generate_workout_plan(workout_input: WorkoutGenInput):
 
     final_chain = context_chain | final_generation
 
-    result = final_chain.invoke(WorkoutGenInput)
+    result = final_chain.invoke({})
 
     return result
 

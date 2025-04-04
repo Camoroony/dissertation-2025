@@ -66,14 +66,14 @@ def get_workoutsession_info(workout_plan_id: int, workoutsession_id: int) :
 
 
 @router.get("/get-exercise-info")
-def get_exercise_info(workout_plan_id: int, exercise_id: int, db: Session = Depends(get_db_session) ) :
+def get_exercise_info(workout_plan_id: int, exercise_id: int, db: Session = Depends(get_db_session)) :
 
     context = get_workout_context(workout_plan_id)
 
     exercise = get_exercise(exercise_id, db)
 
     if not exercise:
-        raise HTTPException(f"No exercise foud with the Id: {exercise_id}")
+        raise HTTPException(f"No exercise found with the Id: {exercise_id}")
 
     exercise_dict = serialise_exercise(exercise)
 
