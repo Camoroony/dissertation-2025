@@ -54,9 +54,6 @@ def get_available_equipment_context(available_equipment: str):
     if available_equipment == "Full gym access":
       available_equipment = ""
 
-    # chains = {muscle: process_muscle(muscle, available_equipment, vectorstore)["chain"] for muscle in MUSCLE_GROUPS}
-    # sources = {muscle+"_sources": process_muscle(muscle, available_equipment, vectorstore)["sources"] for muscle in MUSCLE_GROUPS}
-
     chains = {}
     sources = set()
 
