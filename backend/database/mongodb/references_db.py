@@ -497,6 +497,21 @@ references = [
         }
     ],
     "references": []
+},
+{
+    "title": "Top 5 Calf Exercises Without Weights",
+    "author": "Caroline Schley",
+    "publication_date": "Unknown",
+    "url": "https://www.livestrong.com/article/103936-top-calf-exercises-weights/",
+    "vector_db": "workout_exercises_db",
+    "textfile_name": "best_calf_exercises_Livestrong.txt",
+    "reviewers": [
+        {
+            "Reviewer": "Lindsey Elizabeth Cortes (Pfau)",
+            "Qualifications": "Master of Science (MS), Registered Dietitian (RD), Certified Specialist in Sports Dietetics (CSSD)"
+        }
+    ],
+    "references": []
 }
 ]
 

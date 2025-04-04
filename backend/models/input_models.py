@@ -20,7 +20,7 @@ SESSION_LENGTH = range(10, 90)
 TRAINING_FOCUS = {"Full-Body", "Upper-Body", "Lower-Body", "Arms", "Shoulders", "Chest", "Back"}
 AVAILABLE_EQUIPMENT = {
     "Full gym access",
-    "Dumbbells only", "Bodyweight only", "Strength machines only"
+    "Dumbbells", "Bodyweight"
 }
 
 # Workout Plan Input Model
