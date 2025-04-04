@@ -13,6 +13,7 @@ references = [
     "url": "https://uk.gymshark.com/blog/article/the-best-workout-splits-for-every-goal",
     "vector_db": "workout_splits_db",
     "textfile_name": "best_workout_splits_GS.txt",
+    "reviewers": [],
     "references": [
         {
             "author": "Schoenfeld, B.J., Grgic, J. and Krieger, J.",
@@ -58,6 +59,7 @@ references = [
     "url": "https://builtwithscience.com/fitness-tips/best-workout-split-2025/",
     "vector_db": "workout_splits_db",
     "textfile_name": "best_workout_splits_BWS.txt",
+    "reviewers": [],
     "references": [
         {
             "author": "Pelland, J., Remmert, J., Robinson, Z., Hinson, S., Zourdos, M.",
@@ -90,6 +92,7 @@ references = [
     "url": "https://uk.gymshark.com/blog/article/the-best-dumbbell-exercises",
     "vector_db": "workout_exercises_db",
     "textfile_name": "best_dumbbell_exercises_GS.txt",
+    "reviewers": [],
     "references": [
         {
             "author": "Smoak, Y.",
@@ -135,6 +138,7 @@ references = [
     "url": "https://legionathletics.com/chest-workouts/",
     "vector_db": "workout_exercises_db",
     "textfile_name": "best_chest_exercises_Legion.txt",
+    "reviewers": [],
     "references": [
         {
             "author": "Wolf, Milo, et al.",
@@ -185,6 +189,7 @@ references = [
     "url": "https://legionathletics.com/back-workouts/",
     "vector_db": "workout_exercises_db",
     "textfile_name": "best_back_exercises_Legion.txt",
+    "reviewers": [],
     "references": [
         {
             "author": "Nigro, Federico, and Sandro Bartolomei",
@@ -235,6 +240,7 @@ references = [
     "url": "https://legionathletics.com/shoulder-workouts/",
     "vector_db": "workout_exercises_db",
     "textfile_name": "best_shoulder_exercises_Legion.txt",
+    "reviewers": [],
     "references": [
         {
             "author": "Saeterbakken, Atle H., and Marius S. Fimland",
@@ -270,6 +276,7 @@ references = [
     "url": "https://legionathletics.com/best-arm-exercises/",
     "vector_db": "workout_exercises_db",
     "textfile_name": "best_arm_exercises_Legion.txt",
+    "reviewers": [],
     "references": [
         {
             "author": "Kholinne, Erica, et al.",
@@ -305,6 +312,7 @@ references = [
     "url": "https://legionathletics.com/leg-workouts/",
     "vector_db": "workout_exercises_db",
     "textfile_name": "best_leg_exercises_Legion.txt",
+    "reviewers":[],
     "references": [
         {
             "author": "Yavuz, Hasan Ulas, et al.",
@@ -355,6 +363,7 @@ references = [
     "url": "https://legionathletics.com/how-to-get-six-pack-abs/",
     "vector_db": "workout_exercises_db",
     "textfile_name": "best_core_exercises_Legion.txt",
+    "reviewers":[],
     "references": [
         {
             "author": "Vispute, Sachin S, et al.",
@@ -399,6 +408,7 @@ references = [
 "publication_date": "2024-01-01",
 "url": "https://www.spartan.com/blogs/unbreakable-training/hypertrophy-training",
 "vector_db": "workout_sets_db",
+"reviewers": [],
 "references": [
 {
 "author": "Ralston, Grant W., Lon Kilgore, Frank B. Wyatt & Julien S. Baker",
@@ -449,6 +459,7 @@ references = [
     "url": "https://jeffnippard.com/blogs/news/how-many-sets-do-you-need",
     "vector_db": "workout_sets_db",
     "textfile_name": "how_many_sets_do_you_need_JN.txt",
+    "reviewers": [],
     "references": [
         {
             "author": "Schoenfeld, Brad J., Dan Ogborn, and James W. Krieger",
@@ -469,6 +480,7 @@ references = [
     "url": "https://www.healthline.com/health/fitness-exercise/best-chest-exercises",
     "vector_db": "workout_exercises_db",
     "textfile_name": "best_chest_exercises_Heathline.txt",
+    "reviewers": [],
     "references": []
 },
 {
