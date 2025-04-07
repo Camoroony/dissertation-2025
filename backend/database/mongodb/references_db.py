@@ -507,7 +507,7 @@ references = [
     "textfile_name": "best_calf_exercises_Livestrong.txt",
     "reviewers": [
         {
-            "Reviewer": "Lindsey Elizabeth Cortes (Pfau)",
+            "Reviewer": "Lindsey Elizabeth Cortes",
             "Qualifications": "Master of Science (MS), Registered Dietitian (RD), Certified Specialist in Sports Dietetics (CSSD)"
         }
     ],

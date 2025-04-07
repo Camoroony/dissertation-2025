@@ -41,7 +41,7 @@ def get_chroma_vectorstore(db_name: str, db_data: str):
      for txt_file in txt_files:
         print(f"Loading document: {txt_file}")
         
-        doc_url = get_reference_url(os.path.basename(txt_file))
+        doc_url = get_reference_url(os.path.basename(txt_file)) if db_data is not "workout_video_studies" else "N/A"
 
         loader = TextLoader(txt_file, "utf-8")
         document = loader.load()
