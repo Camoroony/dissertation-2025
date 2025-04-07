@@ -38,7 +38,7 @@ def build_exercise_overview_ai(context):
     response = chain.invoke(formatted_input)
 
     return {
-        "sources_used": sources,
-        "response": response
+        "response": response,
+        "sources_used": sources
     }
 

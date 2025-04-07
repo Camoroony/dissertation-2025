@@ -1,6 +1,11 @@
+from langchain.schema.runnable import RunnableLambda, RunnableParallel
 from langchain_openai import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
 from langchain.schema.output_parser import StrOutputParser
+from models.db_models import WorkoutPlan
+from ai_services.branches.workout_info_branches.get_exercise_tutorial_branch import get_exercise_tutorial_ai
+from ai_services.branches.workout_info_branches.get_exercise_video_branch import get_exercise_video_ai
+from ai_services.branches.workout_info_branches.build_exercise_overview_branch import build_exercise_overview_ai
 from dotenv import load_dotenv
 from typing import Dict, Any
 import os
@@ -40,13 +45,13 @@ def generate_workoutsession_overview(context: str, workoutsession_id: int):
     return response
 
 
-def generate_exercise_overview(exercise: Dict[str, Any]):
+def generate_exercise_overview(exercise: str):
 
     exercise_tutorial_runnable = RunnableLambda(
-     lambda _: get_exercise_tutorial_ai(exercise["exercise_name"]))
+     lambda _: get_exercise_tutorial_ai(exercise))
     
     exercise_video_runnable = RunnableLambda(
-     lambda x: get_exercise_video_ai(exercise["exercise_name"]))
+     lambda x: get_exercise_video_ai(exercise))
     
     context_chain = RunnableParallel(
         exercise_tutorial_context = exercise_tutorial_runnable,
