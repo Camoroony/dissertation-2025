@@ -21,13 +21,14 @@ def get_exercise_video_ai(exercise: str):
 
     context_text = context["documents"]
 
-    ai_query = (f"The individuals workout plan contains the {exercise}\n",
-                "Recommend a youtube tutorial video for the exercise and provide the link for it.")
+    ai_query = (f"The individuals workout plan contains the {exercise}",
+                "\nRecommend a youtube tutorial video for the exercise and provide the link for it.")
 
     ai_context = (
     "\n\n You will be provided with an exercise and you must recommend a tutorial video most relevant to the exercise."
     "\n Documents have been provided that may assist you in your response."
-    + "\n IF YOU CANNOT FIND AN APPROPRIATE VIDEO TO RECOMMEND, STATE THAT YOU DO NOT HAVE AN APPROPRIATE VIDEO TO RECOMMEND."
+    + "\n If the documents do NOT include a relevant video or you cannot confidently suggest one based on them, return the following message exactly:."
+    + "\n We cannot find a video to recommend."
     + f"\nHere are the following documents for you to use: {context_text}"
     )
 

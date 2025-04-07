@@ -1,5 +1,6 @@
+from pydantic import BaseModel, Field
 
-# Workout plan AI prompt schema
+# Workout plan AI output schema
 
 WORKOUT_PLAN_FUNCTION_SCHEMA = {
     "name": "generate_workout_plan",
@@ -50,6 +51,12 @@ WORKOUT_PLAN_FUNCTION_SCHEMA = {
         "required": ["no_of_sessions", "average_session_length", "equipment_requirements", "workout_sessions"]
     }
 }
+
+# Exercise overview AI output schema
+
+class ExerciseOverviewResponse(BaseModel):
+    text_tutorial: str = Field(..., description="A written explanation or step-by-step guide")
+    video_link: str = Field(..., description="A relevant video tutorial link")
 
 # Sets per muscle group AI prompt schema
 

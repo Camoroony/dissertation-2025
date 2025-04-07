@@ -66,9 +66,7 @@ def get_workoutsession_info(workout_plan_id: int, workoutsession_id: int) :
 
 
 @router.get("/get-exercise-info")
-def get_exercise_info(workout_plan_id: int, exercise_id: int, db: Session = Depends(get_db_session)) :
-
-    context = get_workout_context(workout_plan_id)
+def get_exercise_info(exercise_id: int, db: Session = Depends(get_db_session)) :
 
     exercise = get_exercise(exercise_id, db)
 
@@ -77,6 +75,6 @@ def get_exercise_info(workout_plan_id: int, exercise_id: int, db: Session = Depe
 
     exercise_dict = serialise_exercise(exercise)
 
-    ai_response_data = generate_exercise_overview(context, exercise_dict)
+    ai_response_data = generate_exercise_overview(exercise_dict)
 
     return Response(ai_response_data, status_code=200)
