@@ -21,8 +21,8 @@ def chat(user_id: int, user_prompt: str, chat_history_id=None, workout_plan_id=N
 
     workout_plan = get_workout_plan(workout_plan_id, db) if workout_plan_id is not None else None
 
-    if workout_plan:
-        workout_plan_dict = serialise_workout_plan(workout_plan)
+
+    workout_plan_dict = serialise_workout_plan(workout_plan) if workout_plan else None
 
     ai_response_data = generate_chat(user_prompt, chat_history, workout_plan_dict)
 

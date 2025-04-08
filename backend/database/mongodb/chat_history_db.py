@@ -36,9 +36,16 @@ def add_chat_history(user_id: int, user_message: str, ai_message: str, chat_hist
     }
 
     result = chat_history_collection.update_one(
-        {"_id": ObjectId(chat_history_id)},
-        {"$push": {"chats": chat_message}}
-    )
+    {"_id": ObjectId(chat_history_id)},
+    {
+        "$push": {
+            "chats": {
+                "$each": [chat_message],
+                "$slice": -10
+            }
+        }
+    }
+)
         
     return f"Chat message (Id: {result}) added to chat history (Id: {chat_history_id}) "
 
