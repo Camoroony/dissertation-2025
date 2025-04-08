@@ -1,5 +1,6 @@
 from bson import ObjectId
 from database.mongodb.init_mongodb_db import get_mongodb_client
+from models.ai_models import get_generic_chatbot_sysmessage, get_workoutplan_chatbot_sysmessage
 import datetime
 
 
@@ -8,11 +9,14 @@ db = get_mongodb_client()
 chat_history_collection = db['chat_histories']
 
 
-def create_chat_history(user_id: int, workout_plan_id=None):
+def create_chat_history(user_id: int, workout_plan_id=None, workout_plan=None):
+
+    sys_message = get_generic_chatbot_sysmessage() if workout_plan is None else get_workoutplan_chatbot_sysmessage(workout_plan)
 
     chat_history_document = {
         "user_id": user_id,
         "chat_start_time": datetime.datetime.now(datetime.UTC),
+        "sys_message": sys_message,
         "chats": []
     }
 
@@ -21,12 +25,14 @@ def create_chat_history(user_id: int, workout_plan_id=None):
 
     result = chat_history_collection.insert_one(chat_history_document)
 
-    return result.inserted_id
+    new_chat_history = chat_history_collection.find_one({"_id": result.inserted_id})
+
+    return new_chat_history
 
 
-def add_chat_history(user_id: int, user_message: str, ai_message: str, chat_history_id=None, workout_plan_id=None):
+def add_chat_history(chat_history_id: str, user_message: str, ai_message: str):
     if chat_history_id is None:
-        chat_history_id = create_chat_history(user_id, workout_plan_id)
+      raise ValueError("chat_history_id is null. Must be provided.")
     
     chat_message = {
         "chat_message_id": str(ObjectId()),
@@ -49,23 +55,18 @@ def add_chat_history(user_id: int, user_message: str, ai_message: str, chat_hist
         
     return f"Chat message (Id: {result}) added to chat history (Id: {chat_history_id}) "
 
+
 def get_chat_history(chat_history_id: str):
 
     chat_history = chat_history_collection.find_one(
         {"_id": ObjectId(chat_history_id)},
-        {"_id": 0, "chats": 1} 
     )
 
     if not chat_history:
         return {"error": "Chat history not found"}
-    
-    messages = []
 
-    for chat in chat_history["chats"]:
-        messages.append(f"User: {chat['user_message']}")
-        messages.append(f"Response: {chat['ai_message']}")
+    return chat_history
 
-    return messages
 
 def get_chat_histories_by_userid(user_id: int):
 

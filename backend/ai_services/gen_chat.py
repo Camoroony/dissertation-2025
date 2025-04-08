@@ -1,8 +1,9 @@
 from langchain import hub
 from langchain_openai import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
-from langchain.agents import create_react_agent, Tool, AgentExecutor
+from langchain.agents import create_react_agent, create_structured_chat_agent, Tool, AgentExecutor
 from langchain.schema.output_parser import StrOutputParser
+from langchain_core.messages import SystemMessage, AIMessage, HumanMessage
 from ai_services.tools.generic_chatbot_answer_tool import chatbot_answer_tool
 from dotenv import load_dotenv
 import os 
@@ -24,12 +25,17 @@ def generate_generic_chat(prompt: str, chat_history):
     vector_tool = Tool(
     name="VectorSearch",
     func=chatbot_answer_tool,
-    description="Useful for answering questions based on the knowledge base. Returns an answer and sources. Include the sources in your response if using this tool."
-    )
+    description=(
+    "Use this tool when answering any questions that require access to external knowledge, "
+    "especially about muscle building, hypertrophy, fitness science, or workout plans. "
+    "This tool searches a knowledge base and returns relevant documents. "
+    "If unsure or the answer may not be accurate, use this tool to improve reliability."
+    "When using this tool, always return the sources used along with the answer."
+)    )
 
-    agent_prompt = hub.pull("hwchase17/react")
+    agent_prompt = hub.pull("hwchase17/structured-chat-agent")
     
-    chat_agent = create_react_agent(
+    chat_agent = create_structured_chat_agent(
         llm=model,
         tools=[vector_tool],
         prompt=agent_prompt
@@ -43,7 +49,12 @@ def generate_generic_chat(prompt: str, chat_history):
     handle_parsing_errors=True,
     )
 
-    response = agent_executor.invoke({"input": prompt})
+    formatted_chat_history = format_chat_history(chat_history)
+
+    response = agent_executor.invoke({
+        "input": prompt,
+        "chat_history": formatted_chat_history
+    })
 
     return response["output"]
 
@@ -69,3 +80,19 @@ def generate_workout_chat(prompt: str, chat_history, workout_plan):
     response = chain.invoke(formatted_input)
 
     return response
+
+
+# Chat history BaseMessage formatting
+
+def format_chat_history(chat_history):
+    messages = []
+
+    sys_message = SystemMessage(content=chat_history["sys_message"])
+
+    messages.append(sys_message)
+
+    for chat in chat_history["chats"]:
+        messages.append(HumanMessage(chat["user_message"]))
+        messages.append(AIMessage(chat["ai_message"]))
+
+    return messages
