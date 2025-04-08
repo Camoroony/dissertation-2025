@@ -77,4 +77,4 @@ def get_exercise_info(exercise_id: int, db: Session = Depends(get_db_session)) :
 
     ai_response_data = generate_exercise_overview(exercise_dict["exercise_name"])
 
-    return Response(ai_response_data, status_code=200)
+    return ai_response_data
