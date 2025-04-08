@@ -1,6 +1,9 @@
+from langchain import hub
 from langchain_openai import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
+from langchain.agents import create_react_agent, Tool, AgentExecutor
 from langchain.schema.output_parser import StrOutputParser
+from ai_services.tools.generic_chatbot_answer_tool import chatbot_answer_tool
 from dotenv import load_dotenv
 import os 
 
@@ -18,23 +21,31 @@ def generate_chat(prompt: str, chat_history=None, workout_plan=None):
 
 def generate_generic_chat(prompt: str, chat_history):
 
-    prompt_template = ChatPromptTemplate.from_messages([
+    vector_tool = Tool(
+    name="VectorSearch",
+    func=chatbot_answer_tool,
+    description="Useful for answering questions based on the knowledge base. Returns an answer and sources. Include the sources in your response if using this tool."
+    )
 
-        ("system", "You are a chatbot with the following chat history: {chat_history}"),
-        ("human", "{prompt}")
+    agent_prompt = hub.pull("hwchase17/react")
+    
+    chat_agent = create_react_agent(
+        llm=model,
+        tools=[vector_tool],
+        prompt=agent_prompt
+    )
 
-    ])
+    agent_executor = AgentExecutor(
+    tools=[vector_tool],
+    llm=model,
+    agent=chat_agent,
+    verbose=True,
+    handle_parsing_errors=True,
+    )
 
-    formatted_input = {
-        "chat_history": chat_history,
-        "prompt": prompt 
-    }
+    response = agent_executor.invoke({"input": prompt})
 
-    chain = prompt_template | model | StrOutputParser()
-
-    response = chain.invoke(formatted_input)
-
-    return response
+    return response["output"]
 
 def generate_workout_chat(prompt: str, chat_history, workout_plan):
 
