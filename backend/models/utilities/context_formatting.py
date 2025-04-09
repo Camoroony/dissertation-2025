@@ -8,8 +8,9 @@ def format_context(vs_results: list[tuple[Document, float]]) -> dict[str, Any]:
 
     for doc, _score in vs_results:
       context_text += f"{doc.page_content}\n\nSource: {doc.metadata["url"]}\n\n{'='*40}\n\n"
-      sources.add(doc.metadata["url"])
-
+      if doc.metadata["url"] != 'N/A':
+       sources.add(doc.metadata["url"])
+       
     context_text = context_text.rstrip("\n\n---\n\n")
 
     return {

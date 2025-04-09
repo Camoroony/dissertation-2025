@@ -26,7 +26,7 @@ def chat(user_id: int, user_prompt: str, chat_history_id=None, workout_plan_id=N
 
     ai_response_data = generate_chat(user_prompt, chat_history)
 
-    add_chat_history(chat_history["_id"], user_prompt, ai_response_data)
+    add_chat_history(chat_history["_id"], user_prompt, ai_response_data["ai_response"])
 
     return ai_response_data
 

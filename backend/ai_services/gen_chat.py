@@ -1,10 +1,10 @@
 from langchain import hub
 from langchain_openai import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
-from langchain.agents import create_react_agent, create_structured_chat_agent, Tool, AgentExecutor
 from langchain.schema.output_parser import StrOutputParser
 from langchain_core.messages import SystemMessage, AIMessage, HumanMessage
-from ai_services.tools.generic_chatbot_answer_tool import chatbot_answer_tool
+from models.utilities.context_formatting import format_context
+from database.chroma.init_chroma_db import get_chroma_vectorstore
 from dotenv import load_dotenv
 import os 
 
@@ -20,43 +20,48 @@ def generate_chat(prompt: str, chat_history=None, workout_plan=None):
 
     return response
 
-def generate_generic_chat(prompt: str, chat_history):
+def generate_generic_chat(user_prompt: str, chat_history):
 
-    vector_tool = Tool(
-    name="VectorSearch",
-    func=chatbot_answer_tool,
-    description=(
-    "Use this tool when answering any questions that require access to external knowledge, "
-    "especially about muscle building, hypertrophy, fitness science, or workout plans. "
-    "This tool searches a knowledge base and returns relevant documents. "
-    "If unsure or the answer may not be accurate, use this tool to improve reliability."
-    "When using this tool, always return the sources used along with the answer."
-)    )
+    vectorstore = get_chroma_vectorstore(db_name="overall_db", db_data="*")
 
-    agent_prompt = hub.pull("hwchase17/structured-chat-agent")
-    
-    chat_agent = create_structured_chat_agent(
-        llm=model,
-        tools=[vector_tool],
-        prompt=agent_prompt
+    vs_results = vectorstore.similarity_search_with_relevance_scores(query=user_prompt, k=5)
+
+    context = format_context(vs_results)
+
+    context_text = context["documents"]
+    sources = context["sources"]
+
+    ai_context = (
+    "\n\n You will be provided with some relevant documents and a chat history to use when answering the question"
+    + "\n Your job is to provide an answer based on the following documents."
+    + "\n USE ONLY THE DOCUMENTS AND/OR THE CHAT HISTORY PROVIDED TO FORMULATE YOUR ANSWER"
+    + "\n These are the relevant documents you must use to formulate your answer:"
+    + "\n **Relevant Documents:**"
+    + f"\n{context_text}"
+    + "\n **Chat History:**"
+    + f"\n{chat_history['chats']}"
     )
 
-    agent_executor = AgentExecutor(
-    tools=[vector_tool],
-    llm=model,
-    agent=chat_agent,
-    verbose=True,
-    handle_parsing_errors=True,
-    )
+    prompt = ChatPromptTemplate.from_messages([
+    ("system", "You are a chatbot assistant who answers muscular hypertrophy and weightifting questions only.\n\n"),
+    ("system", "{ai_context}"),  
+    ("human", "This is your question to answer based on the documents: {ai_query}")  
+    ])
 
-    formatted_chat_history = format_chat_history(chat_history)
 
-    response = agent_executor.invoke({
-        "input": prompt,
-        "chat_history": formatted_chat_history
-    })
+    chain = prompt | model | StrOutputParser()
 
-    return response["output"]
+    ai_response = chain.invoke({"ai_context": ai_context, "ai_query": user_prompt})  
+
+    print("\n--- Generated Response: ---")
+    print("Content:")
+    print(ai_response)
+
+    return {
+       "ai_response": ai_response,
+       "sources": sources
+    }
+
 
 def generate_workout_chat(prompt: str, chat_history, workout_plan):
 

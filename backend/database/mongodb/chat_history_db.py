@@ -11,12 +11,9 @@ chat_history_collection = db['chat_histories']
 
 def create_chat_history(user_id: int, workout_plan_id=None, workout_plan=None):
 
-    sys_message = get_generic_chatbot_sysmessage() if workout_plan is None else get_workoutplan_chatbot_sysmessage(workout_plan)
-
     chat_history_document = {
         "user_id": user_id,
         "chat_start_time": datetime.datetime.now(datetime.UTC),
-        "sys_message": sys_message,
         "chats": []
     }
 
