@@ -16,37 +16,37 @@ references = [
     "reviewers": [],
     "references": [
         {
-            "author": "Schoenfeld, B.J., Grgic, J. and Krieger, J.",
+            "authors": "Schoenfeld, B.J., Grgic, J. and Krieger, J.",
             "year": 2018,
             "title": "How many times per week should a muscle be trained to maximize muscle hypertrophy? A systematic review and meta-analysis of studies examining the effects of resistance training frequency."
         },
         {
-            "author": "Aston University",
+            "authors": "Aston University",
             "year": "n.d.",
             "title": "The Push/Pull/Legs Routine for Muscle Gains | Aston University."
         },
         {
-            "author": "Schoenfeld, B.J., Ogborn, D. and Krieger, J.W.",
+            "authors": "Schoenfeld, B.J., Ogborn, D. and Krieger, J.W.",
             "year": 2017,
             "title": "Dose-response relationship between weekly resistance training volume and increases in muscle mass: A systematic review and meta-analysis."
         },
         {
-            "author": "Schoenfeld, B.J., Ogborn, D. and Krieger, J.W.",
+            "authors": "Schoenfeld, B.J., Ogborn, D. and Krieger, J.W.",
             "year": 2016,
             "title": "Effects of Resistance Training Frequency on Measures of Muscle Hypertrophy: A Systematic Review and Meta-Analysis."
         },
         {
-            "author": "Ribeiro, A.S., Schoenfeld, B.J., Silva, D.R.P., Pina, F.L.C., Guariglia, D.A., Porto, M., Maestá, N., Burini, R.C. and Cyrino, E.S.",
+            "authors": "Ribeiro, A.S., Schoenfeld, B.J., Silva, D.R.P., Pina, F.L.C., Guariglia, D.A., Porto, M., Maestá, N., Burini, R.C. and Cyrino, E.S.",
             "year": 2015,
             "title": "Effect of Two- Versus Three-Way Split Resistance Training Routines on Body Composition and Muscular Strength in Bodybuilders: A Pilot Study."
         },
         {
-            "author": "Roberts, B.M., Nuckols, G. and Krieger, J.W.",
+            "authors": "Roberts, B.M., Nuckols, G. and Krieger, J.W.",
             "year": 2020,
             "title": "Sex Differences in Resistance Training."
         },
         {
-            "author": "Cureton, K.J., Collins, M.A., Hill, D.W. and McElhannon, F.M.",
+            "authors": "Cureton, K.J., Collins, M.A., Hill, D.W. and McElhannon, F.M.",
             "year": 1988,
             "title": "Muscle hypertrophy in men and women."
         }
@@ -62,13 +62,13 @@ references = [
     "reviewers": [],
     "references": [
         {
-            "author": "Pelland, J., Remmert, J., Robinson, Z., Hinson, S., Zourdos, M.",
+            "authors": "Pelland, J., Remmert, J., Robinson, Z., Hinson, S., Zourdos, M.",
             "year": 2024,
             "title": "The resistance training dose-response: Meta-regressions exploring the effects of weekly volume and frequency on muscle hypertrophy and strength gain.",
             "url": "http://dx.doi.org/10.51224/srxiv.460"
         },
         {
-            "author": "Damas, F., Phillips, S., Vechin, F. C., Ugrinowitsch, C.",
+            "authors": "Damas, F., Phillips, S., Vechin, F. C., Ugrinowitsch, C.",
             "year": 2015,
             "title": "A review of resistance training-induced changes in skeletal muscle protein synthesis and their contribution to hypertrophy.",
             "journal": "Sports medicine (Auckland, N.Z.)",
@@ -76,7 +76,7 @@ references = [
             "pages": "801–807"
         },
         {
-            "author": "Zaroni, R. S., Brigatto, F. A., Schoenfeld, B. J., Braz, T. V., Benvenutti, J. C., Germano, M. D., Marchetti, P. H., Aoki, M. S., Lopes, C. R.",
+            "authors": "Zaroni, R. S., Brigatto, F. A., Schoenfeld, B. J., Braz, T. V., Benvenutti, J. C., Germano, M. D., Marchetti, P. H., Aoki, M. S., Lopes, C. R.",
             "year": 2019,
             "title": "High resistance-training frequency enhances muscle thickness in resistance-trained men.",
             "journal": "Journal of strength and conditioning research",
@@ -95,37 +95,37 @@ references = [
     "reviewers": [],
     "references": [
         {
-            "author": "Smoak, Y.",
+            "authors": "Smoak, Y.",
             "year": 2023,
             "title": "A Randomised Trial Comparing Barbell and Dumbbell Bench Press on Maximal Strength and Power Output."
         },
         {
-            "author": "Saeterbakken, A.H., van den Tillaar, R. and Fimland, M.S.",
+            "authors": "Saeterbakken, A.H., van den Tillaar, R. and Fimland, M.S.",
             "year": 2011,
             "title": "A comparison of muscle activity and 1-RM strength of three chest-press exercises with different stability requirements."
         },
         {
-            "author": "Schoenfeld, B.J. and Grgic, J.",
+            "authors": "Schoenfeld, B.J. and Grgic, J.",
             "year": 2020,
             "title": "Effects of range of motion on muscle development during resistance training interventions: A systematic review."
         },
         {
-            "author": "Schoenfeld, B.J., Vigotsky, A., Contreras, B., Golden, S., Alto, A., Larson, R., Winkelman, N. and Paoli, A.",
+            "authors": "Schoenfeld, B.J., Vigotsky, A., Contreras, B., Golden, S., Alto, A., Larson, R., Winkelman, N. and Paoli, A.",
             "year": 2018,
             "title": "Differential effects of attentional focus strategies during long-term resistance training."
         },
         {
-            "author": "Maeo, S., Wu, Y., Huang, M., Sakurai, H., Kusagawa, Y., Sugiyama, T., Kanehisa, H. and Isaka, T.",
+            "authors": "Maeo, S., Wu, Y., Huang, M., Sakurai, H., Kusagawa, Y., Sugiyama, T., Kanehisa, H. and Isaka, T.",
             "year": 2022,
             "title": "Triceps brachii hypertrophy is substantially greater after elbow extension training performed in the overhead versus neutral arm position."
         },
         {
-            "author": "Solstad, T.E., Andersen, V., Shaw, M., Hoel, E.M., Vonheim, A. and Atle Hole Saeterbakken.",
+            "authors": "Solstad, T.E., Andersen, V., Shaw, M., Hoel, E.M., Vonheim, A. and Atle Hole Saeterbakken.",
             "year": 2020,
             "title": "A Comparison of Muscle Activation between Barbell Bench Press and Dumbbell Flyes in Resistance-Trained Males."
         },
         {
-            "author": "Schoenfeld, B.J., Peterson, M.D., Ogborn, D., Contreras, B. and Sonmez, G.T.",
+            "authors": "Schoenfeld, B.J., Peterson, M.D., Ogborn, D., Contreras, B. and Sonmez, G.T.",
             "year": 2015,
             "title": "Effects of Low- vs. High-Load Resistance Training on Muscle Strength and Hypertrophy in Well-Trained Men."
         }
@@ -141,42 +141,42 @@ references = [
     "reviewers": [],
     "references": [
         {
-            "author": "Wolf, Milo, et al.",
+            "authors": "Wolf, Milo, et al.",
             "year": 2022,
             "title": "Partial vs Full Range of Motion Resistance Training: A Systematic Review and Meta-Analysis."
         },
         {
-            "author": "Martínez-Cava, Alejandro, et al.",
+            "authors": "Martínez-Cava, Alejandro, et al.",
             "year": 2019,
             "title": "Bench Press at Full Range of Motion Produces Greater Neuromuscular Adaptations than Partial Executions after Prolonged Resistance Training."
         },
         {
-            "author": "Costa, Bruna Daniella de Vasconcelos, et al.",
+            "authors": "Costa, Bruna Daniella de Vasconcelos, et al.",
             "year": 2021,
             "title": "Does Performing Different Resistance Exercises for the Same Muscle Group Induce Non-Homogeneous Hypertrophy?"
         },
         {
-            "author": "Kristiansen, M., et al.",
+            "authors": "Kristiansen, M., et al.",
             "year": 2013,
             "title": "Inter-Subject Variability of Muscle Synergies during Bench Press in Power Lifters and Untrained Individuals."
         },
         {
-            "author": "Oranchuk, Dustin J., et al.",
+            "authors": "Oranchuk, Dustin J., et al.",
             "year": 2019,
             "title": "Isometric Training and Long-Term Adaptations: Effects of Muscle Length, Intensity, and Intent: A Systematic Review."
         },
         {
-            "author": "Liao, Kai-Fang, et al.",
+            "authors": "Liao, Kai-Fang, et al.",
             "year": 2021,
             "title": "Effects of Unilateral vs. Bilateral Resistance Training Interventions on Measures of Strength, Jump, Linear and Change of Direction Speed: A Systematic Review and Meta-Analysis."
         },
         {
-            "author": "Barnett, Chris, et al.",
+            "authors": "Barnett, Chris, et al.",
             "year": 1995,
             "title": "Effects of Variations of the Bench Press Exercise on the EMG Activity of Five Shoulder Muscles."
         },
         {
-            "author": "Afonso, José, et al.",
+            "authors": "Afonso, José, et al.",
             "year": 2021,
             "title": "Strength Training versus Stretching for Improving Range of Motion: A Systematic Review and Meta-Analysis."
         }
@@ -192,42 +192,42 @@ references = [
     "reviewers": [],
     "references": [
         {
-            "author": "Nigro, Federico, and Sandro Bartolomei",
+            "authors": "Nigro, Federico, and Sandro Bartolomei",
             "year": 2020,
             "title": "A Comparison between the Squat and the Deadlift for Lower Body Strength and Power Training."
         },
         {
-            "author": "Youdas, James W, et al.",
+            "authors": "Youdas, James W, et al.",
             "year": 2010,
             "title": "Surface Electromyographic Activation Patterns and Elbow Joint Motion during a Pull-Up, Chin-Up, or Perfect-Pullup™ Rotational Exercise."
         },
         {
-            "author": "Dickie, James A., et al.",
+            "authors": "Dickie, James A., et al.",
             "year": 2016,
             "title": "Electromyographic Analysis of Muscle Activation during Pull-up Variations."
         },
         {
-            "author": "Liao, Kai-Fang, et al.",
+            "authors": "Liao, Kai-Fang, et al.",
             "year": 2022,
             "title": "Review Paper Effects of Unilateral vs. Bilateral Resistance Training Interventions on Measures of Strength, Jump, Linear and Change of Direction Speed: A Systematic Review and Meta-Analysis."
         },
         {
-            "author": "Park, Se-yeon, and Won-gyu Yoo",
+            "authors": "Park, Se-yeon, and Won-gyu Yoo",
             "year": 2014,
             "title": "Differential Activation of Parts of the Latissimus Dorsi with Various Isometric Shoulder Exercises."
         },
         {
-            "author": "Gerling, Michael E., and Stephen H. M. Brown",
+            "authors": "Gerling, Michael E., and Stephen H. M. Brown",
             "year": 2013,
             "title": "Architectural Analysis and Predicted Functional Capability of the Human Latissimus Dorsi Muscle."
         },
         {
-            "author": "Schoenfeld, Brad J, and Jozo Grgic",
+            "authors": "Schoenfeld, Brad J, and Jozo Grgic",
             "year": 2020,
             "title": "Effects of Range of Motion on Muscle Development during Resistance Training Interventions: A Systematic Review."
         },
         {
-            "author": "Oranchuk, Dustin J., et al.",
+            "authors": "Oranchuk, Dustin J., et al.",
             "year": 2019,
             "title": "Isometric Training and Long-Term Adaptations: Effects of Muscle Length, Intensity, and Intent: A Systematic Review."
         }
@@ -243,27 +243,27 @@ references = [
     "reviewers": [],
     "references": [
         {
-            "author": "Saeterbakken, Atle H., and Marius S. Fimland",
+            "authors": "Saeterbakken, Atle H., and Marius S. Fimland",
             "year": 2013,
             "title": "Effects of Body Position and Loading Modality on Muscle Activity and Strength in Shoulder Presses."
         },
         {
-            "author": "Raizada, Shiny, and Amritashish Bagchi",
+            "authors": "Raizada, Shiny, and Amritashish Bagchi",
             "year": 2017,
             "title": "Comparison among the EMG Activity of the Anterior Deltoid and Medial Deltoid during Two Variations of Dumbbell Shoulder Press Exercise."
         },
         {
-            "author": "Schoenfeld, Brad J, et al.",
+            "authors": "Schoenfeld, Brad J, et al.",
             "year": 2011,
             "title": "The Upright Row: Implications for Preventing Subacromial Impingement."
         },
         {
-            "author": "Page, Phil",
+            "authors": "Page, Phil",
             "year": 2011,
             "title": "Shoulder Muscle Imbalance and Subacromial Impingement Syndrome in Overhead Athletes."
         },
         {
-            "author": "Franke, Rodrigo, et al.",
+            "authors": "Franke, Rodrigo, et al.",
             "year": 2014,
             "title": "Analysis of Anterior, Middle and Posterior Deltoid Activation during Single and Multijoint Exercises."
         }
@@ -279,27 +279,27 @@ references = [
     "reviewers": [],
     "references": [
         {
-            "author": "Kholinne, Erica, et al.",
+            "authors": "Kholinne, Erica, et al.",
             "year": 2018,
             "title": "The Different Role of Each Head of the Triceps Brachii Muscle in Elbow Extension."
         },
         {
-            "author": "Gentil, Paulo, et al.",
+            "authors": "Gentil, Paulo, et al.",
             "year": 2015,
             "title": "Single vs. Multi-Joint Resistance Exercises: Effects on Muscle Strength and Hypertrophy."
         },
         {
-            "author": "Youdas, James W, et al.",
+            "authors": "Youdas, James W, et al.",
             "year": 2010,
             "title": "Surface Electromyographic Activation Patterns and Elbow Joint Motion during a Pull-Up, Chin-Up, or Perfect-PullupTM Rotational Exercise."
         },
         {
-            "author": "de França, Henrique Silvestre, et al.",
+            "authors": "de França, Henrique Silvestre, et al.",
             "year": 2015,
             "title": "The Effects of Adding Single-Joint Exercises to a Multi-Joint Exercise Resistance Training Program on Upper Body Muscle Strength and Size in Trained Men."
         },
         {
-            "author": "Oliveira, Liliam F., et al.",
+            "authors": "Oliveira, Liliam F., et al.",
             "year": 2009,
             "title": "Effect of the Shoulder Position on the Biceps Brachii Emg in Different Dumbbell Curls."
         }
@@ -315,42 +315,42 @@ references = [
     "reviewers":[],
     "references": [
         {
-            "author": "Yavuz, Hasan Ulas, et al.",
+            "authors": "Yavuz, Hasan Ulas, et al.",
             "year": 2015,
             "title": "Kinematic and EMG Activities during Front and Back Squat Variations in Maximum Loads."
         },
         {
-            "author": "Gullett, Jonathan C, et al.",
+            "authors": "Gullett, Jonathan C, et al.",
             "year": 2009,
             "title": "A Biomechanical Comparison of Back and Front Squats in Healthy Trained Individuals."
         },
         {
-            "author": "Jones, Margaret T, et al.",
+            "authors": "Jones, Margaret T, et al.",
             "year": 2012,
             "title": "Effects of Unilateral and Bilateral Lower-Body Heavy Resistance Exercise on Muscle Activity and Testosterone Responses."
         },
         {
-            "author": "DeFOREST, Bradley A., et al.",
+            "authors": "DeFOREST, Bradley A., et al.",
             "year": 2014,
             "title": "Muscle Activity in Single- vs. Double-Leg Squats."
         },
         {
-            "author": "Wojtys, E M, et al.",
+            "authors": "Wojtys, E M, et al.",
             "year": 1996,
             "title": "Neuromuscular Adaptations in Isokinetic, Isotonic, and Agility Training Programs."
         },
         {
-            "author": "Gentil, Paulo, et al.",
+            "authors": "Gentil, Paulo, et al.",
             "year": 2015,
             "title": "Single vs. Multi-Joint Resistance Exercises: Effects on Muscle Strength and Hypertrophy."
         },
         {
-            "author": "Schoenfeld, Brad J.",
+            "authors": "Schoenfeld, Brad J.",
             "year": 2010,
             "title": "The Mechanisms of Muscle Hypertrophy and Their Application to Resistance Training."
         },
         {
-            "author": "Gonzalez, Adam M., et al.",
+            "authors": "Gonzalez, Adam M., et al.",
             "year": 2015,
             "title": "Intramuscular Anabolic Signaling and Endocrine Response Following Resistance Exercise: Implications for Muscle Hypertrophy."
         }
@@ -366,37 +366,37 @@ references = [
     "reviewers":[],
     "references": [
         {
-            "author": "Vispute, Sachin S, et al.",
+            "authors": "Vispute, Sachin S, et al.",
             "year": 2011,
             "title": "The Effect of Abdominal Exercise on Abdominal Fat."
         },
         {
-            "author": "Stallknecht, Bente, et al.",
+            "authors": "Stallknecht, Bente, et al.",
             "year": 2007,
             "title": "Are Blood Flow and Lipolysis in Subcutaneous Adipose Tissue Influenced by Contractions in Adjacent Muscles in Humans?"
         },
         {
-            "author": "Nuzzo, James L, et al.",
+            "authors": "Nuzzo, James L, et al.",
             "year": 2008,
             "title": "Trunk Muscle Activity during Stability Ball and Free Weight Exercises."
         },
         {
-            "author": "Moraes, Antonio C., et al.",
+            "authors": "Moraes, Antonio C., et al.",
             "year": 2009,
             "title": "EMG Activation of Abdominal Muscles in the Crunch Exercise Performed with Different External Loads."
         },
         {
-            "author": "SuppVersity EMG Series",
+            "authors": "SuppVersity EMG Series",
             "year": 2011,
             "title": "Rectus Abdominis, Obliques and Erector Spinae: The Very Best Exercises for Sixpack Abs and a Powerful Midsection."
         },
         {
-            "author": "Francis, P. and Davis, J.",
+            "authors": "Francis, P. and Davis, J.",
             "year": 2001,
             "title": "New study puts the crunch on ineffective ab exercises."
         },
         {
-            "author": "Youdas, James W, et al.",
+            "authors": "Youdas, James W, et al.",
             "year": 2008,
             "title": "An Electromyographic Analysis of the Ab-Slide Exercise, Abdominal Crunch, Supine Double Leg Thrust, and Side Bridge in Healthy Young Adults: Implications for Rehabilitation Professionals."
         }
@@ -411,42 +411,42 @@ references = [
 "reviewers": [],
 "references": [
 {
-"author": "Ralston, Grant W., Lon Kilgore, Frank B. Wyatt & Julien S. Baker",
+"authors": "Ralston, Grant W., Lon Kilgore, Frank B. Wyatt & Julien S. Baker",
 "year": 2017,
 "title": "The Effect of Weekly Set Volume on Strength Gain: A Meta-Analysis."
 },
 {
-"author": "Amirthalingam, Theban, et al.",
+"authors": "Amirthalingam, Theban, et al.",
 "year": 2017,
 "title": "Effects of a Modified German Volume Training Program on Muscular Hypertrophy and Strength."
 },
 {
-"author": "Jones, Andrew M.",
+"authors": "Jones, Andrew M.",
 "year": 2025,
 "title": "Medicine in Science and Sports Exercise April 2025 - Volume 57 - Issue 4."
 },
 {
-"author": "Slater, Gary John, et al.",
+"authors": "Slater, Gary John, et al.",
 "year": 2019,
 "title": "Is an Energy Surplus Required to Maximize Skeletal Muscle Hypertrophy Associated With Resistance Training."
 },
 {
-"author": "Vingren, Jakob L., et al.",
+"authors": "Vingren, Jakob L., et al.",
 "year": 2010,
 "title": "Testosterone Physiology in Resistance Exercise and Training: The Upstream Regulatory Elements."
 },
 {
-"author": "Brodsky, I. G., et al.",
+"authors": "Brodsky, I. G., et al.",
 "year": 1996,
 "title": "Effects of Testosterone Replacement on Muscle Mass and Muscle Protein Synthesis in Hypogonadal Men--A Clinical Research Center Study."
 },
 {
-"author": "Urhausen, A., et al.",
+"authors": "Urhausen, A., et al.",
 "year": 1995,
 "title": "Blood Hormones as Markers of Training Stress and Overtraining."
 },
 {
-"author": "Stults-Kolehmainen, Matthew A., et al.",
+"authors": "Stults-Kolehmainen, Matthew A., et al.",
 "year": 2014,
 "title": "Chronic Psychological Stress Impairs Recovery of Muscular Function and Somatic Sensations Over a 96-Hour Period."
 }
@@ -462,12 +462,12 @@ references = [
     "reviewers": [],
     "references": [
         {
-            "author": "Schoenfeld, Brad J., Dan Ogborn, and James W. Krieger",
+            "authors": "Schoenfeld, Brad J., Dan Ogborn, and James W. Krieger",
             "year": 2017,
             "title": "Dose-response relationship between weekly resistance training volume and increases in muscle mass: A systematic review and meta-analysis."
         },
         {
-            "author": "Enes, Alysson, Eduardo O. DE Souza, and Tácito P. Souza-Junior",
+            "authors": "Enes, Alysson, Eduardo O. DE Souza, and Tácito P. Souza-Junior",
             "year": 2022,
             "title": "Effects of Different Weekly Set Progressions on Muscular Adaptations in Trained Males: Is There a Dose-Response Effect?"
         }
@@ -492,8 +492,8 @@ references = [
     "textfile_name": "best_bodyweight_exercises_Legion.txt",
     "reviewers": [
         {
-            "Reviewer": "Brian Grant",
-            "Qualifications": "Doctor of Physical Therapy (DPT), Orthopedic Residency Graduate in Physical Therapy, Bachelors Degree in Exercise Science , Certified Strength and Conditioning Specialist from the NSCA"
+            "reviewer": "Brian Grant",
+            "qualifications": "Doctor of Physical Therapy (DPT), Orthopedic Residency Graduate in Physical Therapy, Bachelors Degree in Exercise Science , Certified Strength and Conditioning Specialist from the NSCA"
         }
     ],
     "references": []
@@ -507,11 +507,33 @@ references = [
     "textfile_name": "best_calf_exercises_Livestrong.txt",
     "reviewers": [
         {
-            "Reviewer": "Lindsey Elizabeth Cortes",
-            "Qualifications": "Master of Science (MS), Registered Dietitian (RD), Certified Specialist in Sports Dietetics (CSSD)"
+            "reviewer": "Lindsey Elizabeth Cortes",
+            "qualifications": "Master of Science (MS), Registered Dietitian (RD), Certified Specialist in Sports Dietetics (CSSD)"
         }
     ],
     "references": []
+},
+{
+  "title": "How Hard Should You Train to Build Muscle?",
+  "author": "Jeff Nippard",
+  "publication_date": "Unknown",
+  "url": "https://jeffnippard.com/blogs/news/how-hard-should-you-train-to-build-muscle",
+  "vector_db": "workout_reps_db",
+  "textfile_name": "how_hard_should_you_train_JN.txt",
+  "reviewers": [],
+  "references": [
+    {
+      "authors": "Zac Robinson, Joshua Pelland, Jacob Remmert and Martin Refalo",
+      "year": 2023,
+      "title": "Exploring the Dose-Response Relationship Between Estimated Resistance Training Proximity to Failure, Strength Gain, and Muscle Hypertrophy: A Series of Meta-Regressions",
+    },
+    {
+      "authors": "Martin C. Refalo, Eric R. Helms, Zac P. Robinson, D. Lee Hamilton, Jackson J. Fyfe",
+      "year": 2024,
+      "title": "Similar muscle hypertrophy following eight weeks of resistance training to momentary muscular failure or with repetitions-in-reserve in resistance-trained individuals",
+
+    }
+  ]
 }
 ]
 
