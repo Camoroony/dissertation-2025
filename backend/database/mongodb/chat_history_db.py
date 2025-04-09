@@ -8,7 +8,7 @@ db = get_mongodb_client()
 chat_history_collection = db['chat_histories']
 
 
-def create_chat_history(user_id: int, workout_plan_id=None, workout_plan=None):
+def create_chat_history(user_id: int, workout_plan_id=None):
 
     chat_history_document = {
         "user_id": user_id,

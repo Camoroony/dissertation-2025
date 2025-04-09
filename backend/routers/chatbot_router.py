@@ -18,13 +18,11 @@ def index() :
 def chat(user_id: int, user_prompt: str, chat_history_id=None, workout_plan_id=None, db: Session = Depends(get_db_session)) :
 
     workout_plan = get_workout_plan(workout_plan_id, db) if workout_plan_id is not None else None
-
     workout_plan_dict = serialise_workout_plan(workout_plan) if workout_plan else None
 
-    chat_history = create_chat_history(user_id, workout_plan_id, workout_plan_dict) if chat_history_id is None else get_chat_history(chat_history_id)
+    chat_history = create_chat_history(user_id, workout_plan_id) if chat_history_id is None else get_chat_history(chat_history_id)
 
-
-    ai_response_data = generate_chat(user_prompt, chat_history)
+    ai_response_data = generate_chat(user_prompt, chat_history, workout_plan_dict)
 
     add_chat_history(chat_history["_id"], user_prompt, ai_response_data["ai_response"])
 

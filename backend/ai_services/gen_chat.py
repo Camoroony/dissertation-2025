@@ -20,6 +20,7 @@ def generate_chat(prompt: str, chat_history=None, workout_plan=None):
 
     return response
 
+
 def generate_generic_chat(user_prompt: str, chat_history):
 
     vectorstore = get_chroma_vectorstore(db_name="overall_db", db_data="*")
@@ -63,41 +64,50 @@ def generate_generic_chat(user_prompt: str, chat_history):
     }
 
 
-def generate_workout_chat(prompt: str, chat_history, workout_plan):
+def generate_workout_chat(user_prompt: str, chat_history, workout_plan: dict):
 
-    prompt_template = ChatPromptTemplate.from_messages([
+    vectorstore = get_chroma_vectorstore(db_name="overall_db", db_data="*")
 
-        ("system", "You are a chatbot who can answer questions about the following workout plan: {workout_plan}\n\n"
-        "YOU ARE ONLY ALLOWED TO ANSWER QUESTIONS ABOUT THE WORKOUT PLAN.\n\n"
-        "You have the following chat history with the user: {chat_history}. \n\n"),
-        ("human", "This is the question for you to answer: {prompt}")
+    vs_results = vectorstore.similarity_search_with_relevance_scores(query=user_prompt, k=6)
 
+    context = format_context(vs_results)
+
+    context_text = context["documents"]
+    sources = context["sources"]
+
+    ai_context = (
+    "\n\n You will be provided with some relevant documents and a chat history to use when answering the question."
+    "\n\n You will also be provided a workout plan that you answer must be in reference to."
+    + "\n Your job is to provide an answer to the question based on the following documents."
+    + "\n USE ONLY THE DOCUMENTS AND/OR THE CHAT HISTORY PROVIDED TO FORMULATE YOUR ANSWER."
+    + "\n REMINDER: THE ANSWER MUST BE IN REFERENCE TO THE WORKOUT PLAN PROVIDED."
+    + "\n These are the relevant documents, chat history and workout plan you must use to formulate your answer:"
+    + "\n **Relevant Documents:**"
+    + f"\n{context_text}"
+    + "\n **Chat History:**"
+    + f"\n{chat_history['chats']}"
+    + "\n **Workout Plan:**"
+    + f"\n{workout_plan}"
+    )
+
+    prompt = ChatPromptTemplate.from_messages([
+    ("system", "You are a chatbot assistant who answers muscular hypertrophy and weightifting questions regarding a workout plan.\n"),
+    ("system", "ALL QUESTIONS MUST BE ANSWERED IN REFERENCE TO THE PROVIDED WORKOUT PLAN. YOU CAN ONLY ANSWER QUESTIONS REGARDING THE WORKOUT PLAN.\n"),
+    ("system", "{ai_context}"),  
+    ("human", "This is your question to answer about the workout plan based on the chat history and documents provided: {ai_query}")  
     ])
 
-    formatted_input = {
-        "workout_plan": workout_plan,
-        "chat_history": chat_history,
-        "prompt": prompt 
+
+    chain = prompt | model | StrOutputParser()
+
+    ai_response = chain.invoke({"ai_context": ai_context, "ai_query": user_prompt})  
+
+    print("\n--- Generated Response: ---")
+    print("Content:")
+    print(ai_response)
+
+    return {
+       "ai_response": ai_response,
+       "sources": sources
     }
 
-    chain = prompt_template | model | StrOutputParser()
-
-    response = chain.invoke(formatted_input)
-
-    return response
-
-
-# Chat history BaseMessage formatting
-
-def format_chat_history(chat_history):
-    messages = []
-
-    sys_message = SystemMessage(content=chat_history["sys_message"])
-
-    messages.append(sys_message)
-
-    for chat in chat_history["chats"]:
-        messages.append(HumanMessage(chat["user_message"]))
-        messages.append(AIMessage(chat["ai_message"]))
-
-    return messages
