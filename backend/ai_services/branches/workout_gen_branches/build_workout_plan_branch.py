@@ -23,21 +23,25 @@ def build_workout_plan_ai(workout_input: WorkoutGenInput, context):
                    + "Use these recommendations to generate the workout plan with the individuals characteristics in mind."),     
 
         ("human", "Generate me a **hypertrophy workout plan** for an individual with the following context:\n"
-                  + "- **Workout split**: {workout_split}\n\n"
-                  + "- **Sets per muscle group**: {workout_sets}\n\n"
-                  + "- **Recommended Exercises**: {workout_exercises}\n\n")
+                  + "- **Recommended workout split**: {workout_split}\n\n"
+                  + "- **Recommended Sets per muscle group**: {workout_sets}\n\n"
+                  + "- **Recommended Exercises**: {workout_exercises}\n\n"
+                  + "- **Recommended Reps In Reserve (RIR) for exercise sets**: {workout_exercise_rir}\n\n"
+                  + "- **Additional info from the user to consider**: {additional_info}\n\n")
     ])
 
    
     formatted_input = {
         "workout_split": context["training_availability_context"]["ai_response"],
         "workout_sets": context["training_experience_context"]["ai_response"],
-        "workout_exercises": context["training_equipment_context"]["ai_response"]
+        "workout_exercises": context["training_equipment_context"]["ai_response"],
+        "workout_exercise_rir": context["training_reps_context"]["ai_response"],
+        "additional_info": workout_input.additional_info,
     }
 
     final_prompt = prompt_template.format(**formatted_input)
 
-    sources = context["training_availability_context"]["sources"] | context["training_experience_context"]["sources"] | context["training_equipment_context"]["sources"]
+    sources = context["training_availability_context"]["sources"] | context["training_experience_context"]["sources"] | context["training_equipment_context"]["sources"] | context["training_reps_context"]["sources"]
     
     chain = prompt_template | model
 
