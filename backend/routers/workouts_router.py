@@ -1,9 +1,10 @@
 from fastapi import APIRouter, Response, Depends, HTTPException
 from sqlmodel import Session
 from models.input_models import WorkoutGenInput
-from models.utilities.sql_seralising import serialise_exercise
+from models.utilities.sql_seralising import serialise_workout_plan, serialise_workout_session, serialise_exercise
 from database.sql.init_sql_db import get_db_session
-from database.sql.workout_plan_db import add_workout_plan, delete_workout_plan
+from database.sql.workout_plan_db import add_workout_plan, delete_workout_plan, get_workout_plan
+from database.sql.workout_session_db import get_workout_session
 from database.sql.exercise_db import get_exercise
 from database.mongodb.workout_context_db import add_workout_context, get_workout_context, delete_workout_context
 from ai_services.gen_workout_plan import generate_workout_plan
@@ -56,11 +57,17 @@ def delete_workout(workout_plan_id: int, db: Session = Depends(get_db_session)) 
 
 
 @router.get("/get-workoutsession-info")
-def get_workoutsession_info(workout_plan_id: int, workoutsession_id: int) :
+def get_workoutsession_info(workout_plan_id: int, workout_session_id: int, db: Session = Depends(get_db_session)) :
 
     context = get_workout_context(workout_plan_id)
 
-    ai_response_data = generate_workoutsession_overview(context, workoutsession_id)
+    workout_plan = get_workout_plan(workout_plan_id, db)
+    workout_plan_dict = serialise_workout_plan(workout_plan)
+
+    workout_session = get_workout_session(workout_session_id, db)
+    workout_session_dict = serialise_workout_session(workout_session)
+
+    ai_response_data = generate_workoutsession_overview(context, workout_plan_dict, workout_session_dict)
 
     return Response(ai_response_data, status_code=200)
 

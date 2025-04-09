@@ -1,6 +1,5 @@
 from bson import ObjectId
 from database.mongodb.init_mongodb_db import get_mongodb_client
-from models.ai_models import get_generic_chatbot_sysmessage, get_workoutplan_chatbot_sysmessage
 import datetime
 
 

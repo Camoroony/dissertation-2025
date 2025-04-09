@@ -2,12 +2,11 @@ from langchain.schema.runnable import RunnableLambda, RunnableParallel
 from langchain_openai import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
 from langchain.schema.output_parser import StrOutputParser
-from models.db_models import WorkoutPlan
+from models.db_models import WorkoutSession
 from ai_services.branches.workout_info_branches.get_exercise_tutorial_branch import get_exercise_tutorial_ai
 from ai_services.branches.workout_info_branches.get_exercise_video_branch import get_exercise_video_ai
 from ai_services.branches.workout_info_branches.build_exercise_overview_branch import build_exercise_overview_ai
 from dotenv import load_dotenv
-from typing import Dict, Any
 import os
 
 
@@ -18,24 +17,21 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 model = ChatOpenAI(model="gpt-4o-mini", api_key=OPENAI_API_KEY)
 
 
-def generate_workoutsession_overview(context: str, workoutsession_id: int):
+def generate_workoutsession_overview(context: str, workout_plan: dict, workout_session: dict):
 
     prompt_template = ChatPromptTemplate.from_messages([
 
-        ("system", "You are a muscular hypertrophy workout assistant who has generated a workout based on the following context: {context}\n."
-                   "Your job is to provide explanations for why you generated the given workout session, explain how to do it, providing references and a youtube video tutorial for justification"
-         
-         ),
+        ("system", "You are a muscular hypertrophy workout assistant who has generated a workout based on the following context: {context}.\n"
+                   "This is the workout plan you generated: {workout_plan}"),
 
-
-        ("human", "Give me an explanation of the session with the Id: {workoutsession_id}.\n"
-         "Link the best youtube video on how to do the exercise at the end of the explanation.\n"
-         "Explain the exercise and how to do it using references from academic papers, and provide the references in your explanation and at the end.\n")
+        ("human", "Provide an overview of this session in the workout plan: {workout_session}\n"
+         "Give an overview of the full session providing explanations and justifications for the sessions exercises, rep ranges and other attributes based on the context.\n")
     ])
 
     formatted_input = {
         "context": context,
-        "workoutsession_id": workoutsession_id
+        "workout_plan": workout_plan,
+        "workout_session": workout_session
     }
 
     chain = prompt_template | model | StrOutputParser()

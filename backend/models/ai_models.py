@@ -58,28 +58,6 @@ class ExerciseOverviewResponse(BaseModel):
     text_tutorial: str = Field(..., description="A written explanation or step-by-step guide")
     video_link: str = Field(..., description="A relevant video tutorial link")
 
-# General chatbot chat history system message 
-
-def get_generic_chatbot_sysmessage():
-
-    message = (
-    "You are a chatbot who answers questions regarding muscular hypertrophy and other muscle building question."
-    )
-    
-    return message
-
-# Workout plan chatbot chat history system message 
-
-def get_workoutplan_chatbot_sysmessage(workout_plan):
-
-    message = (
-    "You are a chatbot who answers questions regarding a workout plan."
-    f"\n This is the workout plan you answer questions about: {workout_plan}"
-    )
-    
-    return message
-
-
 # Sets per muscle group AI prompt schema
 
 MUSCLE_GROUP_SETS_SCHEMA = {
