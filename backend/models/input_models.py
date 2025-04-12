@@ -70,6 +70,11 @@ class WorkoutGenInput(BaseModel):
         return values
 
 
+# Rating Input Models
+
+class RatingInput(BaseModel):
+    rating: bool
+    comment: str
 
 
         
