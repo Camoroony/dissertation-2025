@@ -6,6 +6,7 @@ from sqlalchemy.orm import selectinload
 def add_workout_plan(data: Dict[str, Any], user_id: int, db: Session):
 
     workout_plan_obj = WorkoutPlan(
+        plan_name = data["plan_name"],
         user_id = user_id,
         no_of_sessions = data["no_of_sessions"],
         average_session_length = data["average_session_length"],

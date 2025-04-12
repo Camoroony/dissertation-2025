@@ -49,8 +49,6 @@ def get_available_equipment_context(available_equipment: str):
 
     vectorstore = get_chroma_vectorstore(db_name="workout_exercises_db", db_data="workout_exercise_studies")
 
-    ai_response = []
-
     if available_equipment == "Full gym access":
       available_equipment = ""
 

@@ -8,6 +8,10 @@ WORKOUT_PLAN_FUNCTION_SCHEMA = {
     "parameters": {
         "type": "object",
         "properties": {
+            "plan_name": {
+                "type": "string",
+                "description": "The name of the overall workout plan."
+            },
             "no_of_sessions": {
                 "type": "integer",
                 "description": "Total number of workout sessions."

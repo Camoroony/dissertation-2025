@@ -8,6 +8,7 @@ def serialise_workout_plan(workout_plan: WorkoutPlan) -> Dict[str, Any]:
 
         return {
             "id": workout_plan.id,
+            "plan_name": workout_plan.plan_name,
             "user_id": workout_plan.user_id,
             "no_of_sessions": workout_plan.no_of_sessions,
             "average_session_length": workout_plan.average_session_length,
