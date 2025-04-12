@@ -534,6 +534,47 @@ references = [
 
     }
   ]
+},
+{
+  "title": "Strength and Conditioning Terminology",
+  "author": "Abobakr Ravand",
+  "publication_date": "2022-07-21",
+  "url": "https://iascfitness.org/strength-conditioning-terminology/",
+  "vector_db": "overall_db",
+  "textfile_name": "s_and_c_terminology_AR.txt",
+  "reviewers": [],
+  "references": [
+    {
+      "authors": "Zatsiorsky, V.M. and Kraemer, W.J.",
+      "year": 2004,
+      "title": "Science and Practice of Strength Training"
+    },
+    {
+      "authors": "Verkhoshansky, Y. and Verkhoshansky, N.",
+      "year": 2011,
+      "title": "Special Strength Training Manual for Coaches"
+    },
+    {
+      "authors": "Kraemer, W.J., Deschenes, M.R. and Fleck, S.J.",
+      "year": 1988,
+      "title": "Physiological adaptations to resistance exercise. Implications for athletic conditioning"
+    },
+    {
+      "authors": "Bird, S.P., Tarpenning, K.M. and Marino, F.E.",
+      "year": 2005,
+      "title": "Designing Resistance Training Programmes to Enhance Muscular Fitness"
+    },
+    {
+      "authors": "Kraemer, W.J. and Ratamess, N.A.",
+      "year": 2004,
+      "title": "Fundamentals of resistance training: progression and exercise prescription"
+    },
+    {
+      "authors": "Fleck, S.J. and Kraemer, W.J.",
+      "year": "Unknown",
+      "title": "Designing Resistance Training Programs (Fourth Edition)"
+    }
+  ]
 }
 ]
 
@@ -548,6 +589,19 @@ def references_init():
 
     else: 
        print("Application references already exist to MongoDB instance.")
+
+
+def get_reference(txt_name: str):
+   
+  document = references_collection.find_one({"textfile_name": txt_name}, 
+                                            {"_id": 0})
+
+  if document is None:
+     raise ValueError(f"No source content found for file: {txt_name}")
+  else:
+      source = document
+  
+  return source
             
 
 
@@ -557,7 +611,7 @@ def get_reference_url(txt_name: str):
 
   if document:
     if document["url"] is None:
-      url = "No url found for source."
+     raise ValueError(f"No source url found for file: {txt_name}")
     else:
       url = document["url"]
   

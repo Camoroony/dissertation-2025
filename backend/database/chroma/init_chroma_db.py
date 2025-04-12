@@ -1,11 +1,12 @@
 import os 
 import glob
+import json
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import TextLoader
 from langchain_community.vectorstores import Chroma
 from langchain_openai.embeddings import OpenAIEmbeddings
 from langchain.docstore.document import Document
-from database.mongodb.references_db import get_reference_url
+from database.mongodb.references_db import get_reference_url, get_reference
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -43,18 +44,21 @@ def get_chroma_vectorstore(db_name: str, db_data: str):
 
         txt_file_dir = os.path.basename(os.path.dirname(txt_file))
         
-        doc_url = "N/A" if txt_file_dir == "workout_video_studies" else get_reference_url(os.path.basename(txt_file))
+        doc_source = "N/A" if txt_file_dir == "workout_video_studies" else get_reference(os.path.basename(txt_file))
 
         loader = TextLoader(txt_file, "utf-8")
         document = loader.load()
-        docs = text_splitter.split_documents(document)
+        doc_chunks = text_splitter.split_documents(document)
 
         # Debug the chunks
-        for i, chunk in enumerate(docs): 
-            chunk.metadata["url"] = doc_url
+        for i, chunk in enumerate(doc_chunks): 
+            if doc_source != "N/A":
+             chunk.metadata["full_source"] = json.dumps(doc_source)
+             chunk.metadata["url"] = doc_source["url"] 
+            else: chunk.metadata["full_source"] = "N/A"
             # print(f"\nChunk {i+1}:\n\n{chunk}\n\n{chunk.metadata["url"]}\n\n{'='*40}")  
 
-        chunks.extend(docs)
+        chunks.extend(doc_chunks)
         print(f"Document: {txt_file} loaded into chunks")
 
 

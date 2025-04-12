@@ -37,6 +37,8 @@ def generate_generic_chat(user_prompt: str, chat_history):
     + "\n Your job is to provide an answer based on the following documents."
     + "\n USE ONLY THE DOCUMENTS AND/OR THE CHAT HISTORY PROVIDED TO FORMULATE YOUR ANSWER"
     + "\n IF THE DOCUMENTS OR CHAT HISTORY DO NOT PROVIDE YOU WITH THE ANSWER TO THE QUESTION, RESPOND SAYING YOU DON'T KNOW THE ANSWER."
+    + "\n When you use any information from a source or sources, make sure to refer to the source directly in your response, like: "
+    + " '[Source: source_title, source_author, source_url]' to give context."
     + "\n These are the relevant documents you must use to formulate your answer:"
     + "\n **Relevant Documents:**"
     + f"\n{context_text}"
@@ -46,6 +48,7 @@ def generate_generic_chat(user_prompt: str, chat_history):
 
     prompt = ChatPromptTemplate.from_messages([
     ("system", "You are a chatbot assistant who answers muscular hypertrophy and weightifting questions only.\n\n"),
+    ("system", "If your answer to a question is based on a source or sources, incorporate the source(s) you used into your text response.\n\n"),
     ("system", "{ai_context}"),  
     ("human", "This is your question to answer based on the documents: {ai_query}")  
     ])
