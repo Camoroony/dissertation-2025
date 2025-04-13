@@ -69,21 +69,26 @@ def generate_generic_chat(user_prompt: str, chat_history):
 
 def generate_community_chat(user_prompt: str, chat_history, workout_plans_info):
 
+    workout_plans_text = "\n\n".join(
+    f"Workout Plan {wp["id"]}:\n\n{wp}\n\n{'=' * 40}" for wp in workout_plans_info
+    )
+
     ai_context = (
-    "\n\n You will be provided with workout plan information and a chat history to use when answering the question"
-    + "\n Your job is to provide an answer based on the following documents."
+    "\n\n You will be provided with workout plan information from the application's community page including ratings annd comments, as well as a chat history to use when answering the question."
+    + "\n Your job is to provide an answer to the question based on these documents."
     + "\n USE ONLY THE WORKOUT PLAN INFO AND/OR THE CHAT HISTORY PROVIDED TO FORMULATE YOUR ANSWER"
-    + "\n This is the information on workout plans and chat history you must use to formulate your answer:"
-    + "\n **Workout Plan Information:**"
-    + f"\n{workout_plans_info}"
+    + "\n YOU ARE ONLY ALLOWED TO ANSWER QUESTIONS REGARDING WORKOUT PLANS, IF THE QUESTION IS ABOUT SOMETHING ELSE, EXPLAIN THAT YOU CANNOT ANSWER THE QUESTION AND WHY."
+    + "\n This is the the workout plan information from the community page and the chat history you must use to formulate your answer:"
+    + "\n **Workout Plan Information From The Community Page Including Ratings And Comments:**"
+    + f"{workout_plans_text}"
     + "\n **Chat History:**"
     + f"\n{chat_history['chats']}"
     )
 
     prompt = ChatPromptTemplate.from_messages([
-    ("system", "You are a chatbot assistant who answers muscular hypertrophy and weightifting questions regarding workout plan information and chat history.\n\n"),
+    ("system", "You are a chatbot assistant for an application who provides informative suggestions and answers to questions regarding workout plan selection for optimal muscular hypertrophy purposes.\n\n"),
     ("system", "{ai_context}"),  
-    ("human", "This is your question to answer based on the documents: {ai_query}")  
+    ("human", "This is your question to answer based on the workout plan information and chat history: {ai_query}")  
     ])
 
 
