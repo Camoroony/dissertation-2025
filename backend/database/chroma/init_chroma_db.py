@@ -69,16 +69,3 @@ def get_chroma_vectorstore(db_name: str, db_data: str):
 
  
  return vectorstore 
-
-def custom_splitter(document: Document, separator="---") -> list[Document]:
-    
-    chunks = document.page_content.split(separator)
-
-    chunks = [chunk.strip() for chunk in chunks if chunk.strip()]
-
-    documents = []
-    for chunk in chunks:
-        doc = Document(page_content=chunk)
-        documents.append(doc)
-    
-    return documents
