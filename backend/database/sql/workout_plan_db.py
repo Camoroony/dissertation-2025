@@ -57,7 +57,8 @@ def get_workout_plan(workout_plan_id: int, db: Session):
         select(WorkoutPlan)
         .where(WorkoutPlan.id == workout_plan_id)
         .options(
-            selectinload(WorkoutPlan.workout_sessions).selectinload(WorkoutSession.exercises)
+            selectinload(WorkoutPlan.workout_sessions).selectinload(WorkoutSession.exercises),
+            selectinload(WorkoutPlan.ratings)
         )
     )
 
@@ -67,6 +68,23 @@ def get_workout_plan(workout_plan_id: int, db: Session):
         raise ValueError(f"Workout plan with ID {workout_plan_id} not found.")
 
     return workout_plan
+
+def get_workout_plans(db: Session):
+
+    statement = (
+        select(WorkoutPlan)
+        .options(
+            selectinload(WorkoutPlan.workout_sessions).selectinload(WorkoutSession.exercises),
+            selectinload(WorkoutPlan.ratings)
+        )
+    )
+
+    workout_plans = db.exec(statement).all()
+
+    if not workout_plans:
+        raise ValueError(f"Workout plans were not found.")
+
+    return workout_plans
 
 def delete_workout_plan(workout_plan_id: int, db: Session):
 

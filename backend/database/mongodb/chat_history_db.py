@@ -8,19 +8,23 @@ db = get_mongodb_client()
 chat_history_collection = db['chat_histories']
 
 
-def create_chat_history(user_id: int, workout_plan_id=None):
+def create_chat_history(user_id: int, chat_type: str = "general",  workout_plan_id=None):
+    if chat_type not in {"general", "community", "workout"}:
+       raise ValueError("Invalid chat type. Must be 'general', 'community', or 'workout'.")
+
 
     chat_history_document = {
         "user_id": user_id,
+        "chat_type": chat_type,
         "chat_start_time": datetime.datetime.now(datetime.UTC),
         "chats": []
     }
 
-    if workout_plan_id is not None:
-        chat_history_document['workout_plan_id'] = workout_plan_id
+    if chat_type == "workout" and workout_plan_id is not None:
+        chat_history_document["workout_plan_id"] = workout_plan_id
+
 
     result = chat_history_collection.insert_one(chat_history_document)
-
     new_chat_history = chat_history_collection.find_one({"_id": result.inserted_id})
 
     return new_chat_history
@@ -69,16 +73,20 @@ def get_chat_histories_by_userid(user_id: int):
     chat_histories = chat_history_collection.find({"user_id": user_id})
 
     generic_chats = []
+    community_chats = []
     workout_chats = []
 
     for chat_history in chat_histories:
-     if "workout_plan_id" in chat_history:
+     if chat_history["chat_type"] == "workout":
         workout_chats.append(chat_history)
+     elif chat_history["chat_type"] == "community": 
+        community_chats.append(chat_history)
      else:
         generic_chats.append(chat_history) 
 
     chats = {
         "generic_chats": generic_chats,
+        "community_chats": community_chats,
         "workout_chats": workout_chats
     }
 

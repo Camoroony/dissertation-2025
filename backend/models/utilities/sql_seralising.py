@@ -5,6 +5,12 @@ def serialise_workout_plan(workout_plan: WorkoutPlan) -> Dict[str, Any]:
 
         if not isinstance(workout_plan, WorkoutPlan):
           raise TypeError("Object must be of type WorkoutPlan to be serialised.")
+        
+        positive_count = sum(1 for rating in workout_plan.ratings if rating.rating is True)
+        negative_count = sum(1 for rating in workout_plan.ratings if rating.rating is False)
+        total = len(workout_plan.ratings)
+
+        recommendation_percentage = (positive_count / total) * 100 if total > 0 else 0
 
         return {
             "id": workout_plan.id,
@@ -13,6 +19,9 @@ def serialise_workout_plan(workout_plan: WorkoutPlan) -> Dict[str, Any]:
             "no_of_sessions": workout_plan.no_of_sessions,
             "average_session_length": workout_plan.average_session_length,
             "equipment_requirements": workout_plan.equipment_requirements,
+            "total_upvotes": positive_count,
+            "total_downvotes": negative_count,
+            "recommendation_percentage": recommendation_percentage,
             "workout_sessions": [
                 {
                     "id": session.id,
@@ -32,6 +41,15 @@ def serialise_workout_plan(workout_plan: WorkoutPlan) -> Dict[str, Any]:
                     ]
                 }
                 for session in workout_plan.workout_sessions
+            ],
+            "ratings": [
+            {
+                "id": rating.id,
+                "user_id": rating.user_id,
+                "rating": rating.rating,
+                "comment": rating.comment
+            }
+            for rating in workout_plan.ratings
             ]
         }
 
@@ -71,4 +89,5 @@ def serialise_exercise(exercise: Exercise) -> Dict[str, Any]:
         "reps": exercise.reps,
         "reps_in_reserve": exercise.reps_in_reserve
        }
-      
+
+

@@ -33,14 +33,16 @@ def get_ratings_by_workout_db(workout_plan_id: int, db: Session):
     statement = (
         select(Rating)
         .where(Rating.workoutplan_id == workout_plan_id)
+        .order_by(Rating.id)
     )
 
     ratings = db.exec(statement).all()
 
-    if ratings is None:
+    if not ratings:
         raise ValueError(f"Ratings for the workout with ID {workout_plan_id} could not be found.")
 
     return ratings
+
 
 
 

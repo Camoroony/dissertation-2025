@@ -67,6 +67,39 @@ def generate_generic_chat(user_prompt: str, chat_history):
        "sources": sources
     }
 
+def generate_community_chat(user_prompt: str, chat_history, workout_plans_info):
+
+    ai_context = (
+    "\n\n You will be provided with workout plan information and a chat history to use when answering the question"
+    + "\n Your job is to provide an answer based on the following documents."
+    + "\n USE ONLY THE WORKOUT PLAN INFO AND/OR THE CHAT HISTORY PROVIDED TO FORMULATE YOUR ANSWER"
+    + "\n This is the information on workout plans and chat history you must use to formulate your answer:"
+    + "\n **Workout Plan Information:**"
+    + f"\n{workout_plans_info}"
+    + "\n **Chat History:**"
+    + f"\n{chat_history['chats']}"
+    )
+
+    prompt = ChatPromptTemplate.from_messages([
+    ("system", "You are a chatbot assistant who answers muscular hypertrophy and weightifting questions regarding workout plan information and chat history.\n\n"),
+    ("system", "{ai_context}"),  
+    ("human", "This is your question to answer based on the documents: {ai_query}")  
+    ])
+
+
+    chain = prompt | model | StrOutputParser()
+
+    ai_response = chain.invoke({"ai_context": ai_context, "ai_query": user_prompt})  
+
+    print("\n--- Generated Response: ---")
+    print("Content:")
+    print(ai_response)
+
+    return {
+       "ai_response": ai_response
+    }
+
+
 
 def generate_workout_chat(user_prompt: str, chat_history, workout_plan: dict):
 
