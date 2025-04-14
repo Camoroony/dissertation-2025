@@ -23,7 +23,7 @@ def generate_chat(prompt: str, chat_history=None, workout_plan=None):
 
 def generate_generic_chat(user_prompt: str, chat_history):
 
-    vectorstore = get_chroma_vectorstore(db_name="overall_db", db_data="*")
+    vectorstore = get_chroma_vectorstore(db_name="overall_vs", db_data="*")
 
     vs_results = vectorstore.similarity_search_with_relevance_scores(query=user_prompt, k=5)
 
@@ -108,7 +108,7 @@ def generate_community_chat(user_prompt: str, chat_history, workout_plans_info):
 
 def generate_workout_chat(user_prompt: str, chat_history, workout_plan: dict):
 
-    vectorstore = get_chroma_vectorstore(db_name="overall_db", db_data="*")
+    vectorstore = get_chroma_vectorstore(db_name="overall_vs", db_data="*")
 
     vs_results = vectorstore.similarity_search_with_relevance_scores(query=user_prompt, k=6)
 

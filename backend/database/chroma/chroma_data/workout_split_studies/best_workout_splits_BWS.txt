@@ -16,6 +16,7 @@ The best workout split will strike the perfect balance of both.
 
 Analyzing Every Workout Split:
 
+---
 
 3-Day Push-Pull-Legs 
 Let’s start with a classic, the push-pull-legs workout split, where you train all your:
@@ -27,12 +28,14 @@ But the unique thing about this workout split is you can run it once, so you’r
 I’ll score the 3-day-per-week version first, with a hypertrophy score of 6.7.
 And while it takes the top spot on the leaderboard for now, the next workout split will give it a run for its money. 
 
+---
 
 3-Day Full-Body Workout Split
 It’s the 3-day full-body workout split.
 Unlike the 3-day push-pull-legs workout split, which hits each muscle just once per week, the full-body split trains every muscle 3 times per week. 
 This gives it a major advantage.
 
+---
 
 3-Day Full-Body Workout Split
 A recent meta-analysis by Josh Pelland and colleagues [8] found that training a muscle 3 times per week can boost strength gains by about 50% compared to training it once per week — even with the same weekly volume.
@@ -43,6 +46,7 @@ Well, while the latest data suggests frequency doesn’t seem to be as important
 In this case, it’s enough of a boost for the 3-day full-body workout split to take the top spot with a hypertrophy score of 8.1.  
 [8] Pelland, J., Remmert, J., Robinson, Z., Hinson, S. and Zourdos, M., 2024. The resistance training dose-response: Meta-regressions exploring the effects of weekly volume and frequency on muscle hypertrophy and strength gain. [online]. Available from: http://dx.doi.org/10.51224/srxiv.460.
 
+---
 
 4-Day Upper/Lower Workout Split
 Next up, we’re moving to a 4-day routine with the classic upper/lower workout split, which focuses on the upper body for 2 days and the lower body for 2 days.
@@ -52,6 +56,7 @@ The frequency graph is quite flat, meaning you get just a small boost in growth 
 Because of this, the upper/lower split scores quite well, with a hypertrophy score of 8.4, just enough to earn the top spot.
 [8] Pelland, J., Remmert, J., Robinson, Z., Hinson, S. and Zourdos, M., 2024. The resistance training dose-response: Meta-regressions exploring the effects of weekly volume and frequency on muscle hypertrophy and strength gain. [online]. Available from: http://dx.doi.org/10.51224/srxiv.460.
 
+---
 
 5-Day Upper/Lower/Push/Pull/Legs (U/L/P/P/L)
 But now it’s time to step things up with the 5-day splits.
@@ -62,6 +67,7 @@ And with a hypertrophy score of 9.0, it takes the top spot on our leaderboard.
 But will this be enough to beat the rest of the splits?
 Or will I find something even better than what I’ve been doing?
 
+---
 
 5-Day Bro Split
 Let’s find out by moving on to the classic 5-Day bro split.
@@ -76,6 +82,7 @@ For now, let’s see how it scores.
 Is it enough to beat my personal favorite workout split?
 Not quite. It slides into a close second place with a score of 8.8. 
 
+---
 
 5-Day Full-Body Workout Split
 Alright, next up, we have the 5-day full-body workout routine, an ultra-high frequency split that trains each muscle 5 times per week.
@@ -85,6 +92,7 @@ But what’s interesting is this training style may provide additional benefits 
 Every time you lift weights, you’re “signaling” your muscle to grow — something known as the muscle protein synthesis response.
 But here’s the thing.
 
+---
 
 5-Day Full-Body Workout Split
 Research [9] has shown that this response lasts quite long, about 48 to 72 hours, for beginners. This means you only really need to train each muscle 2, max 3 times per week, to keep the protein synthesis response elevated throughout the whole week.
@@ -95,6 +103,7 @@ But this is all just theoretical.
 The real question is, does this really lead to more growth?
 [9] Damas, F., Phillips, S., Vechin, F. C. and Ugrinowitsch, C., 2015. A review of resistance training-induced changes in skeletal muscle protein synthesis and their contribution to hypertrophy. Sports medicine (Auckland, N.Z.) [online], 45 (6), 801–807. Available from: http://dx.doi.org/10.1007/s40279-015-0320-0.
 
+---
 
 5-Day Full-Body Workout Split
 Well, one study published back in 2019 [10] put this split to the test.
@@ -106,6 +115,7 @@ After 8 weeks, almost every muscle measured grew more with the full-body workout
 As for its hypertrophy score, after crunching the numbers, it scored an all-time high of 10.0, taking the top spot by a long shot. 
 [10] Zaroni, R. S., Brigatto, F. A., Schoenfeld, B. J., Braz, T. V., Benvenutti, J. C., Germano, M. D., Marchetti, P. H., Aoki, M. S. and Lopes, C. R., 2019. High resistance-training frequency enhances muscle thickness in resistance-trained men. Journal of strength and conditioning research [online], 33 Suppl 1, S140–S151. Available from: http://dx.doi.org/10.1519/JSC.0000000000002643.
 
+---
 
 6-Day Push-Pull-Legs
 There’s still 1 more workout split left to cover that might take the win, and it’s every gym bro’s favorite routine. The 6-day push-pull legs split. 
@@ -114,6 +124,7 @@ But is this enough to give it the number 1 spot?
 Well, after crunching the numbers, it comes in ...
 … at a close second with a score of 9.7.
 
+---
 
 Ranking Every Workout Split Based On Muscle Growth
 Workout split overall ranking
@@ -123,6 +134,7 @@ Great: 6-day PPL
 Good: 5-day ULPPL, 5-day bro split, 4-day UL, 3-day full-body
 Worst: 3-day PPL
 
+---
 
 What About Time Efficiency?
 But unless you’re someone who would live, eat, and sleep in the gym if it meant more gains, you should also consider time efficiency.
@@ -137,6 +149,8 @@ To answer that, we calculated the weekly time investment you’d spend on each w
 We found a split that gives you 85% of the gains of the top split but with 30% less time in the gym every week. 
 And that split is ... the 4-day upper/lower split.
 
+---
+
 TL;DR
 To determine the best workout split, I worked with PhD researcher Eric Trexler to build a predictive growth equation focused on 2 key factors: frequency and volume.
 For 3-day splits: the full-body version (8.1) scores better than the PPL (6.7) because it may boost strength gains by about 50% — even with the same weekly volume.
@@ -145,3 +159,9 @@ For 5-day splits: the ULPPL comes in with a score of 9.0 (more volume without bi
 Finally, the 6-day PPL came in with a score of 9.7.
 Bonus: the 4-day UL workout split gives you 85% of the gains of the 5-day full-body split — but with 30% less time in the gym weekly.
 To help you guys out, I’ve created a free downloadable PDF for both the 5-day full-body and the 4-day upper/lower routines.
+
+References: 
+[8] Pelland, J., Remmert, J., Robinson, Z., Hinson, S. and Zourdos, M., 2024. The resistance training dose-response: Meta-regressions exploring the effects of weekly volume and frequency on muscle hypertrophy and strength gain. [online]. Available from: http://dx.doi.org/10.51224/srxiv.460.
+[9] Damas, F., Phillips, S., Vechin, F. C. and Ugrinowitsch, C., 2015. A review of resistance training-induced changes in skeletal muscle protein synthesis and their contribution to hypertrophy. Sports medicine (Auckland, N.Z.) [online], 45 (6), 801–807. Available from: http://dx.doi.org/10.1007/s40279-015-0320-0.
+[10] Zaroni, R. S., Brigatto, F. A., Schoenfeld, B. J., Braz, T. V., Benvenutti, J. C., Germano, M. D., Marchetti, P. H., Aoki, M. S. and Lopes, C. R., 2019. High resistance-training frequency enhances muscle thickness in resistance-trained men. Journal of strength and conditioning research [online], 33 Suppl 1, S140–S151. Available from: http://dx.doi.org/10.1519/JSC.0000000000002643.
+

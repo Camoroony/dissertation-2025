@@ -23,6 +23,8 @@ Upper, Lower Workout Split: (best workout split for strength gains)
 Body Part Workout Split: (best workout split for muscle gain ie. hypertrophy).
 You might already be following one of these splits (whether you realize it or not), but ensuring you are on the right workout split for your level and goals is essential. Here's our guide to the best workout splits, and how you can choose the right one for you.
 
+---
+
 Best Workout Split For Beginners: Full Body Workout Split
 Number of Days: 2 or 3-day workout split
 Whether you’re a beginner looking to start building a well-rounded physique, or you’re someone who’s time pressured and wants a workout that gives them the best bang for their buck - a full body workout split will give your muscles all the attention they need.
@@ -41,6 +43,8 @@ Drawbacks of Full Body Workout Split:
 Some muscles may be neglected: Your training may prioritize certain muscle groups over others which may lead to muscular imbalances.
 Hard to increase training frequency without overtraining: The American Council of Sports Medicine (ACSM) Guidelines suggest allowing at least 48 hours between resistance training exercise sessions for a major muscle group. When training full body, this would mean you need a full 48 hours between training sessions, making it hard to increase the frequency without the risk of overtraining.
 Best Workout Split For Intermediate Lifters: Push Pull Legs Workout Split
+
+---
 
 Number of days: 3 day workout split, or 6 day workout split (with 3 days on, 1 day off in a cyclical format)
 If you’re looking to hit every single muscle group then a PPL workout split (push pull legs) is a simple format to follow: One day you focus on upper body pushing exercises, the next you focus on upper body pulling exercises, then finally, you train legs. Put that together, and it will look something like this:
@@ -65,6 +69,7 @@ Little room for flexibility: Using a 3 day on, 1 day off rolling schedule is unp
 May not be suited to those who are time-poor: PPL workouts can take more than 60 minutes because they are focusing on multiple muscle groups in each session.
 [4] Schoenfeld, B.J., Ogborn, D. and Krieger, J.W. (2016). Effects of Resistance Training Frequency on Measures of Muscle Hypertrophy: A Systematic Review and Meta-Analysis.
 
+---
 
 Best Workout Split For Strength Gains: Upper Lower Split Workout
 Number of days: 2, 3, 4, 5 or even 6-day workout split.
@@ -95,6 +100,7 @@ Drawbacks of Upper Lower Split Workout:
 Some muscles may get neglected: Without careful programming, you may neglect some muscle groups whilst overtraining others. This could lead to muscular imbalances over time.
 Best Workout Split For Muscle Gain (Hypertrophy): Body Part Workout Split
 
+---
 
 Number of days: 5 day workout split
 Back in the day, bodybuilders would train to something called the ‘Bro Split Workout’, which would see them train a different muscle group each day. The thinking behind this was that you could accelerate hypertrophy in a single muscle group by focusing a whole session on it and giving it a whole week to recover before training it again.
@@ -114,12 +120,12 @@ Good for hypertrophy: Prioritizes isolation exercises focusing on singular muscl
 You can choose the specific muscle group you want to grow: e.g. if growing your glutes is a priority, you can program to train them twice (as above), or even three times a week.
 Adequate recovery time: You can train every day without the risk of overtraining because the same muscle groups aren’t trained on consecutive days.
 
-
 Disadvantages Of Body Part Workout Split:
 Risk of overtraining a muscle group: A whole session dedicated to two muscle groups is still quite a high volume, particularly for the smaller muscles such as the arm muscles.
 Prioritizes isolation movements over compound exercises: May neglect multi-joint movements that translate directly to everyday life in favor of working a single muscle group at a time. 
 Little room for flexibility: If you miss a day, you risk throwing out your training balance for the week.
 
+---
 
 How To Decide What Is The Most Effective Workout Split?
 How long have you been training for?
@@ -135,23 +141,28 @@ What do you enjoy?
 Ultimately, the workout split you are most likely to stick to is going to be one that you enjoy. Choose one that most closely aligns with how you like to train – that way, it’s less likely to fall through, and you’re more likely to see results.
 There’s no best or worst when it comes to workout splits. Ultimately, the style of training you decide to follow is dependent on you and your lifestyle.
 
+---
 
 Workout Split FAQs
 Do I Need To Train My Abs In A Workout Split?
 Many of these workout splits don’t dedicate a specific time for ab training. This is because your core is at work during many of the big compound lifts like squats, deadlifts, overhead press, etc, so whilst you aren’t doing dedicated core training, you are still using your core. For this reason, it’s not essential to do specific core workouts, but it may be beneficial to include some core work at the end of your sessions both to help your compound lifts and the aesthetic side of things.
 We suggest adding a few core exercises at the end of two of your weekly sessions. If you’re struggling for inspo, why not give the best ab exercises a go.
 
+---
 
 What's The Best Workout Split For Women?
 There’s no major difference between the best workout split for women and the best workout split for men. Contrary to popular belief, research has found that males and females gain muscle mass at almost the same rate, and when it comes to strength gains, men and women gain lower body strength at the same rate, whilst when it comes to upper body strength, women tend to see improvements faster [6, 7]. Although men and women may traditionally strive for different goals, particularly when it comes to aesthetics, workout splits are suitable for both men and women.
 When programming a training split, women may however want to consider the phases of their menstrual cycle and how this impacts their training. During your period, you might be lower on energy and want to opt for lower-intensity exercise. Your follicular phase, however, is the time when you’ll feel strongest. During this phase, you can go big on strength to hit those PBs!
 Find out more about how your menstrual cycle affects your training and how you should exercise according to your cycle.
 
+---
+
 Which Workout Split Is Best For Beginners?
 Generally a 2 or 3 day full body workout split is best for those new to lifting. As a beginner, the muscles don’t need as much stimulus to elicit a response, so hitting each muscle group with one to two exercises, two to three times a week should be enough to see muscle gain. We probably don’t need to tell you, but beginner DOMS are a thing, so upping the session frequency to anything higher than this in the first few months will likely increase the recovery time your muscles need, without speeding up results.
 Using compound exercises in a full-body workout split is an efficient way to work multiple muscles at once and builds the foundation for key movement patterns. Just remember to leave enough time for recovery between sessions (48 hours if possible).
 If you’re serious about your goals or just want to walk into the gym with confidence that you know exactly what you’re doing, then implementing something like a workout split will be a game changer. Choosing the right workout split is the first step, but the hard work starts when you get in the gym. You’ll only get out what you put in so whatever workout split you choose, be consistent and stick with it – we think you’ll be surprised with the results you see.
 
+---
 
 References:
 [1] Schoenfeld, B.J., Grgic, J. and Krieger, J. (2018). How many times per week should a muscle be trained to maximize muscle hypertrophy? A systematic review and meta-analysis of studies examining the effects of resistance training frequency.

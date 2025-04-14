@@ -12,7 +12,7 @@ model = ChatOpenAI(model="gpt-4o-mini")
 
 def get_exercise_video_ai(exercise: str):
 
-    vectorstore = get_chroma_vectorstore(db_name="workout_videos_db", db_data="workout_video_studies")
+    vectorstore = get_chroma_vectorstore(db_name="workout_video_studies_vs", db_data="workout_video_studies")
 
     vs_query = f"{exercise} videos"
     vs_results = vectorstore.similarity_search_with_relevance_scores(query=vs_query, k=1)

@@ -11,7 +11,7 @@ model = ChatOpenAI(model="gpt-4o-mini")
 
 def get_workout_rir_ai(training_experience: str):
 
-    vectorstore = get_chroma_vectorstore(db_name="workout_reps_db", db_data="workout_reps_studies")
+    vectorstore = get_chroma_vectorstore(db_name="workout_reps_studies_vs", db_data="workout_reps_studies")
 
     vs_query = f"How many reps in reserve should a {training_experience} weightlifter do for their exercise sets?"
 

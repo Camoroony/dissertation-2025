@@ -11,7 +11,7 @@ model = ChatOpenAI(model="gpt-4o-mini")
 
 def get_workout_split_ai(training_availability: int):
 
-    vectorstore = get_chroma_vectorstore(db_name="workout_splits_db", db_data="workout_split_studies")
+    vectorstore = get_chroma_vectorstore(db_name="workout_split_studies_vs", db_data="workout_split_studies")
 
     vs_query = f"What {training_availability} day workout splits are there?"
 
@@ -27,7 +27,7 @@ def get_workout_split_ai(training_availability: int):
     ai_query = (
     f"The individual wants to train {training_availability} days per week\n"
     + "Provide a brief 1 to 2 line summary of the individual and their desires, "
-    + f"then suggest the individual the best workout split for {training_availability} sessions a week"
+    + f"then suggest the individual the best workout split for {training_availability} sessions a week and state how many sessions a week it needs to be."
     )
 
     ai_context = (
