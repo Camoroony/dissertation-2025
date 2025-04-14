@@ -1,24 +1,26 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import WorkoutPlanCard from './components/WorkoutPlanCard'
+import { Routes } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import './App.css';
+
+import CreateWorkout from './pages/CreateWorkout';
+import MyWorkouts from './pages/MyWorkouts';
+
+import NavBar from './components/Navbar';
 
 function App() {
 
   return (
-   <>
-   <WorkoutPlanCard workoutplan={{plan_name: "4-day upper/lower split", no_of_sessions: "4", equipment_requirements: "Dumbbells"}}/>
-   </>
+    <div>
+      <NavBar />
+      <main className="main-content">
+        <Routes>
+          <Route path="/createworkout" element={<CreateWorkout />} />
+          <Route path="/myworkouts" element={<MyWorkouts />} />
+        </Routes>
+      </main>
+    </div>
   );
 }
 
-function Text({display}) {
-  return (
-  <div>
-    <p>{display}</p>
-  </div>
-  );
-}
 
 export default App
