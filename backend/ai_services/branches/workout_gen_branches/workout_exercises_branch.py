@@ -20,7 +20,7 @@ def get_workout_exercises_ai(available_equipment: str):
 
   sources = equipment_context_response["sources"]
 
-  content = "\n\n".join(f"**{muscle} Exercises:**\n{exercises}" for muscle, exercises in equipment_context_response["ai_response"].items())
+  content = "\n\n".join(f"**{muscle} Exercises:**\n{exercises}" for muscle, exercises in equipment_context_response['ai_response'].items())
 
   ai_showcase_content = (
     f"Equipment the indvidual has access to: {available_equipment}\n\n"

@@ -53,7 +53,7 @@ def get_chroma_vectorstore(db_name: str, db_data: str):
         # Debug the chunks
         for i, chunk in enumerate(doc_chunks): 
             if doc_source != "N/A":
-             chunk.metadata["full_source"] = f"[Title: {doc_source["title"]}, Author: {doc_source["author"]}, URL: {doc_source["url"]}]"
+             chunk.metadata["full_source"] = f"[Title: {doc_source['title']}, Author: {doc_source['author']}, URL: {doc_source['url']}]"
             else: chunk.metadata["full_source"] = "N/A"
             # print(f"\nChunk {i+1}:\n\n{chunk}\n\n{chunk.metadata["url"]}\n\n{'='*40}")  
 

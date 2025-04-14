@@ -70,7 +70,7 @@ def generate_generic_chat(user_prompt: str, chat_history):
 def generate_community_chat(user_prompt: str, chat_history, workout_plans_info):
 
     workout_plans_text = "\n\n".join(
-    f"Workout Plan {wp["id"]}:\n\n{wp}\n\n{'=' * 40}" for wp in workout_plans_info
+    f"Workout Plan {wp['id']}:\n\n{wp}\n\n{'=' * 40}" for wp in workout_plans_info
     )
 
     ai_context = (
