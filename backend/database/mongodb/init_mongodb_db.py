@@ -10,6 +10,6 @@ def get_mongodb_client():
 
   client = MongoClient(MONGODB_URL)
 
-  db = client['hypertrophy_edu_db']
+  db = client['hypertrophy_edu_mongodb']
 
   return db
