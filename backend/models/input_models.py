@@ -12,20 +12,15 @@ class UserInput(UserBase):
 
 # Workout Plan Input Type Validators
 
-EXPERIENCE_LEVELS = {"Beginner (0 - 2 years of experience)", "Intermediate (2 - 5 years of experience)", "Advanced (5+ years of exeprience)"}
+EXPERIENCE_LEVELS = {"Beginner (less than 12 months of consistent, proper training experience)",
+                      "Intermediate (1 to 4 years of consistent, proper training experience)",
+                        "Advanced (more than 4 years of consistent, proper training experience)"}
 AVAILABILITY_DAYS = range(1, 6)
 SESSION_LENGTH = range(10, 90)
 TRAINING_FOCUS = {"Full-Body", "Upper-Body", "Lower-Body", "Arms", "Shoulders", "Chest", "Back"}
 AVAILABLE_EQUIPMENT = {
-    "Dumbbells", "Barbell",
-    "Squat Rack", "Power Rack", "Smith Machine", "Leg Press Machine", 
-    "Cable Machine", "Chest Press Machine", "Lat Pulldown Machine", 
-    "Seated Row Machine", "Hack Squat Machine", "Leg Extension Machine", 
-    "Leg Curl Machine", "Incline Bench", "Flat Bench", "Decline Bench", 
-    "Preacher Curl Bench", "Dip Bar", "Pull-Up Bar", 
-    "Smith Machine", "Barbell Plate", "Bicep Curl Machine", 
-    "Triceps Pushdown Machine", "Seated Calf Raise Machine", 
-    "Lateral Raise Machine", "Glute Bridge Machine", "Abdominal Crunch Machine"
+    "Full gym access",
+    "Dumbbells", "Bodyweight"
 }
 
 # Workout Plan Input Model
@@ -75,6 +70,11 @@ class WorkoutGenInput(BaseModel):
         return values
 
 
+# Rating Input Models
+
+class RatingInput(BaseModel):
+    rating: bool
+    comment: str
 
 
         

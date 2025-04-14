@@ -1,55 +1,42 @@
-from langchain_openai import ChatOpenAI
-from langchain.prompts import ChatPromptTemplate
-from langchain.schema.output_parser import StrOutputParser
+from langchain.schema.runnable import RunnableParallel, RunnableLambda
 from models.input_models import WorkoutGenInput
-from models.ai_models import WORKOUT_PLAN_SCHEMA
-from dotenv import load_dotenv
-import os 
+from ai_services.branches.workout_gen_branches.workout_split_branch import get_workout_split_ai
+from ai_services.branches.workout_gen_branches.workout_exercises_branch import get_workout_exercises_ai
+from ai_services.branches.workout_gen_branches.workout_sets_branch import get_workout_sets_ai
+from ai_services.branches.workout_gen_branches.workout_reps_branch import get_workout_rir_ai
+from ai_services.branches.workout_gen_branches.build_workout_plan_branch import build_workout_plan_ai
 
-load_dotenv()
-
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-
-model = ChatOpenAI(model="gpt-3.5-turbo", api_key=OPENAI_API_KEY)
 
 def generate_workout_plan(workout_input: WorkoutGenInput):
 
-    # Create a prompt template
-    prompt_template = ChatPromptTemplate.from_messages([
-
-        ("system", "You are a workout generator who generates workout plans following this schema:\n" + "{WORKOUT_PLAN_SCHEMA}\n"),
-
-
-        ("human", "Generate me a hypertrophy workout plan for an individual with the following details:\n"
-                  "- Experience Level: {experience_level}\n"
-                  "- Training Availability: {training_availability} days per week\n"
-                  "- Session Length: {session_length} minutes per session\n"
-                  "- Training Focus: {training_focus}\n"
-                  "- Available Equipment: {available_equipment}\n"
-                  "- Additional Info: {additional_info}")
-    ])
-
-   
-    formatted_input = {
-        "WORKOUT_PLAN_SCHEMA": WORKOUT_PLAN_SCHEMA,
-        "experience_level": workout_input.experience_level,
-        "training_availability": workout_input.training_availability,
-        "session_length": workout_input.session_length,
-        "training_focus": workout_input.training_focus,
-        "available_equipment": ", ".join(workout_input.available_equipment) if workout_input.available_equipment else "None",
-        "additional_info": workout_input.additional_info if workout_input.additional_info else "None"
-    }
-
-    final_prompt = prompt_template.format(**formatted_input)
-
+    workout_split_runnable = RunnableLambda(
+        lambda _: get_workout_split_ai(workout_input.training_availability))
     
-    chain = prompt_template | model | StrOutputParser()
+    workout_exercises_runnable = RunnableLambda(
+        lambda _: get_workout_exercises_ai(workout_input.available_equipment)
+    )
 
-    
-    response = chain.invoke(formatted_input)
+    workout_sets_runnable = RunnableLambda(
+        lambda _: get_workout_sets_ai(workout_input.experience_level, workout_input.training_focus)
+    )
 
-    return {
-        "context": final_prompt,
-        "response": response
-    }
+    workout_reps_runnable = RunnableLambda(
+        lambda _: get_workout_rir_ai(workout_input.experience_level)
+    )
+
+
+    context_chain = RunnableParallel(
+        training_availability_context = workout_split_runnable,
+        training_equipment_context = workout_exercises_runnable,
+        training_experience_context = workout_sets_runnable,
+        training_reps_context = workout_reps_runnable
+    )
+
+    final_generation = RunnableLambda(lambda x: build_workout_plan_ai(workout_input, x))
+
+    final_chain = context_chain | final_generation
+
+    result = final_chain.invoke({})
+
+    return result
 

@@ -8,25 +8,31 @@ db = get_mongodb_client()
 chat_history_collection = db['chat_histories']
 
 
-def create_chat_history(user_id: int, workout_plan_id=None):
+def create_chat_history(user_id: int, chat_type: str = "general",  workout_plan_id=None):
+    if chat_type not in {"general", "community", "workout"}:
+       raise ValueError("Invalid chat type. Must be 'general', 'community', or 'workout'.")
+
 
     chat_history_document = {
         "user_id": user_id,
+        "chat_type": chat_type,
         "chat_start_time": datetime.datetime.now(datetime.UTC),
         "chats": []
     }
 
-    if workout_plan_id is not None:
-        chat_history_document['workout_plan_id'] = workout_plan_id
+    if chat_type == "workout" and workout_plan_id is not None:
+        chat_history_document["workout_plan_id"] = workout_plan_id
+
 
     result = chat_history_collection.insert_one(chat_history_document)
+    new_chat_history = chat_history_collection.find_one({"_id": result.inserted_id})
 
-    return result.inserted_id
+    return new_chat_history
 
 
-def add_chat_history(user_id: int, user_message: str, ai_message: str, chat_history_id=None, workout_plan_id=None):
+def add_chat_history(chat_history_id: str, user_message: str, ai_message: str):
     if chat_history_id is None:
-        chat_history_id = create_chat_history(user_id, workout_plan_id)
+      raise ValueError("chat_history_id is null. Must be provided.")
     
     chat_message = {
         "chat_message_id": str(ObjectId()),
@@ -36,45 +42,51 @@ def add_chat_history(user_id: int, user_message: str, ai_message: str, chat_hist
     }
 
     result = chat_history_collection.update_one(
-        {"_id": ObjectId(chat_history_id)},
-        {"$push": {"chats": chat_message}}
-    )
+    {"_id": ObjectId(chat_history_id)},
+    {
+        "$push": {
+            "chats": {
+                "$each": [chat_message],
+                "$slice": -10
+            }
+        }
+    }
+)
         
     return f"Chat message (Id: {result}) added to chat history (Id: {chat_history_id}) "
+
 
 def get_chat_history(chat_history_id: str):
 
     chat_history = chat_history_collection.find_one(
         {"_id": ObjectId(chat_history_id)},
-        {"_id": 0, "chats": 1} 
     )
 
     if not chat_history:
         return {"error": "Chat history not found"}
-    
-    messages = []
 
-    for chat in chat_history["chats"]:
-        messages.append(f"User: {chat['user_message']}")
-        messages.append(f"Response: {chat['ai_message']}")
+    return chat_history
 
-    return messages
 
 def get_chat_histories_by_userid(user_id: int):
 
     chat_histories = chat_history_collection.find({"user_id": user_id})
 
     generic_chats = []
+    community_chats = []
     workout_chats = []
 
     for chat_history in chat_histories:
-     if "workout_plan_id" in chat_history:
+     if chat_history["chat_type"] == "workout":
         workout_chats.append(chat_history)
+     elif chat_history["chat_type"] == "community": 
+        community_chats.append(chat_history)
      else:
         generic_chats.append(chat_history) 
 
     chats = {
         "generic_chats": generic_chats,
+        "community_chats": community_chats,
         "workout_chats": workout_chats
     }
 

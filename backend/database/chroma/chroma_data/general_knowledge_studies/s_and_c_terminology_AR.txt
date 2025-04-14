@@ -1,0 +1,64 @@
+Strength and Conditioning Terminology
+Date
+July 21, 2022 Posted By
+Abobakr Ravand 
+
+
+The terms resistance exercise and resistance training are often used interchangeably; however, there is an important distinction between the two terms. Resistance exercise refers to a single exercise session, whereas resistance training refers to the combination of many consecutive resistance exercise sessions over time. Thus, a resistance exercise protocol is an exercise prescription for a single session (most commonly called a “workout”) and a resistance training program is an overall plan guiding
+
+
+When weight is being lifted, the major muscles involved are shortening, or performing a concentric muscle action. During a concentric muscle action, force is developed and shortening of the muscle occurs; therefore, the word contraction is also appropriate for this type of muscle action.
+
+
+When weight is being lowered in a controlled manner, the primary muscles involved are developing force and lengthening in a controlled manner; this is termed an eccentric muscle action. Muscles can only shorten or lengthen in a controlled manner; they cannot push against the bones to which they are attached. In most exercises, gravity pulls the weight back to the starting position. To control the weight as it returns to the starting position, the muscles must lengthen in a controlled manner; otherwise, the weight will fall abruptly.
+
+
+When a muscle is activated and develops force, but no visible movement at the joint occurs, an isometric muscle action takes place. This can occur when a weight is held stationary or when a weight is too heavy to lift any farther. Maximal isometric action force is greater than the maximal concentric force at any velocity of movement but less than the maximal eccentric force at any movement velocity.
+
+
+A repetition is one complete motion of an exercise. It normally consists of two phases: the concentric muscle action, or lifting of the resistance, and the eccentric muscle action, or lowering of the resistance.
+
+
+A set is a group of repetitions performed continuously without stopping or resting. Although a set can consist of any number of repetitions, sets typically range from 1 to 15 repetitions.
+
+
+A repetition maximum, or RM, is the maximal number of repetitions per set that can be performed in succession with a proper lifting technique using a given resistance. The heaviest resistance that can be used for one complete repetition of an exercise is called 1RM. A lighter resistance that allows completion of 10, but not 11, repetitions with proper exercise technique is called 10RM.
+
+
+A repetition training zone is a range of typically three repetitions. When performing the repetitions in a repetition training zone, the resistance used can allow the person to perform the desired number of repetitions with relative ease or can result in momentary voluntary failure.
+
+
+If the resistance used results in momentary voluntary failure, the repetition training zone is termed an RM training zone. However, using an RM training zone does not necessarily result in a set to failure. For example, using an 8- to 10RM training zone for 8 repetitions is not training to failure; performing 10 repetitions may bring the person close to failure.
+
+
+Strength is the ability to apply force to either overcome resistance to movement or resist unwanted movement.
+
+
+Maximal strength (MS), also called absolute strength, is the ability to generate maximum force without a time constraint voluntarily.
+
+
+Relative strength (RS) is the ability to apply high force relative to the athlete’s body mass.
+A bigger person will tend to be stronger overall (absolute strength) but smaller people often express greater amounts of strength relative to their own body weight. In the same example, the person squatting 200 kg, might be 200 kg themselves, so basically, 1 kg is lifted per kg of the person’s body weight.If the 150 kg squatter, is only 100 kg, then 1.5kg per kg of body weight is lifted. The 150 kg could have more relative strength and effectively he is stronger than the first one.
+
+
+Power (P) is the rate of performing work, the ability to apply force with speed (force × velocity).
+
+
+Maximum power (Pmax) is the maximal power attained during the entire concentric range of movement.
+
+
+Peak power is the highest power episode of force × velocity, typically for only a few milliseconds.
+
+
+Explosive strength (ES) is a subquality of power but is best differentiated as the ability to overcome heavy resistance with speed. (Power is overcoming any resistance with speed, particularly medium to lighter resistances.)
+
+
+Speed strength is a subquality of power but is best differentiated as the ability to rapidly apply lower levels of force.
+
+
+Reactive strength is the ability of the musculotendinous unit to produce a powerful concentric contraction after a rapid eccentric contraction. Reactive-strength training is commonly referred to as “plyometrics.” Originally termed the “shock” method in Russia, plyometrics is a method of jump training that involves an eccentric shock stimulation to the musculotendinous unit (ie, depth jumps, drop jumps).
+
+
+Strength endurance (SE) is the ability to apply levels of force for a prolonged period without decay. Or refers to the number of repetitions an individual can do with a fixed weight or a fixed % of 1RM.
+
+
