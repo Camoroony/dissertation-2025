@@ -1,6 +1,6 @@
 import { Routes } from 'react-router-dom';
 import { Route } from 'react-router-dom';
-import './App.css';
+import './css/App.css';
 
 import CreateWorkout from './pages/CreateWorkout';
 import MyWorkouts from './pages/MyWorkouts';
