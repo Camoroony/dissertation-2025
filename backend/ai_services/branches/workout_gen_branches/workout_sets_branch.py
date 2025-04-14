@@ -26,7 +26,7 @@ def get_workout_sets_ai(training_experience: str, training_focus: str):
     chain_response = full_chain.invoke({})
 
     final_response = (f"The individual is a {training_experience} weightlifter and is looking to prioritise {training_focus} in their workout plan.\n"
-    + f"YOU MUST DESIGN THE WORKOUT PLAN TO CONTAIN THE FOLLOWING AMOUNT OF SETS PER MUSCLE GROUP: {chain_response["ai_response"]}")
+    + f"YOU MUST DESIGN THE WORKOUT PLAN TO CONTAIN THE FOLLOWING AMOUNT OF SETS PER MUSCLE GROUP: {chain_response['ai_response']}")
 
     return {
        "ai_response": final_response,
@@ -111,7 +111,7 @@ def get_workout_focus_sets(experience_response: dict, training_focus: str):
     f"The individual is looking to put more focus on growing their {training_focus} in their workout plan."
     + f"\nUsing the provided documents for your reasoning, reorganise the current sets for the workout plan to put more emphasis on the muscle the individual desires to prioritise."
     + "\nDO NOT ADD OR DELETE ANY SETS FROM THE TOTAL SET COUNT OF THE PLAN, YOU ARE ONLY REORGANISING THE SETS BASED ON THE DESIRED FOCUS FROM THE INDIVIDUAL."
-    + f"\nThis is the current plan for you to alter based on the users focus desire:\n {experience_response["ai_response"]}"
+    + f"\nThis is the current plan for you to alter based on the users focus desire:\n {experience_response['ai_response']}"
     )
 
     ai_context = (
