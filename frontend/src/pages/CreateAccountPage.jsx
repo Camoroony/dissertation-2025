@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 function CreateAccountPage() {
     return (
     <>
@@ -25,7 +27,7 @@ function CreateAccountPage() {
             </form>
             <div className="text-center">
                 <p>Already have an account?</p>
-                <a href="">Login</a>
+                <Link to='/login' className='text-[#1FA562] hover:underline'>Login</Link>
             </div>
         </div>
     </div>

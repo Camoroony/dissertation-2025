@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 function LoginPage() {
     return (
         <>
@@ -5,7 +7,7 @@ function LoginPage() {
         <h1 className="text-6xl font-bold mb-1">Welcome to</h1>
         <h1 className="text-6xl text-[#2A955F] font-bold mb-15">Hypertrophy Education!</h1>
         <p className="text-lg">Login below if you have an account.</p>
-        <p className="text-lg">If you don’t, create an account <span className="text-[#1FA562]">here!</span></p>
+        <p className="text-lg">If you don’t, create an account <Link to='/createaccount'className="text-[#1FA562] hover:underline">here!</Link></p>
         </div>
     
     
