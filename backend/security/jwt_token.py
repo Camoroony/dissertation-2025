@@ -17,6 +17,9 @@ def create_access_token(data: dict):
      to_encode["sub"] = str(to_encode["sub"])
 
     encoded_jwt = jwt.encode(to_encode, JWT_KEY, algorithm="HS256")
+
+    print(f"Created Token: {encoded_jwt}")
+
     return encoded_jwt
 
 def verify_token(request: Request, db: Session = Depends(get_db_session)) -> UserSQL:
@@ -26,9 +29,6 @@ def verify_token(request: Request, db: Session = Depends(get_db_session)) -> Use
         raise HTTPException(status_code=401, detail="Authorization header is missing.")
     
     parts = authorization.split()
-
-    print(parts[0].lower())
-    print(len(parts))
     
     if len(parts) != 2 or parts[0].lower() != 'bearer':
         raise HTTPException(status_code=401, detail="Invalid token format.") # WTF !!!!!!!!!!!
