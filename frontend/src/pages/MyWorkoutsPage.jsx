@@ -1,6 +1,6 @@
 import WorkoutPlanCard from "../components/WorkoutPlanCard"
 
-function MyWorkouts() {
+function MyWorkoutsPage() {
 
     const workoutplans = [
         {id: 1, plan_name: "4-day Upper/Lower Split", no_of_sessions: 4, equipment_requirements: "Dumbbells"},
@@ -18,4 +18,4 @@ function MyWorkouts() {
 
 }
 
-export default MyWorkouts
+export default MyWorkoutsPage
