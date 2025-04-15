@@ -22,8 +22,8 @@ function App() {
       <NavBar />
       <main className="main-content">
         <Routes>
-          {/* <Route path="/createworkout" element={<CreateWorkoutPage/>} />
-          <Route path="/myworkouts" element={<MyWorkoutsPage/>} /> */}
+          <Route path="/createworkout" element={<CreateWorkoutPage/>}/>
+          {/* {<Route path="/myworkouts" element={<MyWorkoutsPage/>} />} */}
           {/* <Route path="/chatbot" element={<ChatbotPage/>} /> */}
           <Route path="/login" element={<LoginPage/>} />
           {/* <Route path="/manageaccount" element={<ManageAccountPage/>} /> */}

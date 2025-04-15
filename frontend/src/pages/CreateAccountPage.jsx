@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom'
-import React, {useState} from 'react'
+import {useState} from 'react'
 import { createAccount } from '../services/accountapi'
 
 function CreateAccountPage() {
@@ -30,7 +30,7 @@ function CreateAccountPage() {
         } catch(err) {
             console.log(err)
             if (err.message) {
-                setErrorMessage(`Error occured when creating account: ${err.message}` || 'An error occurred, please try again.')
+                setErrorMessage(`Error occured when creating account:\n ${err.message}` || 'An error occurred, please try again.')
                 setTimeout(() => setErrorMessage(''), 4000);
             } else {
                 setErrorMessage('An unknown error occurred, please try again.')

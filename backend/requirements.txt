@@ -10,3 +10,5 @@ unstructured
 python-dotenv
 pymongo
 chromadb
+pyjwt
+passlib
