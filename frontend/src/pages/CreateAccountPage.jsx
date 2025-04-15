@@ -10,6 +10,7 @@ function CreateAccountPage() {
             plain_password: ''
     })
 
+    const [errorMessage, setErrorMessage] = useState('')
     const navigate = useNavigate()
 
     const handleChanges = (e) => {
@@ -28,17 +29,32 @@ function CreateAccountPage() {
             }
         } catch(err) {
             console.log(err)
+            if (err.message) {
+                setErrorMessage(`Error occured when creating account: ${err.message}` || 'An error occurred, please try again.')
+                setTimeout(() => setErrorMessage(''), 4000);
+            } else {
+                setErrorMessage('An unknown error occurred, please try again.')
+                setTimeout(() => setErrorMessage(''), 4000);
+            }
         }
 
     }
     
     return (
     <>
+
+<div className="relative">
+    {errorMessage && (
+                <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded shadow-lg transition-opacity duration-300">
+                {errorMessage}
+            </div>
+            )}
+         </div>
+
     <div className="flex flex-col justify-center items-center mt-20">
     <h1 className="text-6xl font-bold mb-15">Create a <span className="text-[#2A955F]">new account!</span></h1>
     <p className="text-lg">Enter your details below to create an account!</p>
     </div>
-
 
     <div className="flex justify-center items-center mt-25">
         <div className="shadow-lg px-8 py-5 border w-96">

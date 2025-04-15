@@ -16,8 +16,10 @@ export const createAccount = async (userinput) => {
       } catch (error) {
         if (error.response) {
           console.error('Error:', error.response.data.detail);
+          throw new Error(error.response.data.detail || 'An error occurred while creating the account');
         } else {
           console.error('Network or server error:', error.message);
+          throw new Error('Network or server error');
         }
       }
 }
