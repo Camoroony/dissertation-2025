@@ -43,3 +43,19 @@ export const loginToAccount = async (userinput) => {
       }
     }
 }
+
+export const verifyToken = async (token) => {
+  try {
+      const response = await axios.get(`${base_url}/verify-token`, {
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
+      });
+
+      console.log('User verified:', response.data);
+      return response;
+    } catch (error) {
+        console.error('Error:', error.response.data.detail);
+        throw new Error(error.response.data.detail || 'An unknown error occurred when verifiying the user JWT token');
+      }
+    }
