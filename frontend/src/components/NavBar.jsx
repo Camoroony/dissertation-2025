@@ -4,10 +4,9 @@ import "../css/Navbar.css"
 function NavBar () {
     return <nav className="navbar">
         <div className="navbar-logo">
-            <Link to ="/">
-            Hypertrophy <b>Education</b>
-            </Link>
+        <p>Hypertrophy <b>Education</b></p>
         </div>
+        
         <div className="navbar-links">
             <Link to="/createworkout" className="navbar-link"> Create Workout</Link>
             <Link to="/myworkouts" className="navbar-link"> My Workouts</Link>
