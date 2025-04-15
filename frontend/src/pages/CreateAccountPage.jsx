@@ -43,13 +43,13 @@ function CreateAccountPage() {
     return (
     <>
 
-<div className="relative">
-    {errorMessage && (
+     <div className="relative">
+            {errorMessage && (
                 <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded shadow-lg transition-opacity duration-300">
                 {errorMessage}
             </div>
             )}
-         </div>
+     </div>
 
     <div className="flex flex-col justify-center items-center mt-20">
     <h1 className="text-6xl font-bold mb-15">Create a <span className="text-[#2A955F]">new account!</span></h1>
@@ -67,7 +67,7 @@ function CreateAccountPage() {
                 </div>
                 <div className="mb-6">
                     <label htmlFor="password" className="block text-gray-700">Password</label>
-                    <input type="text" placeholder="Enter Password" className="w-full px-3 py-2 border rounded" name='plain_password'
+                    <input type="password" placeholder="Enter Password" className="w-full px-3 py-2 border rounded" name='plain_password'
                     onChange={handleChanges}/>
                 </div>
                 <div className="mb-5">
