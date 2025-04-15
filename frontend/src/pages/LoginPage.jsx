@@ -25,6 +25,7 @@ function LoginPage() {
             const response = await loginToAccount(values)
             console.log(response)
             if(response.status === 201){
+                localStorage.setItem('token', response.data.access_token)
                 navigate('/createworkout', {
                     state: { successMessage: 'You have successfully logged in!' }
                 });
