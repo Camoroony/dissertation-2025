@@ -13,11 +13,11 @@ router = APIRouter(
 def index() :
     return Response ("Hello from the users router!")
 
-@router.post("/create-user", response_model=UserSQL)
+@router.post("/create-user", response_model=UserSQL, status_code=201)
 def create_user(user_data: UserInput, db: Session = Depends(get_db_session)) :
     existing_user = db.exec(select(UserSQL).where(UserSQL.username == user_data.username)).first()
     if existing_user:
-        raise HTTPException(status_code=400, detail="Username already exists")
+        raise HTTPException(status_code=400, detail="User already exists")
     
     new_user = UserSQL(username=user_data.username, hashed_password=hash_password(user_data.plain_password))
 

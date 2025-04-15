@@ -12,7 +12,7 @@ export const createAccount = async (userinput) => {
         });
     
         console.log('User created:', response.data);
-        return response.data;
+        return response;
       } catch (error) {
         if (error.response) {
           console.error('Error:', error.response.data.detail);

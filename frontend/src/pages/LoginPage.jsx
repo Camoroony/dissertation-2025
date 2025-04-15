@@ -1,8 +1,33 @@
-import { Link } from "react-router-dom"
+import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 function LoginPage() {
+
+    const location = useLocation();
+    const [toast, setToast] = useState('');
+
+    useEffect(() => {
+        if (location.state?.successMessage) {
+            setToast(location.state.successMessage);
+            setTimeout(() => setToast(''), 4000);
+        }
+    }, [location.state]);
+
+
+
+
     return (
         <>
+        <div className="relative">
+        {toast && (
+         <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-green-100 border border-green-400 text-green-700 px-4 py-2 rounded shadow-lg transition-opacity duration-300">
+                {toast}
+        </div>
+            )}
+        </div>   
+
+
         <div className="flex flex-col justify-center items-center mt-20">
         <h1 className="text-6xl font-bold mb-1">Welcome to</h1>
         <h1 className="text-6xl text-[#2A955F] font-bold mb-15">Hypertrophy Education!</h1>

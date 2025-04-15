@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import React, {useState} from 'react'
 import { createAccount } from '../services/accountapi'
 
@@ -10,6 +10,8 @@ function CreateAccountPage() {
             plain_password: ''
     })
 
+    const navigate = useNavigate()
+
     const handleChanges = (e) => {
             setValues({...values, [e.target.name]:e.target.value})
     }
@@ -19,6 +21,11 @@ function CreateAccountPage() {
         try {
             const response = await createAccount(values)
             console.log(response)
+            if(response.status === 201){
+                navigate('/login', {
+                    state: { successMessage: 'Account created successfully! Please log in.' }
+                });
+            }
         } catch(err) {
             console.log(err)
         }
