@@ -20,7 +20,7 @@ function CreateAccountPage() {
                     <input type="text" placeholder="Enter Password" className="w-full px-3 py-2 border rounded"/>
                 </div>
                 <div className="mb-5">
-                <button className="w-full bg-black text-white py-2 rounded">Create Account</button>
+                <button className="w-full bg-black text-white py-2 rounded cursor-pointer">Create Account</button>
                 </div>
             </form>
             <div className="text-center">
