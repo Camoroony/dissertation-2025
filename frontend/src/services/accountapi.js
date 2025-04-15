@@ -31,7 +31,7 @@ export const loginToAccount = async (userinput) => {
         plain_password: userinput.plain_password,
       });
   
-      console.log('User created:', response.data);
+      console.log('User logged in, JWT token retrieved:', response.data);
       return response;
     } catch (error) {
       if (error.response) {

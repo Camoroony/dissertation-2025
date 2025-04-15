@@ -16,7 +16,7 @@ router = APIRouter(
 
 SECRET_KEY = "secret_key" 
 
-def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
+def create_access_token(data: dict):
     to_encode = data.copy()
     expire = datetime.now(timezone.utc) + timedelta(minutes=180)
     to_encode.update({"exp": expire})
@@ -53,10 +53,8 @@ def create_user(user_data: UserInput, db: Session = Depends(get_db_session)) :
      if not isMatch:
          raise HTTPException(status_code=400, detail="Incorrect password.")
     
-     access_token_expires = timedelta(minutes=180)
      access_token = create_access_token(
-         data={"sub": existing_user.id},
-         expires_delta=access_token_expires
+         data={"sub": existing_user.id}
      )
      return {"access_token": access_token, "token_type": "bearer"}
     
