@@ -1,6 +1,30 @@
-import { Link } from "react-router-dom"
+import { Link } from 'react-router-dom'
+import React, {useState} from 'react'
+import { createAccount } from '../services/accountapi'
 
 function CreateAccountPage() {
+    
+
+    const [values, setValues] = useState({
+            username: '',
+            plain_password: ''
+    })
+
+    const handleChanges = (e) => {
+            setValues({...values, [e.target.name]:e.target.value})
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        try {
+            const response = await createAccount(values)
+            console.log(response)
+        } catch(err) {
+            console.log(err)
+        }
+
+    }
+    
     return (
     <>
     <div className="flex flex-col justify-center items-center mt-20">
@@ -12,14 +36,16 @@ function CreateAccountPage() {
     <div className="flex justify-center items-center mt-25">
         <div className="shadow-lg px-8 py-5 border w-96">
             <h2 className="text-lg font-bold mb-4">Create an account</h2>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div className="mb-5">
                     <label htmlFor="username" className="block text-gray-700">Username</label>
-                    <input type="text" placeholder="Enter Username" className="w-full px-3 py-2 border rounded"/>
+                    <input type="text" placeholder="Enter Username" className="w-full px-3 py-2 border rounded" name='username'
+                    onChange={handleChanges}/>
                 </div>
                 <div className="mb-6">
                     <label htmlFor="password" className="block text-gray-700">Password</label>
-                    <input type="text" placeholder="Enter Password" className="w-full px-3 py-2 border rounded"/>
+                    <input type="text" placeholder="Enter Password" className="w-full px-3 py-2 border rounded" name='plain_password'
+                    onChange={handleChanges}/>
                 </div>
                 <div className="mb-5">
                 <button className="w-full bg-black text-white py-2 rounded cursor-pointer">Create Account</button>

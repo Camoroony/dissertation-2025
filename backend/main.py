@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Response
+from fastapi.middleware.cors import CORSMiddleware
 from routers.users_router import router as users_router
 from routers.workouts_router import router as workouts_router
 from routers.chatbot_router import router as chatbot_router
@@ -8,6 +9,14 @@ from database.mongodb.references_db import references_init
 from database.chroma.init_chroma_db import init_vectorstores
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"], 
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"], 
+)
 
 app.include_router(users_router)
 app.include_router(workouts_router)
