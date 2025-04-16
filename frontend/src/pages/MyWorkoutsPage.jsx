@@ -1,4 +1,4 @@
-import WorkoutPlanCard from "../components/WorkoutPlanCard"
+import WorkoutPlanCard from "../components/ui/WorkoutPlanCard"
 
 function MyWorkoutsPage() {
 
