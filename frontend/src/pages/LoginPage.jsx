@@ -2,8 +2,11 @@ import { Link } from 'react-router-dom';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import {loginToAccount} from '../services/accountapi'
+import { useAuth } from '../context/AuthContext';
 
 function LoginPage() {
+
+    const { login } = useAuth()
 
     const [values, setValues] = useState({
         username: '',
@@ -25,7 +28,7 @@ function LoginPage() {
             const response = await loginToAccount(values)
             console.log(response)
             if(response.status === 201){
-                localStorage.setItem('token', response.data.access_token)
+                login(response.data.access_token)
                 navigate('/createworkout', {
                     state: { successMessage: 'You have successfully logged in!' }
                 });

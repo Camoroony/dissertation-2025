@@ -31,7 +31,7 @@ def verify_token(request: Request, db: Session = Depends(get_db_session)) -> Use
     parts = authorization.split()
     
     if len(parts) != 2 or parts[0].lower() != 'bearer':
-        raise HTTPException(status_code=401, detail="Invalid token format.") # WTF !!!!!!!!!!!
+        raise HTTPException(status_code=401, detail="Invalid token format.") # This wasn't working but now is despite no code changing, keep an eye on it
     
     token = parts[1]
     

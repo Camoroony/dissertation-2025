@@ -16,7 +16,7 @@ router = APIRouter(
 
 @router.get("/verify-token", response_model=UserSQL)
 def verify_token_endpoint(user: UserSQL = Depends(verify_token)):
-    return {"message": "Token is valid", "user": user}
+    return user
 
 
 @router.get("")

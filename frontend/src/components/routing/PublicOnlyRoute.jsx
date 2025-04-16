@@ -1,30 +1,15 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { verifyToken } from '../../services/accountapi';
+// src/components/PublicRoute.jsx
+import { Navigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 
-function PublicOnlyRoute({ element: Component }) {
-  const [checked, setChecked] = useState(false);
-  const navigate = useNavigate();
+const PublicOnlyRoute = ({ children }) => {
+  const { isAuthenticated } = useAuth();
 
-  useEffect(() => {
-    const checkToken = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        if (token) {
-          await verifyToken(token);
-          navigate('/createworkout');
-          return;
-        }
-      } catch {
-        // Do nothing, show page
-      }
-      setChecked(true);
-    };
+  if (isAuthenticated) {
+    return <Navigate to="/createworkout" replace />;
+  }
 
-    checkToken();
-  }, [navigate]);
-
-  return checked ? <Component /> : null;
-}
+  return children;
+};
 
 export default PublicOnlyRoute;
