@@ -18,9 +18,9 @@ function CreateAccountPage() {
     }
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
         try {
-            const response = await createAccount(values)
+            const response = await createAccount(values);
             console.log(response)
             if(response.status === 201){
                 navigate('/login', {

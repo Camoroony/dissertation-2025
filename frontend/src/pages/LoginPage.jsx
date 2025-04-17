@@ -1,37 +1,35 @@
 import { Link } from 'react-router-dom';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import {loginToAccount} from '../services/accountapi'
+import { loginToAccount } from '../services/accountapi'
 import { useAuth } from '../context/AuthContext';
 
 function LoginPage() {
 
-    const { login } = useAuth()
+    const { login } = useAuth();
 
     const [values, setValues] = useState({
         username: '',
         plain_password: ''
-    })
+    });
 
     const location = useLocation();
     const [successMsg, setSuccessMessage] = useState('');
-    const [errorMessage, setErrorMessage] = useState('')
-    const navigate = useNavigate()
+    const [errorMessage, setErrorMessage] = useState('');
+    const navigate = useNavigate();
 
     const handleChanges = (e) => {
             setValues({...values, [e.target.name]:e.target.value})
     }
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
         try {
-            const response = await loginToAccount(values)
+            const response = await loginToAccount(values);
             console.log(response)
-            if(response.status === 201){
-                login(response.data.access_token)
-                navigate('/createworkout', {
-                    state: { successMessage: 'You have successfully logged in!' }
-                });
+            if(response.status === 200){
+                login(response.data.access_token);
+                navigate('/createworkout');
             }
         } catch(err) {
             console.log(err)
@@ -44,7 +42,7 @@ function LoginPage() {
             }
         }
 
-    }
+    };
 
     useEffect(() => {
         if (location.state?.successMessage) {

@@ -1,7 +1,9 @@
 from fastapi import APIRouter, Response, Depends, HTTPException
 from sqlmodel import Session
 from models.input_models import WorkoutGenInput
+from models.db_models import UserSQL
 from models.utilities.sql_seralising import serialise_workout_plan, serialise_workout_session, serialise_exercise
+from security.jwt_token import verify_token
 from database.sql.init_sql_db import get_db_session
 from database.sql.workout_plan_db import add_workout_plan, delete_workout_plan, get_workout_plan
 from database.sql.workout_session_db import get_workout_session
@@ -20,11 +22,11 @@ def index() :
 
 
 @router.post("/create-workout-plan")
-def create_workout(workout_input: WorkoutGenInput, user_id: int, db: Session = Depends(get_db_session)) :
+def create_workout(workout_input: WorkoutGenInput, user: UserSQL = Depends(verify_token), db: Session = Depends(get_db_session)) :
 
     ai_response_data = generate_workout_plan(workout_input)
 
-    add_result_sql = add_workout_plan(ai_response_data["response"], user_id, db)
+    add_result_sql = add_workout_plan(ai_response_data["response"], user.id, db)
 
     add_result_mongodb = add_workout_context(add_result_sql.id, ai_response_data["context"], list(ai_response_data["sources_used"]))
 
@@ -32,7 +34,7 @@ def create_workout(workout_input: WorkoutGenInput, user_id: int, db: Session = D
         f"Created workout plan Id: {add_result_sql.id} for user: {add_result_sql.user_id}\n"
         f"Workout context added, Id: {add_result_mongodb['inserted_id']}\n"
         f"Sources analysed during plan creation: {ai_response_data['sources_used']}",
-        status_code=200
+        status_code=201
     )
 
 

@@ -39,7 +39,7 @@ def create_user(user_data: UserInput, db: Session = Depends(get_db_session)) :
     return new_user
 
 
-@router.post("/login-user", response_model=Token, status_code=201)
+@router.post("/login-user", response_model=Token, status_code=200)
 def login_user(user_data: UserInput, db: Session = Depends(get_db_session)) :
      existing_user = db.exec(select(UserSQL).where(UserSQL.username == user_data.username)).first()
      if not existing_user:

@@ -36,7 +36,7 @@ function App() {
           <Route path="/references" element={<PrivateRoute><ReferencesPage/></PrivateRoute>}/>
           <Route path="/community" element={<PrivateRoute><CommunityPage/></PrivateRoute>}/>
 
-           {/* Public Only Routes  */}
+          {/* Public Only Routes  */}
           <Route path="/login" element={<PublicOnlyRoute><LoginPage/></PublicOnlyRoute>}/>
           <Route path="/createaccount" element={<PublicOnlyRoute><CreateAccountPage/></PublicOnlyRoute>}/>
 

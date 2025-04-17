@@ -28,46 +28,34 @@ AVAILABLE_EQUIPMENT = {
 class WorkoutGenInput(BaseModel):
     experience_level: str
     training_availability: int
-    session_length: int
     training_focus: str 
-    available_equipment: List[str]  # List of equipment the user is using
+    available_equipment: str 
     additional_info : str
 
-    @field_validator("experience_level")
+    @field_validator("experience_level", mode="before")
     def validate_experience_level(cls, value):
         if value not in EXPERIENCE_LEVELS:
             raise ValueError(f"Invalid experience level: {value}. Allowed levels are: {', '.join(EXPERIENCE_LEVELS)}")
         return value
     
-    @field_validator("training_experience")
-    def validate_experience_level(cls, value):
+    @field_validator("training_availability", mode="before")
+    def validate_training_experience(cls, value):
         if value not in AVAILABILITY_DAYS:
             raise ValueError(f"Training availability must be between 1 and 5 days per week. Got {value}.")
         return value
     
-    @field_validator("session_length")
-    def validate_experience_level(cls, value):
-        if value not in SESSION_LENGTH:
-            raise ValueError(f"Session length must be between 10 and 90 minutes. Got {value} minutes.")
-        return value
-    
     @field_validator("training_focus", mode="before")
-    def validate_experience_level(cls, value):
+    def validate_training_focus(cls, value):
         if value not in TRAINING_FOCUS:
             raise ValueError(f"Invalid training focus category: {value}. Allowed categories are: {', '.join(TRAINING_FOCUS)}")
         return value
     
-    @model_validator(mode="before")
-    def validate_available_equipment(cls, values):
-        available_equipment_input = values.get('available_equipment', [])
+    @field_validator("available_equipment", mode="before")
+    def validate_available_equipment(cls, value):
+        if value not in AVAILABLE_EQUIPMENT:
+            raise ValueError(f"Invalid equipment type: {value}, allowed categories are {', '.join(AVAILABLE_EQUIPMENT)}")
         
-        # Check if all items in the list are valid equipment
-        invalid_items = [item for item in available_equipment_input if item not in AVAILABLE_EQUIPMENT]
-        
-        if invalid_items:
-            raise ValueError(f"Invalid equipment type(s): {', '.join(invalid_items)}")
-        
-        return values
+        return value
 
 
 # Rating Input Models
