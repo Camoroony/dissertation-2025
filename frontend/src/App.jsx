@@ -1,5 +1,6 @@
-import { Routes } from 'react-router-dom';
-import { Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { useAuth } from './context/AuthContext';
+
 import './css/App.css';
 
 
@@ -23,6 +24,8 @@ import NavBar from './components/ui/NavBar';
 
 function App() {
 
+  const { isAuthenticated } = useAuth(); 
+
   return (
     <div>
       <NavBar />
@@ -43,8 +46,14 @@ function App() {
           <Route path="/login" element={<PublicOnlyRoute><LoginPage/></PublicOnlyRoute>}/>
           <Route path="/createaccount" element={<PublicOnlyRoute><CreateAccountPage/></PublicOnlyRoute>}/>
 
-          {/* Redirect all other routes */}
-          {/* <Route path="*" element={<PublicOnlyRoute><LoginPage /></PublicOnlyRoute>} /> */}
+          <Route
+            path="*"
+            element={
+              isAuthenticated
+                ? <Navigate to="/createworkout" replace />
+                : <Navigate to="/login" replace />
+            }
+          />
 
         </Routes>
       </main>
