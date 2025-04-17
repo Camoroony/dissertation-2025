@@ -36,7 +36,6 @@ function CreateWorkoutPage() {
             const response = await createWorkoutPlan(values, token);
             console.log(response);
             if (response.status === 201) {
-                setLoading(false);
                 navigate('/workoutplan', {
                     state: { successMessage: 'Your workout plan has been successfully created!' }
                 });
@@ -50,8 +49,6 @@ function CreateWorkoutPage() {
                 setErrorMessage('An unknown error occurred, please try again.');
             }
             setTimeout(() => setErrorMessage(''), 4000);
-        } finally {
-            setLoading(false);
         }
     };
 
