@@ -5,11 +5,13 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const checkToken = async () => {
     const token = localStorage.getItem('token');
     if (!token) {
       setIsAuthenticated(false);
+      setIsLoading(false);
       return;
     }
 
@@ -18,6 +20,8 @@ export const AuthProvider = ({ children }) => {
       setIsAuthenticated(true);
     } catch {
       setIsAuthenticated(false);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -36,10 +40,11 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, isLoading, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
+
 
 export const useAuth = () => useContext(AuthContext);
