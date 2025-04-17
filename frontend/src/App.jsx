@@ -15,6 +15,7 @@ import ManageAccountPage from './pages/ManageAccountPage';
 import CreateAccountPage from './pages/CreateAccountPage';
 import ReferencesPage from './pages/ReferencesPage';
 import CommunityPage from './pages/CommunityPage';
+import WorkoutPlanPage from './pages/WorkoutPlanPage';
 
 
 import NavBar from './components/ui/NavBar';
@@ -36,12 +37,14 @@ function App() {
           <Route path="/references" element={<PrivateRoute><ReferencesPage/></PrivateRoute>}/>
           <Route path="/community" element={<PrivateRoute><CommunityPage/></PrivateRoute>}/>
 
+          <Route path="/workoutplan" element={<PrivateRoute><WorkoutPlanPage/></PrivateRoute>}/>
+
           {/* Public Only Routes  */}
           <Route path="/login" element={<PublicOnlyRoute><LoginPage/></PublicOnlyRoute>}/>
           <Route path="/createaccount" element={<PublicOnlyRoute><CreateAccountPage/></PublicOnlyRoute>}/>
 
           {/* Redirect all other routes */}
-          <Route path="*" element={<PublicOnlyRoute><LoginPage /></PublicOnlyRoute>} />
+          {/* <Route path="*" element={<PublicOnlyRoute><LoginPage /></PublicOnlyRoute>} /> */}
 
         </Routes>
       </main>

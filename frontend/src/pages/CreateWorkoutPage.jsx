@@ -33,15 +33,16 @@ function CreateWorkoutPage() {
 
         try {
             const token = localStorage.getItem('token');
-            console.log('Form Data:', values);
             const response = await createWorkoutPlan(values, token);
             console.log(response);
             if (response.status === 201) {
+                setLoading(false);
                 navigate('/workoutplan', {
                     state: { successMessage: 'Your workout plan has been successfully created!' }
                 });
             }
         } catch (err) {
+            setLoading(false);
             console.log(err);
             if (err.message) {
                 setErrorMessage(`Error occurred when creating workout plan: ${err.message}` || 'An error occurred, please try again.');
