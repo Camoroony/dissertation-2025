@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 
 function WorkoutPlanPage() {
-
+    
+    const location = useLocation();
     const [successMsg, setSuccessMessage] = useState('');
 
     useEffect(() => {
