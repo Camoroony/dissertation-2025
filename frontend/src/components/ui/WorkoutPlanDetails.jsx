@@ -6,31 +6,38 @@ const WorkoutPlanDetails = ({ workoutPlan }) => {
         alert("clicked.")
     }
 
-
+    const getSessionOverview = () => {
+        alert("clicked.")
+    }
 
     if (!workoutPlan) return <p>No workout plan data available.</p>;
 
     return (
         <div className="p-6">
             <div className="mb-8 flex flex-col items-center text-center">
-                <h1 className="text-3xl font-bold mb-10 underline">{workoutPlan.plan_name}</h1>
-                <div className="flex gap-6 mb-5">
-                    <p>Equipment Needed: <span className='text-green-600 font-bold'>{workoutPlan.equipment_requirements}</span></p>
-                    <p>Sessions:  <span className='text-green-600 font-bold'>{workoutPlan.no_of_sessions}</span></p>
-                    <p>Avg Session Length: <span className='text-green-600 font-bold'>{workoutPlan.average_session_length} mins</span></p>
+                <h1 className="text-3xl font-bold mb-10">{workoutPlan.plan_name}</h1>
+                <div className="flex gap-20 mb-5">
+                    <p className='text-lg'>Sessions:  <span className=' text-green-600 font-bold underline'>{workoutPlan.no_of_sessions}</span></p>
+                    <p className='text-lg'>Average Session Length: <span className='text-green-600 font-bold underline'>{workoutPlan.average_session_length} minutes</span></p>
                 </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {workoutPlan.workout_sessions.map((session) => (
                     <div key={session.id} className="border rounded-xl p-4 shadow-md">
-                        <h2 className="text-xl font-bold mb-2">{session.session_name}</h2>
-                        <p className="text-gray-600 mb-2">
-                            Day: {session.day_of_week} | Length: {session.length_of_session} mins
-                        </p>
-            <p className="text-gray-600 mb-4">
-              Equipment: {session.equipment_requirements || 'None'}
-            </p>
+                        <div className="flex justify-between items-center mb-2">
+                            <h2 className="text-xl font-bold mb-2">{session.session_name}</h2>
+                            <p className="text-gray-600 mb-2">
+                                Day: <b>{session.day_of_week}</b> | Length: <b>{session.length_of_session} mins</b>
+                            </p>
+                            <p className="text-gray-600 mb-2">
+                                Equipment: <b>{session.equipment_requirements || 'None'}</b>
+                            </p>
+
+                            <button className="ml-4 px-2 py-3 pi pi-question-circle text-3xl text-[#009951] hover:text-[#1FA562] cursor-pointer"
+                                onClick={getSessionOverview}>
+                            </button>
+                        </div>
 
             <div className="space-y-3">
               {session.exercises.map((exercise) => (
