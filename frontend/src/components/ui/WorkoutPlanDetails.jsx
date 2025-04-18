@@ -17,8 +17,8 @@ const WorkoutPlanDetails = ({ workoutPlan }) => {
             <div className="mb-8 flex flex-col items-center text-center">
                 <h1 className="text-3xl font-bold mb-10">{workoutPlan.plan_name}</h1>
                 <div className="flex gap-20 mb-5">
-                    <p className='text-lg'>Sessions:  <span className=' text-green-600 font-bold underline'>{workoutPlan.no_of_sessions}</span></p>
-                    <p className='text-lg'>Average Session Length: <span className='text-green-600 font-bold underline'>{workoutPlan.average_session_length} minutes</span></p>
+                    <p className='text-lg border rounded p-2 shadow-md'>Sessions:  <span className=' text-green-600 font-bold underline'>{workoutPlan.no_of_sessions}</span></p>
+                    <p className='text-lg border rounded p-2 shadow-md'>Average Session Length: <span className='text-green-600 font-bold underline'>{workoutPlan.average_session_length} minutes</span></p>
                 </div>
             </div>
 
@@ -26,11 +26,11 @@ const WorkoutPlanDetails = ({ workoutPlan }) => {
                 {workoutPlan.workout_sessions.map((session) => (
                     <div key={session.id} className="border rounded-xl p-4 shadow-md">
                         <div className="flex justify-between items-center mb-2">
-                            <h2 className="text-xl font-bold mb-2">{session.session_name}</h2>
-                            <p className="text-gray-600 mb-2">
+                            <h2 className="text-xl font-bold mb-2 p-3">{session.session_name}</h2>
+                            <p className="text-gray-600 mb-2 p-3">
                                 Day: <b>{session.day_of_week}</b> | Length: <b>{session.length_of_session} mins</b>
                             </p>
-                            <p className="text-gray-600 mb-2">
+                            <p className="text-gray-600 mb-2 p-3">
                                 Equipment: <b>{session.equipment_requirements || 'None'}</b>
                             </p>
 
