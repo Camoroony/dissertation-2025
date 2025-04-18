@@ -37,6 +37,22 @@ def create_workout(workout_input: WorkoutGenInput, user: UserSQL = Depends(verif
         status_code=201
     )
 
+@router.get("/get-workout-plan")
+def get_workout(id: int, user: UserSQL = Depends(verify_token), db: Session = Depends(get_db_session)) :
+
+    try:
+     workoutplan = get_workout_plan(id, user.id, db)
+
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail="An unexpected error occured retrieving the workout plan.")
+         
+    if not workoutplan:
+        raise HTTPException(status_code=400, detail=f"Error with retrieving workout plan Id: {id}")
+
+    return workoutplan
 
 @router.delete("/delete-workout-plan")
 def delete_workout(workout_plan_id: int, db: Session = Depends(get_db_session)) :

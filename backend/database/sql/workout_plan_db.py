@@ -51,7 +51,7 @@ def add_workout_plan(data: Dict[str, Any], user_id: int, db: Session):
 
     return workout_plan_obj
 
-def get_workout_plan(workout_plan_id: int, db: Session):
+def get_workout_plan(workout_plan_id: int, user_id: int, db: Session):
 
     statement = (
         select(WorkoutPlan)
@@ -66,6 +66,9 @@ def get_workout_plan(workout_plan_id: int, db: Session):
 
     if workout_plan is None:
         raise ValueError(f"Workout plan with ID {workout_plan_id} not found.")
+    
+    if workout_plan.user_id != user_id:
+        raise ValueError(f"User Id: {user_id} does not match workout plan user Id.")
 
     return workout_plan
 

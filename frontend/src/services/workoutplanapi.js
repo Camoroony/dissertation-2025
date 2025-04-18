@@ -20,7 +20,31 @@ export const createWorkoutPlan = async (workoutgeninput, token) => {
   } catch (error) {
     if (error.response) {
       console.error('Error:', error.response.data.detail);
-      throw new Error(error.response.data.detail.msg || 'An error occurred while creating the workout plan');
+      throw new Error(error.response.data.detail || 'An error occurred while creating the workout plan');
+    } else {
+      console.error('Network or server error:', error.message);
+      throw new Error('Network or server error');
+    }
+  }
+}
+
+export const getWorkoutPlan = async (id, token) => {
+
+  try {
+    const response = await axios.get(`${base_url}/get-workout-plan`, {
+      params: { id },
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    console.log('Workout plan retrieved:', response.data);
+
+    return response;
+  } catch (error) {
+    if (error.response) {
+      console.error('Error:', error.response.data.detail);
+      throw new Error(error.response.data.detail || 'An error occurred while retrieving the workout plan');
     } else {
       console.error('Network or server error:', error.message);
       throw new Error('Network or server error');

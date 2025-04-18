@@ -68,7 +68,7 @@ function CreateWorkoutPage() {
                 <>
                     <div className="relative">
                         {errorMessage && (
-                            <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded shadow-lg transition-opacity duration-300">
+                            <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-red-100 border border-red-400 text-red-700 px-7 py-2 rounded shadow-lg">
                                 {errorMessage}
                             </div>
                         )}

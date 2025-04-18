@@ -10,14 +10,22 @@ function MyWorkoutsPage() {
         {id: 5, plan_name: "3-day bodyweight plan", no_of_sessions: 3, average_session_length: 60, equipment_requirements: "Bodyweight exercises"}
     ]
 
-    return <div className="home">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 items-stretch">
-            {workoutplans.map(workoutplan => (
-                <WorkoutPlanCard workoutplan={workoutplan} key={workoutplan.id}/>
-            ))}
-        </div>
-    </div>
+    return <>
 
+        <div className="flex flex-col justify-center items-center mt-20">
+            <h1 className="text-6xl font-bold mb-15">Your <span className='text-[#2A955F]'>workout plans!</span></h1>
+            <p className="text-lg">View your personalised workout plans here!</p>
+        </div>
+
+
+        <div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 items-stretch">
+                {workoutplans.map(workoutplan => (
+                    <WorkoutPlanCard workoutplan={workoutplan} key={workoutplan.id} />
+                ))}
+            </div>
+        </div>
+    </>
 }
 
 export default MyWorkoutsPage
