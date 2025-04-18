@@ -65,7 +65,7 @@ function WorkoutPlanPage() {
                 {errorMessage}
             </div>
         ) : ( <div className='border'>
-            <div className="flex justify-center gap-10grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 items-stretch">
+            <div className="flex justify-center gap-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 items-stretch">
                 {workoutplans.map(workoutplan => (
                     <WorkoutSessionCard workoutplan={workoutplan} key={workoutplan.id} />
                 ))}
