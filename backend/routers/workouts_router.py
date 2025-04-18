@@ -51,8 +51,10 @@ def get_workout(id: int, user: UserSQL = Depends(verify_token), db: Session = De
          
     if not workoutplan:
         raise HTTPException(status_code=400, detail=f"Error with retrieving workout plan Id: {id}")
+    
+    workoutplan_read = serialise_workout_plan(workoutplan)
 
-    return workoutplan
+    return workoutplan_read
 
 @router.delete("/delete-workout-plan")
 def delete_workout(workout_plan_id: int, db: Session = Depends(get_db_session)) :

@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import WorkoutSessionCard from "../components/ui/WorkoutSessionCard"
 import { getWorkoutPlan } from "../services/workoutplanapi.js"
 import { Link } from 'react-router-dom';
+import WorkoutPlanDetails from '../components/ui/WorkoutPlanDetails.jsx';
 
 
 function WorkoutPlanPage() {
     
     const location = useLocation();
-    const [successMsg, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [workoutPlan, setWorkoutPlan] = useState(null);
 
     const { id } = useParams()
 
@@ -28,7 +28,7 @@ function WorkoutPlanPage() {
                     const response = await getWorkoutPlan(parseInt(id, 10), token);
                     console.log(response)
                     if (response.status == 200) {
-                        const workoutplan = response.data
+                        setWorkoutPlan(response.data);
                     }
                 } catch (err) {
                     if (err.message){
@@ -64,11 +64,9 @@ function WorkoutPlanPage() {
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 bg-red-100 border border-red-400 text-red-700 px-7 py-5 rounded shadow-lg">
                 {errorMessage}
             </div>
-        ) : ( <div className='border'>
-            <div className="flex justify-center gap-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 items-stretch">
-                {workoutplans.map(workoutplan => (
-                    <WorkoutSessionCard workoutplan={workoutplan} key={workoutplan.id} />
-                ))}
+        ) : (<div>
+            <div>
+                <WorkoutPlanDetails workoutPlan={workoutPlan}></WorkoutPlanDetails>
             </div>
         </div>)}
 
