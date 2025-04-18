@@ -120,19 +120,19 @@ function CreateWorkoutPage() {
                                             <option value="1">
                                                 1 day a week
                                             </option>
-                                            <option value="2 days a week">
+                                            <option value="2">
                                                 2 days a week
                                             </option>
-                                            <option value="3 days a week">
+                                            <option value="3">
                                                 3 days a week
                                             </option>
-                                            <option value="4 days a week">
+                                            <option value="4">
                                                 4 days a week
                                             </option>
-                                            <option value="5 days a week">
+                                            <option value="5">
                                                 5 days a week
                                             </option>
-                                            <option value="6 days a week">
+                                            <option value="6">
                                                 6 days a week
                                             </option>
                                         </select>
