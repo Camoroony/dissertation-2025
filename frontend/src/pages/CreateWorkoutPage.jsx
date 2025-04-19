@@ -36,7 +36,7 @@ function CreateWorkoutPage() {
             const response = await createWorkoutPlan(values, token);
             console.log(response);
             if (response.status === 201) {
-                navigate('/workoutplan', {
+                navigate(`/workoutplan/${response.data.id}`, {
                     state: { successMessage: 'Your workout plan has been successfully created!' }
                 });
             }

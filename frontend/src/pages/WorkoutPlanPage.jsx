@@ -8,6 +8,7 @@ import WorkoutPlanDetails from '../components/ui/WorkoutPlanDetails.jsx';
 function WorkoutPlanPage() {
     
     const location = useLocation();
+    const [successMsg, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [workoutPlan, setWorkoutPlan] = useState(null);
 
@@ -19,6 +20,7 @@ function WorkoutPlanPage() {
             setTimeout(() => setSuccessMessage(''), 4000);
         }
     }, [location.state]);
+
 
     useEffect(() => {
         const retrieveWorkoutPlan = async() => {
@@ -58,6 +60,14 @@ function WorkoutPlanPage() {
                 <i className="pi pi-chevron-left"></i>
                 <p>Back</p>
             </Link>
+        </div>
+
+        <div className="relative">
+        {successMsg && (
+         <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-green-100 border border-green-400 text-green-700 px-4 py-2 rounded shadow-lg transition-opacity duration-300">
+                {successMsg}
+        </div>
+            )}
         </div>
 
         {errorMessage ? (
