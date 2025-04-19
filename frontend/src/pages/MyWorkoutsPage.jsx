@@ -49,10 +49,12 @@ function MyWorkoutsPage() {
                 {errorMessage}
             </div>
         ) : (<div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 items-stretch">
-                {workoutPlans.map(workoutplan => (
-                    <WorkoutPlanCard workoutplan={workoutplan} key={workoutplan.id} />
-                ))}
+            <div>
+                <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-8">
+                    {workoutPlans.map(workoutplan => (
+                        <WorkoutPlanCard workoutplan={workoutplan} key={workoutplan.id} />
+                    ))}
+                </div>
             </div>
         </div>)}
     </>
