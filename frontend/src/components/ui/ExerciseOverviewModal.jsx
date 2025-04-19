@@ -70,14 +70,14 @@ function ExerciseOverviewModal({ id, closeModalMethod, modalContent, setModalCon
 
                 <button
                     onClick={() => closeModalMethod(abortController)}
-                    className="mt-4 px-4 py-2 mr-5 bg-[#009951] hover:bg-[#007A41] text-white rounded"
+                    className="mt-4 px-4 py-2 mr-5 bg-[#009951] hover:bg-[#007A41] text-white rounded cursor-pointer"
                 >
                     Close
                 </button>
 
                 {!loading && (<button
                     onClick={openReferencesModal}
-                    className="mt-4 px-4 py-2 bg-[#D732A8] hover:bg-[#B0278B] text-white rounded"
+                    className="mt-4 px-4 py-2 bg-[#D732A8] hover:bg-[#B0278B] text-white rounded cursor-pointer"
                 >
                     References
                 </button>)}

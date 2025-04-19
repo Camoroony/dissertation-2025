@@ -8,7 +8,7 @@ from database.sql.init_sql_db import get_db_session
 from database.sql.workout_plan_db import add_workout_plan, delete_workout_plan, get_workout_plan, get_workout_plans_by_user
 from database.sql.workout_session_db import get_workout_session
 from database.sql.exercise_db import get_exercise
-from database.mongodb.workout_context_db import add_workout_context, get_workout_context, delete_workout_context
+from database.mongodb.workout_context_db import add_workout_context, get_workout_context, get_workout_sources_used, delete_workout_context
 from ai_services.gen_workout_plan import generate_workout_plan
 from ai_services.gen_workout_info import generate_exercise_overview, generate_workoutsession_overview
 
@@ -54,6 +54,9 @@ def get_workout(id: int, user: UserSQL = Depends(verify_token), db: Session = De
 @router.get("/get-workout-plans-by-user")
 def get_workout(user: UserSQL = Depends(verify_token), db: Session = Depends(get_db_session)) :
 
+    if not user:
+        raise HTTPException(f"User Token verification failed")
+
     try:
      workoutplans = get_workout_plans_by_user(user.id, db)
 
@@ -65,10 +68,29 @@ def get_workout(user: UserSQL = Depends(verify_token), db: Session = Depends(get
          
     if not workoutplans:
         raise HTTPException(status_code=400, detail=f"Error with retrieving workout plans for user Id: {user.id}")
-    
-    workoutplans
 
     return workoutplans
+
+@router.get("/get-workout-plan-sources", status_code=200)
+def get_workout(id: int, user: UserSQL = Depends(verify_token)) :
+
+    if not user:
+      raise HTTPException(f"User Token verification failed")
+
+    try:
+     sources_used = get_workout_sources_used(id) 
+
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"An unexpected error occured retrieving the workout plans for user: {user.id}.")
+         
+    if not sources_used:
+        raise HTTPException(status_code=400, detail=f"Error with retrieving workout plans for user Id: {user.id}")
+    
+    return sources_used
+
 
 @router.delete("/delete-workout-plan")
 def delete_workout(workout_plan_id: int, db: Session = Depends(get_db_session)) :
@@ -111,7 +133,6 @@ def get_exercise_info(id: int, user: UserSQL = Depends(verify_token), db: Sessio
 
     if not user:
         raise HTTPException(f"User Token verification failed")
-
 
     exercise = get_exercise(id, db)
 

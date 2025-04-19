@@ -75,6 +75,30 @@ export const getWorkoutPlansByUser = async (token) => {
   }
 }
 
+export const getWorkoutPlanSources = async (id, token) => {
+
+  try {
+    const response = await axios.get(`${base_url}/get-workout-plan-sources`, {
+      params: { id },
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    console.log('Workout plan sources retrieved:', response.data);
+
+    return response;
+  } catch (error) {
+    if (error.response) {
+      console.error('Error:', error.response.data.detail);
+      throw new Error(error.response.data.detail || `An error occurred while retrieving the workout plans sources for workout plan Id: ${id}`);
+    } else {
+      console.error('Network or server error:', error.message);
+      throw new Error('Network or server error');
+    }
+  }
+}
+
 export const getExerciseOverview = async (id, token, signal) => {
 
   try {

@@ -18,7 +18,7 @@ function MyWorkoutsPage() {
     const [workoutPlans, setWorkoutPlans] = useState([]);
 
     useEffect(() => {
-            const retrieveWorkoutPlan = async() => {
+            const retrieveWorkoutPlans = async() => {
                     try {
                         const token = localStorage.getItem('token');
                         const response = await getWorkoutPlansByUser(token);
@@ -34,7 +34,7 @@ function MyWorkoutsPage() {
                         }
                     }
             }
-            retrieveWorkoutPlan()
+            retrieveWorkoutPlans()
         }, [])
 
     return <>
