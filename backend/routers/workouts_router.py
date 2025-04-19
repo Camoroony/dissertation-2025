@@ -21,21 +21,16 @@ def index() :
     return Response("Hello from the workouts router!")
 
 
-@router.post("/create-workout-plan")
+@router.post("/create-workout-plan", status_code=201)
 def create_workout(workout_input: WorkoutGenInput, user: UserSQL = Depends(verify_token), db: Session = Depends(get_db_session)) :
 
     ai_response_data = generate_workout_plan(workout_input)
 
     add_result_sql = add_workout_plan(ai_response_data["response"], user.id, db)
 
-    add_result_mongodb = add_workout_context(add_result_sql.id, ai_response_data["context"], list(ai_response_data["sources_used"]))
+    add_workout_context(add_result_sql.id, ai_response_data["context"], list(ai_response_data["sources_used"]))
 
-    return Response(
-        f"Created workout plan Id: {add_result_sql.id} for user: {add_result_sql.user_id}\n"
-        f"Workout context added, Id: {add_result_mongodb['inserted_id']}\n"
-        f"Sources analysed during plan creation: {ai_response_data['sources_used']}",
-        status_code=201
-    )
+    return {"id": add_result_sql.id}
 
 @router.get("/get-workout-plan")
 def get_workout(id: int, user: UserSQL = Depends(verify_token), db: Session = Depends(get_db_session)) :
