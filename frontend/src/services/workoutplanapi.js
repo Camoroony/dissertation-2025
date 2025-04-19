@@ -51,3 +51,26 @@ export const getWorkoutPlan = async (id, token) => {
     }
   }
 }
+
+export const getWorkoutPlansByUser = async (token) => {
+
+  try {
+    const response = await axios.get(`${base_url}/get-workout-plans-by-user`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    console.log('Workout plans retrieved:', response.data);
+
+    return response;
+  } catch (error) {
+    if (error.response) {
+      console.error('Error:', error.response.data.detail);
+      throw new Error(error.response.data.detail || 'An error occurred while retrieving the workout plans for the workout plans page');
+    } else {
+      console.error('Network or server error:', error.message);
+      throw new Error('Network or server error');
+    }
+  }
+}

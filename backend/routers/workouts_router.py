@@ -5,7 +5,7 @@ from models.db_models import UserSQL
 from models.utilities.sql_seralising import serialise_workout_plan, serialise_workout_session, serialise_exercise
 from security.jwt_token import verify_token
 from database.sql.init_sql_db import get_db_session
-from database.sql.workout_plan_db import add_workout_plan, delete_workout_plan, get_workout_plan
+from database.sql.workout_plan_db import add_workout_plan, delete_workout_plan, get_workout_plan, get_workout_plans_by_user
 from database.sql.workout_session_db import get_workout_session
 from database.sql.exercise_db import get_exercise
 from database.mongodb.workout_context_db import add_workout_context, get_workout_context, delete_workout_context
@@ -50,6 +50,25 @@ def get_workout(id: int, user: UserSQL = Depends(verify_token), db: Session = De
     workoutplan_read = serialise_workout_plan(workoutplan)
 
     return workoutplan_read
+
+@router.get("/get-workout-plans-by-user")
+def get_workout(user: UserSQL = Depends(verify_token), db: Session = Depends(get_db_session)) :
+
+    try:
+     workoutplans = get_workout_plans_by_user(user.id, db)
+
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"An unexpected error occured retrieving the workout plans for user: {user.id}.")
+         
+    if not workoutplans:
+        raise HTTPException(status_code=400, detail=f"Error with retrieving workout plans for user Id: {user.id}")
+    
+    workoutplans
+
+    return workoutplans
 
 @router.delete("/delete-workout-plan")
 def delete_workout(workout_plan_id: int, db: Session = Depends(get_db_session)) :

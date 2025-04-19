@@ -1,4 +1,7 @@
 import WorkoutPlanCard from "../components/ui/WorkoutPlanCard"
+import { getWorkoutPlansByUser } from "../services/workoutplanapi";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 function MyWorkoutsPage() {
 
@@ -10,6 +13,30 @@ function MyWorkoutsPage() {
         {id: 5, plan_name: "3-day bodyweight plan", no_of_sessions: 3, average_session_length: 60, equipment_requirements: "Bodyweight exercises"}
     ]
 
+    const location = useLocation();
+    const [errorMessage, setErrorMessage] = useState('');
+    const [workoutPlans, setWorkoutPlans] = useState([]);
+
+    useEffect(() => {
+            const retrieveWorkoutPlan = async() => {
+                    try {
+                        const token = localStorage.getItem('token');
+                        const response = await getWorkoutPlansByUser(token);
+                        console.log(response)
+                        if (response.status == 200) {
+                            setWorkoutPlans(response.data);
+                        }
+                    } catch (err) {
+                        if (err.message){
+                            setErrorMessage(`Error occured loading workout plans: ${err.message}`);
+                        } else {
+                            setErrorMessage('An unknown error occured when loading in your workout plans.');
+                        }
+                    }
+            }
+            retrieveWorkoutPlan()
+        }, [])
+
     return <>
 
         <div className="flex flex-col justify-center items-center mt-20">
@@ -17,14 +44,17 @@ function MyWorkoutsPage() {
             <p className="text-lg">View your personalised workout plans here!</p>
         </div>
 
-
-        <div>
+        {errorMessage ? (
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 bg-red-100 border border-red-400 text-red-700 px-7 py-5 rounded shadow-lg">
+                {errorMessage}
+            </div>
+        ) : (<div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 items-stretch">
-                {workoutplans.map(workoutplan => (
+                {workoutPlans.map(workoutplan => (
                     <WorkoutPlanCard workoutplan={workoutplan} key={workoutplan.id} />
                 ))}
             </div>
-        </div>
+        </div>)}
     </>
 }
 

@@ -66,9 +66,6 @@ def get_workout_plan(workout_plan_id: int, user_id: int, db: Session):
 
     if workout_plan is None:
         raise ValueError(f"Workout plan with ID {workout_plan_id} not found.")
-    
-    if workout_plan.user_id != user_id:
-        raise ValueError(f"User Id: {user_id} does not match workout plan user Id.")
 
     return workout_plan
 
@@ -86,6 +83,23 @@ def get_workout_plans(db: Session):
 
     if not workout_plans:
         raise ValueError(f"Workout plans were not found.")
+
+    return workout_plans
+
+def get_workout_plans_by_user(user_id: int, db: Session):
+
+    statement = (
+        select(WorkoutPlan).where(WorkoutPlan.user_id == user_id)
+        .options(
+            selectinload(WorkoutPlan.workout_sessions).selectinload(WorkoutSession.exercises),
+            selectinload(WorkoutPlan.ratings)
+        )
+    )
+
+    workout_plans = db.exec(statement).all()
+
+    if not workout_plans:
+        raise ValueError(f"Workout plans were not found for user Id: {user_id}.")
 
     return workout_plans
 

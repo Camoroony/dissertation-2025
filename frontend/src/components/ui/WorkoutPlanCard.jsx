@@ -1,7 +1,12 @@
+import { useNavigate } from "react-router-dom"
+
 function WorkoutPlanCard({workoutplan}) {
 
+    const navigate = useNavigate();
+
+
     function viewWorkoutPlan() {
-        alert("clicked.")
+        navigate(`/workoutplan/${workoutplan.id}`)
     }
 
     return <div className="flex justify-center items-center mt-15">
