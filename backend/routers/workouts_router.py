@@ -106,13 +106,17 @@ def get_workoutsession_info(workout_plan_id: int, workout_session_id: int, db: S
     return Response(ai_response_data, status_code=200)
 
 
-@router.get("/get-exercise-info")
-def get_exercise_info(exercise_id: int, db: Session = Depends(get_db_session)) :
+@router.get("/get-exercise-info", status_code=200)
+def get_exercise_info(id: int, user: UserSQL = Depends(verify_token), db: Session = Depends(get_db_session)) :
 
-    exercise = get_exercise(exercise_id, db)
+    if not user:
+        raise HTTPException(f"User Token verification failed")
+
+
+    exercise = get_exercise(id, db)
 
     if not exercise:
-        raise HTTPException(f"No exercise found with the Id: {exercise_id}")
+        raise HTTPException(f"No exercise found with the Id: {id}")
 
     exercise_dict = serialise_exercise(exercise)
 
