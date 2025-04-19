@@ -11,7 +11,7 @@ function WorkoutPlanCard({workoutplan}) {
 
     return <div className="flex justify-center items-center mt-15">
         <div className="flex flex-col justify-between shadow-lg px-8 py-5 border w-96 h-full rounded border-[#009951]">
-            <h2 className="text-xl font-bold min-h-[3.5rem]">{workoutplan.plan_name}</h2>
+            <h2 className="text-xl font-bold min-h-[3.5rem] pb-6">{workoutplan.plan_name}</h2>
                 <div className="mb-5">
                     <p className="block text-gray-700"><b>Number of sessions:</b> {workoutplan.no_of_sessions}</p>
                 </div>
