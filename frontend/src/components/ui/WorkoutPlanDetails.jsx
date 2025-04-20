@@ -122,7 +122,7 @@ const WorkoutPlanDetails = ({ workoutPlan }) => {
                             <div className="flex justify-end mt-6">
                                 <button
                                     onClick={closeSourcesUsedModal}
-                                    className="px-4 py-2 bg-[#D732A8] hover:bg-[#B0278B] text-white rounded"
+                                    className="px-4 py-2 bg-[#D732A8] hover:bg-[#B0278B] text-white rounded cursor-pointer"
                                 >
                                     Close
                                 </button>
