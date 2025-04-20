@@ -480,7 +480,13 @@ references = [
     "url": "https://www.healthline.com/health/fitness-exercise/best-chest-exercises",
     "vector_db": "workout_exercises_db",
     "textfile_name": "best_chest_exercises_Heathline.txt",
-    "reviewers": [],
+    "reviewers": [
+        {
+            "reviewer": "Daniel Bubnis",
+            "qualifications": ("Associate's Degree (AA) - Pennsylvania State University, Bachelor's Degree (BA) - Marywood University, Master's Degree (MS) – California University of Pennsylvania, "
+            "NASM Certified Personal Trainer (NASM-CPT), NASE Level II Certified Speed Specialist (NASE Level II-CSS)")
+        }
+    ],
     "references": []
 },
 {
@@ -602,6 +608,15 @@ def get_reference(txt_name: str):
       source = document
   
   return source
+
+def get_references():
+   
+  references = list(references_collection.find({}, {'_id': 0}))
+
+  if not references:
+     raise ValueError(f"No source content found for references collection")
+  
+  return references
             
 
 
