@@ -112,20 +112,20 @@ def delete_workout(workout_plan_id: int, db: Session = Depends(get_db_session)) 
     )
 
 
-@router.get("/get-workoutsession-info")
-def get_workoutsession_info(workout_plan_id: int, workout_session_id: int, db: Session = Depends(get_db_session)) :
+@router.get("/get-workoutsession-info", status_code=200)
+def get_workoutsession_info(id: int, user: UserSQL = Depends(verify_token), db: Session = Depends(get_db_session)) :
 
-    context = get_workout_context(workout_plan_id)
+    workout_session = get_workout_session(id, db)
+    workout_session_dict = serialise_workout_session(workout_session)
 
-    workout_plan = get_workout_plan(workout_plan_id, db)
+    workout_plan = get_workout_plan(workout_session.workoutplan_id, user.id, db)
     workout_plan_dict = serialise_workout_plan(workout_plan)
 
-    workout_session = get_workout_session(workout_session_id, db)
-    workout_session_dict = serialise_workout_session(workout_session)
+    context = get_workout_context(workout_session.workoutplan_id)
 
     ai_response_data = generate_workoutsession_overview(context, workout_plan_dict, workout_session_dict)
 
-    return Response(ai_response_data, status_code=200)
+    return ai_response_data
 
 
 @router.get("/get-exercise-info", status_code=200)

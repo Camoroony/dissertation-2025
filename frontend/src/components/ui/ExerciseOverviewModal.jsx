@@ -53,7 +53,7 @@ function ExerciseOverviewModal({ id, closeModalMethod, modalContent, setModalCon
         {/* Main Modal */}
         <div className="fixed inset-0 flex items-center justify-center bg-[rgba(0,0,0,0.5)] z-50">
             <div className="bg-white p-8 rounded shadow-lg w-11/12 max-w-4xl max-h-[90vh] overflow-y-auto">
-                <h2 className="text-2xl font-bold mb-4">Overview</h2>
+                <h2 className="text-2xl font-bold mb-4">Exercise Overview</h2>
 
                 {loading ? (
                     <div className="flex flex-col justify-center items-center">

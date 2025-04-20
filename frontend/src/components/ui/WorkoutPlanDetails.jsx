@@ -1,15 +1,18 @@
 import React, { use } from 'react';
 import { useState, useEffect } from 'react';
 import ExerciseOverviewModal from './ExerciseOverviewModal';
+import SessionOverviewModal from './SessionOverviewModal';
 import { getWorkoutPlanSources } from '../../services/workoutplanapi';
 
 const WorkoutPlanDetails = ({ workoutPlan }) => {
 
     const [errorMessage, setErrorMessage] = useState('');
 
+    const [sessionModalOpen, setSessionModalOpen] = useState(false);
     const [exerciseModalOpen, setExerciseModalOpen] = useState(false);
     const [sourcesUsedModalOpen, setSourcesUsedModalOpen] = useState(false);
 
+    const [sessionId, setSessionId] = useState(null);
     const [exerciseId, setExerciseId] = useState(null);
     const [modalContent, setModalContent] = useState('');
     const [sources, setSources] = useState('');
@@ -38,12 +41,26 @@ const WorkoutPlanDetails = ({ workoutPlan }) => {
         retrieveWorkoutPlanSources()
     }, [workoutPlan])
 
+    const openSessionModal = async (id) => {
+        setSessionId(id);
+        setSessionModalOpen(true);
+    };
+
+
+    const closeSessionModal = (abortController) => {
+        if (abortController) {
+            abortController.abort();
+        }
+        setSessionModalOpen(false);
+        setModalContent('');
+    };
+
     const openExerciseModal = async (id) => {
         setExerciseId(id);
         setExerciseModalOpen(true);
     };
 
-    const closeModal = (abortController) => {
+    const closeExerciseModal = (abortController) => {
         if (abortController) {
             abortController.abort();
         }
@@ -65,10 +82,19 @@ const WorkoutPlanDetails = ({ workoutPlan }) => {
     return (
         <div className="p-6">
 
+            {sessionModalOpen && (
+                <SessionOverviewModal
+                    id={sessionId}
+                    closeModalMethod={closeSessionModal}
+                    modalContent={modalContent}
+                    setModalContent={setModalContent}
+                ></SessionOverviewModal>
+            )}
+
             {exerciseModalOpen && (
                 <ExerciseOverviewModal
                     id={exerciseId}
-                    closeModalMethod={closeModal}
+                    closeModalMethod={closeExerciseModal}
                     modalContent={modalContent}
                     setModalContent={setModalContent}
                 ></ExerciseOverviewModal>
@@ -135,7 +161,7 @@ const WorkoutPlanDetails = ({ workoutPlan }) => {
                             </p>
 
                             <button className="ml-4 px-2 py-3 pi pi-question-circle text-3xl text-[#009951] hover:text-[#1FA562] cursor-pointer"
-                                onClick={() => openModal('session', exercise.id)}>
+                                onClick={() => openSessionModal(session.id)}>
                             </button>
                         </div>
 

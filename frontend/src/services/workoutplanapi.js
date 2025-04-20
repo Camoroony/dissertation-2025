@@ -99,6 +99,35 @@ export const getWorkoutPlanSources = async (id, token) => {
   }
 }
 
+export const getSessionOverview = async (id, token, signal) => {
+
+  try {
+    const response = await axios.get(`${base_url}/get-workoutsession-info`, {
+      params: { id },
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+      signal: signal,
+    });
+
+    console.log('Exercise overview retrieved:', response.data);
+
+    return response;
+  } catch (error) {
+    if (axios.isCancel(error)) {
+      console.log('Request was cancelled by the user.')
+      return;
+    }
+    if (error.response) {
+      console.error('Error:', error.response.data.detail);
+      throw new Error(error.response.data.detail || 'An error occurred while retrieving the exercise overview');
+    } else {
+      console.error('Network or server error:', error.message);
+      throw new Error('Network or server error');
+    }
+  }
+}
+
 export const getExerciseOverview = async (id, token, signal) => {
 
   try {
