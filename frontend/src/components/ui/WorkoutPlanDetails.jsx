@@ -16,20 +16,22 @@ const WorkoutPlanDetails = ({ workoutPlan }) => {
 
     useEffect(() => {
         const retrieveWorkoutPlanSources = async () => {
-            try {
-                const token = localStorage.getItem('token');
-                const response = await getWorkoutPlanSources(workoutPlan.id, token);
-                console.log(response)
-                if (response.status == 200) {
-                    setSources(response.data);
-                }
-            } catch (err) {
-                if (err.message) {
-                    setErrorMessage(`Error occured loading workout plan sources: ${err.message}`);
-                    setTimeout(() => setErrorMessage(''), 4000);
-                } else {
-                    setErrorMessage('An unknown error occured when loading in your workout plan sources.');
-                    setTimeout(() => setErrorMessage(''), 4000);
+            if (workoutPlan) {
+                try {
+                    const token = localStorage.getItem('token');
+                    const response = await getWorkoutPlanSources(workoutPlan.id, token);
+                    console.log(response)
+                    if (response.status == 200) {
+                        setSources(response.data);
+                    }
+                } catch (err) {
+                    if (err.message) {
+                        setErrorMessage(`Error occured loading workout plan sources: ${err.message}`);
+                        setTimeout(() => setErrorMessage(''), 4000);
+                    } else {
+                        setErrorMessage('An unknown error occured when loading in your workout plan sources.');
+                        setTimeout(() => setErrorMessage(''), 4000);
+                    }
                 }
             }
         }
@@ -50,7 +52,8 @@ const WorkoutPlanDetails = ({ workoutPlan }) => {
     };
 
     const openSourcesUsedModal = () => {
-        setSourcesUsedModalOpen(true);
+            setSourcesUsedModalOpen(true);
+
     }
 
     const closeSourcesUsedModal = () => {
