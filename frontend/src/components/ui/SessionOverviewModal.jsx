@@ -51,7 +51,7 @@ function SessionOverviewModal({ id, closeModalMethod, modalContent, setModalCont
                             <i className="pi pi-spinner pi-spin text-4xl mr-5" style={{ color: '#D732A8' }}></i>
                             <p className="text-gray-500 text-lg">Please wait...</p>
                         </div>
-                        <p className="text-gray-500 text-center text-md mb-1">The AI is retreiving information on this exercise</p>
+                        <p className="text-gray-500 text-center text-md mb-1">The AI is retreiving information on this session.</p>
                         <p className="text-gray-500 text-center text-md">This may take a couple of seconds...</p>
                     </div>
                 ) : (
