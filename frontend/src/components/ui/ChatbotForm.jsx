@@ -2,7 +2,7 @@ import React, { use } from 'react'
 import { useRef } from 'react'
 import '../../css/Chatbot.css'
 
-const ChatbotForm = ({setChatHistory}) => {
+const ChatbotForm = ({ chatHistory, setChatHistory, generateBotResponse }) => {
 
     const inputRef = useRef();
 
@@ -14,7 +14,14 @@ const ChatbotForm = ({setChatHistory}) => {
 
         console.log(userMessage);
 
-        setChatHistory(history => [...history, {role: "user", text: userMessage}]);
+        setChatHistory((history) => [...history, {role: "user", text: userMessage}]);
+
+        setTimeout(() => {
+
+            setChatHistory((history) => [...history, {role: "model", text: "Thinking..."}]);
+
+            generateBotResponse([...chatHistory, {role: "user", text: userMessage}]);
+        }, 600);
     }
 
 

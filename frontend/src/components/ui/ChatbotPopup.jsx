@@ -6,9 +6,13 @@ import '../../css/Chatbot.css'
 
 const ChatbotPopup = () => {
 
+    const generateBotResponse = (history) => {
+
+        console.log(history)
+
+    }
+
     const [chatHistory, setChatHistory] = useState([]);
-
-
 
     return (
         <div className="container">
@@ -37,7 +41,7 @@ const ChatbotPopup = () => {
 
                 {/* Chat Footer */}
                 <div className='chat-footer'>
-                    <ChatbotForm setChatHistory={setChatHistory} />
+                    <ChatbotForm chatHistory={chatHistory} setChatHistory={setChatHistory} generateBotResponse={generateBotResponse} />
                 </div>
             </div>
         </div>
