@@ -2,7 +2,7 @@ import React, { use } from 'react'
 import { useRef } from 'react'
 import '../../css/Chatbot.css'
 
-const ChatbotForm = () => {
+const ChatbotForm = ({setChatHistory}) => {
 
     const inputRef = useRef();
 
@@ -13,6 +13,8 @@ const ChatbotForm = () => {
         inputRef.current.value = "";
 
         console.log(userMessage);
+
+        setChatHistory(history => [...history, {role: "user", text: userMessage}]);
     }
 
 
