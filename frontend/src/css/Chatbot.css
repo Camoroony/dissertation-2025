@@ -24,6 +24,23 @@
     }
 }
 
+#chatbot-toggler {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 30px;
+    right: 35px;
+    border: none;
+    height: 65px;
+    width: 65px;
+    cursor: pointer;
+    border-radius: 50%;
+    background: #1FA562;
+    color: #fff;
+    font-size: 25px;
+}
+
 .chatbot-popup .chat-header {
     display: flex;
     padding: 15px 22px;

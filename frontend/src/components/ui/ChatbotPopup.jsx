@@ -6,6 +6,8 @@ import '../../css/Chatbot.css'
 
 const ChatbotPopup = () => {
 
+    const [showChatbotPopup, setShowChatbotPopup] = useState(false);
+
     const generateChatResponse = async (history) => {
 
         history.map(({role, text}) => ({role, parts: [{text}]}))
@@ -18,16 +20,13 @@ const ChatbotPopup = () => {
 
     return (
         <div>
-            <button className="chatbot-toggler">
-                <i className='pi pi-comments'></i>
-            </button>
-            <div className='chatbot-popup'>
+            {showChatbotPopup ? ( <div className='chatbot-popup'>
                 <div className='chat-header'>
                     <div className='header-info'>
                         <ChatbotIcon type={'head'} />
                         <h2 className='logo-text'>Chatbot</h2>
                     </div>
-                    <button className='pi pi-angle-down' style={{ fontSize: '1rem' }}></button>
+                    <button className='pi pi-angle-down' style={{ fontSize: '1rem' }} onClick={() => setShowChatbotPopup(false)}></button>
                 </div>
 
                 {/* Chat Body */}
@@ -48,7 +47,9 @@ const ChatbotPopup = () => {
                 <div className='chat-footer'>
                     <ChatbotForm chatHistory={chatHistory} setChatHistory={setChatHistory} generateChatResponse={generateChatResponse} />
                 </div>
-            </div>
+            </div>) : ( <button id="chatbot-toggler" onClick={() => setShowChatbotPopup(true)}>
+                <ChatbotIcon type={'head'} />
+            </button>)}
         </div>
     )
 }
