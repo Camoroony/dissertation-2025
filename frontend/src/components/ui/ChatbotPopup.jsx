@@ -6,7 +6,9 @@ import '../../css/Chatbot.css'
 
 const ChatbotPopup = () => {
 
-    const generateBotResponse = (history) => {
+    const generateChatResponse = async (history) => {
+
+        history.map(({role, text}) => ({role, parts: [{text}]}))
 
         console.log(history)
 
@@ -15,7 +17,7 @@ const ChatbotPopup = () => {
     const [chatHistory, setChatHistory] = useState([]);
 
     return (
-        <div className="container">
+        <div>
             <div className='chatbot-popup'>
                 <div className='chat-header'>
                     <div className='header-info'>
@@ -41,7 +43,7 @@ const ChatbotPopup = () => {
 
                 {/* Chat Footer */}
                 <div className='chat-footer'>
-                    <ChatbotForm chatHistory={chatHistory} setChatHistory={setChatHistory} generateBotResponse={generateBotResponse} />
+                    <ChatbotForm chatHistory={chatHistory} setChatHistory={setChatHistory} generateChatResponse={generateChatResponse} />
                 </div>
             </div>
         </div>

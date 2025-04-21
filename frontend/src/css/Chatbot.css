@@ -1,6 +1,8 @@
 
 .chatbot-popup {
-    position: relative;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
     width: 650px;
     overflow: hidden;
     background: #fff;
@@ -9,6 +11,17 @@
     box-shadow: 0 0 128px 0 rgba(0, 0, 0, 0.1),
     0 32px 64px -48px rgba(0, 0, 0, 0.9);
 
+}
+
+@media (max-width: 700px) {
+    .chatbot-popup {
+        bottom: 0;
+        right: 0;
+        width: 100vw;
+        height: 100vh;
+        max-height: 100vh;
+        border-radius: 0;
+    }
 }
 
 .chatbot-popup .chat-header {
