@@ -18,10 +18,13 @@ const ChatbotPopup = () => {
 
     return (
         <div>
+            <button className="chatbot-toggler">
+                <i className='pi pi-comments'></i>
+            </button>
             <div className='chatbot-popup'>
                 <div className='chat-header'>
                     <div className='header-info'>
-                        <ChatbotIcon />
+                        <ChatbotIcon type={'head'} />
                         <h2 className='logo-text'>Chatbot</h2>
                     </div>
                     <button className='pi pi-angle-down' style={{ fontSize: '1rem' }}></button>
@@ -30,7 +33,7 @@ const ChatbotPopup = () => {
                 {/* Chat Body */}
                 <div className='chat-body'>
                     <div className='message bot-message'>
-                        <ChatbotIcon />
+                        <ChatbotIcon type={'response'}/>
                         <p className="message-text">
                             Hi! <br /> How can I help you today?
                         </p>

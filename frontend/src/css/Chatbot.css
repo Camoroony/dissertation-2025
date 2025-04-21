@@ -39,16 +39,17 @@
 
 }
 
-.header-info svg {
+.header-info i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 35px;
     width: 35px;
     padding: 6px;
-    flex-shrink: 0;
-    fill: #2A955F;
-    align-self: flex-end;
-    margin-bottom: 2px;
     background: #fff;
     border-radius: 50%;
+    font-size: 20px;
+    color: #2A955F; 
 }
 
 .header-info .logo-text {
@@ -91,14 +92,17 @@
     align-items: center;
 }
 
-.chat-body .bot-message svg {
+.chat-body .bot-message i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 35px;
     width: 35px;
     padding: 6px;
-    flex-shrink: 0;
-    fill: #fff;
     background: #2A955F;
     border-radius: 50%;
+    font-size: 20px;
+    color: #fff; 
 }
 
 .chat-body .message .message-text {
