@@ -1,5 +1,6 @@
 
 .chatbot-popup {
+    position: relative;
     width: 420px;
     overflow: hidden;
     background: #fff;
@@ -110,4 +111,51 @@
     color: #fff;
     border-radius: 11px 11px 2px 11px;
     background: #2A955F;
+}
+
+.chat-footer {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    background: #fff;
+    padding: 15px 22px 20px;
+}
+
+.chat-footer .chat-form {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-radius: 14px;
+    outline: 1px solid #e1e0e0;
+    width: 100%;
+
+}
+
+.chat-form .message-input {
+    border: none;
+    outline: none;
+    background: none;
+    height: 47px;
+    padding: 0 17px;
+    font-size: 0.97rem;
+    flex: 1;
+}
+
+.chat-form button {
+    height: 35px;
+    width: 35px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin-right: 3px;
+    color: #fff;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #2A955F;
+    transition: 0.4s ease;
+}
+
+.chat-form button:hover {
+    background: #1FA562;
 }
