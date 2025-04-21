@@ -1,0 +1,59 @@
+
+.chatbot-popup {
+    width: 420px;
+    overflow: hidden;
+    background: gray;
+    border-radius: 15px;
+    box-shadow: 0 0 128px 0 rgba(0, 0, 0, 0.1),
+    0 32px 64px -48px rgba(0, 0, 0, 0.9);
+
+}
+
+.chatbot-popup .chat-header {
+    display: flex;
+    padding: 15px 22px;
+    align-items: center;
+    justify-content: space-between;
+    background: #2A955F;
+}
+
+.chat-header .header-info {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+}
+
+.header-info svg {
+    height: 35px;
+    width: 35px;
+    padding: 6px;
+    flex-shrink: 0;
+    fill: #2A955F;
+    background: #fff;
+    border-radius: 50%;
+}
+
+.header-info .logo-text {
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+.chat-header button {
+    height: 40px;
+    width: 40px;
+    border: none;
+    outline: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 2rem;
+    padding-top: 2px;
+    margin-right: -10px;
+    border-radius: 50%;
+    transition: 0.4s ease;
+}
+
+.chat-header button:hover {
+    background: #1e804f;
+}
