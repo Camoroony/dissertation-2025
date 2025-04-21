@@ -125,10 +125,15 @@
     display: flex;
     align-items: center;
     background: #fff;
-    border-radius: 14px;
+    border-radius: 20px;
     outline: 1px solid #e1e0e0;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
     width: 100%;
 
+}
+
+.chat-footer .chat-form:focus-within {
+    outline: 2px solid #1FA562;
 }
 
 .chat-form .message-input {
@@ -145,6 +150,7 @@
     height: 35px;
     width: 35px;
     border: none;
+    display: none;
     outline: none;
     cursor: pointer;
     font-size: 1.2rem;
