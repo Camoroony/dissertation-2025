@@ -24,7 +24,7 @@ const ChatbotPopup = () => {
                     </div>
                     <div className='message user-message'>
                         <p className="message-text">
-                         This is the user message!
+                         This is the user message hello how are you doing i'm okay thank yhou woooo!
                         </p>
                     </div>
                 </div>
