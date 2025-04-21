@@ -10,7 +10,6 @@ import PrivateRoute from './components/routing/PrivateRoute';
 
 import CreateWorkoutPage from './pages/CreateWorkoutPage';
 import MyWorkoutsPage from './pages/MyWorkoutsPage';
-import ChatbotPage from './pages/ChatbotPage';
 import LoginPage from './pages/LoginPage';
 import ManageAccountPage from './pages/ManageAccountPage';
 import CreateAccountPage from './pages/CreateAccountPage';
@@ -20,6 +19,7 @@ import WorkoutPlanPage from './pages/WorkoutPlanPage';
 
 
 import NavBar from './components/ui/NavBar';
+import ChatbotPopup from './components/ui/ChatbotPopup';
 
 
 function App() {
@@ -35,7 +35,6 @@ function App() {
           {/* Private Routes */}
           <Route path="/createworkout" element={<PrivateRoute><CreateWorkoutPage/></PrivateRoute>}/>
           <Route path="/myworkouts" element={<PrivateRoute><MyWorkoutsPage/></PrivateRoute>}/>
-          <Route path="/chatbot" element={<PrivateRoute><ChatbotPage/></PrivateRoute>}/>
           <Route path="/manageaccount" element={<PrivateRoute><ManageAccountPage/></PrivateRoute>}/>
           <Route path="/references" element={<PrivateRoute><ReferencesPage/></PrivateRoute>}/>
           <Route path="/community" element={<PrivateRoute><CommunityPage/></PrivateRoute>}/>
@@ -56,6 +55,9 @@ function App() {
           />
 
         </Routes>
+
+        {isAuthenticated && <ChatbotPopup />}
+
       </main>
     </div>
   );

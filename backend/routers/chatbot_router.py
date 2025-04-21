@@ -28,9 +28,10 @@ def chat(user_id: int, user_prompt: str, chat_history_id=None, workout_plan_id=N
     
      add_chat_history(chat_history["_id"], user_prompt, ai_response_data["ai_response"])
 
-     return ai_response_data
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Unexpected error: {str(e)}")
+    
+    return ai_response_data
 
 @router.post("/community-chat")
 def community_chat(user_id: int, user_prompt: str, chat_history_id=None, db: Session = Depends(get_db_session)) :
