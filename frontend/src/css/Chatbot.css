@@ -1,7 +1,7 @@
 
 .chatbot-popup {
     position: relative;
-    width: 420px;
+    width: 650px;
     overflow: hidden;
     background: #fff;
     border: 2px solid #2A955F;
@@ -118,7 +118,7 @@
     position: absolute;
     bottom: 0px;
     width: 100%;
-    background: #fff;
+    background: #f7f7f7;
     padding: 15px 22px 20px;
 }
 
