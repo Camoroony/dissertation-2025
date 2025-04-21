@@ -20,7 +20,8 @@ const ChatbotPopup = () => {
 
     return (
         <div>
-            {showChatbotPopup ? ( <div className='chatbot-popup'>
+            {showChatbotPopup ? ( 
+                <div className='chatbot-popup'>
                 <div className='chat-header'>
                     <div className='header-info'>
                         <ChatbotIcon type={'head'} />
@@ -47,9 +48,12 @@ const ChatbotPopup = () => {
                 <div className='chat-footer'>
                     <ChatbotForm chatHistory={chatHistory} setChatHistory={setChatHistory} generateChatResponse={generateChatResponse} />
                 </div>
-            </div>) : ( <button id="chatbot-toggler" onClick={() => setShowChatbotPopup(true)}>
+            </div>
+            ) : ( 
+                <button id="chatbot-toggler" onClick={() => setShowChatbotPopup(true)}>
                 <ChatbotIcon type={'head'} />
-            </button>)}
+            </button>
+            )}
         </div>
     )
 }
