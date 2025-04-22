@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import ChatbotIcon from './ChatbotIcon'
 import ChatbotForm from './ChatbotForm'
 import ChatbotMessage from './ChatbotMessage'
@@ -14,6 +14,8 @@ const ChatbotPopup = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [chatHistory, setChatHistory] = useState([]);
     const [chatHistoryId, setChatHistoryId] = useState(null);
+
+    const chatBodyRef = useRef(null);
 
     useEffect(() => {
         const fetchChatHistory = async () => {
@@ -71,6 +73,12 @@ const ChatbotPopup = () => {
 
     }
 
+    useEffect(() => {
+        if (chatBodyRef.current) {
+            chatBodyRef.current.scrollTop = chatBodyRef.current.scrollHeight;
+        }
+    }, [chatHistory]);
+
     return (
         <div>
             {showChatbotPopup ? (
@@ -84,7 +92,7 @@ const ChatbotPopup = () => {
                     </div>
 
                     {/* Chat Body */}
-                    <div className='chat-body'>
+                    <div className='chat-body' ref={chatBodyRef}>
                         <div className='message bot-message'>
                             <ChatbotIcon type={'response'} />
                             <p className="message-text">
