@@ -9,6 +9,7 @@ from database.sql.workout_plan_db import add_workout_plan, delete_workout_plan, 
 from database.sql.workout_session_db import get_workout_session
 from database.sql.exercise_db import get_exercise
 from database.mongodb.workout_context_db import add_workout_context, get_workout_context, get_workout_sources_used, delete_workout_context
+from database.mongodb.chat_history_db import delete_chat_history_by_workoutplan
 from ai_services.gen_workout_plan import generate_workout_plan
 from ai_services.gen_workout_info import generate_exercise_overview, generate_workoutsession_overview
 
@@ -22,7 +23,7 @@ def index() :
 
 
 @router.post("/create-workout-plan", status_code=201)
-def create_workout(workout_input: WorkoutGenInput, user: UserSQL = Depends(verify_token), db: Session = Depends(get_db_session)) :
+def create_workout_plan(workout_input: WorkoutGenInput, user: UserSQL = Depends(verify_token), db: Session = Depends(get_db_session)) :
 
     ai_response_data = generate_workout_plan(workout_input)
 
@@ -52,7 +53,7 @@ def get_workout(id: int, user: UserSQL = Depends(verify_token), db: Session = De
     return workoutplan_read
 
 @router.get("/get-workout-plans-by-user")
-def get_workout(user: UserSQL = Depends(verify_token), db: Session = Depends(get_db_session)) :
+def get_workout_plan_by_userid(user: UserSQL = Depends(verify_token), db: Session = Depends(get_db_session)) :
 
     if not user:
         raise HTTPException(f"User Token verification failed")
@@ -72,7 +73,7 @@ def get_workout(user: UserSQL = Depends(verify_token), db: Session = Depends(get
     return workoutplans
 
 @router.get("/get-workout-plan-sources", status_code=200)
-def get_workout(id: int, user: UserSQL = Depends(verify_token)) :
+def get_workout_plan_sources(id: int, user: UserSQL = Depends(verify_token)) :
 
     if not user:
       raise HTTPException(f"User Token verification failed")
@@ -99,11 +100,16 @@ def delete_workout(workout_plan_id: int, db: Session = Depends(get_db_session)) 
 
     delete_result_mongodb = delete_workout_context(workout_plan_id)
 
+    delete_chathistory_result_mongodb = delete_chat_history_by_workoutplan(workout_plan_id)
+
     if delete_result_sql is False:
         raise HTTPException(status_code=400, detail=f"Error with deleting workout plan Id: {workout_plan_id}")
     
     if delete_result_mongodb is False:
         raise HTTPException(status_code=400, detail=f"Error with deleting workout context for workout Id: {workout_plan_id}")
+    
+    if delete_chathistory_result_mongodb is False:
+        raise HTTPException(status_code=400, detail=f"Error with deleting workout plan chat history for workout Id: {workout_plan_id}")
 
     return Response(
         f"Deleted workout plan (Id: {workout_plan_id})\n"
