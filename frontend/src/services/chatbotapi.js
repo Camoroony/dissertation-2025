@@ -2,17 +2,16 @@ import axios from 'axios'
 
 const base_url = "http://localhost:8000/chatbot"
 
-// Workout Plan API calls
+// Chatbot API calls
 
-export const generateChatResponse = async (user_prompt, chat_history_id, token) => {
+export const chat = async (user_prompt, chat_history_id, token) => {
   try {
 
-    const data = {
-      user_prompt: user_prompt,
-      chat_history_id: chat_history_id
-    };
-
-    const response = await axios.post(`${base_url}/chat`, data, {
+    const response = await axios.get(`${base_url}/chat`, {
+      params: {
+        user_prompt: user_prompt,
+        chat_history_id: chat_history_id
+      },
       headers: {
         Authorization: `Bearer ${token}`
       }

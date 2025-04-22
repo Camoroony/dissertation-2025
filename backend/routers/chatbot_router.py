@@ -16,7 +16,7 @@ router = APIRouter(
 def index() :
     return Response("Hello from the chatbot router!")
 
-@router.post("/chat")
+@router.get("/chat")
 def chat(user_prompt: str, chat_history_id: str, user: UserSQL = Depends(verify_token), db: Session = Depends(get_db_session)) :
 
     if not user:
@@ -26,7 +26,7 @@ def chat(user_prompt: str, chat_history_id: str, user: UserSQL = Depends(verify_
 
      chat_history = get_chat_history(chat_history_id)
 
-     workout_plan_id = chat_history["workout_plan_id"] if chat_history["workout_plan_id"] is not None else None
+     workout_plan_id = chat_history.get("workout_plan_id", None)
 
      workout_plan = get_workout_plan(workout_plan_id, db) if workout_plan_id is not None else None
      workout_plan_dict = serialise_workout_plan(workout_plan) if workout_plan else None

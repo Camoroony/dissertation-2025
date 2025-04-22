@@ -22,6 +22,7 @@ const ChatbotForm = ({ setChatHistory, generateChatResponse }) => {
 
             generateChatResponse(userMessage);
         }, 600);
+        
     }
 
 
