@@ -19,7 +19,10 @@ const ChatbotPopup = () => {
                 const response = await getUserChatHistory(token);
                 console.log(response)
                 if (response.status === 200) {
-                    // return response
+                    for (let i = 0; i < response.data[0].chats.length; i++) {
+                        setChatHistory((history) => [...history, { role: "user", text: response.data[0].chats[i].user_message }]);
+                        setChatHistory((history) => [...history, { role: "model", text: response.data[0].chats[i].ai_message }]);
+                    }
                 }
             } catch (err) {
                 console.log(err)

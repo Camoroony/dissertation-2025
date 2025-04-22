@@ -40,7 +40,7 @@ def chat(user_prompt: str, chat_history_id: str, user: UserSQL = Depends(verify_
     
     return ai_response_data
 
-@router.get("/get-chat-history")
+@router.get("/get-chat-history", status_code=200)
 def get_chat_history_by_user(user: UserSQL = Depends(verify_token), db: Session = Depends(get_db_session)) :
 
     if not user:
