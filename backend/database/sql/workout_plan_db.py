@@ -98,7 +98,7 @@ def get_workout_plans_by_user(user_id: int, db: Session):
 
     workout_plans = db.exec(statement).all()
 
-    if not workout_plans:
+    if workout_plans == None:
         raise ValueError(f"Workout plans were not found for user Id: {user_id}.")
 
     return workout_plans

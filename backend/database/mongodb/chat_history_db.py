@@ -102,3 +102,26 @@ def delete_chat_history(chat_history_id: int):
         state = True
     
     return state
+
+def delete_chat_history_by_user(user_id: int):
+       
+    state = False
+
+    result = chat_history_collection.delete_many({"user_id": user_id})
+
+    if result.deleted_count > 0:
+        state = True
+    
+    return state
+
+def delete_chat_history_by_workoutplan(workout_plan_id: int):
+       
+    state = False
+
+    result = chat_history_collection.delete_one({"workout_plan_id": workout_plan_id})
+
+    if result.deleted_count > 0:
+        state = True
+    
+    return state
+

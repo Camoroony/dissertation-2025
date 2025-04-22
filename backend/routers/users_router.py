@@ -1,12 +1,10 @@
-import jwt 
-from typing import Optional
-from datetime import datetime, timedelta, timezone
-from fastapi import APIRouter, Response, Depends, HTTPException, Request
+from fastapi import APIRouter, Response, Depends, HTTPException
 from sqlmodel import Session, select
 from models.db_models import UserSQL
 from models.input_models import UserInput
 from models.security_models import Token
 from database.sql.init_sql_db import get_db_session
+from database.mongodb.chat_history_db import create_chat_history, delete_chat_history_by_user
 from security.hashing import hash_password, verify_password
 from security.jwt_token import verify_token, create_access_token
 
@@ -35,6 +33,9 @@ def create_user(user_data: UserInput, db: Session = Depends(get_db_session)) :
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
+
+    create_chat_history(new_user.id, chat_type="general")
+    create_chat_history(new_user.id, chat_type="community")
 
     return new_user
 
@@ -92,6 +93,8 @@ def delete_user(user_id: int, db: Session = Depends(get_db_session)) :
     
     db.delete(user)
     db.commit()
+
+    delete_chat_history_by_user(user_id)
 
     return f"Deleted user Id: {user.id}, Username: {user.username}"
 

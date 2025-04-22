@@ -9,7 +9,7 @@ from database.sql.workout_plan_db import add_workout_plan, delete_workout_plan, 
 from database.sql.workout_session_db import get_workout_session
 from database.sql.exercise_db import get_exercise
 from database.mongodb.workout_context_db import add_workout_context, get_workout_context, get_workout_sources_used, delete_workout_context
-from database.mongodb.chat_history_db import delete_chat_history_by_workoutplan
+from database.mongodb.chat_history_db import create_chat_history, delete_chat_history_by_workoutplan
 from ai_services.gen_workout_plan import generate_workout_plan
 from ai_services.gen_workout_info import generate_exercise_overview, generate_workoutsession_overview
 
@@ -30,6 +30,8 @@ def create_workout_plan(workout_input: WorkoutGenInput, user: UserSQL = Depends(
     add_result_sql = add_workout_plan(ai_response_data["response"], user.id, db)
 
     add_workout_context(add_result_sql.id, ai_response_data["context"], list(ai_response_data["sources_used"]))
+
+    create_chat_history(user.id, "workout", add_result_sql.id)
 
     return {"id": add_result_sql.id}
 
@@ -66,9 +68,6 @@ def get_workout_plan_by_userid(user: UserSQL = Depends(verify_token), db: Sessio
     
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"An unexpected error occured retrieving the workout plans for user: {user.id}.")
-         
-    if not workoutplans:
-        raise HTTPException(status_code=400, detail=f"Error with retrieving workout plans for user Id: {user.id}")
 
     return workoutplans
 
