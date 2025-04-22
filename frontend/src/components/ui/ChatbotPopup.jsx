@@ -1,22 +1,64 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ChatbotIcon from './ChatbotIcon'
 import ChatbotForm from './ChatbotForm'
 import ChatbotMessage from './ChatbotMessage'
 import '../../css/Chatbot.css'
 
+import { getUserChatHistory } from '../../services/chatbotapi'
+
 const ChatbotPopup = () => {
 
     const [showChatbotPopup, setShowChatbotPopup] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+    const [chatHistory, setChatHistory] = useState([]);
 
-    const generateChatResponse = async (history) => {
+    useEffect(() => {
+        const fetchChathistory = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                const response = await getUserChatHistory(token);
+                console.log(response)
+                if (response.status === 200) {
+                    // return response
+                }
+            } catch (err) {
+                console.log(err)
+                if (err.message) {
+                    setErrorMessage(`Error occured when generating the a chat message response: ${err.message}` || 'An error occurred, please try again.')
+                    setTimeout(() => setErrorMessage(''), 4000);
+                } else {
+                    setErrorMessage('An unknown error occurred, please try again.')
+                    setTimeout(() => setErrorMessage(''), 4000);
+                }
+            }
+        };
 
-        history.map(({role, text}) => ({role, parts: [{text}]}))
+        fetchChathistory();
+    }, []);
+
+    const generateChatResponse = async (userMessage) => {
+
+        try {
+            const token = localStorage.getItem('token');
+            const response = await generateChatResponse(userMessage, chatHistoryId, token);
+            console.log(response)
+            if(response.status === 200){
+                // return response
+            }
+        } catch(err) {
+            console.log(err)
+            if (err.message) {
+                setErrorMessage(`Error occured when generating the a chat message response: ${err.message}` || 'An error occurred, please try again.')
+                setTimeout(() => setErrorMessage(''), 4000);
+            } else {
+                setErrorMessage('An unknown error occurred, please try again.')
+                setTimeout(() => setErrorMessage(''), 4000);
+            }
+        }
 
         console.log(history)
 
     }
-
-    const [chatHistory, setChatHistory] = useState([]);
 
     return (
         <div>
@@ -46,7 +88,7 @@ const ChatbotPopup = () => {
 
                 {/* Chat Footer */}
                 <div className='chat-footer'>
-                    <ChatbotForm chatHistory={chatHistory} setChatHistory={setChatHistory} generateChatResponse={generateChatResponse} />
+                    <ChatbotForm setChatHistory={setChatHistory} generateChatResponse={generateChatResponse} />
                 </div>
             </div>
             ) : ( 

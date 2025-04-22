@@ -1,5 +1,6 @@
 from bson import ObjectId
 from database.mongodb.init_mongodb_db import get_mongodb_client
+from models.utilities.mongodb_serialising import serialize_chatId
 import datetime
 
 
@@ -63,7 +64,7 @@ def get_chat_history(chat_history_id: str):
     )
 
     if not chat_history:
-        return {"error": "Chat history not found"}
+       raise ValueError(f"Chat history with Id: {chat_history_id} not found.")
 
     return chat_history
 
@@ -77,12 +78,15 @@ def get_chat_histories_by_userid(user_id: int):
     workout_chats = []
 
     for chat_history in chat_histories:
-     if chat_history["chat_type"] == "workout":
-        workout_chats.append(chat_history)
-     elif chat_history["chat_type"] == "community": 
-        community_chats.append(chat_history)
+     
+     serialised_chat = serialize_chatId(chat_history)
+
+     if serialised_chat["chat_type"] == "workout":
+        workout_chats.append(serialised_chat)
+     elif serialised_chat["chat_type"] == "community": 
+        community_chats.append(serialised_chat)
      else:
-        generic_chats.append(chat_history) 
+        generic_chats.append(serialised_chat) 
 
     chats = {
         "generic_chats": generic_chats,
