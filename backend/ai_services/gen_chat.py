@@ -14,11 +14,26 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 model = ChatOpenAI(model="gpt-4o-mini", api_key=OPENAI_API_KEY)
 
-def generate_chat(prompt: str, chat_history=None, workout_plan=None):
+def generate_chat(prompt: str, chat_history, workout_plans, workout_plan=None,):
 
-    response = generate_generic_chat(prompt, chat_history) if workout_plan is None else generate_workout_chat(prompt, chat_history, workout_plan)
+    chat_type = chat_history.get('chat_type')
 
-    return response
+    if chat_type == 'Workout' and workout_plan is None:
+        raise ValueError("Workout chat requires a workout_plan.")
+
+    if chat_type == 'Community' and not workout_plans:
+        raise ValueError("Community chat requires a list of workout_plans.")
+
+    match chat_type:
+        case 'General':
+            return generate_generic_chat(prompt, chat_history)
+        case 'Workout':
+            return generate_workout_chat(prompt, chat_history, workout_plan)
+        case 'Community':
+            return generate_community_chat(prompt, chat_history, workout_plans)
+        case _:
+            raise ValueError(f"Unsupported chat type: {chat_history['chat_type']}")
+        
 
 
 def generate_generic_chat(user_prompt: str, chat_history):
@@ -124,6 +139,8 @@ def generate_workout_chat(user_prompt: str, chat_history, workout_plan: dict):
     + "\n USE ONLY THE DOCUMENTS AND/OR THE CHAT HISTORY PROVIDED TO FORMULATE YOUR ANSWER."
     + "\n IF THE DOCUMENTS OR CHAT HISTORY DO NOT PROVIDE YOU WITH THE ANSWER TO THE QUESTION, RESPOND SAYING YOU DON'T KNOW THE ANSWER."
     + "\n REMINDER: THE ANSWER MUST BE IN REFERENCE TO THE WORKOUT PLAN PROVIDED."
+    + "\n When you use any information from a source or sources, make sure to refer to the source directly in your response in this format: "
+    + " ' [Source: source_title, source_author, source_url]' to give context to the user."
     + "\n These are the relevant documents, chat history and workout plan you must use to formulate your answer:"
     + "\n **Relevant Documents:**"
     + f"\n{context_text}"

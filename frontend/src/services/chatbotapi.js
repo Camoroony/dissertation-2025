@@ -30,7 +30,7 @@ export const chat = async (user_prompt, chat_history_id, token) => {
   }
 }
 
-export const getUserChatHistory = async (token) => {
+export const getUserChats = async (token) => {
   try {
 
     const response = await axios.get(`${base_url}/get-chat-history`, {

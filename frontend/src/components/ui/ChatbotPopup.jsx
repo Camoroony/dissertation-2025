@@ -6,7 +6,7 @@ import '../../css/Chatbot.css'
 
 
 import { chat } from '../../services/chatbotapi'
-import { getUserChatHistory } from '../../services/chatbotapi'
+import { getUserChats } from '../../services/chatbotapi'
 
 const ChatbotPopup = () => {
 
@@ -64,7 +64,7 @@ const ChatbotPopup = () => {
         const fetchChats = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const response = await getUserChatHistory(token);
+                const response = await getUserChats(token);
                 console.log(response)
                 if (response.status === 200) {
 
