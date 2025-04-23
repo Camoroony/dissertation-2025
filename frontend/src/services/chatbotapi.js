@@ -7,11 +7,12 @@ const base_url = "http://localhost:8000/chatbot"
 export const chat = async (user_prompt, chat_history_id, token) => {
   try {
 
-    const response = await axios.get(`${base_url}/chat`, {
-      params: {
-        user_prompt: user_prompt,
-        chat_history_id: chat_history_id
-      },
+    const data = {
+      user_prompt: user_prompt,
+      chat_history_id: chat_history_id
+    };
+
+    const response = await axios.post(`${base_url}/chat`, data, {
       headers: {
         Authorization: `Bearer ${token}`
       }

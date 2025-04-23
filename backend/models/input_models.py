@@ -65,5 +65,12 @@ class RatingInput(BaseModel):
     comment: str
 
 
+# User Chat Input Model
+
+class UserChatInput(BaseModel):
+    user_prompt: str
+    chat_history_id: str
+
+
         
 

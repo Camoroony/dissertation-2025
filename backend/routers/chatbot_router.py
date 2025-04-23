@@ -6,6 +6,7 @@ from database.sql.workout_plan_db import get_workout_plan, get_workout_plans
 from models.utilities.sql_serialising import serialise_workout_plan
 from models.utilities.mongodb_serialising import serialise_chatId
 from models.db_models import UserSQL
+from models.input_models import UserChatInput
 from security.jwt_token import verify_token
 from ai_services.gen_chat import generate_chat, generate_community_chat
 
@@ -18,15 +19,15 @@ def index() :
     return Response("Hello from the chatbot router!")
 
 
-@router.get("/chat")
-def chat(user_prompt: str, chat_history_id: str, user: UserSQL = Depends(verify_token), db: Session = Depends(get_db_session)) :
+@router.post("/chat")
+def chat(userInput: UserChatInput, user: UserSQL = Depends(verify_token), db: Session = Depends(get_db_session)) :
 
     if not user:
       raise HTTPException(f"User Token verification failed")
     
     try: 
 
-     chat_history = get_chat_history(chat_history_id)
+     chat_history = get_chat_history(userInput.chat_history_id)
 
      workout_plans_dict = []
 
@@ -43,9 +44,9 @@ def chat(user_prompt: str, chat_history_id: str, user: UserSQL = Depends(verify_
      workout_plan = get_workout_plan(workout_plan_id, user.id, db) if workout_plan_id is not None else None
      workout_plan_dict = serialise_workout_plan(workout_plan) if workout_plan else None
 
-     ai_response_data = generate_chat(user_prompt, chat_history, workout_plans_dict, workout_plan_dict)
+     ai_response_data = generate_chat(userInput.user_prompt, chat_history, workout_plans_dict, workout_plan_dict)
     
-     add_chat_history(chat_history["_id"], user_prompt, ai_response_data["ai_response"])
+     add_chat_history(chat_history["_id"], userInput.user_prompt, ai_response_data["ai_response"])
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Unexpected error: {str(e)}")
