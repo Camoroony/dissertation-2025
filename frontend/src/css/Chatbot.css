@@ -108,6 +108,15 @@
     align-items: center;
 }
 
+.chat-body .message .message-text {
+    padding: 13px 16px; 
+    max-width: 75%;
+    word-wrap: break-word;
+    white-space: pre-line;
+    font-size: 0.9rem;
+
+}
+
 .chat-body .bot-message i {
     display: flex;
     align-items: center;
@@ -121,18 +130,28 @@
     color: #fff; 
 }
 
-.chat-body .message .message-text {
-    padding: 13px 16px; 
-    max-width: 75%;
-    word-wrap: break-word;
-    white-space: pre-line;
-    font-size: 0.9rem;
-
-}
-
 .chat-body .bot-message .message-text {
     border-radius: 11px;
     background: #ffe9fc;
+}
+
+.chat-body .error-message i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 35px;
+    width: 35px;
+    padding: 6px;
+    background: red;
+    border-radius: 50%;
+    font-size: 20px;
+    color: #fff; 
+}
+
+.chat-body .error-message .message-text {
+    border-radius: 11px;
+    background: #ffe9fc;
+    color: red;
 }
 
 .chat-body .user-message {

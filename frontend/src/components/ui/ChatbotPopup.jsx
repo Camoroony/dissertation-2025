@@ -61,11 +61,9 @@ const ChatbotPopup = () => {
         } catch (err) {
             console.log(err)
             if (err.message) {
-                setErrorMessage(`Error occured when generating the a chat message response: ${err.message}` || 'An error occurred, please try again.')
-                setTimeout(() => setErrorMessage(''), 4000);
+                setChatHistory((history) => [...history.filter(message => message.text !== "Thinking..."), {role: "error", text: `An error occured when generating the chat response: ${err.message}`}]);
             } else {
-                setErrorMessage('An unknown error occurred, please try again.')
-                setTimeout(() => setErrorMessage(''), 4000);
+                setChatHistory((history) => [...history.filter(message => message.text !== "Thinking..."), {role: "error", text: 'An unknown error occured when generating this response.'}]);
             }
         }
 
