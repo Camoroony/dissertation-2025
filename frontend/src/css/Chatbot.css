@@ -142,7 +142,7 @@
     height: 35px;
     width: 35px;
     padding: 6px;
-    background: red;
+    background: rgb(200, 1, 1);
     border-radius: 50%;
     font-size: 20px;
     color: #fff; 
@@ -151,7 +151,7 @@
 .chat-body .error-message .message-text {
     border-radius: 11px;
     background: #ffe9fc;
-    color: red;
+    color: rgb(200, 1, 1);
 }
 
 .chat-body .user-message {
