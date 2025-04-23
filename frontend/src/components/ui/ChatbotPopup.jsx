@@ -14,57 +14,25 @@ const ChatbotPopup = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [chatHistory, setChatHistory] = useState([]);
     const [chatHistoryId, setChatHistoryId] = useState(null);
-    const [selectedBot, setSelectedBot] = useState('Chatbot');
-    const [botOptions, setBotOptions] = useState([]);
+    const [chatbotOptions, setChatbotOptions] = useState([]);
+    const [selectedBot, setSelectedBot] = useState(null);
 
     const chatBodyRef = useRef(null);
 
-    // const botOptions = [
-    //     { label: 'Chatbot', value: 'Chatbot' },
-    //     { label: 'Community Community Chatbot', value: 'Community Community Chatbot' },
-    //     { label: 'Workout plan chatbot', value: 'Workout Plan Chatbot' }
-    //   ];
+    const updateChatbot = async (chatbotId) => {
 
-    const updateChatHistory = async (chatbot) => {
-        setChatHistoryId(chatbot._id);
+        const chatbot = chatbotOptions.find(option => option.id == chatbotId);
+
+        setChatHistoryId(chatbot.id);
         const newHistory = chatbot.chats.flatMap(chat => [
             { role: "user", text: chat.user_message },
             { role: "model", text: chat.ai_message }
         ]);
         setChatHistory(newHistory);
-    }
 
-    useEffect(() => {
-        const fetchChats = async () => {
-            try {
-                const token = localStorage.getItem('token');
-                const response = await getUserChatHistory(token);
-                console.log(response)
-                if (response.status === 200) {
+        setSelectedBot(chatbot)
+    };
 
-                    const options = response.data.map(bot => ({
-                        label: bot.workout_plan_name ? `'${bot.workout_plan_name}' chatbot` : `${bot.chat_type} chatbot`,
-                        value: bot._id,
-                        chats: bot.chats
-                    }));
-                    setBotOptions(options);
-
-                    updateChatHistory(options[0])
-                }
-            } catch (err) {
-                console.log(err)
-                if (err.message) {
-                    setErrorMessage(`Error occured when retrieving chat history: ${err.message}` || 'An error occurred, please try again.')
-                    setTimeout(() => setErrorMessage(''), 4000);
-                } else {
-                    setErrorMessage('An unknown error occurred, please try again.')
-                    setTimeout(() => setErrorMessage(''), 4000);
-                }
-            }
-        };
-
-        fetchChats();
-    }, []);
 
     const generateChatResponse = async (userMessage) => {
 
@@ -89,8 +57,48 @@ const ChatbotPopup = () => {
 
         console.log(history)
 
-    }
+    };
 
+
+    useEffect(() => {
+        const fetchChats = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                const response = await getUserChatHistory(token);
+                console.log(response)
+                if (response.status === 200) {
+
+                    const options = response.data.map(bot => ({
+                        label: bot.workout_plan_name ? `'${bot.workout_plan_name}' chatbot` : `${bot.chat_type} chatbot`,
+                        id: bot._id,
+                        chats: bot.chats
+                    }));
+
+                    setChatbotOptions(options);
+                }
+            } catch (err) {
+                console.log(err)
+                if (err.message) {
+                    setErrorMessage(`Error occured when retrieving chat details: ${err.message}` || 'An error occurred, please try again.')
+                    setTimeout(() => setErrorMessage(''), 4000);
+                } else {
+                    setErrorMessage('An unknown error occurred, please try again.')
+                    setTimeout(() => setErrorMessage(''), 4000);
+                }
+            }
+        };
+
+        fetchChats();
+    }, []);
+
+
+    useEffect(() => {
+        if (chatbotOptions.length > 0 && selectedBot === null) {
+            updateChatbot(chatbotOptions[0].id);
+        }
+    }, [chatbotOptions]); 
+
+    
     useEffect(() => {
         if (chatBodyRef.current) {
             chatBodyRef.current.scrollTop = chatBodyRef.current.scrollHeight;
@@ -107,11 +115,11 @@ const ChatbotPopup = () => {
                             <div className='relative flex items-center border border-white rounded-md px-2 py-1'>
                                 <select
                                     className='chatbot-select bg-transparent text-white appearance-none pr-6'
-                                    value={selectedBot}
-                                    onChange={(e) => setSelectedBot(e.target.value)}
+                                    value={selectedBot.id}
+                                    onChange={(e) => updateChatbot(e.target.value)}
                                 >
-                                    {botOptions.map((bot) => (
-                                        <option key={bot.value} value={bot.label}>
+                                    {chatbotOptions.map((bot) => (
+                                        <option key={bot.id} value={bot.id}>
                                             {bot.label}
                                         </option>
                                     ))}

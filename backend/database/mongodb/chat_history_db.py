@@ -8,9 +8,9 @@ db = get_mongodb_client()
 chat_history_collection = db['chat_histories']
 
 
-def create_chat_history(user_id: int, chat_type: str = "general",  workout_plan=None):
-    if chat_type not in {"general", "community", "workout"}:
-       raise ValueError("Invalid chat type. Must be 'general', 'community', or 'workout'.")
+def create_chat_history(user_id: int, chat_type: str = "General",  workout_plan=None):
+    if chat_type not in {"General", "Community", "Workout"}:
+       raise ValueError("Invalid chat type. Must be 'General', 'Community', or 'Workout'.")
 
 
     chat_history_document = {
@@ -20,7 +20,7 @@ def create_chat_history(user_id: int, chat_type: str = "general",  workout_plan=
         "chats": []
     }
 
-    if chat_type == "workout" and workout_plan is not None:
+    if chat_type == "Workout" and workout_plan is not None:
         chat_history_document["workout_plan_id"] = workout_plan.id
         chat_history_document["workout_plan_name"] = workout_plan.plan_name
 

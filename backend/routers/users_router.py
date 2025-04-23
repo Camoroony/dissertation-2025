@@ -34,8 +34,8 @@ def create_user(user_data: UserInput, db: Session = Depends(get_db_session)) :
     db.commit()
     db.refresh(new_user)
 
-    create_chat_history(new_user.id, chat_type="general")
-    create_chat_history(new_user.id, chat_type="community")
+    create_chat_history(new_user.id, chat_type="General")
+    create_chat_history(new_user.id, chat_type="Community")
 
     return new_user
 
