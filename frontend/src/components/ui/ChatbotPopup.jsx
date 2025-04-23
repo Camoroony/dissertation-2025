@@ -14,8 +14,15 @@ const ChatbotPopup = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [chatHistory, setChatHistory] = useState([]);
     const [chatHistoryId, setChatHistoryId] = useState(null);
+    const [selectedBot, setSelectedBot] = useState('Chatbot');
 
     const chatBodyRef = useRef(null);
+
+    const botOptions = [
+        { label: 'Chatbot', value: 'Chatbot' },
+        { label: 'Community Community Chatbot', value: 'Community Community Chatbot' },
+        { label: 'Workout plan chatbot', value: 'Workout Plan Chatbot' }
+      ];
 
     useEffect(() => {
         const fetchChatHistory = async () => {
@@ -84,9 +91,22 @@ const ChatbotPopup = () => {
                     <div className='chat-header'>
                         <div className='header-info'>
                             <ChatbotIcon type={'head'} />
-                            <h2 className='logo-text'>Chatbot</h2>
+                            <div className='relative flex items-center border border-white rounded-md px-2 py-1'>
+                                <select
+                                    className='chatbot-select bg-transparent text-white appearance-none pr-6'
+                                    value={selectedBot}
+                                    onChange={(e) => setSelectedBot(e.target.value)}
+                                >
+                                    {botOptions.map((bot) => (
+                                        <option key={bot.value} value={bot.label}>
+                                            {bot.label}
+                                        </option>
+                                    ))}
+                                </select>
+                                <i className="pi pi-angle-down" id='chatbot-select-icon'></i>
+                            </div>
                         </div>
-                        <button className='pi pi-angle-down' style={{ fontSize: '1rem' }} onClick={() => setShowChatbotPopup(false)}></button>
+                        <button className='pi pi-angle-down' style={{ fontSize: '20px' }} onClick={() => setShowChatbotPopup(false)}></button>
                     </div>
 
                     {/* Chat Body */}
