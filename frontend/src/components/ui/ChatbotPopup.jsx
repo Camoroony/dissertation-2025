@@ -15,28 +15,41 @@ const ChatbotPopup = () => {
     const [chatHistory, setChatHistory] = useState([]);
     const [chatHistoryId, setChatHistoryId] = useState(null);
     const [selectedBot, setSelectedBot] = useState('Chatbot');
+    const [botOptions, setBotOptions] = useState([]);
 
     const chatBodyRef = useRef(null);
 
-    const botOptions = [
-        { label: 'Chatbot', value: 'Chatbot' },
-        { label: 'Community Community Chatbot', value: 'Community Community Chatbot' },
-        { label: 'Workout plan chatbot', value: 'Workout Plan Chatbot' }
-      ];
+    // const botOptions = [
+    //     { label: 'Chatbot', value: 'Chatbot' },
+    //     { label: 'Community Community Chatbot', value: 'Community Community Chatbot' },
+    //     { label: 'Workout plan chatbot', value: 'Workout Plan Chatbot' }
+    //   ];
+
+    const updateChatHistory = async (chatbot) => {
+        setChatHistoryId(chatbot._id);
+        const newHistory = chatbot.chats.flatMap(chat => [
+            { role: "user", text: chat.user_message },
+            { role: "model", text: chat.ai_message }
+        ]);
+        setChatHistory(newHistory);
+    }
 
     useEffect(() => {
-        const fetchChatHistory = async () => {
+        const fetchChats = async () => {
             try {
                 const token = localStorage.getItem('token');
                 const response = await getUserChatHistory(token);
                 console.log(response)
                 if (response.status === 200) {
-                    setChatHistoryId(response.data[0]._id);
-                    const newHistory = response.data[0].chats.flatMap(chat => [
-                        { role: "user", text: chat.user_message },
-                        { role: "model", text: chat.ai_message }
-                    ]);
-                    setChatHistory(newHistory);
+
+                    const options = response.data.map(bot => ({
+                        label: bot.workout_plan_name ? `'${bot.workout_plan_name}' chatbot` : `${bot.chat_type} chatbot`,
+                        value: bot._id,
+                        chats: bot.chats
+                    }));
+                    setBotOptions(options);
+
+                    updateChatHistory(options[0])
                 }
             } catch (err) {
                 console.log(err)
@@ -50,7 +63,7 @@ const ChatbotPopup = () => {
             }
         };
 
-        fetchChatHistory();
+        fetchChats();
     }, []);
 
     const generateChatResponse = async (userMessage) => {

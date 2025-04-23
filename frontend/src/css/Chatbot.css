@@ -107,12 +107,7 @@
     font-weight: 500;
     outline: none;
     cursor: pointer;
-  }
-  
-  .chatbot-select option {
-    background: #fff;
-    color: #2A955F;
-  }
+}
 
 .chat-body {
     display: flex;

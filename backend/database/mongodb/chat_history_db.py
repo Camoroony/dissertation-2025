@@ -1,6 +1,5 @@
 from bson import ObjectId
 from database.mongodb.init_mongodb_db import get_mongodb_client
-from models.utilities.mongodb_serialising import serialize_chatId
 import datetime
 
 
@@ -9,7 +8,7 @@ db = get_mongodb_client()
 chat_history_collection = db['chat_histories']
 
 
-def create_chat_history(user_id: int, chat_type: str = "general",  workout_plan_id=None):
+def create_chat_history(user_id: int, chat_type: str = "general",  workout_plan=None):
     if chat_type not in {"general", "community", "workout"}:
        raise ValueError("Invalid chat type. Must be 'general', 'community', or 'workout'.")
 
@@ -21,8 +20,9 @@ def create_chat_history(user_id: int, chat_type: str = "general",  workout_plan_
         "chats": []
     }
 
-    if chat_type == "workout" and workout_plan_id is not None:
-        chat_history_document["workout_plan_id"] = workout_plan_id
+    if chat_type == "workout" and workout_plan is not None:
+        chat_history_document["workout_plan_id"] = workout_plan.id
+        chat_history_document["workout_plan_name"] = workout_plan.plan_name
 
 
     result = chat_history_collection.insert_one(chat_history_document)
@@ -73,28 +73,10 @@ def get_chat_histories_by_userid(user_id: int):
 
     chat_histories = chat_history_collection.find({"user_id": user_id})
 
-    generic_chats = []
-    community_chats = []
-    workout_chats = []
+    if not chat_histories:
+        raise ValueError(f"No chat histories were found for user: {user_id}.")
 
-    for chat_history in chat_histories:
-     
-     serialised_chat = serialize_chatId(chat_history)
-
-     if serialised_chat["chat_type"] == "workout":
-        workout_chats.append(serialised_chat)
-     elif serialised_chat["chat_type"] == "community": 
-        community_chats.append(serialised_chat)
-     else:
-        generic_chats.append(serialised_chat) 
-
-    chats = {
-        "generic_chats": generic_chats,
-        "community_chats": community_chats,
-        "workout_chats": workout_chats
-    }
-
-    return chats
+    return list(chat_histories)
 
 def delete_chat_history(chat_history_id: int):
 

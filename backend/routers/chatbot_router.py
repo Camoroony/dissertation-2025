@@ -3,7 +3,8 @@ from sqlmodel import Session
 from database.sql.init_sql_db import get_db_session
 from database.mongodb.chat_history_db import create_chat_history, get_chat_history, add_chat_history, delete_chat_history, get_chat_histories_by_userid
 from database.sql.workout_plan_db import get_workout_plan, get_workout_plans
-from models.utilities.sql_seralising import serialise_workout_plan
+from models.utilities.sql_serialising import serialise_workout_plan
+from models.utilities.mongodb_serialising import serialise_chatId
 from models.db_models import UserSQL
 from security.jwt_token import verify_token
 from ai_services.gen_chat import generate_chat, generate_community_chat
@@ -15,6 +16,7 @@ router = APIRouter(
 @router.get("")
 def index() :
     return Response("Hello from the chatbot router!")
+
 
 @router.get("/chat")
 def chat(user_prompt: str, chat_history_id: str, user: UserSQL = Depends(verify_token), db: Session = Depends(get_db_session)) :
@@ -40,6 +42,7 @@ def chat(user_prompt: str, chat_history_id: str, user: UserSQL = Depends(verify_
     
     return ai_response_data
 
+
 @router.get("/get-chat-history", status_code=200)
 def get_chat_history_by_user(user: UserSQL = Depends(verify_token), db: Session = Depends(get_db_session)) :
 
@@ -47,13 +50,15 @@ def get_chat_history_by_user(user: UserSQL = Depends(verify_token), db: Session 
       raise HTTPException(f"User Token verification failed")
     
     try: 
-
      chat_histories = get_chat_histories_by_userid(user.id)
+
+     serialised_chat_histories = [serialise_chatId(chat_history) for chat_history in chat_histories]
 
     except ValueError as e:
         raise HTTPException(status_code=500, detail=f"Error when retrieving chat history: {str(e)}")
     
-    return chat_histories["generic_chats"] # THIS ONLY RETURNS THE GENERIC CHAT, UPDATE THIS TO RETURN ALL WHEN PROPERLY IMPLEMENTED IN UI
+    return serialised_chat_histories 
+
 
 @router.post("/community-chat")
 def community_chat(user_id: int, user_prompt: str, chat_history_id=None, db: Session = Depends(get_db_session)) :
@@ -76,6 +81,7 @@ def community_chat(user_id: int, user_prompt: str, chat_history_id=None, db: Ses
      return ai_response_data
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Unexpected error: {str(e)}")
+
 
 @router.delete("/delete-chat")
 def delete_chat(chat_history_id: str):

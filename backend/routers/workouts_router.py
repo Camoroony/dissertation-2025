@@ -2,7 +2,7 @@ from fastapi import APIRouter, Response, Depends, HTTPException
 from sqlmodel import Session
 from models.input_models import WorkoutGenInput
 from models.db_models import UserSQL
-from models.utilities.sql_seralising import serialise_workout_plan, serialise_workout_session, serialise_exercise
+from models.utilities.sql_serialising import serialise_workout_plan, serialise_workout_session, serialise_exercise
 from security.jwt_token import verify_token
 from database.sql.init_sql_db import get_db_session
 from database.sql.workout_plan_db import add_workout_plan, delete_workout_plan, get_workout_plan, get_workout_plans_by_user
@@ -31,7 +31,7 @@ def create_workout_plan(workout_input: WorkoutGenInput, user: UserSQL = Depends(
 
     add_workout_context(add_result_sql.id, ai_response_data["context"], list(ai_response_data["sources_used"]))
 
-    create_chat_history(user.id, "workout", add_result_sql.id)
+    create_chat_history(user.id, "workout", add_result_sql)
 
     return {"id": add_result_sql.id}
 
