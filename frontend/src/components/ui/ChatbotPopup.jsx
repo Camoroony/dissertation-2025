@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import ChatbotIcon from './ChatbotIcon'
 import ChatbotForm from './ChatbotForm'
 import ChatbotMessage from './ChatbotMessage'
+import ChatbotTemplateMessage from './ChatbotTemplateMessage'
 import '../../css/Chatbot.css'
 
 
@@ -75,7 +76,8 @@ const ChatbotPopup = () => {
                     const options = response.data.map(bot => ({
                         label: bot.workout_plan_name ? `'${bot.workout_plan_name}' chatbot` : `${bot.chat_type} chatbot`,
                         id: bot._id,
-                        chats: bot.chats
+                        chats: bot.chats,
+                        chat_type: bot.chat_type
                     }));
 
                     setChatbotOptions(options);
@@ -138,9 +140,12 @@ const ChatbotPopup = () => {
                     <div className='chat-body' ref={chatBodyRef}>
                         <div className='message bot-message'>
                             <ChatbotIcon type={'response'} />
-                            <p className="message-text">
+                            {selectedBot && (
+                            <ChatbotTemplateMessage chat_type={selectedBot.chat_type} />
+                            )}
+                            {/* <p className="message-text">
                                 Hi! <br /> How can I help you today?
-                            </p>
+                            </p> */}
                         </div>
 
                         {chatHistory.map((chat, index) => (

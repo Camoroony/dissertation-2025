@@ -81,7 +81,7 @@ def get_workout_plans(db: Session):
 
     workout_plans = db.exec(statement).all()
 
-    if not workout_plans:
+    if workout_plans is None:
         raise ValueError(f"Workout plans were not found.")
 
     return workout_plans

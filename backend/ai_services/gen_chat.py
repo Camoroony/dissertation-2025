@@ -21,7 +21,7 @@ def generate_chat(prompt: str, chat_history, workout_plans, workout_plan=None,):
     if chat_type == 'Workout' and workout_plan is None:
         raise ValueError("Workout chat requires a workout_plan.")
 
-    if chat_type == 'Community' and not workout_plans:
+    if chat_type == 'Community' and workout_plans is None:
         raise ValueError("Community chat requires a list of workout_plans.")
 
     match chat_type:
