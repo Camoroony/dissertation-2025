@@ -143,9 +143,6 @@ const ChatbotPopup = () => {
                             {selectedBot && (
                             <ChatbotTemplateMessage chat_type={selectedBot.chat_type} />
                             )}
-                            {/* <p className="message-text">
-                                Hi! <br /> How can I help you today?
-                            </p> */}
                         </div>
 
                         {chatHistory.map((chat, index) => (
