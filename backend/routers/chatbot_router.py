@@ -46,7 +46,7 @@ def chat(userInput: UserChatInput, user: UserSQL = Depends(verify_token), db: Se
 
      ai_response_data = generate_chat(userInput.user_prompt, chat_history, workout_plans_dict, workout_plan_dict)
     
-     add_chat_history(chat_history["_id"], userInput.user_prompt, ai_response_data["ai_response"])
+     add_chat_history(chat_history["_id"], userInput.user_prompt, ai_response_data)
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Unexpected error: {str(e)}")

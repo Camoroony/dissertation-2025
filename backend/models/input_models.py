@@ -70,7 +70,3 @@ class RatingInput(BaseModel):
 class UserChatInput(BaseModel):
     user_prompt: str
     chat_history_id: str
-
-
-        
-

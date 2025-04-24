@@ -26,7 +26,7 @@ const ChatbotPopup = () => {
         setChatHistoryId(chatbot.id);
         const newHistory = chatbot.chats.flatMap(chat => [
             { role: "user", text: chat.user_message },
-            { role: "model", text: chat.ai_message }
+            { role: "model", text: chat.ai_message, sources: chat.source_used ? chat.source_used : null }
         ]);
         setChatHistory(newHistory);
 

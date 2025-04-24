@@ -239,3 +239,26 @@
 .chat-form .message-input:valid~button {
     display: block;
 }
+
+.message-content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+
+.sources-button {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+    border: none;
+    border-radius: 6px;
+    background-color: #e6f5ed;
+    color: #2A955F;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    width: fit-content;
+}
+
+.sources-button:hover {
+    background-color: #d3f0e1;
+}

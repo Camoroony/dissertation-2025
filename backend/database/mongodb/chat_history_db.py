@@ -31,16 +31,21 @@ def create_chat_history(user_id: int, chat_type: str = "General",  workout_plan=
     return new_chat_history
 
 
-def add_chat_history(chat_history_id: str, user_message: str, ai_message: str):
+def add_chat_history(chat_history_id: str, user_message: str, ai_response_data: dict[str, any]):
     if chat_history_id is None:
       raise ValueError("chat_history_id is null. Must be provided.")
     
     chat_message = {
         "chat_message_id": str(ObjectId()),
         "user_message": user_message,
-        "ai_message": ai_message,
+        "ai_message": ai_response_data['ai_response'],
         "timestamp": datetime.datetime.now(datetime.UTC)
     }
+
+    sources = ai_response_data.get('sources')
+
+    if sources:
+        chat_message["sources_used"] = list(sources)
 
     result = chat_history_collection.update_one(
     {"_id": ObjectId(chat_history_id)},
