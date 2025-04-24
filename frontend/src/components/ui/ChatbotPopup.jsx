@@ -26,7 +26,7 @@ const ChatbotPopup = () => {
         setChatHistoryId(chatbot.id);
         const newHistory = chatbot.chats.flatMap(chat => [
             { role: "user", text: chat.user_message },
-            { role: "model", text: chat.ai_message, sources: chat.source_used ? chat.source_used : null }
+            { role: "model", text: chat.ai_message, sources: chat.sources_used ? chat.sources_used : null }
         ]);
         setChatHistory(newHistory);
 
@@ -43,8 +43,12 @@ const ChatbotPopup = () => {
             const response = await chat(userMessage, chatHistoryId, token);
             console.log(response)
             if (response.status === 200) {
-                const aiResponse = response.data.ai_response;
-                setChatHistory(history => [...history.filter(message => message.text !== "Thinking..."), {role: "model", text: aiResponse}]);
+                setChatHistory(history => [...history.filter(message => message.text !== "Thinking..."),
+                {
+                    role: "model",
+                    text: response.data.ai_response,
+                    sources: response.data.sources ? response.data.sources : null
+                }]);
             }
         } catch (err) {
             console.log(err)

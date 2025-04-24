@@ -18,7 +18,7 @@ const ChatbotForm = ({ setChatHistory, generateChatResponse }) => {
 
         setTimeout(() => {
 
-            setChatHistory((history) => [...history, {role: "model", text: "Thinking..."}]);
+            setChatHistory((history) => [...history, {role: "pending", text: "Thinking..."}]);
 
             generateChatResponse(userMessage);
         }, 600);
