@@ -45,7 +45,7 @@ def serialise_workout_plan(workout_plan: WorkoutPlan) -> Dict[str, Any]:
             "ratings": [
             {
                 "id": rating.id,
-                "user_id": rating.user_id,
+                "user": rating.user,
                 "rating": rating.rating,
                 "comment": rating.comment
             }

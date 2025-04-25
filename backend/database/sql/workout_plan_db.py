@@ -1,5 +1,5 @@
 from typing import Dict, Any
-from models.db_models import WorkoutPlan, WorkoutSession, Exercise
+from models.db_models import WorkoutPlan, WorkoutSession, Exercise, Rating
 from sqlmodel import Session, select
 from sqlalchemy.orm import selectinload
 
@@ -75,7 +75,7 @@ def get_workout_plans(db: Session):
         select(WorkoutPlan)
         .options(
             selectinload(WorkoutPlan.workout_sessions).selectinload(WorkoutSession.exercises),
-            selectinload(WorkoutPlan.ratings)
+            selectinload(WorkoutPlan.ratings).selectinload(Rating.user)
         )
     )
 

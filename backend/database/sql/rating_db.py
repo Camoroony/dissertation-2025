@@ -1,4 +1,5 @@
 from sqlmodel import Session, select
+from sqlalchemy.orm import selectinload
 from models.db_models import Rating
 from models.input_models import RatingInput
 
@@ -34,6 +35,9 @@ def get_ratings_by_workout_db(workout_plan_id: int, db: Session):
         select(Rating)
         .where(Rating.workoutplan_id == workout_plan_id)
         .order_by(Rating.id)
+        .options(
+            selectinload(Rating.user)
+        )
     )
 
     ratings = db.exec(statement).all()
