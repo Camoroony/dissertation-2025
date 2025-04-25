@@ -1,12 +1,10 @@
 import WorkoutPlanCard from "../components/ui/WorkoutPlanCard"
 import { getWorkoutPlansByUser } from "../services/workoutplanapi";
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 function MyWorkoutsPage() {
 
-    const location = useLocation();
     const [errorMessage, setErrorMessage] = useState('');
     const [workoutPlans, setWorkoutPlans] = useState([]);
 
@@ -55,7 +53,7 @@ function MyWorkoutsPage() {
 
             <div className="flex flex-col justify-center items-center mt-40"> 
                 <p className="text-lg mb-">You currently have <b>0 workout plans</b>.</p>
-                <p className="text-lg">Create your first workout plan <Link to='/creatworkout'className="text-[#1FA562] hover:underline">here!</Link></p>
+                <p className="text-lg">Create your first workout plan <Link to='/createworkout'className="text-[#1FA562] hover:underline">here!</Link></p>
             </div>
         )}
     </>

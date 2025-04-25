@@ -7,7 +7,7 @@ from models.utilities.sql_serialising import serialise_workout_plan, serialise_w
 from models.utilities.csv_exporter import export_workout_plan_csv
 from security.jwt_token import verify_token
 from database.sql.init_sql_db import get_db_session
-from database.sql.workout_plan_db import add_workout_plan, delete_workout_plan, get_workout_plan, get_workout_plans_by_user
+from database.sql.workout_plan_db import add_workout_plan, delete_workout_plan, get_workout_plan, get_workout_plans, get_workout_plans_by_user
 from database.sql.workout_session_db import get_workout_session
 from database.sql.exercise_db import get_exercise
 from database.mongodb.workout_context_db import add_workout_context, get_workout_context, get_workout_sources_used, delete_workout_context
@@ -51,11 +51,38 @@ def get_workout(id: int, user: UserSQL = Depends(verify_token), db: Session = De
         raise HTTPException(status_code=500, detail="An unexpected error occured retrieving the workout plan.")
          
     if not workoutplan:
-        raise HTTPException(status_code=400, detail=f"Error with retrieving workout plan Id: {id}")
+        raise HTTPException(status_code=400, detail=f"Error with retrieving workout plan Id: {id} not found")
     
     workoutplan_read = serialise_workout_plan(workoutplan)
 
     return workoutplan_read
+
+@router.get("/get-workout-plans")
+def get_all_workouts(user: UserSQL = Depends(verify_token), db: Session = Depends(get_db_session)) :
+
+    if not user:
+        raise HTTPException(f"User Token verification failed")
+
+    try:
+     workoutplans = get_workout_plans(db)
+
+     serialised_workout_plans = []
+
+     for workoutplan in workoutplans:
+       serialised_workout_plan = serialise_workout_plan(workoutplan)
+       serialised_workout_plans.append(serialised_workout_plan)
+
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail="An unexpected error occured when retrieving workout plans.")
+         
+    if not workoutplans:
+        raise HTTPException(status_code=400, detail="Error with retrieving workout plans: workout plans not found")
+
+    return serialised_workout_plans
+
 
 @router.get("/export-workout-plan-csv")
 def get_workout_csv(id: int, user: UserSQL = Depends(verify_token), db: Session = Depends(get_db_session)) :
@@ -79,7 +106,7 @@ def get_workout_csv(id: int, user: UserSQL = Depends(verify_token), db: Session 
         raise HTTPException(status_code=500, detail="An unexpected error occured retrieving the workout plan.")
      
     if not workoutplan:
-        raise HTTPException(status_code=400, detail=f"Error with retrieving workout plan Id: {id}")
+        raise HTTPException(status_code=400, detail=f"Error with retrieving workout plan Id: {id} not found")
 
     return StreamingResponse(
         csv_bytes,
