@@ -1,8 +1,10 @@
 from fastapi import APIRouter, Response, Depends, HTTPException
+from fastapi.responses import StreamingResponse
 from sqlmodel import Session
 from models.input_models import WorkoutGenInput
 from models.db_models import UserSQL
 from models.utilities.sql_serialising import serialise_workout_plan, serialise_workout_session, serialise_exercise
+from models.utilities.csv_exporter import export_workout_plan_csv
 from security.jwt_token import verify_token
 from database.sql.init_sql_db import get_db_session
 from database.sql.workout_plan_db import add_workout_plan, delete_workout_plan, get_workout_plan, get_workout_plans_by_user
@@ -12,6 +14,7 @@ from database.mongodb.workout_context_db import add_workout_context, get_workout
 from database.mongodb.chat_history_db import create_chat_history, delete_chat_history_by_workoutplan
 from ai_services.gen_workout_plan import generate_workout_plan
 from ai_services.gen_workout_info import generate_exercise_overview, generate_workoutsession_overview
+import io
 
 router = APIRouter(
     prefix="/workouts"
@@ -53,6 +56,33 @@ def get_workout(id: int, user: UserSQL = Depends(verify_token), db: Session = De
     workoutplan_read = serialise_workout_plan(workoutplan)
 
     return workoutplan_read
+
+@router.get("/export-workout-plan-csv")
+def get_workout_csv(id: int, user_id: int, db: Session = Depends(get_db_session)) :
+    
+    try:
+     workoutplan = get_workout_plan(id, user_id, db)
+     serialised_workoutplan = serialise_workout_plan(workoutplan)
+
+     csvfile = export_workout_plan_csv(serialised_workoutplan)
+
+     csvfile.seek(0)
+     csv_bytes = io.BytesIO(csvfile.read().encode("utf-8"))
+
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail="An unexpected error occured retrieving the workout plan.")
+     
+    if not workoutplan:
+        raise HTTPException(status_code=400, detail=f"Error with retrieving workout plan Id: {id}")
+
+    return StreamingResponse(
+        csv_bytes,
+        media_type="text/csv",
+        headers={"Content-Disposition": "attachment; filename=workout_plan.csv"}
+    )
 
 @router.get("/get-workout-plans-by-user")
 def get_workout_plan_by_userid(user: UserSQL = Depends(verify_token), db: Session = Depends(get_db_session)) :
