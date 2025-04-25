@@ -61,7 +61,7 @@ function ExerciseOverviewModal({ id, closeModalMethod, modalContent, setModalCon
                             <i className="pi pi-spinner pi-spin text-4xl mr-5" style={{ color: '#D732A8' }}></i>
                             <p className="text-gray-500 text-lg">Please wait...</p>
                         </div>
-                        <p className="text-gray-500 text-center text-md mb-1">The AI is retreiving information on this exercise</p>
+                        <p className="text-gray-500 text-center text-md mb-1">The AI is retrieving information on this exercise</p>
                         <p className="text-gray-500 text-center text-md">This may take a couple of seconds...</p>
                     </div>
                 ) : (
@@ -79,7 +79,7 @@ function ExerciseOverviewModal({ id, closeModalMethod, modalContent, setModalCon
                     onClick={openReferencesModal}
                     className="mt-4 px-4 py-2 bg-[#D732A8] hover:bg-[#B0278B] text-white rounded cursor-pointer"
                 >
-                    References
+                    Sources
                 </button>)}
             </div>
         </div>
@@ -88,9 +88,9 @@ function ExerciseOverviewModal({ id, closeModalMethod, modalContent, setModalCon
         {referenceModalOpen && (
             <div className="fixed inset-0 flex items-center justify-center bg-[rgba(0,0,0,0.5)] z-50">
                 <div className="bg-white p-8 rounded shadow-lg w-11/12 max-w-2xl max-h-[80vh] overflow-y-auto">
-                    <h2 className="text-2xl font-bold mb-4">References</h2>
+                    <h2 className="text-2xl font-bold mb-4">Sources</h2>
                     <p className="text-gray-500 text-base italic mb-8">
-                        These are the references that were analysed during the creation of this AI generated output.
+                        These are the sources that were analysed during the creation of this AI generated output.
                     </p>
                     {references.length > 0 ? (
                         <ul className="list-disc list-inside space-y-2 text-gray-700 mb-10">
@@ -99,7 +99,7 @@ function ExerciseOverviewModal({ id, closeModalMethod, modalContent, setModalCon
                             ))}
                         </ul>
                     ) : (
-                        <p>No references available.</p>
+                        <p>No sources available.</p>
                     )}
 
                     <div className="flex justify-end mt-6">
