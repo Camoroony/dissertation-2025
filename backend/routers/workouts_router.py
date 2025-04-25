@@ -58,10 +58,13 @@ def get_workout(id: int, user: UserSQL = Depends(verify_token), db: Session = De
     return workoutplan_read
 
 @router.get("/export-workout-plan-csv")
-def get_workout_csv(id: int, user_id: int, db: Session = Depends(get_db_session)) :
+def get_workout_csv(id: int, user: UserSQL = Depends(verify_token), db: Session = Depends(get_db_session)) :
+
+    if not user:
+        raise HTTPException(f"User Token verification failed")
     
     try:
-     workoutplan = get_workout_plan(id, user_id, db)
+     workoutplan = get_workout_plan(id, user.id, db)
      serialised_workoutplan = serialise_workout_plan(workoutplan)
 
      csvfile = export_workout_plan_csv(serialised_workoutplan)

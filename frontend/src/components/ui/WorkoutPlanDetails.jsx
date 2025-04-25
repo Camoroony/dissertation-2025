@@ -2,7 +2,8 @@ import React, { use } from 'react';
 import { useState, useEffect } from 'react';
 import ExerciseOverviewModal from './ExerciseOverviewModal';
 import SessionOverviewModal from './SessionOverviewModal';
-import { getWorkoutPlanSources } from '../../services/workoutplanapi';
+import { getWorkoutPlanSources, exportWorkoutPlanAsCSV } from '../../services/workoutplanapi';
+
 
 const WorkoutPlanDetails = ({ workoutPlan }) => {
 
@@ -40,6 +41,27 @@ const WorkoutPlanDetails = ({ workoutPlan }) => {
         }
         retrieveWorkoutPlanSources()
     }, [workoutPlan])
+
+    const exportToCSV = async () => {
+        if (workoutPlan) {
+            try {
+                const token = localStorage.getItem('token');
+                const response = await exportWorkoutPlanAsCSV(workoutPlan.id, token);
+                console.log(response)
+                if (response.status == 200) {
+                    console.log(`CSV exported: ${response}}`)
+                }
+            } catch (err) {
+                if (err.message) {
+                    setErrorMessage(`Error occured when exporting workout plan to CSV file: ${err.message}`);
+                    setTimeout(() => setErrorMessage(''), 4000);
+                } else {
+                    setErrorMessage('An unknown error occured when exporting the workout plan to a CSV file.');
+                    setTimeout(() => setErrorMessage(''), 4000);
+                }
+            }
+        }
+    }
 
     const openSessionModal = async (id) => {
         setSessionId(id);
@@ -144,6 +166,13 @@ const WorkoutPlanDetails = ({ workoutPlan }) => {
                         className="px-4 py-2 bg-[#D732A8] hover:bg-[#B0278B] text-white rounded shadow-md cursor-pointer"
                     >
                         Sources Used
+                    </button>
+
+                    <button
+                        onClick={exportToCSV}
+                        className="px-4 py-2 bg-black text-white rounded shadow-md cursor-pointer"
+                    >
+                        Export as CSV
                     </button>
                 </div>
             </div>

@@ -52,6 +52,45 @@ export const getWorkoutPlan = async (id, token) => {
   }
 }
 
+export const exportWorkoutPlanAsCSV = async (id, token) => {
+
+  try {
+    const response = await axios.get(`${base_url}/export-workout-plan-csv`, {
+      params: { id },
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+      responseType: 'blob',
+    });
+
+    const blob = new Blob([response.data], {type: 'text/csv'});
+
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+
+    link.setAttribute('download', 'workout_plan.csv')
+
+    document.body.appendChild(link)
+    link.click();
+
+    link.remove();
+    window.URL.revokeObjectURL(url);
+
+    console.log('Workout plan exported:', response.data);
+
+    return response;
+  } catch (error) {
+    if (error.response) {
+      console.error('Error:', error.response.data.detail);
+      throw new Error(error.response.data.detail || 'An error occurred while exporting the workout plan to a CSV file');
+    } else {
+      console.error('Network or server error:', error.message);
+      throw new Error('Network or server error');
+    }
+  }
+}
+
 export const getWorkoutPlansByUser = async (token) => {
 
   try {
