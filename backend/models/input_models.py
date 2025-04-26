@@ -63,6 +63,7 @@ class WorkoutGenInput(BaseModel):
 class RatingInput(BaseModel):
     rating: bool
     comment: str
+    workout_plan_id: int
 
 
 # User Chat Input Model

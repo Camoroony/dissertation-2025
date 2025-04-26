@@ -1,4 +1,4 @@
-from models.db_models import WorkoutPlan, WorkoutSession, Exercise
+from models.db_models import WorkoutPlan, WorkoutSession, Exercise, Rating
 from typing import Dict, Any
 
 def serialise_workout_plan(workout_plan: WorkoutPlan) -> Dict[str, Any]:
@@ -90,4 +90,14 @@ def serialise_exercise(exercise: Exercise) -> Dict[str, Any]:
         "reps_in_reserve": exercise.reps_in_reserve
        }
 
-
+def serialise_rating(rating: Rating) -> Dict[str, Any]:
+     
+    if not isinstance(rating, Rating):
+       raise TypeError("Object must be of type Rating to be serialised.")
+    
+    return {
+        "id": rating.id,
+        "user": rating.user,
+        "rating": rating.rating,
+        "comment": rating.comment
+    }

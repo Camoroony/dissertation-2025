@@ -2,16 +2,24 @@ import { useNavigate } from "react-router-dom"
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import CommunityRating from "./CommunityRating";
+import { createRating } from "../../services/ratingapi";
 
-function WorkoutPlanCommunityCard({workoutplan}) {
+function WorkoutPlanCommunityCard({ workoutplan }) {
+
+    const [values, setValues] = useState({
+        rating: '',
+        comment: '',
+        workout_plan_id: '',
+
+    })
 
     const navigate = useNavigate();
     const location = useLocation();
 
-    const [rating, setRating] = useState("");
     const [ratings, setRatings] = useState(workoutplan.ratings);
 
     const [sentiment, setSentiment] = useState(true);
+    const [rating, setRating] = useState("");
 
 
     function viewWorkoutPlan() {
@@ -21,11 +29,34 @@ function WorkoutPlanCommunityCard({workoutplan}) {
         });
     }
 
-    function handleReviewSubmit() {
+    const handleReviewSubmit = async () => {
         if (rating.trim()) {
 
-            setRatings([...ratings, rating.trim()]);
-            setRating("");
+            try {
+
+                const ratinginput = {
+                    rating: sentiment,
+                    comment: rating,
+                    workout_plan_id: workoutplan.id
+                }
+ 
+                const token = localStorage.getItem('token');
+                const response = await createRating(ratinginput, token);
+                console.log(response);
+                if (response.status === 201) {
+                    setRatings([...ratings, response.data]);
+                    setRating("");
+                }
+            } catch (err) {
+                setLoading(false);
+                console.log(err);
+                if (err.message) {
+                    setErrorMessage(`Error occurred when creating workout plan: ${err.message}` || 'An error occurred, please try again.');
+                } else {
+                    setErrorMessage('An unknown error occurred, please try again.');
+                }
+                setTimeout(() => setErrorMessage(''), 4000);
+            }
         }
     }
 

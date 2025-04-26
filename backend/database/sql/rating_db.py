@@ -3,13 +3,18 @@ from sqlalchemy.orm import selectinload
 from models.db_models import Rating
 from models.input_models import RatingInput
 
-def create_rating_db(user_id: int, rating_input: RatingInput, workout_plan_id: int, db: Session):
+def create_rating_db(user_id: int, rating_input: RatingInput, db: Session):
 
-    rating = Rating(workoutplan_id=workout_plan_id, user_id=user_id, rating=rating_input.rating, comment=rating_input.comment)
+    rating = Rating(workoutplan_id=rating_input.workout_plan_id, user_id=user_id, rating=rating_input.rating, comment=rating_input.comment)
 
     db.add(rating)
     db.commit()
     db.refresh(rating)
+
+    _ = rating.user
+
+    if not rating:
+        raise ValueError(f"Rating with input: {rating_input} could not be created.")
 
     return rating
 
