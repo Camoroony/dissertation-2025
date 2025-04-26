@@ -1,10 +1,12 @@
 import { useNavigate } from "react-router-dom"
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import CommunityRating from "./CommunityRating";
 
 function WorkoutPlanCommunityCard({workoutplan}) {
 
     const navigate = useNavigate();
+    const location = useLocation();
 
     const [rating, setRating] = useState("");
     const [ratings, setRatings] = useState(workoutplan.ratings);
@@ -13,7 +15,10 @@ function WorkoutPlanCommunityCard({workoutplan}) {
 
 
     function viewWorkoutPlan() {
-        navigate(`/workoutplan/${workoutplan.id}`)
+        navigate(`/workoutplan/${workoutplan.id}`, {
+            state: { previousPage: location.pathname }
+
+        });
     }
 
     function handleReviewSubmit() {
@@ -86,7 +91,7 @@ function WorkoutPlanCommunityCard({workoutplan}) {
                         disabled={!rating.trim()}
                         className="mt-2 bg-[#009951] text-white px-3 py-1 rounded text-sm cursor-pointer"
                     >
-                        Submit Comment
+                        Submit Review
                     </button>
                 </div>
                 

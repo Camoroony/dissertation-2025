@@ -47,7 +47,8 @@ function WorkoutPlanPage() {
     return <>
 
         <div className="absolute m-4">
-            <Link className="flex justify-center items-center hover:text-[#1FA562] gap-2 px-4 py-2 border rounded border-[#009951]" to='/myworkouts'>
+            <Link className="flex justify-center items-center hover:text-[#1FA562] gap-2 px-4 py-2 border rounded border-[#009951]" 
+            to={location.state?.previousPage || '/myworkouts'}>
                 <i className="pi pi-chevron-left"></i>
                 <p>Back</p>
             </Link>

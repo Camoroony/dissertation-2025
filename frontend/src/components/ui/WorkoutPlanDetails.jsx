@@ -1,4 +1,4 @@
-import React, { use } from 'react';
+import React from 'react';
 import { useState, useEffect } from 'react';
 import ExerciseOverviewModal from './ExerciseOverviewModal';
 import SessionOverviewModal from './SessionOverviewModal';
