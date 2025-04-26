@@ -9,6 +9,8 @@ function WorkoutPlanCommunityCard({workoutplan}) {
     const [rating, setRating] = useState("");
     const [ratings, setRatings] = useState(workoutplan.ratings);
 
+    const [sentiment, setSentiment] = useState(true);
+
 
     function viewWorkoutPlan() {
         navigate(`/workoutplan/${workoutplan.id}`)
@@ -16,6 +18,7 @@ function WorkoutPlanCommunityCard({workoutplan}) {
 
     function handleReviewSubmit() {
         if (rating.trim()) {
+
             setRatings([...ratings, rating.trim()]);
             setRating("");
         }
@@ -51,6 +54,26 @@ function WorkoutPlanCommunityCard({workoutplan}) {
                     </div>
                 )}
                 <div className="mb-5">
+                    <div className="flex gap-2 mb-2">
+                        <button
+                            onClick={() => setSentiment(true)}
+                            className={`px-3 py-1 rounded text-sm ${sentiment === true
+                                    ? "bg-green-600 text-white"
+                                    : "bg-gray-200 text-gray-700 cursor-pointer"
+                                }`}
+                        >
+                            <i className="pi pi-check text-md"></i>
+                        </button>
+                        <button
+                            onClick={() => setSentiment(false)}
+                            className={`px-3 py-1 rounded text-sm ${sentiment === false
+                                ? "bg-red-600 text-white"
+                                : "bg-gray-200 text-gray-700 cursor-pointer"
+                                }`}
+                        >
+                            <i className="pi pi-times text-md"></i>
+                        </button>
+                    </div>
                     <textarea
                         className="w-full border rounded p-2 text-sm"
                         rows="2"
@@ -60,7 +83,8 @@ function WorkoutPlanCommunityCard({workoutplan}) {
                     />
                     <button
                         onClick={handleReviewSubmit}
-                        className="mt-2 bg-[#009951] text-white px-3 py-1 rounded text-sm"
+                        disabled={!rating.trim()}
+                        className="mt-2 bg-[#009951] text-white px-3 py-1 rounded text-sm cursor-pointer"
                     >
                         Submit Comment
                     </button>
