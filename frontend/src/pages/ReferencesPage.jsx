@@ -35,7 +35,7 @@ function ReferencesPage() {
                 {errorMessage}
             </div>
         ) : (<><div className="flex flex-col justify-center items-center mt-20">
-            <h1 className="text-6xl font-bold mb-15">App <span className='text-[#2A955F]'>reference library.</span></h1>
+            <h1 className="text-6xl font-bold mb-15">App <span className='text-[#2A955F]'>reference library</span></h1>
             <p className="text-lg"><b className="underline">All AI content</b> created in this application uses the following sources.</p>
         </div>
             <div className="flex flex-col justify-center items-center mt-20">

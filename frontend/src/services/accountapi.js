@@ -37,11 +37,35 @@ export const loginToAccount = async (userinput) => {
       if (error.response) {
         console.error('Error:', error.response.data.detail);
         throw new Error(error.response.data.detail || 'An unknown error occurred when attempting to log in');
-      } else {
-        console.error('Network or server error:', error.message);
-        throw new Error('Network or server error');
-      }
+    } else {
+      console.error('Network or server error:', error.message);
+      throw new Error('Network or server error');
     }
+  }
+}
+
+export const updateAccount = async (userupdateinput) => {
+  try {
+
+    const data = { ...userupdateinput };
+
+    const response = await axios.post(`${base_url}/update-user`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    console.log('User updated:', response.data);
+    return response;
+  } catch (error) {
+    if (error.response) {
+      console.error('Error:', error.response.data.detail);
+      throw new Error(error.response.data.detail || 'An unknown error occurred while updating the account');
+    } else {
+      console.error('Network or server error:', error.message);
+      throw new Error('Network or server error');
+    }
+  }
 }
 
 export const verifyToken = async (token) => {

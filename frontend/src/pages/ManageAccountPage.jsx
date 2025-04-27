@@ -15,7 +15,6 @@ function ManageAccountPage() {
     const [showPassword, setShowPassword] = useState('');
     const [successMsg, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const navigate = useNavigate();
 
     const handleChanges = (e) => {
         setValues({ ...values, [e.target.name]: e.target.value })
