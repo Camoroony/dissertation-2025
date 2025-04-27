@@ -59,29 +59,36 @@ function ManageAccountPage() {
             </div>
 
             <div className="flex justify-center items-center mt-25">
-                <div className="shadow-lg px-8 py-5 border w-120">
+                <div className="shadow-lg px-8 py-5 border w-150">
                     <h2 className="text-lg font-bold mb-4">Account details</h2>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-2">
-                            <label htmlFor="new_username" className="block text-gray-700">New Username</label>
+                            <label htmlFor="new_username" className="block text-gray-700 mb-1">New Username</label>
                             <input type="text" placeholder="Enter your new username..." className="w-full px-3 py-2 border rounded" name='new_username'
                                 onChange={handleChanges} />
                         </div>
-                        <div className="mb-6">
-                            <label htmlFor="confirm_username" className="block text-gray-700">Confirm Username</label>
+                        <div className="mb-8">
+                            <label htmlFor="confirm_username" className="block text-gray-700 mb-1">Confirm Username</label>
                             <input type="text" placeholder="Confirm your new username..." className="w-full px-3 py-2 border rounded" name='confirm_username'
                                 onChange={handleChanges} />
                         </div>
 
                         <div className="mb-2">
-                            <label htmlFor="new_password" className="block text-gray-700">New Password</label>
-                            <input type="text" placeholder="Enter new password" className="w-full px-3 py-2 border rounded" name='new_password'
+                            <label htmlFor="new_password" className="block text-gray-700 mb-1">New Password</label>
+                            <input type="text" placeholder="Enter your new password..." className="w-full px-3 py-2 border rounded" name='new_password'
                                 onChange={handleChanges} />
                         </div>
                         <div className="mb-7">
-                            <label htmlFor="confirm_password" className="block text-gray-700">Confirm Password</label>
+                            <label htmlFor="confirm_password" className="block text-gray-700 mb-1">Confirm Password</label>
                             <input type="password" placeholder="Confirm your new password..." className="w-full px-3 py-2 border rounded" name='confirm_password'
                                 onChange={handleChanges} />
+                        </div>
+
+                        <div className="mb-7">
+                            <label htmlFor="current_password" className="block text-gray-700 mb-1">Current Password</label>
+                            <input type="password" placeholder="Confirm your current password..." className="w-full px-3 py-2 border rounded" name='current_password'
+                                onChange={handleChanges} />
+                                    <p className='text-sm'>(Please confirm your account changes by entering your current password.)</p>
                         </div>
 
                         <div className='flex flex-row w-full'>
