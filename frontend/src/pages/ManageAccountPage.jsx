@@ -10,8 +10,9 @@ function ManageAccountPage() {
         plain_password: ''
     })
 
-    const [errorMessage, setErrorMessage] = useState('')
-    const navigate = useNavigate()
+    const [showPassword, setShowPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const navigate = useNavigate();
 
     const handleChanges = (e) => {
         setValues({ ...values, [e.target.name]: e.target.value })
@@ -73,22 +74,52 @@ function ManageAccountPage() {
                                 onChange={handleChanges} />
                         </div>
 
-                        <div className="mb-2">
-                            <label htmlFor="new_password" className="block text-gray-700 mb-1">New Password</label>
-                            <input type="text" placeholder="Enter your new password..." className="w-full px-3 py-2 border rounded" name='new_password'
-                                onChange={handleChanges} />
+                        <div className="mb-2 relative">
+                            <label htmlFor="new_password" className="block text-gray-700 mb-1">
+                                New Password
+                            </label>
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                placeholder="Enter your new password..."
+                                className="w-full px-3 py-2 border rounded pr-10" // pr-10 gives space for button
+                                name="new_password"
+                                onChange={handleChanges}
+                            />
+                            <button
+                                type="button"
+                                className="absolute right-3 top-9.5 text-md text-gray-600"
+                                onClick={() => setShowPassword(!showPassword)}
+                            >
+                                {showPassword ? <i className='pi pi-eye-slash' /> : <i className='pi pi-eye' />}
+                            </button>
                         </div>
-                        <div className="mb-7">
-                            <label htmlFor="confirm_password" className="block text-gray-700 mb-1">Confirm Password</label>
-                            <input type="password" placeholder="Confirm your new password..." className="w-full px-3 py-2 border rounded" name='confirm_password'
-                                onChange={handleChanges} />
+
+
+                        <div className="mb-7 relative">
+                            <label htmlFor="confirm_password" className="block text-gray-700 mb-1">
+                                Confirm Password
+                            </label>
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                placeholder="Confirm your new password..."
+                                className="w-full px-3 py-2 border rounded pr-10"
+                                name="confirm_password"
+                                onChange={handleChanges}
+                            />
+                            <button
+                                type="button"
+                                className="absolute right-3 top-9.5 text-md text-gray-600"
+                                onClick={() => setShowPassword(!showPassword)}
+                            >
+                                {showPassword ? <i className='text-l pi pi-eye-slash' /> : <i className='pi pi-eye' />}
+                            </button>
                         </div>
 
                         <div className="mb-7">
                             <label htmlFor="current_password" className="block text-gray-700 mb-1">Current Password</label>
                             <input type="password" placeholder="Confirm your current password..." className="w-full px-3 py-2 border rounded" name='current_password'
                                 onChange={handleChanges} />
-                                    <p className='text-sm'>(Please confirm your account changes by entering your current password.)</p>
+                            <p className='text-sm'>(Please confirm your account changes by entering your current password.)</p>
                         </div>
 
                         <div className='flex flex-row w-full'>
