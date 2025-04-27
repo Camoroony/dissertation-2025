@@ -1,16 +1,19 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import { createAccount } from '../services/accountapi'
 
 function ManageAccountPage() {
 
 
     const [values, setValues] = useState({
-        username: '',
-        plain_password: ''
+        new_username: '',
+        confirm_username: '',
+        new_password: '',
+        confirm_password: '',
+        current_password: '',
     })
 
     const [showPassword, setShowPassword] = useState('');
+    const [successMsg, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
 
@@ -20,49 +23,53 @@ function ManageAccountPage() {
 
     const handleUpdateSubmit = async (e) => {
         e.preventDefault();
-        alert('Account updated.')
-        // try {
-        //     const response = await createAccount(values);
-        //     console.log(response)
-        //     if (response.status === 201) {
-        //         navigate('/login', {
-        //             state: { successMessage: 'Account created successfully! Please log in.' }
-        //         });
-        //     }
-        // } catch (err) {
-        //     console.log(err)
-        //     if (err.message) {
-        //         setErrorMessage(`Error occured when creating account:\n ${err.message}` || 'An error occurred, please try again.')
-        //         setTimeout(() => setErrorMessage(''), 4000);
-        //     } else {
-        //         setErrorMessage('An unknown error occurred, please try again.')
-        //         setTimeout(() => setErrorMessage(''), 4000);
-        //     }
-        // }
+        try {
+            const token = localStorage.getItem('token');
+            const response = await updateAccount(values, token);
+            console.log(response)
+            if (response.status === 201) {
+                setValues({
+                    new_username: '',
+                    confirm_username: '',
+                    new_password: '',
+                    confirm_password: '',
+                    current_password: '',
+                });
+                setSuccessMessage('Your account details were updated successfully!');
+                setTimeout(() => setSuccessMessage(''), 4000);
+            }
+        } catch (err) {
+            console.log(err)
+            if (err.message) {
+                setErrorMessage(`Error occured when updating account:\n ${err.message}` || 'An error occurred, please try again.')
+                setTimeout(() => setErrorMessage(''), 4000);
+            } else {
+                setErrorMessage('An unknown error occurred, please try again.')
+                setTimeout(() => setErrorMessage(''), 4000);
+            }
+        }
 
     }
 
     const handleDeleteSubmit = async (e) => {
         e.preventDefault();
-        alert('Account deleted.')
-        // try {
-        //     const response = await createAccount(values);
-        //     console.log(response)
-        //     if (response.status === 201) {
-        //         navigate('/login', {
-        //             state: { successMessage: 'Account created successfully! Please log in.' }
-        //         });
-        //     }
-        // } catch (err) {
-        //     console.log(err)
-        //     if (err.message) {
-        //         setErrorMessage(`Error occured when creating account:\n ${err.message}` || 'An error occurred, please try again.')
-        //         setTimeout(() => setErrorMessage(''), 4000);
-        //     } else {
-        //         setErrorMessage('An unknown error occurred, please try again.')
-        //         setTimeout(() => setErrorMessage(''), 4000);
-        //     }
-        // }
+        try {
+            const token = localStorage.getItem('token');
+            const response = await deleteAccount(token);
+            console.log(response)
+            if (response.status === 201) {
+                
+            }
+        } catch (err) {
+            console.log(err)
+            if (err.message) {
+                setErrorMessage(`Error occured when deleting account:\n ${err.message}` || 'An error occurred, please try again.')
+                setTimeout(() => setErrorMessage(''), 4000);
+            } else {
+                setErrorMessage('An unknown error occurred, please try again.')
+                setTimeout(() => setErrorMessage(''), 4000);
+            }
+        }
 
     }
 
@@ -70,8 +77,16 @@ function ManageAccountPage() {
         <>
 
             <div className="relative">
+                {successMsg && (
+                    <div className="absolute top-70 left-1/2 transform -translate-x-1/2 bg-green-100 border border-green-400 text-green-700 px-4 py-2 rounded shadow-lg transition-opacity duration-300">
+                        {successMsg}
+                    </div>
+                )}
+            </div>
+
+            <div className="relative">
                 {errorMessage && (
-                    <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded shadow-lg transition-opacity duration-300">
+                    <div className="absolute top-70 left-1/2 transform -translate-x-1/2 bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded shadow-lg transition-opacity duration-300">
                         {errorMessage}
                     </div>
                 )}
