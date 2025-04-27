@@ -18,26 +18,51 @@ function ManageAccountPage() {
         setValues({ ...values, [e.target.name]: e.target.value })
     }
 
-    const handleSubmit = async (e) => {
+    const handleUpdateSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const response = await createAccount(values);
-            console.log(response)
-            if (response.status === 201) {
-                navigate('/login', {
-                    state: { successMessage: 'Account created successfully! Please log in.' }
-                });
-            }
-        } catch (err) {
-            console.log(err)
-            if (err.message) {
-                setErrorMessage(`Error occured when creating account:\n ${err.message}` || 'An error occurred, please try again.')
-                setTimeout(() => setErrorMessage(''), 4000);
-            } else {
-                setErrorMessage('An unknown error occurred, please try again.')
-                setTimeout(() => setErrorMessage(''), 4000);
-            }
-        }
+        alert('Account updated.')
+        // try {
+        //     const response = await createAccount(values);
+        //     console.log(response)
+        //     if (response.status === 201) {
+        //         navigate('/login', {
+        //             state: { successMessage: 'Account created successfully! Please log in.' }
+        //         });
+        //     }
+        // } catch (err) {
+        //     console.log(err)
+        //     if (err.message) {
+        //         setErrorMessage(`Error occured when creating account:\n ${err.message}` || 'An error occurred, please try again.')
+        //         setTimeout(() => setErrorMessage(''), 4000);
+        //     } else {
+        //         setErrorMessage('An unknown error occurred, please try again.')
+        //         setTimeout(() => setErrorMessage(''), 4000);
+        //     }
+        // }
+
+    }
+
+    const handleDeleteSubmit = async (e) => {
+        e.preventDefault();
+        alert('Account deleted.')
+        // try {
+        //     const response = await createAccount(values);
+        //     console.log(response)
+        //     if (response.status === 201) {
+        //         navigate('/login', {
+        //             state: { successMessage: 'Account created successfully! Please log in.' }
+        //         });
+        //     }
+        // } catch (err) {
+        //     console.log(err)
+        //     if (err.message) {
+        //         setErrorMessage(`Error occured when creating account:\n ${err.message}` || 'An error occurred, please try again.')
+        //         setTimeout(() => setErrorMessage(''), 4000);
+        //     } else {
+        //         setErrorMessage('An unknown error occurred, please try again.')
+        //         setTimeout(() => setErrorMessage(''), 4000);
+        //     }
+        // }
 
     }
 
@@ -62,7 +87,7 @@ function ManageAccountPage() {
             <div className="flex justify-center items-center mt-25">
                 <div className="shadow-lg px-8 py-5 border w-150">
                     <h2 className="text-lg font-bold mb-4">Account details</h2>
-                    <form onSubmit={handleSubmit}>
+                    <form>
                         <div className="mb-2">
                             <label htmlFor="new_username" className="block text-gray-700 mb-1">New Username</label>
                             <input type="text" placeholder="Enter your new username..." className="w-full px-3 py-2 border rounded" name='new_username'
@@ -124,10 +149,10 @@ function ManageAccountPage() {
 
                         <div className='flex flex-row w-full'>
                             <div className="mb-5">
-                                <button className="bg-black text-white p-2 rounded cursor-pointer">Update Details</button>
+                                <button onClick={handleUpdateSubmit} className="bg-black text-white p-2 rounded cursor-pointer">Update Details</button>
                             </div>
                             <div className="mb-5 ml-auto">
-                                <button className="bg-red-700 hover:bg-red-600 text-white p-2 rounded cursor-pointer">Delete Account</button>
+                                <button onClick={handleDeleteSubmit} className="bg-red-700 hover:bg-red-600 text-white p-2 rounded cursor-pointer">Delete Account</button>
                             </div>
                         </div>
                     </form>
