@@ -1,5 +1,5 @@
-import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+import { updateAccount, deleteAccount } from '../services/accountapi';
 
 function ManageAccountPage() {
 
@@ -26,7 +26,7 @@ function ManageAccountPage() {
             const token = localStorage.getItem('token');
             const response = await updateAccount(values, token);
             console.log(response)
-            if (response.status === 201) {
+            if (response.status === 200) {
                 setValues({
                     new_username: '',
                     confirm_username: '',
@@ -105,12 +105,12 @@ function ManageAccountPage() {
                         <div className="mb-2">
                             <label htmlFor="new_username" className="block text-gray-700 mb-1">New Username</label>
                             <input type="text" placeholder="Enter your new username..." className="w-full px-3 py-2 border rounded" name='new_username'
-                                onChange={handleChanges} />
+                                value={values.new_username} onChange={handleChanges} />
                         </div>
                         <div className="mb-8">
                             <label htmlFor="confirm_username" className="block text-gray-700 mb-1">Confirm Username</label>
                             <input type="text" placeholder="Confirm your new username..." className="w-full px-3 py-2 border rounded" name='confirm_username'
-                                onChange={handleChanges} />
+                                value={values.confirm_username} onChange={handleChanges} />
                         </div>
 
                         <div className="mb-2 relative">
@@ -122,6 +122,7 @@ function ManageAccountPage() {
                                 placeholder="Enter your new password..."
                                 className="w-full px-3 py-2 border rounded pr-10" // pr-10 gives space for button
                                 name="new_password"
+                                value={values.new_password}
                                 onChange={handleChanges}
                             />
                             <button
@@ -143,6 +144,7 @@ function ManageAccountPage() {
                                 placeholder="Confirm your new password..."
                                 className="w-full px-3 py-2 border rounded pr-10"
                                 name="confirm_password"
+                                value={values.confirm_password}
                                 onChange={handleChanges}
                             />
                             <button
@@ -157,7 +159,7 @@ function ManageAccountPage() {
                         <div className="mb-7">
                             <label htmlFor="current_password" className="block text-gray-700 mb-1">Current Password</label>
                             <input type="password" placeholder="Confirm your current password..." className="w-full px-3 py-2 border rounded" name='current_password'
-                                onChange={handleChanges} />
+                                value={values.current_password} onChange={handleChanges} />
                             <p className='text-sm'>(Please confirm your account changes by entering your current password.)</p>
                         </div>
 

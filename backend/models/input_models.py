@@ -10,6 +10,13 @@ class UserBase(SQLModel):
 class UserInput(UserBase):
     plain_password: str
 
+class UserUpdateInput(BaseModel):
+    new_username: str
+    confirm_username: str
+    new_password: str
+    confirm_password: str
+    current_password: str
+
 # Workout Plan Input Type Validators
 
 EXPERIENCE_LEVELS = {"Beginner (less than 12 months of consistent, proper training experience)",

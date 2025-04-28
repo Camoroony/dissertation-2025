@@ -44,12 +44,12 @@ export const loginToAccount = async (userinput) => {
   }
 }
 
-export const updateAccount = async (userupdateinput) => {
+export const updateAccount = async (userupdateinput, token) => {
   try {
 
     const data = { ...userupdateinput };
 
-    const response = await axios.post(`${base_url}/update-user`, data, {
+    const response = await axios.put(`${base_url}/update-user`, data, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -61,6 +61,28 @@ export const updateAccount = async (userupdateinput) => {
     if (error.response) {
       console.error('Error:', error.response.data.detail);
       throw new Error(error.response.data.detail || 'An unknown error occurred while updating the account');
+    } else {
+      console.error('Network or server error:', error.message);
+      throw new Error('Network or server error');
+    }
+  }
+}
+
+export const deleteAccount = async (token) => {
+  try {
+
+    const response = await axios.delete(`${base_url}/delete-user`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    console.log('User deleted:', response.data);
+    return response;
+  } catch (error) {
+    if (error.response) {
+      console.error('Error:', error.response.data.detail);
+      throw new Error(error.response.data.detail || 'An unknown error occurred while deleting the account');
     } else {
       console.error('Network or server error:', error.message);
       throw new Error('Network or server error');
