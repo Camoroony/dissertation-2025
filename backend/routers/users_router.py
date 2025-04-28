@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Response, Depends, HTTPException
 from sqlmodel import Session, select
 from models.db_models import UserSQL
-from models.input_models import UserInput, UserUpdateInput
+from models.input_models import UserLoginInput, UserCreateInput, UserUpdateInput
 from models.security_models import Token
 from database.sql.init_sql_db import get_db_session
 from database.sql.user_sql import update_user_db
@@ -24,11 +24,14 @@ def index() :
 
 
 @router.post("/create-user", response_model=UserSQL, status_code=201)
-def create_user(user_data: UserInput, db: Session = Depends(get_db_session)) :
+def create_user(user_data: UserCreateInput, db: Session = Depends(get_db_session)) :
     
     existing_user = db.exec(select(UserSQL).where(UserSQL.username == user_data.username)).first()
     if existing_user:
         raise HTTPException(status_code=400, detail="User already exists")
+    
+    if user_data.plain_password != user_data.confirm_password:
+        raise HTTPException(status_code=400, detail="Password and confirm password do not match")
     
     new_user = UserSQL(username=user_data.username, hashed_password=hash_password(user_data.plain_password))
 
@@ -43,7 +46,7 @@ def create_user(user_data: UserInput, db: Session = Depends(get_db_session)) :
 
 
 @router.post("/login-user", response_model=Token, status_code=200)
-def login_user(user_data: UserInput, db: Session = Depends(get_db_session)) :
+def login_user(user_data: UserLoginInput, db: Session = Depends(get_db_session)) :
      existing_user = db.exec(select(UserSQL).where(UserSQL.username == user_data.username)).first()
      if not existing_user:
          raise HTTPException(status_code=400, detail="Username does not exist.")

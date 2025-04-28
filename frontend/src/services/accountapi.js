@@ -9,6 +9,7 @@ export const createAccount = async (userinput) => {
         const response = await axios.post(`${base_url}/create-user`, {
           username: userinput.username,
           plain_password: userinput.plain_password,
+          confirm_password: userinput.confirm_password,
         });
     
         console.log('User created:', response.data);

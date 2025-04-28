@@ -7,10 +7,12 @@ function CreateAccountPage() {
 
     const [values, setValues] = useState({
             username: '',
-            plain_password: ''
+            plain_password: '',
+            confirm_password: '',
     })
 
     const [errorMessage, setErrorMessage] = useState('')
+    const [showPassword, setShowPassword] = useState('');
     const navigate = useNavigate()
 
     const handleChanges = (e) => {
@@ -62,17 +64,40 @@ function CreateAccountPage() {
             <form onSubmit={handleSubmit}>
                 <div className="mb-5">
                     <label htmlFor="username" className="block text-gray-700">Username</label>
-                    <input type="text" placeholder="Enter Username" className="w-full px-3 py-2 border rounded" name='username'
+                    <input type="text" placeholder="Enter your username..." className="w-full px-3 py-2 border rounded" name='username'
                     onChange={handleChanges}/>
                 </div>
-                <div className="mb-6">
-                    <label htmlFor="password" className="block text-gray-700">Password</label>
-                    <input type="password" placeholder="Enter Password" className="w-full px-3 py-2 border rounded" name='plain_password'
-                    onChange={handleChanges}/>
-                </div>
-                <div className="mb-5">
-                <button className="w-full bg-black text-white py-2 rounded cursor-pointer">Create Account</button>
-                </div>
+
+                <div className="mb-6 relative">
+                    <label htmlFor="plain_password" className="block text-gray-700">Password</label>
+                            <input type={showPassword ? "text" : "password"} placeholder="Enter your password..." className="w-full px-3 py-2 border rounded pr-10" name='plain_password'
+                                onChange={handleChanges} />
+                            <button
+                                type="button"
+                                className="absolute right-3 top-8.75 text-md text-gray-600"
+                                onClick={() => setShowPassword(!showPassword)}
+                            >
+                                {showPassword ? <i className='pi pi-eye' /> : <i className='pi pi-eye-slash' />}
+                            </button>
+                        </div>
+
+                <div className="mb-6 relative">
+                    <label htmlFor="confirm_password" className="block text-gray-700">Confirm Password</label>
+                            <input type={showPassword ? "text" : "password"} placeholder="Confirm your password..." className="w-full px-3 py-2 border rounded pr-10" name='confirm_password'
+                                onChange={handleChanges} />
+                            <button
+                                type="button"
+                                className="absolute right-3 top-8.75 text-md text-gray-600"
+                                onClick={() => setShowPassword(!showPassword)}
+                            >
+                                {showPassword ? <i className='pi pi-eye' /> : <i className='pi pi-eye-slash' />}
+                            </button>
+                        </div>
+
+                        <div className="mb-5">
+                            <button className="w-full bg-black text-white py-2 rounded cursor-pointer">Create Account</button>
+                        </div>
+
             </form>
             <div className="text-center">
                 <p>Already have an account?</p>

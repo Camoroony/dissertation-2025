@@ -170,7 +170,7 @@ function ManageAccountPage() {
                                 className="absolute right-3 top-9.5 text-md text-gray-600"
                                 onClick={() => setShowPassword(!showPassword)}
                             >
-                                {showPassword ? <i className='pi pi-eye-slash' /> : <i className='pi pi-eye' />}
+                                {showPassword ? <i className='pi pi-eye' /> : <i className='pi pi-eye-slash' />}
                             </button>
                         </div>
 
@@ -192,7 +192,7 @@ function ManageAccountPage() {
                                 className="absolute right-3 top-9.5 text-md text-gray-600"
                                 onClick={() => setShowPassword(!showPassword)}
                             >
-                                {showPassword ? <i className='text-l pi pi-eye-slash' /> : <i className='pi pi-eye' />}
+                                {showPassword ? <i className='text-l pi pi-eye' /> : <i className='pi pi-eye-slash' />}
                             </button>
                         </div>
 

@@ -7,8 +7,11 @@ from typing import List
 class UserBase(SQLModel):
     username: str = Field(index=True, unique=True)
 
-class UserInput(UserBase):
+class UserLoginInput(UserBase):
     plain_password: str
+
+class UserCreateInput(UserLoginInput):
+    confirm_password: str
 
 class UserUpdateInput(BaseModel):
     new_username: str

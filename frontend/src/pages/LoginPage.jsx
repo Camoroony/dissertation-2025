@@ -34,7 +34,7 @@ function LoginPage() {
         } catch(err) {
             console.log(err)
             if (err.message) {
-                setErrorMessage(`Error occured when creating account: ${err.message}` || 'An error occurred, please try again.')
+                setErrorMessage(`Error occured when logging into account: ${err.message}` || 'An error occurred, please try again.')
                 setTimeout(() => setErrorMessage(''), 4000);
             } else {
                 setErrorMessage('An unknown error occurred, please try again.')
