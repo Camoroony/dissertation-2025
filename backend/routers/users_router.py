@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Response, Depends, HTTPException
 from sqlmodel import Session, select
+from sqlalchemy import event
 from models.db_models import UserSQL
 from models.input_models import UserLoginInput, UserCreateInput, UserUpdateInput
 from models.security_models import Token
@@ -92,7 +93,11 @@ def delete_user(user: UserSQL = Depends(verify_token), db: Session = Depends(get
     db.delete(user)
     db.commit()
 
-    delete_chat_history_by_user(user.id)
-
     return f"Deleted user Id: {user.id}, Username: {user.username}"
 
+# Event listeners
+
+@event.listens_for(UserSQL, "after_delete")
+def cleanup_workout_context_documents(mapper, connection, target):
+    user_id = target.id
+    delete_chat_history_by_user(user_id)

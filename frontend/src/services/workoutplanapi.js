@@ -52,6 +52,32 @@ export const getWorkoutPlan = async (id, token) => {
   }
 }
 
+export const deleteWorkoutPlan = async (id, token) => {
+
+  try {
+    const response = await axios.delete(`${base_url}/delete-workout-plan`, {
+      params: { workout_plan_id: id },
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    console.log('Workout plan deleted:', response.data);
+
+    return response;
+  } catch (error) {
+    if (error.response) {
+      console.error('Error:', error.response.data.detail);
+      throw new Error(error.response.data.detail || 'An unknown error occurred while deleting the workout plan');
+    } else {
+      console.error('Network or server error:', error.message);
+      throw new Error('Network or server error');
+    }
+  }
+}
+
+
+
 export const getAllWorkoutPlans = async (token) => {
 
   try {

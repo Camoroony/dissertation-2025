@@ -1,8 +1,9 @@
 from fastapi import APIRouter, Response, Depends, HTTPException
 from fastapi.responses import StreamingResponse
+from sqlalchemy import event
 from sqlmodel import Session
 from models.input_models import WorkoutGenInput
-from models.db_models import UserSQL
+from models.db_models import UserSQL, WorkoutPlan
 from models.utilities.sql_serialising import serialise_workout_plan, serialise_workout_session, serialise_exercise
 from models.utilities.csv_exporter import export_workout_plan_csv
 from security.jwt_token import verify_token
@@ -77,9 +78,7 @@ def get_all_workouts(user: UserSQL = Depends(verify_token), db: Session = Depend
     
     except Exception as e:
         raise HTTPException(status_code=500, detail="An unexpected error occured when retrieving workout plans.")
-         
-    if not workoutplans:
-        raise HTTPException(status_code=400, detail="Error with retrieving workout plans: workout plans not found")
+
 
     return serialised_workout_plans
 
@@ -157,24 +156,10 @@ def delete_workout(workout_plan_id: int, db: Session = Depends(get_db_session)) 
 
     delete_result_sql = delete_workout_plan(workout_plan_id, db)
 
-    delete_result_mongodb = delete_workout_context(workout_plan_id)
-
-    delete_chathistory_result_mongodb = delete_chat_history_by_workoutplan(workout_plan_id)
-
     if delete_result_sql is False:
         raise HTTPException(status_code=400, detail=f"Error with deleting workout plan Id: {workout_plan_id}")
-    
-    if delete_result_mongodb is False:
-        raise HTTPException(status_code=400, detail=f"Error with deleting workout context for workout Id: {workout_plan_id}")
-    
-    if delete_chathistory_result_mongodb is False:
-        raise HTTPException(status_code=400, detail=f"Error with deleting workout plan chat history for workout Id: {workout_plan_id}")
 
-    return Response(
-        f"Deleted workout plan (Id: {workout_plan_id})\n"
-        f"Deleted workout context (Id: {delete_result_mongodb})",
-        status_code=200
-    )
+    return workout_plan_id
 
 
 @router.get("/get-workoutsession-info", status_code=200)
@@ -209,3 +194,12 @@ def get_exercise_info(id: int, user: UserSQL = Depends(verify_token), db: Sessio
     ai_response_data = generate_exercise_overview(exercise_dict["exercise_name"])
 
     return ai_response_data
+
+
+# Event listeners 
+
+@event.listens_for(WorkoutPlan, "after_delete")
+def cleanup_workout_context_documents(mapper, connection, target):
+    workout_plan_id = target.id
+    delete_chat_history_by_workoutplan(workout_plan_id)
+    delete_workout_context(workout_plan_id)
