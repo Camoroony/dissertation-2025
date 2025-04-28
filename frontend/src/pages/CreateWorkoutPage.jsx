@@ -43,8 +43,17 @@ function CreateWorkoutPage() {
         } catch (err) {
             setLoading(false);
             console.log(err);
+
+            setValues({
+                experience_level: '',
+                training_availability: '',
+                training_focus: '',
+                available_equipment: '',
+                additional_info: ''
+            });
+            
             if (err.message) {
-                setErrorMessage(`Error occurred when creating workout plan: ${err.message}` || 'An error occurred, please try again.');
+                setErrorMessage(`${err.message}` || 'An error occurred, please try again.');
             } else {
                 setErrorMessage('An unknown error occurred, please try again.');
             }
@@ -68,7 +77,7 @@ function CreateWorkoutPage() {
                 <>
                     <div className="relative">
                         {errorMessage && (
-                            <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-red-100 border border-red-400 text-red-700 px-7 py-2 rounded shadow-lg">
+                            <div className="absolute top-65 left-1/2 transform -translate-x-1/2 bg-red-100 border border-red-400 text-red-700 px-7 py-2 rounded shadow-lg">
                                 {errorMessage}
                             </div>
                         )}

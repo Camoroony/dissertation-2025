@@ -19,6 +19,13 @@ export const createWorkoutPlan = async (workoutgeninput, token) => {
     return response;
   } catch (error) {
     if (error.response) {
+      const { status, data } = error.response;
+      if (status === 422 && Array.isArray(data.detail)) {
+        const messages = data.detail.map(err => {
+          return `${err.msg}`;
+        }).join(' | ');
+        throw new Error(messages);
+      }
       console.error('Error:', error.response.data.detail);
       throw new Error(error.response.data.detail || 'An error occurred while creating the workout plan');
     } else {

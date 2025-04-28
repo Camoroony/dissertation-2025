@@ -29,13 +29,16 @@ def index() :
 @router.post("/create-workout-plan", status_code=201)
 def create_workout_plan(workout_input: WorkoutGenInput, user: UserSQL = Depends(verify_token), db: Session = Depends(get_db_session)) :
 
-    ai_response_data = generate_workout_plan(workout_input)
+    try: 
+     ai_response_data = generate_workout_plan(workout_input)
 
-    add_result_sql = add_workout_plan(ai_response_data["response"], user.id, db)
+     add_result_sql = add_workout_plan(ai_response_data["response"], user.id, db)
 
-    add_workout_context(add_result_sql.id, ai_response_data["context"], list(ai_response_data["sources_used"]))
+     add_workout_context(add_result_sql.id, ai_response_data["context"], list(ai_response_data["sources_used"]))
 
-    create_chat_history(user.id, "Workout", add_result_sql)
+     create_chat_history(user.id, "Workout", add_result_sql)
+    except ValueError as e:
+       raise HTTPException(status_code=400, detail=f'{e}')
 
     return {"id": add_result_sql.id}
 
