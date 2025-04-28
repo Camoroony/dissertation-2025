@@ -1,8 +1,10 @@
 import { useState } from 'react'
-import { updateAccount, deleteAccount } from '../services/accountapi';
+import { updateAccount, deleteAccount } from '../services/accountapi'
+import { useNavigate } from 'react-router-dom'
 
 function ManageAccountPage() {
 
+    const navigate = useNavigate();
 
     const [values, setValues] = useState({
         new_username: '',
@@ -15,6 +17,7 @@ function ManageAccountPage() {
     const [showPassword, setShowPassword] = useState('');
     const [successMsg, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
     const handleChanges = (e) => {
         setValues({ ...values, [e.target.name]: e.target.value })
@@ -56,8 +59,9 @@ function ManageAccountPage() {
             const token = localStorage.getItem('token');
             const response = await deleteAccount(token);
             console.log(response)
-            if (response.status === 201) {
-                
+            if (response.status === 200) {
+                localStorage.removeItem('token');
+                window.location.reload();
             }
         } catch (err) {
             console.log(err)
@@ -69,7 +73,14 @@ function ManageAccountPage() {
                 setTimeout(() => setErrorMessage(''), 4000);
             }
         }
+    }
 
+    const openDeleteAccountModal = () => {
+        setDeleteModalOpen(true);
+    }
+
+    const closeDeleteAccountModal = () => {
+        setDeleteModalOpen(false);
     }
 
     return (
@@ -91,6 +102,36 @@ function ManageAccountPage() {
                 )}
             </div>
 
+            {/* Delete account modal  */}
+            {deleteModalOpen && (
+                <div className="fixed inset-0 flex items-center justify-center bg-[rgba(0,0,0,0.5)] z-50">
+                    <div className="bg-white p-8 rounded shadow-lg w-120 max-w-2xl max-h-[80vh] overflow-y-auto">
+                        <h2 className="text-2xl font-bold mb-6">Are you sure you want to delete your account?</h2>
+                        <p className="text-gray-500 text-base mb-8">
+                            All your personal details and workout plans will be deleted.
+                        </p>
+                        <div className='flex justify-between w-full'>
+        
+                                <button
+                                    onClick={handleDeleteSubmit}
+                                    className="px-6 py-2 bg-green-700 hover:bg-green-600 text-white rounded cursor-pointer mt-6"
+                                >
+                                    Yes
+                                </button>
+    
+
+                                <button
+                                    onClick={closeDeleteAccountModal}
+                                    className="px-6 py-2 bg-red-700 hover:bg-red-600 text-white rounded cursor-pointer mt-6"
+                                >
+                                    No
+                                </button>
+  
+                        </div>
+                    </div>
+                </div>
+            )}
+
             <div className="flex flex-col justify-center items-center mt-20">
                 <h1 className="text-6xl font-bold mb-15">
                     Update Your <span className="text-[#2A955F]">Account</span></h1>
@@ -101,7 +142,6 @@ function ManageAccountPage() {
             <div className="flex justify-center items-center mt-25">
                 <div className="shadow-lg px-8 py-5 border w-150">
                     <h2 className="text-lg font-bold mb-4">Account details</h2>
-                    <form>
                         <div className="mb-2">
                             <label htmlFor="new_username" className="block text-gray-700 mb-1">New Username</label>
                             <input type="text" placeholder="Enter your new username..." className="w-full px-3 py-2 border rounded" name='new_username'
@@ -168,10 +208,9 @@ function ManageAccountPage() {
                                 <button onClick={handleUpdateSubmit} className="bg-black text-white p-2 rounded cursor-pointer">Update Details</button>
                             </div>
                             <div className="mb-5 ml-auto">
-                                <button onClick={handleDeleteSubmit} className="bg-red-700 hover:bg-red-600 text-white p-2 rounded cursor-pointer">Delete Account</button>
+                                <button onClick={openDeleteAccountModal} className="bg-red-700 hover:bg-red-600 text-white p-2 rounded cursor-pointer">Delete Account</button>
                             </div>
                         </div>
-                    </form>
                 </div>
             </div>
         </>

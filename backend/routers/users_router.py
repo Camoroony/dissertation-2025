@@ -80,7 +80,7 @@ def update_user(updated_user: UserUpdateInput, user: UserSQL = Depends(verify_to
     return update_result
 
 
-@router.delete("/delete-user", response_model= str)
+@router.delete("/delete-user", response_model= str, status_code=200)
 def delete_user(user: UserSQL = Depends(verify_token), db: Session = Depends(get_db_session)) :
     user = db.get(UserSQL, user.id)
     if not user:

@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import "../../css/Navbar.css"
 
@@ -7,7 +7,7 @@ function NavBar () {
     const logout = () => {
         localStorage.removeItem('token');
         console.log(`Authenticated : ${isAuthenticated}`)
-        window.location.reload()
+        window.location.reload();
     }
 
     const { isAuthenticated } = useAuth(); 
