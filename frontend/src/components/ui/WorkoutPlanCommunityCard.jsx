@@ -162,7 +162,7 @@ function WorkoutPlanCommunityCard({ workoutplan }) {
                     <button
                         onClick={handleReviewSubmit}
                         disabled={!rating.trim()}
-                        className="mt-2 bg-[#009951] text-white px-3 py-1 rounded text-sm cursor-pointer"
+                        className="mt-2 bg-[#009951] hover:bg-[#007a40] text-white px-3 py-1 rounded text-sm transition-colors duration-200 cursor-pointer"
                     >
                         Submit Review
                     </button>

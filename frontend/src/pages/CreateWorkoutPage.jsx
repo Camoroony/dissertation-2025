@@ -91,8 +91,8 @@ function CreateWorkoutPage() {
                     </div>
 
 
-                    <div className="flex justify-center items-center mt-25">
-                        <div className="shadow-lg px-8 py-5 border w-150">
+                    <div className="flex justify-center items-center mt-10">
+                        <div className="shadow-lg px-8 py-5 border rounded w-150">
                             <h2 className="text-lg font-bold mb-4">Create your workout plan</h2>
                             <form onSubmit={handleSubmit}>
                                 <div className="mb-5">
@@ -210,7 +210,7 @@ function CreateWorkoutPage() {
                                         onChange={handleChanges} />
                                 </div>
                                 <div className="mb-5">
-                                    <button className="w-full bg-black text-white py-2 rounded cursor-pointer">Generate Plan</button>
+                                    <button className="w-full bg-[#009951] hover:bg-[#007a40] text-white py-2 rounded transition-colors duration-200 cursor-pointer">Generate Plan</button>
                                 </div>
                             </form>
                         </div>
