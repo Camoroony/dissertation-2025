@@ -93,15 +93,31 @@ function WorkoutPlanCommunityCard({ workoutplan }) {
                 <div className="mb-5">
                     <p className="block text-gray-600 "><b>Required equipment:</b> {workoutplan.equipment_requirements}</p>
                 </div>
-                <div className="mb-5">
-                    <p className="block text-green-600 "><b>Upvotes: {workoutplan.total_upvotes}</b></p>
+                <div className="inline-block max-w-full mb-3 px-4 py-3 bg-white border border-gray-300 rounded-lg shadow-sm">
+                    <div className="flex items-center space-x-6">
+                        <div className="text-green-700 font-semibold">
+                            <span className="block text-sm"><i className="pi pi-thumbs-up-fill"/> Upvotes:</span>
+                            <span className="text-lg">{workoutplan.total_upvotes}</span>
+                        </div>
+                        <div className="text-red-700 font-semibold">
+                            <span className="block text-sm"><i className="pi pi-thumbs-down-fill"/> Downvotes:</span>
+                            <span className="text-lg">{workoutplan.total_downvotes}</span>
+                        </div>
+                        <div className="text-black font-semibold">
+                            <span className="block text-sm"> Recommendation rate:</span>
+                            <span
+                                className={`text-lg font-semibold ${workoutplan.recommendation_percentage == 0 ? 'text-black'
+                                    : workoutplan.recommendation_percentage < 50
+                                        ? 'text-red-600'
+                                        : workoutplan.recommendation_percentage < 70
+                                            ? 'text-orange-500'
+                                            : 'text-green-600'
+                                    }`}
+                            >{workoutplan.recommendation_percentage}%</span>
+                        </div>
+                    </div>
                 </div>
-                <div className="mb-5">
-                    <p className="block text-red-600"><b>Downvotes: {workoutplan.total_downvotes}</b></p>
-                </div>
-                <div className="mb-5">
-                    <p className="block text-gray-700"><b>Recommendation Percentage:</b> {workoutplan.recommendation_percentage}%</p>
-                </div>
+
                 <div className="mb-5">
                     <button onClick={viewWorkoutPlan} className="bg-black text-white py-2 px-4 rounded cursor-pointer">View Workout Plan</button>
                 </div>
