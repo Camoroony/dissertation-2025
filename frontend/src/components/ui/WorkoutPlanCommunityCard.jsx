@@ -93,6 +93,9 @@ function WorkoutPlanCommunityCard({ workoutplan }) {
                 <div className="mb-5">
                     <p className="block text-gray-600 "><b>Required equipment:</b> {workoutplan.equipment_requirements}</p>
                 </div>
+                <div className="mb-5">
+                    {workoutplan.additional_info && (<p className="block text-gray-600 "><b>Additional info:</b> {workoutplan.additional_info}</p>)}
+                </div>
                 <div className="inline-block max-w-full mb-3 px-4 py-3 bg-white border border-gray-300 rounded-lg shadow-sm">
                     <div className="flex items-center space-x-6">
                         <div className="text-green-700 font-semibold">
