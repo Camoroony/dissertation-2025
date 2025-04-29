@@ -68,7 +68,7 @@ function WorkoutPlanCard({ workoutplan, onDelete }) {
 
                 <button
                     onClick={openDeleteModal}
-                    className="absolute top-3 right-3 text-red-500 hover:bg-red-600 hover:text-white p-1.5 rounded-full border border-transparent hover:border-white transition-colors duration-200 cursor-pointer"
+                    className="absolute top-3 right-3 text-red-500 hover:bg-red-600 hover:text-white px-1 rounded border border-transparent hover:border-white transition-colors duration-200 cursor-pointer"
                 >
                     <i className="pi pi-times text-sm flex justify-center items-center"></i>
                 </button>
@@ -88,7 +88,7 @@ function WorkoutPlanCard({ workoutplan, onDelete }) {
                 <div className="pt-2">
                     <button
                         onClick={viewWorkoutPlan}
-                        className="w-full bg-[#009951] hover:bg-[#007a40] text-white font-medium py-2 rounded-lg transition-colors duration-200 cursor-pointer"
+                        className="w-full bg-[#009951] hover:bg-[#007a40] text-white py-2 rounded-lg transition-colors duration-200 cursor-pointer"
                     >
                         View Workout Plan
                     </button>
