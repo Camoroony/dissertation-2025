@@ -63,36 +63,39 @@ function WorkoutPlanCard({ workoutplan, onDelete }) {
         )}
 
 
-        <div className="flex justify-center items-center mt-15">
-            <div className="relative flex flex-col justify-between shadow-lg px-10 py-8 border w-96 h-full rounded border-[#009951]">
-
+        <div className="flex justify-center items-center mt-12">
+            <div className="relative flex flex-col gap-4 shadow-xl px-8 py-6 border w-full max-w-md rounded-2xl border-[#009951] bg-white transition-all">
 
                 <button
                     onClick={openDeleteModal}
-                    className="absolute top-2.5 right-3.5 text-red-500 hover:bg-red-600 hover:text-white text-xl font-bold border px-2 rounded cursor-pointer"
+                    className="absolute top-3 right-3 text-red-500 hover:bg-red-600 hover:text-white p-1.5 rounded-full border border-transparent hover:border-white transition-colors duration-200 cursor-pointer"
                 >
-                    <i className="pi pi-times text-sm flex justify-center"></i>
+                    <i className="pi pi-times text-sm flex justify-center items-center"></i>
                 </button>
 
+                <h2 className="text-2xl font-semibold text-gray-900 leading-snug">{workoutplan.plan_name}</h2>
 
-                <h2 className="text-xl font-bold min-h-[3.5rem] pb-6">{workoutplan.plan_name}</h2>
-                <div className="mb-5">
-                    <p className="block text-gray-700"><b>Number of sessions:</b> {workoutplan.no_of_sessions}</p>
+                <div className="space-y-4 text-md text-gray-700">
+                    <p><span className="font-semibold">Sessions:</span> {workoutplan.no_of_sessions}</p>
+                    <p><span className="font-semibold">Average session length:</span> {workoutplan.average_session_length} minutes</p>
+                    <p><span className="font-semibold">Equipment:</span> {workoutplan.equipment_requirements}</p>
+                    <p><span className="font-semibold">Experience:</span> {workoutplan.experience_level}</p>
+                    {workoutplan.additional_info && (
+                        <p><span className="font-semibold">Additional Info:</span> {workoutplan.additional_info}</p>
+                    )}
                 </div>
-                <div className="mb-5">
-                    <p className="block text-gray-700"><b>Average session length:</b> {workoutplan.average_session_length} minutes</p>
-                </div>
-                <div className="mb-5">
-                    <p className="block text-gray-700"><b>Equipment requirements:</b> {workoutplan.equipment_requirements}</p>
-                </div>
-                <div className="mb-5">
-                    <p className="block text-gray-700"><b>Recommended experience level:</b> {workoutplan.experience_level}</p>
-                </div>
-                <div className="mb-1">
-                    <button onClick={viewWorkoutPlan} className="w-full bg-black text-white py-2 rounded cursor-pointer">View Workout Plan</button>
+
+                <div className="pt-2">
+                    <button
+                        onClick={viewWorkoutPlan}
+                        className="w-full bg-[#009951] hover:bg-[#007a40] text-white font-medium py-2 rounded-lg transition-colors duration-200 cursor-pointer"
+                    >
+                        View Workout Plan
+                    </button>
                 </div>
             </div>
         </div>
+
     </>
 
 
