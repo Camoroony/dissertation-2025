@@ -73,7 +73,7 @@ function WorkoutPlanCard({ workoutplan, onDelete }) {
                     <i className="pi pi-times text-sm flex justify-center items-center"></i>
                 </button>
 
-                <h2 className="text-2xl font-semibold text-gray-900 leading-snug">{workoutplan.plan_name}</h2>
+                <h2 className="text-2xl font-semibold text-gray-900">{workoutplan.plan_name}</h2>
 
                 <div className="space-y-4 text-md text-gray-700">
                     <p><span className="font-semibold">Sessions:</span> {workoutplan.no_of_sessions}</p>
