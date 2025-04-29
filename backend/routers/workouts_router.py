@@ -36,7 +36,7 @@ def create_workout_plan(workout_input: WorkoutGenInput, user: UserSQL = Depends(
 
      add_workout_context(add_result_sql.id, ai_response_data["context"], list(ai_response_data["sources_used"]))
 
-     create_chat_history(user.id, "Workout", add_result_sql)
+    #  create_chat_history(user.id, "Workout", add_result_sql)
     except ValueError as e:
        raise HTTPException(status_code=400, detail=f'{e}')
 

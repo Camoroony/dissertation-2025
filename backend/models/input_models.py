@@ -25,7 +25,7 @@ class UserUpdateInput(BaseModel):
 EXPERIENCE_LEVELS = {"Beginner (less than 12 months of consistent, proper training experience)",
                       "Intermediate (1 to 4 years of consistent, proper training experience)",
                         "Advanced (more than 4 years of consistent, proper training experience)"}
-AVAILABILITY_DAYS = range(1, 6)
+AVAILABILITY_DAYS = range(1, 7)
 SESSION_LENGTH = range(10, 90)
 TRAINING_FOCUS = {"Full-Body", "Upper-Body", "Lower-Body", "Arms", "Shoulders", "Chest", "Back"}
 AVAILABLE_EQUIPMENT = {

@@ -109,14 +109,16 @@ function WorkoutPlanCommunityCard({ workoutplan }) {
                         <div className="text-black font-semibold">
                             <span className="block text-sm"> Recommendation rate:</span>
                             <span
-                                className={`text-lg font-semibold ${workoutplan.recommendation_percentage == 0 ? 'text-black'
+                                className={`text-lg font-semibold ${workoutplan.total_upvotes == 0 && workoutplan.total_downvotes == 0 ? 'text-black'
                                     : workoutplan.recommendation_percentage < 50
                                         ? 'text-red-600'
                                         : workoutplan.recommendation_percentage < 70
                                             ? 'text-orange-500'
                                             : 'text-green-600'
                                     }`}
-                            >{workoutplan.recommendation_percentage}%</span>
+                            >{workoutplan.total_upvotes == 0 && workoutplan.total_downvotes == 0
+                                ? 'No reviews'
+                                : `${workoutplan.recommendation_percentage}%`}</span>
                         </div>
                     </div>
                 </div>
@@ -156,6 +158,7 @@ function WorkoutPlanCommunityCard({ workoutplan }) {
                         </button>
                     </div>
                     <textarea
+                        maxLength={250}
                         className="w-full border rounded p-2 text-sm"
                         rows="2"
                         placeholder="Leave a review..."

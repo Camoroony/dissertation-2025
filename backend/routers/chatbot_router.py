@@ -1,14 +1,14 @@
 from fastapi import APIRouter, Depends, Response, HTTPException
 from sqlmodel import Session
 from database.sql.init_sql_db import get_db_session
-from database.mongodb.chat_history_db import create_chat_history, get_chat_history, add_chat_history, delete_chat_history, get_chat_histories_by_userid
+from database.mongodb.chat_history_db import get_chat_history, add_chat_history, delete_chat_history, get_chat_histories_by_userid
 from database.sql.workout_plan_db import get_workout_plan, get_workout_plans
 from models.utilities.sql_serialising import serialise_workout_plan
 from models.utilities.mongodb_serialising import serialise_chatId
 from models.db_models import UserSQL
 from models.input_models import UserChatInput
 from security.jwt_token import verify_token
-from ai_services.gen_chat import generate_chat, generate_community_chat
+from ai_services.gen_chat import generate_chat
 
 router = APIRouter(
     prefix="/chatbot"
@@ -52,29 +52,6 @@ def chat(userInput: UserChatInput, user: UserSQL = Depends(verify_token), db: Se
         raise HTTPException(status_code=500, detail=f"Unexpected error: {str(e)}")
     
     return ai_response_data
-
-
-@router.post("/community-chat")
-def community_chat(user_id: int, user_prompt: str, chat_history_id=None, db: Session = Depends(get_db_session)) :
-
-    try: 
-     workout_plans = get_workout_plans(db)
-
-     workout_plans_dict = []
- 
-     for workout_plan in workout_plans:
-         serialised_workout_plan = serialise_workout_plan(workout_plan)
-         workout_plans_dict.append(serialised_workout_plan)
-
-     chat_history = create_chat_history(user_id, chat_type="community") if chat_history_id is None else get_chat_history(chat_history_id)
-
-     ai_response_data = generate_community_chat(user_prompt, chat_history, workout_plans_dict)
-
-     add_chat_history(chat_history["_id"], user_prompt, ai_response_data["ai_response"])
-
-     return ai_response_data
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Unexpected error: {str(e)}")
 
 
 @router.get("/get-chat-history", status_code=200)
