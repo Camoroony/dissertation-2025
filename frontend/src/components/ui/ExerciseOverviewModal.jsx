@@ -23,8 +23,8 @@ function ExerciseOverviewModal({ id, closeModalMethod, modalContent, setModalCon
                 const token = localStorage.getItem('token');
                 const response = await getExerciseOverview(id, token, apiStateController.signal);
                 if (response.status === 200) {
-                    setModalContent(response.data.response.text_tutorial);
-                    setReferences(response.data.sources_used || []);
+                    setModalContent(response.data);
+                    setReferences(response.data.exercise_tutorial_context.sources || []);
                 } else {
                     setModalContent('Failed to load overview.');
                 }
@@ -65,7 +65,28 @@ function ExerciseOverviewModal({ id, closeModalMethod, modalContent, setModalCon
                         <p className="text-gray-500 text-center text-md">This may take a couple of seconds...</p>
                     </div>
                 ) : (
-                    <p className="mb-6 whitespace-pre-line">{modalContent}</p>
+                    typeof modalContent === 'object' && modalContent?.exercise_tutorial_context ? (
+                        <>
+                            <p className="mb-6 whitespace-pre-line">Tutorial: {modalContent.exercise_tutorial_context.ai_response}</p>
+                            <div className="mb-6 w-full border rounded p-3 bg-gray-200">
+                                <p className="whitespace-pre-line mb-2">The AI has attempted to find an appropriate video tutorial for you:</p>
+                                {/^https?:\/\/\S+$/.test(modalContent.exercise_video_context.ai_response) ? (
+                                    <a
+                                        href={modalContent.exercise_video_context.ai_response}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-blue-600 underline cursor-pointer"
+                                    >
+                                        Click this link to view the video
+                                    </a>
+                                ) : (
+                                    <p className="italic text-red-700 font-semibold">{modalContent.exercise_video_context.ai_response}</p>
+                                )}
+                            </div>
+                        </>
+                    ) : (
+                        <p className="text-red-600">No content available.</p>
+                    )
                 )}
 
                 <button

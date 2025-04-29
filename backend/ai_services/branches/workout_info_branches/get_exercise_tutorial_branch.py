@@ -31,6 +31,8 @@ def get_exercise_tutorial_ai(exercise: str):
     + "\n YOU MUST ONLY MAKE A TUTORIAL ON HOW TO DO THIS EXERCISE USING THE DOCUMENTS PROVIDED AND NOTHING ELSE."
     + "\n IF THE DOCUMENTS PROVIDED DO NOT GIVE YOU THE NECESSARY INFORMATION TO COMPLETE THE TASK, STATE THAT THIS IS THE CASE AND THAT YOU CANNOT PROVIDE A TUTORIAL."
     + "\n DO NOT MAKE UP A TUTORIAL IF YOU DO NOT HAVE THE NECESSARY DOCUMENTS TO MAKE A TUTORIAL."
+    + "\n When you use any information from a source or sources, make sure to refer to the source directly in your response in this format: "
+    + " ' [Source: source_title, source_author, source_url]' to give context to the user."
     + f"\nHere are the following documents for you to use: {context_text}"
     )
 

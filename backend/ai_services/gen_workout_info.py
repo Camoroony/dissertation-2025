@@ -2,10 +2,8 @@ from langchain.schema.runnable import RunnableLambda, RunnableParallel
 from langchain_openai import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
 from langchain.schema.output_parser import StrOutputParser
-from models.db_models import WorkoutSession
 from ai_services.branches.workout_info_branches.get_exercise_tutorial_branch import get_exercise_tutorial_ai
 from ai_services.branches.workout_info_branches.get_exercise_video_branch import get_exercise_video_ai
-from ai_services.branches.workout_info_branches.build_exercise_overview_branch import build_exercise_overview_ai
 from dotenv import load_dotenv
 import os
 
@@ -54,11 +52,7 @@ def generate_exercise_overview(exercise: str):
         exercise_video_context = exercise_video_runnable
     )
 
-    final_generation = RunnableLambda(lambda x: build_exercise_overview_ai(x))
 
-
-    final_chain = context_chain | final_generation
-
-    response = final_chain.invoke({})
+    response = context_chain.invoke({})
     
     return response
