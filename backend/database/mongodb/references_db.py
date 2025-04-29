@@ -581,6 +581,42 @@ references = [
       "title": "Designing Resistance Training Programs (Fourth Edition)"
     }
   ]
+},
+{
+  "title": "What is Hypertrophy?",
+  "author": "NSCA (National Strength and Conditioning Association)",
+  "publication_date": "Unknown",
+  "url": "https://www.nsca.com/contentassets/d27e2ba7e56949229d3eb1aaef7ddcfa/trainertips_hypertrophy_201601.pdf?srsltid=AfmBOoq-pT_RG3v3V0d3xg1WPob_nrN1aGhd5CFAFs69ada5-nj9AP_Z",
+  "vector_db": "overall_db",
+  "textfile_name": "what_is_hypertrophy_NSCA.txt",
+  "reviewers": [],
+  "references": [
+    {
+      "authors": "Schoenfeld, B. J.",
+      "year": 2010,
+      "title": "The Mechanisms of Muscle Hypertrophy and Their Application to Resistance Training"
+    },
+    {
+      "authors": "Schoenfeld, B.",
+      "year": 2011,
+      "title": "The Use of Specialized Training to Maximize Muscle Hypertrophy"
+    },
+    {
+      "authors": "Spano, M.",
+      "year": 2012,
+      "title": "Nutrition in the Personal Training Setting. In NSCA’s Essentials of Personal Training (2nd ed.)"
+    },
+    {
+      "authors": "Weir, J. P. and Brown, L. E.",
+      "year": 2012,
+      "title": "Resistance Training Adaptations. In NSCA’s Essentials of Personal Training (2nd ed.)"
+    },
+    {
+      "authors": "Kubitz, K., Landers, D., Petruzzello, S., and Han, M.",
+      "year": 1996,
+      "title": "The Effects of Acute and Chronic Exercise on Sleep: A Meta-Analytic Review"
+    }
+  ]
 }
 ]
 

@@ -88,6 +88,12 @@ function WorkoutPlanCommunityCard({ workoutplan }) {
             <div className="flex flex-col justify-between shadow-lg px-8 py-5 border w-150 h-full rounded border-[#009951]">
                 <h2 className="text-xl font-bold min-h-[3.5rem] pb-6">{workoutplan.plan_name}</h2>
                 <div className="mb-5">
+                    <p className="block text-gray-600 "><b>Recommended experience level:</b> {workoutplan.experience_level}</p>
+                </div>
+                <div className="mb-5">
+                    <p className="block text-gray-600 "><b>Required equipment:</b> {workoutplan.equipment_requirements}</p>
+                </div>
+                <div className="mb-5">
                     <p className="block text-green-600 "><b>Upvotes: {workoutplan.total_upvotes}</b></p>
                 </div>
                 <div className="mb-5">

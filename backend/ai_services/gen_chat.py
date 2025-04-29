@@ -53,7 +53,7 @@ def generate_generic_chat(user_prompt: str, chat_history):
     + "\n USE ONLY THE DOCUMENTS AND/OR THE CHAT HISTORY PROVIDED TO FORMULATE YOUR ANSWER"
     + "\n IF THE DOCUMENTS OR CHAT HISTORY DO NOT PROVIDE YOU WITH THE ANSWER TO THE QUESTION, RESPOND SAYING YOU DON'T KNOW THE ANSWER."
     + "\n When you use any information from a source or sources, make sure to refer to the source directly in your response in this format: "
-    + " ' [Source: source_title, source_author, source_url]' to give context to the user."
+    + " ' [Source: Title: source_title, Author: source_author, URL: source_url]' to give context to the user."
     + "\n These are the relevant documents you must use to formulate your answer:"
     + "\n **Relevant Documents:**"
     + f"\n{context_text}"

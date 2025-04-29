@@ -10,7 +10,8 @@ def add_workout_plan(data: Dict[str, Any], user_id: int, db: Session):
         user_id = user_id,
         no_of_sessions = data["no_of_sessions"],
         average_session_length = data["average_session_length"],
-        equipment_requirements = data["equipment_requirements"]
+        equipment_requirements = data["equipment_requirements"],
+        experience_level = data["experience_level"]
 
     )
 

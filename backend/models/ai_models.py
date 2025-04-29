@@ -24,6 +24,10 @@ WORKOUT_PLAN_FUNCTION_SCHEMA = {
                 "type": "string",
                 "description": "Equipment required for the plan."
             },
+             "experience_level": {
+                "type": "string",
+                "description": "Experience level required from the individual for the plan."
+            },
             "workout_sessions": {
                 "type": "array",
                 "description": "A list of workout sessions included in the plan.",

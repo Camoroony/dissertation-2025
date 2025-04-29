@@ -85,6 +85,9 @@ function WorkoutPlanCard({ workoutplan, onDelete }) {
                 <div className="mb-5">
                     <p className="block text-gray-700"><b>Equipment requirements:</b> {workoutplan.equipment_requirements}</p>
                 </div>
+                <div className="mb-5">
+                    <p className="block text-gray-700"><b>Recommended experience level:</b> {workoutplan.experience_level}</p>
+                </div>
                 <div className="mb-1">
                     <button onClick={viewWorkoutPlan} className="w-full bg-black text-white py-2 rounded cursor-pointer">View Workout Plan</button>
                 </div>

@@ -19,6 +19,7 @@ def serialise_workout_plan(workout_plan: WorkoutPlan) -> Dict[str, Any]:
             "no_of_sessions": workout_plan.no_of_sessions,
             "average_session_length": workout_plan.average_session_length,
             "equipment_requirements": workout_plan.equipment_requirements,
+            "experience_level": workout_plan.experience_level,
             "total_upvotes": positive_count,
             "total_downvotes": negative_count,
             "recommendation_percentage": recommendation_percentage,
