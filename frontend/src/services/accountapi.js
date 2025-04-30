@@ -99,10 +99,27 @@ export const verifyToken = async (token) => {
         }
       });
 
-      console.log('User verified:', response.data);
-      return response;
-    } catch (error) {
-        console.error('Error:', error.response.data.detail);
-        throw new Error(error.response.data.detail || 'An unknown error occurred when verifiying the user JWT token');
+    console.log('User verified:', response.data);
+    return response;
+  } catch (error) {
+    console.error('Error:', error.response.data.detail);
+    throw new Error(error.response.data.detail || 'An unknown error occurred when verifiying the user JWT token');
+  }
+}
+
+
+export const getUser = async (token) => {
+  try {
+    const response = await axios.get(`${base_url}/get-user`, {
+      headers: {
+        "Authorization": `Bearer ${token}`
       }
-    }
+    });
+
+    console.log('User details retrieved:', response.data);
+    return response;
+  } catch (error) {
+    console.error('Error:', error.response.data.detail);
+    throw new Error(error.response.data.detail || 'An unknown error occurred when retrieving the user details');
+  }
+}

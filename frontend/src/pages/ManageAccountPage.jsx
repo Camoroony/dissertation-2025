@@ -1,10 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { updateAccount, deleteAccount } from '../services/accountapi'
-import { useNavigate } from 'react-router-dom'
+import { getUser } from '../services/accountapi';
 
 function ManageAccountPage() {
-
-    const navigate = useNavigate();
 
     const [values, setValues] = useState({
         new_username: '',
@@ -18,6 +16,29 @@ function ManageAccountPage() {
     const [successMsg, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+    const [username, setUsername] = useState(null);
+
+    useEffect(() => {
+        const retrieveUser = async () => {
+                    try {
+                        const token = localStorage.getItem('token');
+                        const response = await getUser(token);
+                        console.log(response)
+                        if (response.status == 200) {
+                            setUsername(response.data.username);
+                        }
+                    } catch (err) {
+                        if (err.message) {
+                            setErrorMessage(`Error occured loading user details: ${err.message}`);
+                            setTimeout(() => setErrorMessage(''), 4000);
+                        } else {
+                            setErrorMessage('An unknown error occured when loading in user details.');
+                            setTimeout(() => setErrorMessage(''), 4000);
+                        }
+                    }
+                }
+                retrieveUser()
+    }, [])
 
     const handleChanges = (e) => {
         setValues({ ...values, [e.target.name]: e.target.value })
@@ -133,6 +154,8 @@ function ManageAccountPage() {
             )}
 
             <div className="flex flex-col justify-center items-center mt-20">
+                <h1 className="text-6xl font-bold mb-7">
+                    Hello<span className="text-[#2A955F]"> {username}!</span></h1>
                 <h1 className="text-6xl font-bold mb-15">
                     Update Your <span className="text-[#2A955F]">Account</span></h1>
                 <p className="text-lg">Need to make changes to your account information?</p>
@@ -160,7 +183,7 @@ function ManageAccountPage() {
                             <input
                                 type={showPassword ? "text" : "password"}
                                 placeholder="Enter your new password..."
-                                className="w-full px-3 py-2 border rounded pr-10" // pr-10 gives space for button
+                                className="w-full px-3 py-2 border rounded pr-10"
                                 name="new_password"
                                 value={values.new_password}
                                 onChange={handleChanges}

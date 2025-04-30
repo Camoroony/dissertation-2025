@@ -64,10 +64,10 @@ def login_user(user_data: UserLoginInput, db: Session = Depends(get_db_session))
 
 
 @router.get("/get-user", response_model=UserSQL)
-def get_user(user_id: int, db: Session = Depends(get_db_session)) :
-    user = db.get(UserSQL, user_id)
+def get_user(user: UserSQL = Depends(verify_token), db: Session = Depends(get_db_session)) :
+    user = db.get(UserSQL, user.id)
     if not user:
-        raise HTTPException(status_code=404, detail=f"No user with id {user_id} exists")
+        raise HTTPException(status_code=404, detail=f"No user with id: {user.id} exists")
     
     return user
 
