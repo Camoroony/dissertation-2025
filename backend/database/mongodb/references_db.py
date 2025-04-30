@@ -630,7 +630,7 @@ def references_init():
            print(f"Added application references to MongoDB instance.\n Ids inserted: {result.inserted_ids}")
 
     else: 
-       print("Application references already exist to MongoDB instance.")
+       print("Application references already exist to MongoDB instance. No need to add reference data.")
 
 
 def get_reference(txt_name: str):
