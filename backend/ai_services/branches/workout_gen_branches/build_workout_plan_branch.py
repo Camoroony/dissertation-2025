@@ -21,8 +21,9 @@ def build_workout_plan_ai(workout_input: WorkoutGenInput, context):
                    + "Use these recommendations to generate the workout plan with the individuals characteristics in mind."),     
 
         ("human", "Generate me a **hypertrophy workout plan** for an individual with the following context:\n"
-                  + "- **Recommended workout split**: {workout_split}\n\n"
-                  + "- **Recommended sets per muscle group**:\n"
+                  + "- **Workout split**:\n"
+                  + "The following structure shows the number of sessions you must program into the plan as well as the type of split and why: {workout_split}\n\n"
+                  + "- *Sets per muscle group**:\n"
                   + "The following structure shows the number of sets you must program into the workout plan per muscle group for the week.\n"
                   + "{workout_sets}\n\n"
                   + "- **Recommended Exercises**: {workout_exercises}\n\n"

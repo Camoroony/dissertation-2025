@@ -1,13 +1,14 @@
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
-from langchain.schema.output_parser import StrOutputParser
 from langchain.prompts import ChatPromptTemplate
+from models.ai_models import WORKOUT_SPLIT_SCHEMA
 from models.utilities.context_formatting import format_context
 from database.chroma.init_chroma_db import get_chroma_vectorstore
+import json
 
 load_dotenv()
 
-model = ChatOpenAI(model="gpt-4o-mini")
+model = ChatOpenAI(model="gpt-4o-mini").with_structured_output(schema=WORKOUT_SPLIT_SCHEMA)
 
 def get_workout_split_ai(training_availability: int):
 
@@ -48,13 +49,13 @@ def get_workout_split_ai(training_availability: int):
     ])
 
 
-    chain = prompt | model | StrOutputParser()
+    chain = prompt | model
 
     ai_response = chain.invoke({"ai_context": ai_context, "ai_query": ai_query})  
 
     print("\n--- Generated Response: ---")
     print("\n\nContent:")
-    print("\n" + ai_response)
+    print("\n" + json.dumps(ai_response, indent=2))
     print("\n\nSources used:\n")
     print(sources)
 

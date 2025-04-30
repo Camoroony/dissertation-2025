@@ -64,6 +64,47 @@ WORKOUT_PLAN_FUNCTION_SCHEMA = {
     }
 }
 
+# Workout plan split schema
+
+WORKOUT_SPLIT_SCHEMA = {
+    "name": "define_workout_split",
+    "description": "Define a workout split type along with session count and reasoning.",
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "split_name": {
+                "type": "string",
+                "description": "The name of the workout split (e.g., 'Push/Pull/Legs', 'Upper/Lower', 'Full Body')."
+            },
+            "no_of_sessions": {
+                "type": "integer",
+                "description": "Total number of sessions per week for this split."
+            },
+            "split_structure": {
+                "type": "array",
+                "description": "The structure of the split by day/session, describing what muscle groups or goals are covered.",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "day": {"type": "string"},
+                        "focus": {"type": "string"},
+                        "reasoning": {
+                            "type": "string",
+                            "description": "Why this focus is used on this day and how it complements the overall split."
+                        }
+                    },
+                    "required": ["day", "focus", "reasoning"]
+                }
+            },
+            "split_rationale": {
+                "type": "string",
+                "description": "Explanation of why this split is chosen, who it's ideal for, and its training advantages."
+            }
+        },
+        "required": ["split_name", "no_of_sessions", "split_structure", "split_rationale"]
+    }
+}
+
 # Exercise overview AI output schema
 
 class ExerciseOverviewResponse(BaseModel):
