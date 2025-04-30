@@ -2,22 +2,17 @@ version: '3.8'
 
 services:
 
-  # hypertrophy_edu_backend:
-  #   build: ./backend 
-  #   container_name: hypertrophy-edu_backendcontainer
-  #   restart: always
-  #   environment:
-  #     SQLDB_URL: mysql+pymysql://root:password@sql/hypertrophy_edu_db 
-  #     MONGODB_URL: mongodb://mongo:27017/hypertrophy_edu_mongodb
-  #     OPENAI_API_KEY: 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
-  #   depends_on:
-  #     - sql  
-  #     - mongo
-  #   ports:
-  #     - "8000:8000" 
+  hypertrophy_edu_frontend:
+    build: ./frontend
+    container_name: hypertrophy-edu_frontendcontainer
+    restart: always
+    ports:
+      - "3000:80"
+    depends_on:
+      - hypertrophy_edu_backend
 
   hypertrophy_edu_backend:
-    image: ghcr.io/camoroony/hypertrophy-edu-backend:latest  # Using GHCR image
+    build: ./backend 
     container_name: hypertrophy-edu_backendcontainer
     restart: always
     environment:
@@ -31,6 +26,22 @@ services:
       - "8000:8000" 
     volumes:
       - vectorstore_data:/app/database/chroma/chroma_dbs
+
+  # hypertrophy_edu_backend:
+  #   image: ghcr.io/camoroony/hypertrophy-edu-backend:latest  # Using GHCR image
+  #   container_name: hypertrophy-edu_backendcontainer
+  #   restart: always
+  #   environment:
+  #     SQLDB_URL: mysql+pymysql://root:password@sql/hypertrophy_edu_sqldb 
+  #     MONGODB_URL: mongodb://mongo:27017/hypertrophy_edu_mongodb
+  #     OPENAI_API_KEY: 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
+  #   depends_on:
+  #     - sql  
+  #     - mongo
+  #   ports:
+  #     - "8000:8000" 
+  #   volumes:
+  #     - vectorstore_data:/app/database/chroma/chroma_dbs
 
 
   sql:

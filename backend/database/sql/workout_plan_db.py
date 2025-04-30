@@ -1,5 +1,5 @@
 from typing import Dict, Any
-from models.db_models import WorkoutPlan, WorkoutSession, Exercise
+from models.db_models import WorkoutPlan, WorkoutSession, Exercise, Rating
 from sqlmodel import Session, select
 from sqlalchemy.orm import selectinload
 
@@ -10,7 +10,9 @@ def add_workout_plan(data: Dict[str, Any], user_id: int, db: Session):
         user_id = user_id,
         no_of_sessions = data["no_of_sessions"],
         average_session_length = data["average_session_length"],
-        equipment_requirements = data["equipment_requirements"]
+        equipment_requirements = data["equipment_requirements"],
+        experience_level = data["experience_level"],
+        additional_info = data["additional_info"]
 
     )
 
@@ -51,7 +53,7 @@ def add_workout_plan(data: Dict[str, Any], user_id: int, db: Session):
 
     return workout_plan_obj
 
-def get_workout_plan(workout_plan_id: int, db: Session):
+def get_workout_plan(workout_plan_id: int, user_id: int, db: Session):
 
     statement = (
         select(WorkoutPlan)
@@ -75,14 +77,31 @@ def get_workout_plans(db: Session):
         select(WorkoutPlan)
         .options(
             selectinload(WorkoutPlan.workout_sessions).selectinload(WorkoutSession.exercises),
+            selectinload(WorkoutPlan.ratings).selectinload(Rating.user)
+        )
+    )
+
+    workout_plans = db.exec(statement).all()
+
+    if workout_plans is None:
+        raise ValueError(f"Workout plans were not found.")
+
+    return workout_plans
+
+def get_workout_plans_by_user(user_id: int, db: Session):
+
+    statement = (
+        select(WorkoutPlan).where(WorkoutPlan.user_id == user_id)
+        .options(
+            selectinload(WorkoutPlan.workout_sessions).selectinload(WorkoutSession.exercises),
             selectinload(WorkoutPlan.ratings)
         )
     )
 
     workout_plans = db.exec(statement).all()
 
-    if not workout_plans:
-        raise ValueError(f"Workout plans were not found.")
+    if workout_plans == None:
+        raise ValueError(f"Workout plans were not found for user Id: {user_id}.")
 
     return workout_plans
 

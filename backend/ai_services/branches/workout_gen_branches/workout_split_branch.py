@@ -28,6 +28,7 @@ def get_workout_split_ai(training_availability: int):
     f"The individual wants to train {training_availability} days per week\n"
     + "Provide a brief 1 to 2 line summary of the individual and their desires, "
     + f"then suggest the individual the best workout split for {training_availability} sessions a week and state how many sessions a week it needs to be."
+    + "REMINDER: YOU MUST STATE THE AMOUNT OF SESSIONS THE WORKOUT PLAN WILL BE."
     )
 
     ai_context = (

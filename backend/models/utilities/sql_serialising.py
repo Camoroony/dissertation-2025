@@ -1,4 +1,4 @@
-from models.db_models import WorkoutPlan, WorkoutSession, Exercise
+from models.db_models import WorkoutPlan, WorkoutSession, Exercise, Rating
 from typing import Dict, Any
 
 def serialise_workout_plan(workout_plan: WorkoutPlan) -> Dict[str, Any]:
@@ -19,9 +19,11 @@ def serialise_workout_plan(workout_plan: WorkoutPlan) -> Dict[str, Any]:
             "no_of_sessions": workout_plan.no_of_sessions,
             "average_session_length": workout_plan.average_session_length,
             "equipment_requirements": workout_plan.equipment_requirements,
+            "experience_level": workout_plan.experience_level,
             "total_upvotes": positive_count,
             "total_downvotes": negative_count,
             "recommendation_percentage": recommendation_percentage,
+            "additional_info": workout_plan.additional_info,
             "workout_sessions": [
                 {
                     "id": session.id,
@@ -45,7 +47,7 @@ def serialise_workout_plan(workout_plan: WorkoutPlan) -> Dict[str, Any]:
             "ratings": [
             {
                 "id": rating.id,
-                "user_id": rating.user_id,
+                "user": rating.user,
                 "rating": rating.rating,
                 "comment": rating.comment
             }
@@ -90,4 +92,14 @@ def serialise_exercise(exercise: Exercise) -> Dict[str, Any]:
         "reps_in_reserve": exercise.reps_in_reserve
        }
 
-
+def serialise_rating(rating: Rating) -> Dict[str, Any]:
+     
+    if not isinstance(rating, Rating):
+       raise TypeError("Object must be of type Rating to be serialised.")
+    
+    return {
+        "id": rating.id,
+        "user": rating.user,
+        "rating": rating.rating,
+        "comment": rating.comment
+    }

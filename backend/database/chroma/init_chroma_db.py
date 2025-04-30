@@ -1,12 +1,10 @@
 import os 
 import glob
-import json
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import TextLoader
 from langchain_community.vectorstores import Chroma
 from langchain_openai.embeddings import OpenAIEmbeddings
-from langchain.docstore.document import Document
-from database.mongodb.references_db import get_reference_url, get_reference
+from database.mongodb.references_db import get_reference
 from dotenv import load_dotenv
 
 load_dotenv()

@@ -1,9 +1,7 @@
 from langchain_openai import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
-from langchain_core.output_parsers import JsonOutputParser
 from models.input_models import WorkoutGenInput
 from models.ai_models import WORKOUT_PLAN_FUNCTION_SCHEMA
-from models.db_models import WorkoutPlan
 from dotenv import load_dotenv
 import os 
 

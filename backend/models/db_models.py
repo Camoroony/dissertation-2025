@@ -28,6 +28,8 @@ class WorkoutPlan(SQLModel, table=True):
     no_of_sessions: int
     average_session_length: int
     equipment_requirements: str
+    experience_level: str
+    additional_info: str
 
     user: UserSQL = Relationship(back_populates="workout_plans")
     workout_sessions: List["WorkoutSession"] = Relationship(back_populates="workout_plan", sa_relationship_kwargs={"cascade": "delete"})
