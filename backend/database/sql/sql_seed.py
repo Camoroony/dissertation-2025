@@ -3,10 +3,10 @@ import os
 import glob
 
 sql_conn = pymysql.connect(
-    host="127.0.0.1",
+    host="sql",
     user="root",
-    password="P4$$w0Rd16",
-    database="hypertrophy_edu_db"
+    password="password",
+    database="hypertrophy_edu_sqldb"
 )
 
 def is_sql_seeded():
