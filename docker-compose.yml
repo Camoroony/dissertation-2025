@@ -28,7 +28,7 @@ services:
   #   volumes:
   #     - vectorstore_data:/app/database/chroma/chroma_dbs
 
-# GHCR image versions
+# GHCR build versions
   hypertrophy_edu_backend:
     image: ghcr.io/camoroony/hypertrophy-edu-backend:latest
     container_name: hypertrophy-edu_backendcontainer
