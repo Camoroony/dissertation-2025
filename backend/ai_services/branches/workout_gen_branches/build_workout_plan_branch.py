@@ -2,12 +2,9 @@ from langchain_openai import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
 from models.input_models import WorkoutGenInput
 from models.ai_models import WORKOUT_PLAN_FUNCTION_SCHEMA
-from dotenv import load_dotenv
-import os 
+from security.openai_api_key import get_openai_api_key
 
-load_dotenv()
-
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+OPENAI_API_KEY = get_openai_api_key()
 
 model = ChatOpenAI(model="gpt-4o-mini", api_key=OPENAI_API_KEY).with_structured_output(schema=WORKOUT_PLAN_FUNCTION_SCHEMA)
 

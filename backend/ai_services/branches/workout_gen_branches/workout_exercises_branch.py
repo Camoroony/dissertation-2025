@@ -6,12 +6,12 @@ from langchain.prompts import ChatPromptTemplate
 from models.ai_models import MUSCLE_GROUPS
 from models.utilities.context_formatting import format_context
 from database.chroma.init_chroma_db import get_chroma_vectorstore
-from dotenv import load_dotenv
-import os
+from security.openai_api_key import get_openai_api_key
 
-load_dotenv()
 
-model = ChatOpenAI(model="gpt-4o-mini")
+OPENAI_API_KEY = get_openai_api_key()
+
+model = ChatOpenAI(model="gpt-4o-mini", api_key=OPENAI_API_KEY)
 
 
 def get_workout_exercises_ai(available_equipment: str):

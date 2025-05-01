@@ -2,15 +2,11 @@ from langchain import hub
 from langchain_openai import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
 from langchain.schema.output_parser import StrOutputParser
-from langchain_core.messages import SystemMessage, AIMessage, HumanMessage
+from security.openai_api_key import get_openai_api_key
 from models.utilities.context_formatting import format_context
 from database.chroma.init_chroma_db import get_chroma_vectorstore
-from dotenv import load_dotenv
-import os 
 
-load_dotenv()
-
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+OPENAI_API_KEY = get_openai_api_key()
 
 model = ChatOpenAI(model="gpt-4o-mini", api_key=OPENAI_API_KEY)
 

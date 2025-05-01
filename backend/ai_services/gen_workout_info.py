@@ -2,15 +2,11 @@ from langchain.schema.runnable import RunnableLambda, RunnableParallel
 from langchain_openai import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
 from langchain.schema.output_parser import StrOutputParser
+from security.openai_api_key import get_openai_api_key
 from ai_services.branches.workout_info_branches.get_exercise_tutorial_branch import get_exercise_tutorial_ai
 from ai_services.branches.workout_info_branches.get_exercise_video_branch import get_exercise_video_ai
-from dotenv import load_dotenv
-import os
 
-
-load_dotenv()
-
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+OPENAI_API_KEY = get_openai_api_key()
 
 model = ChatOpenAI(model="gpt-4o-mini", api_key=OPENAI_API_KEY)
 

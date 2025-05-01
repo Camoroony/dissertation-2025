@@ -4,11 +4,11 @@ from langchain.schema.output_parser import StrOutputParser
 from langchain.prompts import ChatPromptTemplate
 from models.utilities.context_formatting import format_context
 from database.chroma.init_chroma_db import get_chroma_vectorstore
+from security.openai_api_key import get_openai_api_key
 
+OPENAI_API_KEY = get_openai_api_key()
 
-load_dotenv()
-
-model = ChatOpenAI(model="gpt-4o-mini")
+model = ChatOpenAI(model="gpt-4o-mini", api_key=OPENAI_API_KEY)
 
 def get_exercise_tutorial_ai(exercise: str):
 

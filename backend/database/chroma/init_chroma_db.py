@@ -5,11 +5,11 @@ from langchain_community.document_loaders import TextLoader
 from langchain_community.vectorstores import Chroma
 from langchain_openai.embeddings import OpenAIEmbeddings
 from database.mongodb.references_db import get_reference
-from dotenv import load_dotenv
+from security.openai_api_key import get_openai_api_key
 
-load_dotenv()
+OPENAI_API_KEY = get_openai_api_key()
 
-embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
+embeddings = OpenAIEmbeddings(model="text-embedding-3-small", api_key=OPENAI_API_KEY)
 
 def get_chroma_vectorstore(db_name: str, db_data: str):
  
