@@ -2,14 +2,14 @@ import pymysql
 import os 
 import glob
 
-sql_conn = pymysql.connect(
+def is_sql_seeded():
+
+    sql_conn = pymysql.connect(
     host="sql",
     user="root",
     password="password",
     database="hypertrophy_edu_sqldb"
 )
-
-def is_sql_seeded():
     with sql_conn.cursor() as cursor:
         cursor.execute("SELECT COUNT(*) FROM user")  # adjust table
         count = cursor.fetchone()[0]
@@ -17,6 +17,13 @@ def is_sql_seeded():
 
 def seed_sql():
     print("Seeding MySQL from SQL file...")
+
+    sql_conn = pymysql.connect(
+    host="sql",
+    user="root",
+    password="password",
+    database="hypertrophy_edu_sqldb"
+)
 
     dummy_data_file = glob.glob(os.path.join(os.path.dirname(__file__), "sqldummydata", "sqldummydata.sql"))
 
