@@ -23,7 +23,9 @@ def build_workout_plan_ai(workout_input: WorkoutGenInput, context):
                   + "- *Sets per muscle group**:\n"
                   + "The following structure shows the number of sets you must program into the workout plan per muscle group for the week.\n"
                   + "{workout_sets}\n\n"
-                  + "- **Recommended Exercises**: {workout_exercises}\n\n"
+                  + "- **Exercises to use when making plan**:\n"
+                  + "The following structure shows the exercises you must program into the workout plan.\n"
+                  + "{workout_exercises}\n\n"
                   + "- **Recommended Reps In Reserve (RIR) for exercise sets**: {workout_exercise_rir}\n\n"
                   + "- **Additional info from the user to consider**: {additional_info}\n\n")
     ])

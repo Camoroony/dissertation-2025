@@ -105,6 +105,56 @@ WORKOUT_SPLIT_SCHEMA = {
     }
 }
 
+# Exercise recommendation schema
+
+EXERCISE_RECOMMENDATION_SCHEMA = {
+    "name": "structured_muscle_exercises",
+    "description": "Provide a structured list of exercises per muscle group including name, equipment, and a brief rationale.",
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "muscle_groups": {
+                "type": "array",
+                "description": "List of muscle groups with corresponding recommended exercises.",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "muscle": {
+                            "type": "string",
+                            "description": "Targeted muscle group (e.g., 'Chest', 'Back', etc.)."
+                        },
+                        "exercises": {
+                            "type": "array",
+                            "description": "Recommended exercises for the muscle group.",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "exercise_name": {
+                                        "type": "string",
+                                        "description": "Name of the exercise (e.g., 'Bench Press', 'Pull-Up')."
+                                    },
+                                    "equipment_required": {
+                                        "type": "string",
+                                        "description": "Type of equipment required (e.g., 'Barbell', 'Resistance Band', 'Bodyweight')."
+                                    },
+                                    "rationale": {
+                                        "type": "string",
+                                        "description": "Short reason for recommending the exercise."
+                                    }
+                                },
+                                "required": ["exercise_name", "equipment_required", "rationale"]
+                            }
+                        }
+                    },
+                    "required": ["muscle", "exercises"]
+                }
+            }
+        },
+        "required": ["muscle_groups"]
+    }
+}
+
+
 # Exercise overview AI output schema
 
 class ExerciseOverviewResponse(BaseModel):

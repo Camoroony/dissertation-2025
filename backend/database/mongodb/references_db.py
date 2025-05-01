@@ -86,52 +86,6 @@ references = [
     ]
 },
 {
-    "title": "The Best Dumbbell Exercises To Target Every Muscle",
-    "author": "Alex Kirkup-Lee",
-    "publication_date": "2025-03-21",
-    "url": "https://uk.gymshark.com/blog/article/the-best-dumbbell-exercises",
-    "vector_db": "workout_exercises_db",
-    "textfile_name": "best_dumbbell_exercises_GS.txt",
-    "reviewers": [],
-    "references": [
-        {
-            "authors": "Smoak, Y.",
-            "year": 2023,
-            "title": "A Randomised Trial Comparing Barbell and Dumbbell Bench Press on Maximal Strength and Power Output."
-        },
-        {
-            "authors": "Saeterbakken, A.H., van den Tillaar, R. and Fimland, M.S.",
-            "year": 2011,
-            "title": "A comparison of muscle activity and 1-RM strength of three chest-press exercises with different stability requirements."
-        },
-        {
-            "authors": "Schoenfeld, B.J. and Grgic, J.",
-            "year": 2020,
-            "title": "Effects of range of motion on muscle development during resistance training interventions: A systematic review."
-        },
-        {
-            "authors": "Schoenfeld, B.J., Vigotsky, A., Contreras, B., Golden, S., Alto, A., Larson, R., Winkelman, N. and Paoli, A.",
-            "year": 2018,
-            "title": "Differential effects of attentional focus strategies during long-term resistance training."
-        },
-        {
-            "authors": "Maeo, S., Wu, Y., Huang, M., Sakurai, H., Kusagawa, Y., Sugiyama, T., Kanehisa, H. and Isaka, T.",
-            "year": 2022,
-            "title": "Triceps brachii hypertrophy is substantially greater after elbow extension training performed in the overhead versus neutral arm position."
-        },
-        {
-            "authors": "Solstad, T.E., Andersen, V., Shaw, M., Hoel, E.M., Vonheim, A. and Atle Hole Saeterbakken.",
-            "year": 2020,
-            "title": "A Comparison of Muscle Activation between Barbell Bench Press and Dumbbell Flyes in Resistance-Trained Males."
-        },
-        {
-            "authors": "Schoenfeld, B.J., Peterson, M.D., Ogborn, D., Contreras, B. and Sonmez, G.T.",
-            "year": 2015,
-            "title": "Effects of Low- vs. High-Load Resistance Training on Muscle Strength and Hypertrophy in Well-Trained Men."
-        }
-    ]
-},
-{
     "title": "Your Next Chest Routine for Mass: 7 Must-Do Pec Exercises",
     "author": "Michael Matthews",
     "publication_date": "2024-09-13",
@@ -403,56 +357,6 @@ references = [
     ]
 },
 {
-"title": "Hypertrophy Training: How Many Sets Should You Do To Maximize Muscle Growth?",
-"author": "John Fawkes",
-"publication_date": "2024-01-01",
-"url": "https://www.spartan.com/blogs/unbreakable-training/hypertrophy-training",
-"vector_db": "workout_sets_db",
-"reviewers": [],
-"references": [
-{
-"authors": "Ralston, Grant W., Lon Kilgore, Frank B. Wyatt & Julien S. Baker",
-"year": 2017,
-"title": "The Effect of Weekly Set Volume on Strength Gain: A Meta-Analysis."
-},
-{
-"authors": "Amirthalingam, Theban, et al.",
-"year": 2017,
-"title": "Effects of a Modified German Volume Training Program on Muscular Hypertrophy and Strength."
-},
-{
-"authors": "Jones, Andrew M.",
-"year": 2025,
-"title": "Medicine in Science and Sports Exercise April 2025 - Volume 57 - Issue 4."
-},
-{
-"authors": "Slater, Gary John, et al.",
-"year": 2019,
-"title": "Is an Energy Surplus Required to Maximize Skeletal Muscle Hypertrophy Associated With Resistance Training."
-},
-{
-"authors": "Vingren, Jakob L., et al.",
-"year": 2010,
-"title": "Testosterone Physiology in Resistance Exercise and Training: The Upstream Regulatory Elements."
-},
-{
-"authors": "Brodsky, I. G., et al.",
-"year": 1996,
-"title": "Effects of Testosterone Replacement on Muscle Mass and Muscle Protein Synthesis in Hypogonadal Men--A Clinical Research Center Study."
-},
-{
-"authors": "Urhausen, A., et al.",
-"year": 1995,
-"title": "Blood Hormones as Markers of Training Stress and Overtraining."
-},
-{
-"authors": "Stults-Kolehmainen, Matthew A., et al.",
-"year": 2014,
-"title": "Chronic Psychological Stress Impairs Recovery of Muscular Function and Somatic Sensations Over a 96-Hour Period."
-}
-]
-},
-{
     "title": "How Many Sets Do You Need?",
     "author": "Jeff Nippard",
     "publication_date": "2025-01-01",
@@ -479,7 +383,7 @@ references = [
     "publication_date": "2023-03-29",
     "url": "https://www.healthline.com/health/fitness-exercise/best-chest-exercises",
     "vector_db": "workout_exercises_db",
-    "textfile_name": "best_chest_exercises_Heathline.txt",
+    "textfile_name": "best_chest_exercises_Healthline.txt",
     "reviewers": [
         {
             "reviewer": "Daniel Bubnis",
@@ -490,18 +394,81 @@ references = [
     "references": []
 },
 {
-    "title": "The Best Bodyweight Workouts and Exercises You Can Do",
-    "author": "Michael Matthews",
-    "publication_date": "2019-05-08",
-    "url": "https://legionathletics.com/the-ultimate-bodyweight-workout-routine/",
+    "title": "9 Bodyweight Leg Exercises for Every Body",
+    "author": "Tyler Read",
+    "publication_date": "2021-02-26",
+    "url": "https://www.healthline.com/nutrition/bodyweight-leg-exercises",
     "vector_db": "workout_exercises_db",
-    "textfile_name": "best_bodyweight_exercises_Legion.txt",
+    "textfile_name": "bodyweight_leg_exercises_Healthline.txt",
     "reviewers": [
         {
-            "reviewer": "Brian Grant",
-            "qualifications": "Doctor of Physical Therapy (DPT), Orthopedic Residency Graduate in Physical Therapy, Bachelors Degree in Exercise Science , Certified Strength and Conditioning Specialist from the NSCA"
+            "reviewer": "Daniel Bubnis",
+            "qualifications": ("Associate's Degree (AA) - Pennsylvania State University, Bachelor's Degree (BA) - Marywood University, Master's Degree (MS) – California University of Pennsylvania, "
+            "NASM Certified Personal Trainer (NASM-CPT), NASE Level II Certified Speed Specialist (NASE Level II-CSS)")
         }
     ],
+    "references": []
+},
+{
+    "title": "Bodyweight Hamstring Exercises for Every Experience Level",
+    "author": "Katey Davidson",
+    "publication_date": "2022-02-21",
+    "url": "https://www.healthline.com/nutrition/bodyweight-leg-exercises",
+    "vector_db": "workout_exercises_db",
+    "textfile_name": "bodyweight_hamstring_exercises_Healthline.txt",
+    "reviewers": [
+        {
+            "reviewer": "Daniel Bubnis",
+            "qualifications": ("Associate's Degree (AA) - Pennsylvania State University, Bachelor's Degree (BA) - Marywood University, Master's Degree (MS) – California University of Pennsylvania, "
+            "NASM Certified Personal Trainer (NASM-CPT), NASE Level II Certified Speed Specialist (NASE Level II-CSS)")
+        }
+    ],
+    "references": []
+},
+{
+    "title": "No More Backaches: 18 Exercises for a Stronger Back",
+    "author": "Nicole Davis and Katey Davidson",
+    "publication_date": "2024-04-10",
+    "url": "https://www.healthline.com/health/fitness/back-strengthening-muscles-posture",
+    "vector_db": "workout_exercises_db",
+    "textfile_name": "best_back_exercises_Healthline.txt",
+    "reviewers": [
+      {
+  "reviewer": "Gregory Minnis, DPT",
+  "qualifications": "Bachelor of Science (BS) – University of Delaware, Doctor of Physical Therapy (DPT) – University of St. Augustine, Licensed Physical Therapist – State of California and State of New Jersey, CPR Certified, Completed advanced certification in evaluation and treatment of the temporomandibular joint (TMJ)"
+}
+    ],
+"references": [
+  {
+    "authors": "MedlinePlus",
+    "year": 2017,
+    "title": "Guide to good posture"
+  },
+  {
+    "authors": "World Health Organization (WHO)",
+    "year": 2023,
+    "title": "Low back pain"
+  },
+  {
+    "authors": "Tataryn N, Simas V, Furness J, Climstein M",
+    "year": 2021,
+    "title": "Posterior-chain resistance training compared to general exercise and walking programmes for the treatment of chronic low back pain in the general population: A systematic review and meta-analysis"
+  }
+]
+},
+{
+    "title": "30 Dumbbell Exercises To Love Leg Day",
+    "author": "Eryn Barber",
+    "publication_date": "2022-06-20",
+    "url": "https://mirafit.co.uk/blog/30-dumbbell-exercises-to-love-leg-day/",
+    "vector_db": "workout_exercises_db",
+    "textfile_name": "dumbbell_leg_exercises_mf.txt",
+    "reviewers": [
+  {
+    "reviewer": "Eryn Barber",
+    "qualifications": "Master of Science (MSc) in Strength & Conditioning, Level 3 Personal Trainer, Level 3 Yoga Teacher, Pre-Natal & Post-Natal Training Specialist"
+  }
+],
     "references": []
 },
 {
@@ -528,18 +495,22 @@ references = [
   "textfile_name": "how_hard_should_you_train_JN.txt",
   "reviewers": [],
   "references": [
-    {
-      "authors": "Zac Robinson, Joshua Pelland, Jacob Remmert and Martin Refalo",
-      "year": 2023,
-      "title": "Exploring the Dose-Response Relationship Between Estimated Resistance Training Proximity to Failure, Strength Gain, and Muscle Hypertrophy: A Series of Meta-Regressions",
-    },
-    {
-      "authors": "Martin C. Refalo, Eric R. Helms, Zac P. Robinson, D. Lee Hamilton, Jackson J. Fyfe",
-      "year": 2024,
-      "title": "Similar muscle hypertrophy following eight weeks of resistance training to momentary muscular failure or with repetitions-in-reserve in resistance-trained individuals",
-
-    }
-  ]
+  {
+    "authors": "MedlinePlus",
+    "year": 2017,
+    "title": "Guide to good posture"
+  },
+  {
+    "authors": "World Health Organization (WHO)",
+    "year": 2023,
+    "title": "Low back pain",
+  },
+  {
+    "authors": "Tataryn N, Simas V, Furness J, Climstein M",
+    "year": 2021,
+    "title": "Posterior-chain resistance training compared to general exercise and walking programmes for the treatment of chronic low back pain in the general population: A systematic review and meta-analysis"
+  }
+]
 },
 {
   "title": "Strength and Conditioning Terminology",
