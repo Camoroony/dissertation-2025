@@ -606,6 +606,107 @@ references = [
   ]
 },
 {
+  "title": "Hypertrophy Training: The Complete Guide (Plus Workouts)",
+  "author": "Eric Curry",
+  "publication_date": "2025-03-17",
+  "url": "https://www.scienceforsport.com/hypertrophy-training/?srsltid=AfmBOopn6y7pGws_w83X4Ing08CGNvvf2IeTvcUdt5_tN4XQF3keWLRU",
+  "vector_db": "overall_db",
+  "textfile_name": "hypertrophy_guide_SFS.txt",
+  "reviewers": [],
+ "references": [
+  {
+    "authors": "Haff, G. G., & Triplett, N. T. (Eds.)",
+    "year": 2015,
+    "title": "Essentials of strength training and conditioning (4th ed.)"
+  },
+  {
+    "authors": "Schoenfeld, B. J.",
+    "year": 2010,
+    "title": "The mechanisms of muscle hypertrophy and their application to resistance training"
+  },
+  {
+    "authors": "Taber, C. B., Vigotsky, A., Nuckols, G., & Haun, C. T.",
+    "year": 2019,
+    "title": "Exercise-induced myofibrillar hypertrophy is a contributory cause of gains in muscle strength"
+  },
+  {
+    "authors": "Karki, G.",
+    "year": 2018,
+    "title": "Muscle-skeletal muscle-gross and ultra structure"
+  },
+  {
+    "authors": "Tamaki, T., Akatsuka, A., Tokunaga, M., Ishige, K., Uchiyama, S., & Shiraishi, T.",
+    "year": 1997,
+    "title": "Morphological and biochemical evidence of muscle hyperplasia following weight-lifting exercise in rats"
+  },
+  {
+    "authors": "Schoenfeld, B.",
+    "year": 2021,
+    "title": "Science and development of muscle hypertrophy"
+  },
+  {
+    "authors": "Churchward-Venne, T. A., Murphy, C. H., Longland, T. M., & Phillips, S. M.",
+    "year": 2013,
+    "title": "Role of protein and amino acids in promoting lean mass accretion with resistance exercise and attenuating lean mass loss during energy deficit in humans"
+  },
+  {
+    "authors": "Figueiredo, V. C.",
+    "year": 2019,
+    "title": "Revisiting the roles of protein synthesis during skeletal muscle hypertrophy induced by exercise"
+  },
+  {
+    "authors": "Garlick, P. J.",
+    "year": 2005,
+    "title": "The role of leucine in the regulation of protein metabolism"
+  },
+  {
+    "authors": "Rondanelli, M., Nichetti, M., Peroni, G., Faliva, M. A., Naso, M., Gasparri, C., Perna, S., Oberto, L., Di Paolo, E., Riva, A., Petrangolini, G., Guerreschi, G., & Tartara, A.",
+    "year": 2021,
+    "title": "Where to find leucine in food and how to feed elderly with sarcopenia in order to counteract loss of muscle mass: Practical advice"
+  },
+  {
+    "authors": "Goldberg, A. L., Etlinger, J. D., Goldspink, D. F., & Jablecki, C.",
+    "year": 1975,
+    "title": "Mechanism of work-induced hypertrophy of skeletal muscle"
+  },
+  {
+    "authors": "Farthing, J. P., & Chilibeck, P. D.",
+    "year": 2003,
+    "title": "The effects of eccentric and concentric training at different velocities on muscle hypertrophy"
+  },
+  {
+    "authors": "Smith, R. C., & Rutherford, O. M.",
+    "year": 1995,
+    "title": "The role of metabolites in strength training. I. A comparison of eccentric and concentric contractions"
+  },
+  {
+    "authors": "Schoenfeld, B., & Grgic, J.",
+    "year": 2017,
+    "title": "Evidence-based guidelines for resistance training volume to maximize muscle hypertrophy"
+  },
+  {
+    "authors": "Schoenfeld, B. J., Contreras, B., Willardson, J. M., Fontana, F., & Tiryaki-Sonmez, G.",
+    "year": 2014,
+    "title": "Muscle activation during low- versus high-load resistance training in well-trained men"
+  },
+  {
+    "authors": "Willardson, J. M.",
+    "year": 2007,
+    "title": "The application of training to failure in periodized multiple-set resistance exercise programs"
+  },
+  {
+    "authors": "Fry, A. C., & Kraemer, W. J.",
+    "year": 1997,
+    "title": "Resistance exercise overtraining and overreaching"
+  },
+  {
+    "authors": "Haff, G. G.",
+    "year": 2000,
+    "title": "Roundtable discussion: Machines versus free weights"
+  }
+]
+},
+{
     "title": "Top 7 Dumbbell Ab Exercises For Your Core Workout",
     "author": "Erin Lohrenz",
     "publication_date": "2025-01-17",
