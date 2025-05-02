@@ -394,6 +394,22 @@ references = [
     "references": []
 },
 {
+    "title": "21 Bodyweight Core Exercises You Might Want to Try at Home",
+    "author": "Greatist.com team",
+    "publication_date": "2024-10-25",
+    "url": "https://greatist.com/move/best-bodyweight-exercises-abs",
+    "vector_db": "workout_exercises_db",
+    "textfile_name": "bodyweight_core_exercises_greatist.txt",
+    "reviewers": [
+        {
+            "reviewer": "Daniel Bubnis",
+            "qualifications": ("Associate's Degree (AA) - Pennsylvania State University, Bachelor's Degree (BA) - Marywood University, Master's Degree (MS) – California University of Pennsylvania, "
+            "NASM Certified Personal Trainer (NASM-CPT), NASE Level II Certified Speed Specialist (NASE Level II-CSS)")
+        }
+    ],
+    "references": []
+},
+{
     "title": "9 Bodyweight Leg Exercises for Every Body",
     "author": "Tyler Read",
     "publication_date": "2021-02-26",
@@ -588,6 +604,21 @@ references = [
       "title": "The Effects of Acute and Chronic Exercise on Sleep: A Meta-Analytic Review"
     }
   ]
+},
+{
+    "title": "Top 7 Dumbbell Ab Exercises For Your Core Workout",
+    "author": "Erin Lohrenz",
+    "publication_date": "2025-01-17",
+    "url": "https://endomondo.com/exercise/dumbbell-ab-exercises", 
+    "vector_db": "workout_exercises_db",
+    "textfile_name": "dumbbell_core_exercises_EM.txt",
+    "reviewers": [
+        {
+            "reviewer": "April Edwards",
+            "qualifications": "Master Of Science In Physiotherapy – MSc, Physiotherapy: University of Montreal, Bachelor Of Physiotherapy – BA, Physiotherapy: University Of Montreal"
+        }
+    ],
+    "references": []
 }
 ]
 
