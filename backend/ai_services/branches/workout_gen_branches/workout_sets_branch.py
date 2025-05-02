@@ -26,11 +26,8 @@ def get_workout_sets_ai(training_experience: str, training_focus: str):
 
     chain_response = full_chain.invoke({})
 
-    final_response = (f"The individual is a {training_experience} weightlifter and is looking to prioritise {training_focus} in their workout plan.\n"
-    + f"YOU MUST DESIGN THE WORKOUT PLAN TO CONTAIN THE FOLLOWING AMOUNT OF SETS PER MUSCLE GROUP: {chain_response['ai_response']}")
-
     return {
-       "ai_response": final_response,
+       "ai_response": chain_response["ai_response"],
        "sources": chain_response["sources"]
     }
     

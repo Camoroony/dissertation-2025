@@ -49,9 +49,6 @@ def get_available_equipment_context(available_equipment: str):
 
     vectorstore = get_chroma_vectorstore(db_name="workout_exercise_studies_vs", db_data="workout_exercise_studies")
 
-    if available_equipment == "Full gym access":
-      available_equipment = ""
-
     chains = {}
     sources = set()
 
@@ -88,9 +85,10 @@ def process_muscle(muscle: str, available_equipment: str, vectorstore: Chroma):
 
     ai_query = (
     "\n\n This is your question to answer based on the documents:"
-    + "\n\n What {available_equipment} {muscle} exercises do you recommend?\n"
-    + "You must provide at least three, but an upmost of five if you have them to share. \n\n" 
+    + "\n\n **What {available_equipment} {muscle} exercises do you recommend?**\n"
+    # + "Provide an upmost of five exercises if you have them to share but no more than that. \n\n" 
     + "If you can provide no exercises for the equipment type amd muscle group, simply state you do not have any exercises to recommend for the muscle and equipment\n\n" 
+    + "If you have access to an exercise from the context for the muscle type in question, but it is not the correct equipment type, DO NOT recommend it. \n\n" 
     + "Provide all the exercises you can recommend in a list format alongside the corresponding muscle they train"
     )
 

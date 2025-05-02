@@ -11,24 +11,43 @@ model = ChatOpenAI(model="gpt-4o-mini", api_key=OPENAI_API_KEY).with_structured_
 def build_workout_plan_ai(workout_input: WorkoutGenInput, context):
 
     prompt_template = ChatPromptTemplate.from_messages([
+    ("system", 
+     "You are an expert workout planner specialized in designing hypertrophy-focused training programs for individuals based on specific guidelines."),
 
-        ("system", "You are a workout generator who generates workout plans for an individual."),
+    ("system", 
+     "You will be provided with detailed parameters about the individual's workout structure, weekly set and exercise targets, available exercises, and other recommendations.\n"
+     "Your job is to design a weekly hypertrophy workout plan that:\n"
+     "- Follows the workout split structure.\n"
+     "- Meets the required number of sets AND exercises per muscle group across the week.\n"
+     "- Selects exercises only from the list provided.\n"
+     "- Maintains a balanced distribution across muscle groups.\n"
+     "- Honors the RIR guidance for intensity control.\n"
+     "- Incorporates any additional user-specific notes."),
 
-        ("system", "You will be provided context on the individual and recommendations to take into account for generating the workout plan. "
-                   + "Use these recommendations to generate the workout plan with the individuals characteristics in mind."),     
+    ("human", 
+     "**Generate a hypertrophy workout plan** based on the following individual-specific parameters:\n\n"
+     "**1. Workout Split:**\n"
+     "The structure below defines how many sessions to include in the week and what split type to use, including rationale:\n"
+     "{workout_split}\n\n"
 
-        ("human", "Generate me a **hypertrophy workout plan** for an individual with the following context:\n"
-                  + "- **Workout split**:\n"
-                  + "The following structure shows the number of sessions you must program into the plan as well as the type of split and why: {workout_split}\n\n"
-                  + "- *Sets per muscle group**:\n"
-                  + "The following structure shows the number of sets you must program into the workout plan per muscle group for the week.\n"
-                  + "{workout_sets}\n\n"
-                  + "- **Exercises to use when making plan**:\n"
-                  + "The following structure shows the exercises you must program into the workout plan.\n"
-                  + "{workout_exercises}\n\n"
-                  + "- **Recommended Reps In Reserve (RIR) for exercise sets**: {workout_exercise_rir}\n\n"
-                  + "- **Additional info from the user to consider**: {additional_info}\n\n")
-    ])
+     "**2. Sets and Exercises per Muscle Group:**\n"
+     "THE FOLLOWING STRUCTURE SHOWS THE NUMBER OF SETS AND EXERCISES YOU MUST PROGRAM INTO THE WORKOUT PLAN PER MUSCLE GROUP ACROSS THE WHOLE WEEK:\n"
+     "{workout_sets}\n\n"
+
+     "**3. Available Exercises:**\n"
+     "Below is a list of exercises categorized by muscle group. ONLY select from these exercises when building the plan.\n"
+     "Use as many exercises as needed to fulfill the set and exercise targets per muscle group, but DO NOT include more than what is required.\n"
+     "{workout_exercises}\n"
+     "USE A BALANCED NUMBER OF EXERCISES PER MUSCLE GROUP UNLESS OTHERWISE SPECIFIED. DO NOT EXCEED THE PROVIDED WEEKLY SET VOLUME FOR ANY GROUP.\n\n"
+
+     "**4. Reps In Reserve (RIR):**\n"
+     "Use the following RIR guidance to assign appropriate effort for each set: {workout_exercise_rir}\n\n"
+
+     "**5. Additional Notes:**\n"
+     "{additional_info}\n\n"
+     
+    )])
+
 
    
     formatted_input = {

@@ -72,7 +72,7 @@ function MyWorkoutsPage() {
                     {errorMessage}
                 </div>
             ) : (<div>
-                <div>
+                <div className="mt-15">
                     <div className="grid grid-cols-[repeat(auto-fit,minmax(500px,1fr))] gap-8">
                         {workoutPlans.map(workoutplan => (
                             <WorkoutPlanCard workoutplan={workoutplan} onDelete={(planId) => handleDeleteSubmit(planId)} key={workoutplan.id} />
