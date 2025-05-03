@@ -1,6 +1,6 @@
 # Hypertrophy EDU
 
-**Hypertrophy EDU** is a containerised full-stack AI application designed for educational content and data-driven hypertrophy training insights. The app includes:
+**Hypertrophy EDU** is a full-stack AI application designed for educational content and data-driven hypertrophy training insights. The app includes:
 
 - A React-based frontend
 - A FastAPI backend
