@@ -1,6 +1,9 @@
 FROM python:3.11
 
 
+ENV OPENAI_API_KEY=${OPENAI_API_KEY}
+
+
 WORKDIR /app
 
 
