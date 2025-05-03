@@ -378,6 +378,22 @@ references = [
     ]
 },
 {
+    "title": "Rest Between Sets: What’s Right for Me?",
+    "author": "Travis Edwards",
+    "publication_date": "2021-06-21",
+    "url": "https://www.healthline.com/health/fitness/rest-between-sets",
+    "vector_db": "workout_sets_db",
+    "textfile_name": "rest_between_sets_healthline.txt",
+    "reviewers": [
+        {
+            "reviewer": "Daniel Bubnis",
+            "qualifications": ("Associate's Degree (AA) - Pennsylvania State University, Bachelor's Degree (BA) - Marywood University, Master's Degree (MS) – California University of Pennsylvania, "
+            "NASM Certified Personal Trainer (NASM-CPT), NASE Level II Certified Speed Specialist (NASE Level II-CSS)")
+        }
+    ],
+    "references": []
+},
+{
     "title": "The Top 8 Chest Exercises for Strength and Shape",
     "author": "Travis Edwards",
     "publication_date": "2023-03-29",
