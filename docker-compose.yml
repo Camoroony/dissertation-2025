@@ -3,33 +3,17 @@ version: '3.8'
 services:
 
 # Local build versions
-  hypertrophy_edu_frontend:
-    build: ./frontend
-    container_name: hypertrophy-edu_frontendcontainer
-    restart: always
-    ports:
-      - "3000:80"
-    depends_on:
-      - hypertrophy_edu_backend
+  # hypertrophy_edu_frontend:
+  #   build: ./frontend
+  #   container_name: hypertrophy-edu_frontendcontainer
+  #   restart: always
+  #   ports:
+  #     - "3000:80"
+  #   depends_on:
+  #     - hypertrophy_edu_backend
 
-  hypertrophy_edu_backend:
-    build: ./backend 
-    container_name: hypertrophy-edu_backendcontainer
-    restart: always
-    environment:
-      SQLDB_URL: mysql+pymysql://root:password@sql/hypertrophy_edu_sqldb 
-      MONGODB_URL: mongodb://mongo:27017/hypertrophy_edu_mongodb
-    depends_on:
-      - sql  
-      - mongo
-    ports:
-      - "8000:8000" 
-    volumes:
-      - vectorstore_data:/app/database/chroma/chroma_dbs
-
-# GHCR build versions
   # hypertrophy_edu_backend:
-  #   image: ghcr.io/camoroony/hypertrophy-edu-backend:latest
+  #   build: ./backend 
   #   container_name: hypertrophy-edu_backendcontainer
   #   restart: always
   #   environment:
@@ -43,14 +27,30 @@ services:
   #   volumes:
   #     - vectorstore_data:/app/database/chroma/chroma_dbs
 
-  # hypertrophy_edu_frontend:
-  #   image: ghcr.io/camoroony/hypertrophy-edu-frontend:latest
-  #   container_name: hypertrophy-edu_frontendcontainer
-  #   restart: always
-  #   ports:
-  #     - "3000:80"
-  #   depends_on:
-  #     - hypertrophy_edu_backend
+# GHCR build versions
+  hypertrophy_edu_backend:
+    image: ghcr.io/camoroony/hypertrophy-edu-backend:latest
+    container_name: hypertrophy-edu_backendcontainer
+    restart: always
+    environment:
+      SQLDB_URL: mysql+pymysql://root:password@sql/hypertrophy_edu_sqldb 
+      MONGODB_URL: mongodb://mongo:27017/hypertrophy_edu_mongodb
+    depends_on:
+      - sql  
+      - mongo
+    ports:
+      - "8000:8000" 
+    volumes:
+      - vectorstore_data:/app/database/chroma/chroma_dbs
+
+  hypertrophy_edu_frontend:
+    image: ghcr.io/camoroony/hypertrophy-edu-frontend:latest
+    container_name: hypertrophy-edu_frontendcontainer
+    restart: always
+    ports:
+      - "3000:80"
+    depends_on:
+      - hypertrophy_edu_backend
 
 
   sql:
