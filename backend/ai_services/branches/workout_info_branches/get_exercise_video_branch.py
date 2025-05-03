@@ -14,7 +14,7 @@ def get_exercise_video_ai(exercise: str):
     vectorstore = get_chroma_vectorstore(db_name="workout_video_studies_vs", db_data="workout_video_studies")
 
     vs_query = f"{exercise} videos"
-    vs_results = vectorstore.similarity_search_with_relevance_scores(query=vs_query, k=3)
+    vs_results = vectorstore.similarity_search_with_relevance_scores(query=vs_query, k=5)
 
     context = format_context(vs_results)
 
