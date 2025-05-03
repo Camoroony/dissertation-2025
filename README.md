@@ -129,7 +129,7 @@ To fully uninstall docker, follow these steps:
 
 ## Feedback survey
 
-The following project is my University Dissertation artefac t.
+The following project is my University Dissertation artefact.
 For anyone who intends on using this, I would greatly appreciate if you would provide feedback on the project through [**This Survey**](https://docs.google.com/forms/d/e/1FAIpQLSdeeP_d0XTodh2ilcNOAn6Pl1wbi-zH2CmGvnUOIuM6lfaoEA/viewform?usp=dialog).
 
 ---
