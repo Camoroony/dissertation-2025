@@ -34,7 +34,7 @@ jobs:
 
       - name: Build and push backend image
         run: |
-          docker buildx build --build-arg OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} -t ghcr.io/camoroony/hypertrophy-edu-backend:latest ./backend --push
+          docker build --build-arg OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} -t ghcr.io/camoroony/hypertrophy-edu-backend:latest ./backend
           docker push ghcr.io/camoroony/hypertrophy-edu-backend:latest
 
       - name: Build and push frontend image
