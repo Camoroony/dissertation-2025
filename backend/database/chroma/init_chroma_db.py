@@ -58,7 +58,6 @@ def get_chroma_vectorstore(db_name: str, db_data: str):
         chunks.extend(doc_chunks)
         print(f"Document: {os.path.basename(txt_file)} loaded into chunks")
 
-     print (f"AI API key: {OPENAI_API_KEY}")
      vectorstore = Chroma.from_documents(chunks, embeddings, persist_directory=persistent_directory)
      print(f"Vectorstore: '{db_name}' initialised.\n")
  else:
