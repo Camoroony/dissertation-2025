@@ -123,9 +123,9 @@ docker rmi mongo:latest
 docker rmi ghcr.io/camoroony/hypertrophy-edu-backend:latest
 docker rmi mysql:8.0
 ```
-and finally run this to **delete all saved stores** for the app:
+To **delete all saved stores** for the app, run this command and replace the `{DIRECTORY}` tag with the name of the directory you ran the `docker-compose.yml` in:
 ```bash
-docker volume rm downloads_vectorstore_data downloads_sqldb_data downloads_mongodb_data downloads_mongodb_config
+docker volume rm {DIRECTORY}_vectorstore_data {DIRECTORY}_sqldb_data {DIRECTORY}_mongodb_data {DIRECTORY}_mongodb_config
 ```
 
 To fully uninstall docker, follow these steps:
