@@ -103,7 +103,7 @@ Once this is complete, navigate to `http://localhost:3000` in a browser to begin
 
 ## Uninstalling
 
-Once you are finished with the app, you can **close all the application resources** by either pressing `ctrl + c` or running the command: 
+Once you are finished with the app, you can **close all the application resources** by either pressing `ctrl + c` in the terminal you ran the app from, or running the command: 
 ```bash
 docker stop hypertrophy-edu_mongocontainer hypertrophy-edu_dbcontainer hypertrophy-edu_backendcontainer hypertrophy-edu_frontendcontainer
 ```
