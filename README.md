@@ -113,6 +113,14 @@ If you need to start the app up again, you can run:
 docker start hypertrophy-edu_mongocontainer hypertrophy-edu_dbcontainer hypertrophy-edu_backendcontainer hypertrophy-edu_frontendcontainer
 ```
 
+If you want to uninstall the app images, you can run: 
+```bash
+docker rmi ghcr.io/camoroony/hypertrophy-edu-frontend:latest
+docker rmi mongo:latest
+docker rmi ghcr.io/camoroony/hypertrophy-edu-backend:latest
+docker rmi mysql:8.0
+```
+
 To fully uninstall docker, follow these steps:
 
 **Windows:**
