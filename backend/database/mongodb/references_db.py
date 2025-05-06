@@ -445,7 +445,7 @@ references = [
     "title": "Bodyweight Hamstring Exercises for Every Experience Level",
     "author": "Katey Davidson",
     "publication_date": "2022-02-21",
-    "url": "https://www.healthline.com/nutrition/bodyweight-leg-exercises",
+    "url": "https://www.healthline.com/health/fitness/hamstring-exercises-bodyweight",
     "vector_db": "workout_exercises_db",
     "textfile_name": "bodyweight_hamstring_exercises_Healthline.txt",
     "reviewers": [
