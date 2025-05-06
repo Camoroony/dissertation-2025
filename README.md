@@ -103,14 +103,29 @@ Once this is complete, navigate to `http://localhost:3000` in a browser to begin
 
 ## Uninstalling
 
-Once you are finished with the app, you can close all the application resources by running the command: 
+Once you are finished with the app, you can **close all the application resources** by either pressing `ctrl + c` in the terminal you ran the app from, or running the command: 
 ```bash
 docker stop hypertrophy-edu_mongocontainer hypertrophy-edu_dbcontainer hypertrophy-edu_backendcontainer hypertrophy-edu_frontendcontainer
 ```
-
-If you need to start the app up again, you can run: 
+If you need to **start the app** up again, you can run: 
 ```bash
 docker start hypertrophy-edu_mongocontainer hypertrophy-edu_dbcontainer hypertrophy-edu_backendcontainer hypertrophy-edu_frontendcontainer
+```
+
+If you want to **uninstall the app** without uninstalling docker, first stop all your containers, then run this to **delete the containers**: 
+```bash
+docker rm hypertrophy-edu_dbcontainer hypertrophy-edu_mongocontainer hypertrophy-edu_backendcontainer hypertrophy-edu_frontendcontainer
+```
+then run this to **delete the images**:
+```bash
+docker rmi ghcr.io/camoroony/hypertrophy-edu-frontend:latest
+docker rmi mongo:latest
+docker rmi ghcr.io/camoroony/hypertrophy-edu-backend:latest
+docker rmi mysql:8.0
+```
+To **delete all saved stores** for the app, run this command and replace the `{DIRECTORY}` tag with the name of the directory you ran the `docker-compose.yml` in:
+```bash
+docker volume rm {DIRECTORY}_vectorstore_data {DIRECTORY}_sqldb_data {DIRECTORY}_mongodb_data {DIRECTORY}_mongodb_config
 ```
 
 To fully uninstall docker, follow these steps:
