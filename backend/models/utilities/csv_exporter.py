@@ -1,10 +1,9 @@
 import csv
 import io
 
-def export_workout_plan_csv(workout_plan, filename="dynamic_workout_log.csv"):
+def export_workout_plan_csv(workout_plan):
     max_sets = 0
 
-    # First, determine the maximum sets for any exercise
     for session in workout_plan["workout_sessions"]:
         for exercise in session["exercises"]:
             if exercise["sets"] > max_sets:
